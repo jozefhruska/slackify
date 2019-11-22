@@ -1,8 +1,42 @@
-import * as express from 'express';
+import { Server } from 'http';
+import opn from 'opn';
 
-const app = express();
-const port = 3000;
+import startServer from './server';
 
-app.get('/', (req, res) => res.send('Hello World!'));
+try {
+  const PORT = 8080;
 
-app.listen(port, () => console.log(`🚀  Started on port ${port}.`));
+  let server: Server;
+
+  if (module.hot) {
+    module.hot.accept();
+    module.hot.dispose(data => {
+      if (server) {
+        server.close();
+      }
+      data.hotReloaded = true;
+    });
+    module.hot.addStatusHandler(status => {
+      if (status === 'fail') {
+        process.exit(250);
+      }
+    });
+  }
+
+  const firstStartInDevMode =
+    module.hot && process.env.LAST_EXIT_CODE === '0' && (!module.hot.data || !module.hot.data.hotReloaded);
+
+  startServer(PORT).then(serverInstance => {
+    if (!module.hot || firstStartInDevMode) {
+      console.log(`GraphQL Server is now running on http://localhost:${PORT}`);
+      if (firstStartInDevMode) {
+        opn(`http://localhost:${PORT}/api/swagger`);
+      }
+    }
+
+    server = serverInstance;
+  });
+} catch (e) {
+  console.error(e);
+  process.exit(1);
+}
