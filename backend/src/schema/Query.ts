@@ -1,0 +1,33 @@
+import { objectType, stringArg } from 'nexus';
+
+export const Query = objectType({
+  name: 'Query',
+  definition(t) {
+    t.crud.post({
+      alias: 'post',
+    });
+
+    t.list.field('feed', {
+      type: 'Post',
+      resolve: (_, args, ctx) => {
+        return ctx.photon.posts.findMany({
+          where: { published: true },
+        });
+      },
+    });
+
+    t.list.field('filterPosts', {
+      type: 'Post',
+      args: {
+        searchString: stringArg({ nullable: true }),
+      },
+      resolve: (_, { searchString }, ctx) => {
+        return ctx.photon.posts.findMany({
+          where: {
+            OR: [{ title: { contains: searchString } }, { content: { contains: searchString } }],
+          },
+        });
+      },
+    });
+  },
+});

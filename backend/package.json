@@ -1,37 +1,38 @@
 {
   "name": "slackify-backend",
-  "version": "0.0.1",
-  "description": "",
-  "main": "src/index.js",
+  "version": "0.1.0",
+  "private": true,
   "scripts": {
-    "start": "NODE_ENV=development webpack --watch",
-    "build": "webpack",
-    "gql:codegen": "npx graphql-codegen --config ./codegen.yml"
+    "start": "node dist/server",
+    "clean": "rm -rf dist",
+    "build": "npm -s run clean && npm -s run generate && tsc",
+    "generate": "npm -s run generate:prisma && npm -s run generate:nexus",
+    "generate:prisma": "prisma2 generate",
+    "generate:nexus": "ts-node --transpile-only src/schema",
+    "deploy:database": "npx prisma2 lift up",
+    "dev": "ts-node-dev --no-notify --respawn --transpileOnly src/server"
   },
-  "author": "",
+  "author": "Jozef Hruška",
   "license": "UNLICENSED",
   "dependencies": {
-    "apollo-server": "^2.9.15",
+    "@prisma/photon": "^2.0.0-preview019",
+    "apollo-server": "^2.9.16",
+    "axios": "^0.19.1",
     "graphql": "^14.5.8",
-    "graphql-tools": "^4.0.6"
+    "nexus": "^0.12.0-rc.5",
+    "nexus-prisma": "^0.7.0-next.1",
+    "prisma2": "^2.0.0-preview019"
   },
   "devDependencies": {
-    "@graphql-codegen/cli": "^1.9.1",
-    "@graphql-codegen/typescript": "^1.9.1",
-    "@graphql-codegen/typescript-resolvers": "^1.9.1",
-    "@types/graphql": "^14.5.0",
-    "@typescript-eslint/eslint-plugin": "^2.14.0",
-    "@typescript-eslint/parser": "^2.14.0",
+    "@types/node": "^13.1.7",
+    "@typescript-eslint/eslint-plugin": "^2.16.0",
+    "@typescript-eslint/parser": "^2.16.0",
     "eslint": "^6.8.0",
     "eslint-config-prettier": "^6.9.0",
     "eslint-plugin-prettier": "^3.1.2",
-    "nodemon-webpack-plugin": "^4.2.2",
     "prettier": "^1.19.1",
-    "ts-loader": "^6.2.1",
-    "ts-node": "^8.5.4",
-    "typescript": "^3.7.4",
-    "webpack": "^4.41.5",
-    "webpack-cli": "^3.3.10",
-    "webpack-node-externals": "^1.7.2"
+    "ts-node": "^8.6.2",
+    "ts-node-dev": "^1.0.0-pre.44",
+    "typescript": "^3.7.4"
   }
 }
