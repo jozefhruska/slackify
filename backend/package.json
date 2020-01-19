@@ -10,7 +10,8 @@
     "generate:prisma": "prisma2 generate",
     "generate:nexus": "ts-node --transpile-only src/schema",
     "deploy:database": "npx prisma2 lift up",
-    "dev": "ts-node-dev --no-notify --respawn --transpileOnly src/server"
+    "dev": "ts-node-dev --no-notify --respawn --transpileOnly src/server",
+    "prisma:dev": "prisma2 dev"
   },
   "author": "Jozef Hruška",
   "license": "UNLICENSED",

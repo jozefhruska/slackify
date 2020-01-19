@@ -2,6 +2,8 @@
 import { objectType, stringArg, idArg } from 'nexus';
 import axios from 'axios';
 
+import { SlackAuthResponse } from '../types/auth';
+
 export const Mutation = objectType({
   name: 'Mutation',
   definition(t) {
@@ -35,20 +37,51 @@ export const Mutation = objectType({
       args: {
         code: stringArg(),
       },
-      resolve: async (_, { code }) => {
-        const userData = await axios
-          .get('https://slack.com/api/oauth.access', {
+      resolve: async (_, { code }, { photon }) => {
+        const slackAuthResponse = await axios
+          .get<SlackAuthResponse>('https://slack.com/api/oauth.access', {
             params: {
               client_id: '791343423090.804137961685',
               client_secret: '86a91fd3c50384313047d79be1afb7bc',
               code,
             },
           })
-          .then(res => res.data);
+          .then(res => res.data)
+          .catch(() => {
+            throw new Error('Slack authorization failed (unable to fetch auth token).');
+          });
 
-        console.log(userData);
+        if (slackAuthResponse?.ok && slackAuthResponse.access_token && slackAuthResponse.user) {
+          const existingUser = await photon.users.findOne({
+            where: {
+              id: slackAuthResponse.user.id,
+            },
+          });
 
-        return userData;
+          if (existingUser) {
+            return photon.users.update({
+              where: {
+                id: slackAuthResponse.user.id,
+              },
+              data: {
+                name: slackAuthResponse.user.name,
+                email: slackAuthResponse.user.email,
+                accessToken: slackAuthResponse.access_token,
+              },
+            });
+          } else {
+            return photon.users.create({
+              data: {
+                id: slackAuthResponse.user.id,
+                name: slackAuthResponse.user.name,
+                email: slackAuthResponse.user.email,
+                accessToken: slackAuthResponse.access_token,
+              },
+            });
+          }
+        } else {
+          throw new Error('Slack authorization failed (invalid auth response data).');
+        }
       },
     });
 

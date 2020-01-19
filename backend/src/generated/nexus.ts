@@ -36,9 +36,10 @@ export interface NexusGenInputs {
     id?: string | null; // ID
   }
   UserCreateInput: { // input type
+    accessToken: string; // String!
     email: string; // String!
-    id?: string | null; // ID
-    name?: string | null; // String
+    id: string; // String!
+    name: string; // String!
     posts?: NexusGenInputs['PostCreateManyWithoutPostsInput'] | null; // PostCreateManyWithoutPostsInput
   }
 }
@@ -87,11 +88,14 @@ export interface NexusGenFieldTypes {
     feed: NexusGenRootTypes['Post'][]; // [Post!]!
     filterPosts: NexusGenRootTypes['Post'][]; // [Post!]!
     post: NexusGenRootTypes['Post'] | null; // Post
+    posts: NexusGenRootTypes['Post'][]; // [Post!]!
+    users: NexusGenRootTypes['User'][]; // [User!]!
   }
   User: { // field return type
+    accessToken: string; // String!
     email: string; // String!
-    id: string; // ID!
-    name: string | null; // String
+    id: string; // String!
+    name: string; // String!
     posts: NexusGenRootTypes['Post'][]; // [Post!]!
   }
 }
@@ -122,6 +126,20 @@ export interface NexusGenArgTypes {
     }
     post: { // args
       where: NexusGenInputs['PostWhereUniqueInput']; // PostWhereUniqueInput!
+    }
+    posts: { // args
+      after?: string | null; // ID
+      before?: string | null; // ID
+      first?: number | null; // Int
+      last?: number | null; // Int
+      skip?: number | null; // Int
+    }
+    users: { // args
+      after?: string | null; // String
+      before?: string | null; // String
+      first?: number | null; // Int
+      last?: number | null; // Int
+      skip?: number | null; // Int
     }
   }
 }

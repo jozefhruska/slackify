@@ -44,18 +44,22 @@ type Query {
   feed: [Post!]!
   filterPosts(searchString: String): [Post!]!
   post(where: PostWhereUniqueInput!): Post
+  posts(after: ID, before: ID, first: Int, last: Int, skip: Int): [Post!]!
+  users(after: String, before: String, first: Int, last: Int, skip: Int): [User!]!
 }
 
 type User {
+  accessToken: String!
   email: String!
-  id: ID!
-  name: String
+  id: String!
+  name: String!
   posts: [Post!]!
 }
 
 input UserCreateInput {
+  accessToken: String!
   email: String!
-  id: ID
-  name: String
+  id: String!
+  name: String!
   posts: PostCreateManyWithoutPostsInput
 }

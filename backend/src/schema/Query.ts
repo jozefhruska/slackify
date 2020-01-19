@@ -3,8 +3,14 @@ import { objectType, stringArg } from 'nexus';
 export const Query = objectType({
   name: 'Query',
   definition(t) {
+    t.crud.users();
+
     t.crud.post({
       alias: 'post',
+    });
+
+    t.crud.posts({
+      alias: 'posts',
     });
 
     t.list.field('feed', {

@@ -8,10 +8,11 @@ generator photon {
 }
 
 model User {
-  id    String  @default(cuid()) @id
-  email String  @unique
-  name  String?
-  posts Post[]
+  id          String @id
+  email       String @unique
+  name        String
+  accessToken String @unique
+  posts       Post[]
 }
 
 model Post {
