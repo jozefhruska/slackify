@@ -1,2 +1,7 @@
 # generated
 src/generated
+
+# prisma
+prisma/migrations/dev
+
+.db

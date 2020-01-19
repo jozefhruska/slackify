@@ -1,6 +1,8 @@
 datasource db {
   provider = "postgresql"
-  url      = "postgresql://qtmrhuucmgibdm:f4831b677866d97fbbd839a615d0797ec9c685e57f94cc1ff208f30fceb8afeb@ec2-46-137-173-221.eu-west-1.compute.amazonaws.com/d2no7tpsdocnbt?schema=main&sslmode=prefer"
+  url      = "postgresql://postgres:password@localhost:5432/postgres"
+  // url      = env("POSTGRES_URL")
+  // enabled  = env("POSTGRES_URL")
 }
 
 generator photon {
