@@ -15,8 +15,8 @@ export const Query = objectType({
 
     t.list.field('feed', {
       type: 'Post',
-      resolve: (_, args, ctx) => {
-        return ctx.photon.posts.findMany({
+      resolve: (_, args, { prisma }) => {
+        return prisma.posts.findMany({
           where: { published: true },
         });
       },
@@ -27,8 +27,8 @@ export const Query = objectType({
       args: {
         searchString: stringArg({ nullable: true }),
       },
-      resolve: (_, { searchString }, ctx) => {
-        return ctx.photon.posts.findMany({
+      resolve: (_, { searchString }, { prisma }) => {
+        return prisma.posts.findMany({
           where: {
             OR: [{ title: { contains: searchString } }, { content: { contains: searchString } }],
           },

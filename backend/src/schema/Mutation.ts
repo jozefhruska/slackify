@@ -17,8 +17,8 @@ export const Mutation = objectType({
         content: stringArg(),
         authorEmail: stringArg(),
       },
-      resolve: (_, { title, content, authorEmail }, ctx) => {
-        return ctx.photon.posts.create({
+      resolve: (_, { title, content, authorEmail }, { prisma }) => {
+        return prisma.posts.create({
           data: {
             title,
             content,
@@ -37,7 +37,7 @@ export const Mutation = objectType({
       args: {
         code: stringArg(),
       },
-      resolve: async (_, { code }, { photon }) => {
+      resolve: async (_, { code }, { prisma }) => {
         const slackAuthResponse = await axios
           .get<SlackAuthResponse>('https://slack.com/api/oauth.access', {
             params: {
@@ -52,14 +52,14 @@ export const Mutation = objectType({
           });
 
         if (slackAuthResponse?.ok && slackAuthResponse.access_token && slackAuthResponse.user) {
-          const existingUser = await photon.users.findOne({
+          const existingUser = await prisma.users.findOne({
             where: {
               id: slackAuthResponse.user.id,
             },
           });
 
           if (existingUser) {
-            return photon.users.update({
+            return prisma.users.update({
               where: {
                 id: slackAuthResponse.user.id,
               },
@@ -70,7 +70,7 @@ export const Mutation = objectType({
               },
             });
           } else {
-            return photon.users.create({
+            return prisma.users.create({
               data: {
                 id: slackAuthResponse.user.id,
                 name: slackAuthResponse.user.name,
@@ -91,8 +91,8 @@ export const Mutation = objectType({
       args: {
         id: idArg(),
       },
-      resolve: (_, { id }, ctx) => {
-        return ctx.photon.posts.update({
+      resolve: (_, { id }, { prisma }) => {
+        return prisma.posts.update({
           where: { id },
           data: { published: true },
         });

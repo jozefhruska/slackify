@@ -7,33 +7,36 @@
     "clean": "rm -rf dist",
     "dev": "ts-node-dev --no-notify --respawn --transpileOnly src/server",
     "build": "npm -s run clean && npm -s run generate && tsc",
-    "generate": "npm -s run generate:prisma && npm -s run generate:nexus",
+    "generate": "npm -s run prisma:generate && npm -s run nexus:generate",
     "nexus:generate": "ts-node --transpile-only src/schema",
-    "prisma:dev": "prisma2 dev",
     "prisma:generate": "prisma2 generate",
-    "prisma:deploy": "prisma2 lift up"
+    "prisma:dev": "prisma2 generate --watch",
+    "prisma:save": "prisma2 migrate save --experimental",
+    "prisma:deploy": "prisma2 migrate up --experimental"
   },
   "author": "Jozef Hruška",
   "license": "UNLICENSED",
   "dependencies": {
-    "@prisma/photon": "^2.0.0-preview019",
-    "apollo-server": "^2.9.16",
-    "axios": "^0.19.1",
-    "graphql": "^14.5.8",
-    "nexus": "^0.12.0-rc.5",
-    "nexus-prisma": "^0.7.0-next.1",
-    "prisma2": "^2.0.0-preview019"
+    "@prisma/client": "^2.0.0-preview020.3",
+    "apollo-server-express": "^2.9.16",
+    "axios": "^0.19.2",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "graphql": "^14.6.0",
+    "nexus": "^0.12.0-rc.9",
+    "nexus-prisma": "^0.7.0"
   },
   "devDependencies": {
-    "@types/node": "^13.1.7",
-    "@typescript-eslint/eslint-plugin": "^2.16.0",
-    "@typescript-eslint/parser": "^2.16.0",
+    "@types/node": "^13.5.0",
+    "@typescript-eslint/eslint-plugin": "^2.17.0",
+    "@typescript-eslint/parser": "^2.17.0",
     "eslint": "^6.8.0",
     "eslint-config-prettier": "^6.9.0",
     "eslint-plugin-prettier": "^3.1.2",
     "prettier": "^1.19.1",
+    "prisma2": "^2.0.0-preview020.3",
     "ts-node": "^8.6.2",
     "ts-node-dev": "^1.0.0-pre.44",
-    "typescript": "^3.7.4"
+    "typescript": "^3.7.5"
   }
 }

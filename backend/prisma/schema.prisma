@@ -1,12 +1,12 @@
 datasource db {
   provider = "postgresql"
-  url      = "postgresql://postgres:password@localhost:5432/postgres"
-  // url      = env("POSTGRES_URL")
-  // enabled  = env("POSTGRES_URL")
+  url      = env("POSTGRES_URL")
+  enabled  = env("POSTGRES_URL")
+  // url      = "postgresql://postgres:password@localhost:5432/postgres"
 }
 
 generator photon {
-  provider = "photonjs"
+  provider = "prisma-client-js"
 }
 
 model User {
