@@ -3,6 +3,7 @@ import { objectType, stringArg, idArg } from 'nexus';
 import axios from 'axios';
 
 import { SlackAuthResponse } from '../types/auth';
+import { CLIENT_SECRET, CLIENT_ID } from '../config';
 
 export const Mutation = objectType({
   name: 'Mutation',
@@ -41,8 +42,8 @@ export const Mutation = objectType({
         const slackAuthResponse = await axios
           .get<SlackAuthResponse>('https://slack.com/api/oauth.access', {
             params: {
-              client_id: '791343423090.804137961685',
-              client_secret: '86a91fd3c50384313047d79be1afb7bc',
+              client_id: CLIENT_ID,
+              client_secret: CLIENT_SECRET,
               code,
             },
           })
