@@ -4,8 +4,14 @@ import createHttpError from 'http-errors';
 import { SlackEventType, SlackAppHomeOpenedEventType } from '../types/events';
 import Axios from 'axios';
 import { SLACK_BOT_USER_ACCESS_TOKEN } from '../config';
+import { Request, Response } from 'express';
 
-export const handleSlackEventType = async (event: SlackEventType): Promise<void> => {
+export const handleSlackEventType = async (
+  request: Request,
+  response: Response
+): Promise<Response> => {
+  const event = request?.body.event as SlackEventType;
+
   switch (event?.type) {
     case 'app_home_opened': {
       const { tab, user } = event as SlackAppHomeOpenedEventType;
@@ -21,7 +27,7 @@ export const handleSlackEventType = async (event: SlackEventType): Promise<void>
                 type: 'section',
                 text: {
                   type: 'mrkdwn',
-                  text: 'A simple stack of blocks for the simple sample Block Kit Home tab.',
+                  text: 'A simple stack of blocks for the simple sample Block Kit Home tabsss.',
                 },
               },
               {
@@ -55,6 +61,9 @@ export const handleSlackEventType = async (event: SlackEventType): Promise<void>
           },
         }
       );
+
+      /* Confirm Slack event */
+      return response.sendStatus(200);
     }
 
     default: {

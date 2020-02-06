@@ -28,3 +28,8 @@ export type SlackAppHomeOpenedEventType = {
 export type SlackEventType = SlackAppHomeOpenedEventType;
 
 export type SlackEvent = SlackURLVerificationEvent | SlackEventCallbackEvent;
+
+export type SlackHTTPHeaders = {
+  'x-slack-signature': string;
+  'x-slack-request-timestamp': string;
+};

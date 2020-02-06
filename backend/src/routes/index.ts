@@ -13,7 +13,7 @@ router.use(bodyParser.json());
 router.use('/events', events);
 
 /* Handle HTTP errors */
-router.use((error: HttpError, request: Request, response: Response, next: NextFunction) => {
+router.use((error: HttpError, request: Request, response: Response) => {
   response.status(error.status);
 
   response.json({

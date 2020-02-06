@@ -18,5 +18,5 @@ app.use('/', routes);
 
 /* Start the Apollo Express Server */
 app.listen({ port: PORT }, () =>
-  console.log(`🚀  [Private] Server ready at http://localhost:4000${apollo.graphqlPath}`)
+  console.log(`🚀  [Slackify] Server ready at http://localhost:4000.`)
 );

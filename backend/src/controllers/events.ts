@@ -2,32 +2,26 @@ import { Request, Response } from 'express';
 import createHttpError from 'http-errors';
 import asyncHandler from 'express-async-handler';
 
-import { SlackEvent, SlackURLVerificationEvent, SlackEventCallbackEvent } from '../types/events';
-import { SLACK_VERIFICATION_TOKEN } from '../config';
+import { SlackEvent, SlackURLVerificationEvent } from '../types/events';
 import { handleSlackEventType } from '../util/events';
 
-export const receive = asyncHandler(async (request: Request, response: Response): void => {
+export const receive = asyncHandler(async (request: Request, response: Response) => {
   if (request?.body) {
     const eventBody: SlackEvent = request.body;
-
-    /* Verify if event is coming from Slack
-     * TODO: Use signing secret instead */
-    if (eventBody?.token !== SLACK_VERIFICATION_TOKEN) {
-      throw createHttpError(500, 'Incorrect verification token.');
-    }
 
     switch (eventBody?.type) {
       case 'url_verification': {
         const { challenge } = eventBody as SlackURLVerificationEvent;
 
         /* Send the challenge string back */
-        response.json({
+        return response.json({
           challenge,
         });
       }
 
       case 'event_callback': {
-        await handleSlackEventType((eventBody as SlackEventCallbackEvent).event);
+        await handleSlackEventType(request, response);
+        break;
       }
 
       default: {
@@ -36,5 +30,5 @@ export const receive = asyncHandler(async (request: Request, response: Response)
     }
   }
 
-  response.status(500);
+  throw createHttpError(500, 'Internal error.');
 });
