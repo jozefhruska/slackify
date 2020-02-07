@@ -3,7 +3,7 @@ import createHttpError from 'http-errors';
 import asyncHandler from 'express-async-handler';
 
 import { SlackEvent, SlackURLVerificationEvent } from '../types/events';
-import { handleSlackEventType } from '../util/events';
+import { handleSlackEventType } from '../utils/events';
 
 export const receive = asyncHandler(async (request: Request, response: Response) => {
   if (request?.body) {

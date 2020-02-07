@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/camelcase */
+import { Request, Response } from 'express';
 import createHttpError from 'http-errors';
+import Axios from 'axios';
 
 import { SlackEventType, SlackAppHomeOpenedEventType } from '../types/events';
-import Axios from 'axios';
 import { SLACK_BOT_USER_ACCESS_TOKEN } from '../config';
-import { Request, Response } from 'express';
 
 export const handleSlackEventType = async (
   request: Request,
@@ -14,7 +14,7 @@ export const handleSlackEventType = async (
 
   switch (event?.type) {
     case 'app_home_opened': {
-      const { tab, user } = event as SlackAppHomeOpenedEventType;
+      const { user } = event as SlackAppHomeOpenedEventType;
 
       await Axios.post(
         'https://slack.com/api/views.publish',

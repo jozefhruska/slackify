@@ -14,7 +14,7 @@ export const verifySlackSignature = async (
 ): Promise<void> => {
   const headers = request?.headers as SlackHTTPHeaders;
 
-  /* Check if both signature and timetamp headers are defined */
+  /* Check if both signature and timestamp headers are defined */
   if (headers?.['x-slack-signature'] && headers?.['x-slack-request-timestamp']) {
     const requestTimestamp = Number(headers['x-slack-request-timestamp']);
     const requestSignature = request.headers['x-slack-signature'] as string;
