@@ -4,7 +4,7 @@ import createHttpError from 'http-errors';
 import Axios from 'axios';
 
 import { SlackEvent, SlackAppHomeOpenedEvent } from '../types/events';
-import { SLACK_BOT_USER_ACCESS_TOKEN } from '../config';
+import { SLACK_BOT_ACCESS_TOKEN } from '../config';
 
 export const handleSlackEventType = async (
   request: Request,
@@ -178,7 +178,7 @@ export const handleSlackEventType = async (
         {
           headers: {
             'Content-Type': 'application/json',
-            Authorization: `Bearer ${SLACK_BOT_USER_ACCESS_TOKEN}`,
+            Authorization: `Bearer ${SLACK_BOT_ACCESS_TOKEN}`,
           },
         }
       );
