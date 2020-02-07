@@ -21,7 +21,7 @@ export const receive = asyncHandler(async (request: Request, response: Response)
 
       case 'event_callback': {
         await handleSlackEventType(request, response);
-        break;
+        return;
       }
 
       default: {
