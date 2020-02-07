@@ -3,18 +3,18 @@ import { Request, Response } from 'express';
 import createHttpError from 'http-errors';
 import Axios from 'axios';
 
-import { SlackEventType, SlackAppHomeOpenedEventType } from '../types/events';
+import { SlackEvent, SlackAppHomeOpenedEvent } from '../types/events';
 import { SLACK_BOT_USER_ACCESS_TOKEN } from '../config';
 
 export const handleSlackEventType = async (
   request: Request,
   response: Response
 ): Promise<Response> => {
-  const event = request?.body.event as SlackEventType;
+  const event = request?.body.event as SlackEvent;
 
   switch (event?.type) {
     case 'app_home_opened': {
-      const { user } = event as SlackAppHomeOpenedEventType;
+      const { user } = event as SlackAppHomeOpenedEvent;
 
       await Axios.post(
         'https://slack.com/api/views.publish',
@@ -45,12 +45,12 @@ export const handleSlackEventType = async (
                   },
                   {
                     type: 'button',
+                    action_id: 'create_new_category',
                     text: {
                       type: 'plain_text',
                       text: '📂 \tCreate new category',
                       emoji: true,
                     },
-                    value: 'create_category',
                   },
                   {
                     type: 'button',

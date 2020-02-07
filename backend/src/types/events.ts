@@ -1,16 +1,16 @@
 /* Events
 ============================================================================= */
-export type SlackURLVerificationEvent = {
+export type SlackURLVerificationEventRequestBody = {
   type: 'url_verification';
   token: string;
   challenge: string;
 };
 
-export type SlackEventCallbackEvent = {
+export type SlackEventCallbackRequestBody = {
   token: string;
   team_id: string;
   api_app_id: string;
-  event: SlackEventType;
+  event: SlackEvent;
   type: 'event_callback';
   event_id: string;
   event_time: number;
@@ -18,16 +18,18 @@ export type SlackEventCallbackEvent = {
 
 /* Event types
 ============================================================================= */
-export type SlackAppHomeOpenedEventType = {
+export type SlackAppHomeOpenedEvent = {
   type: 'app_home_opened';
   user: string;
   channel: string;
   tab: 'home' | 'messages';
 };
 
-export type SlackEventType = SlackAppHomeOpenedEventType;
+export type SlackEvent = SlackAppHomeOpenedEvent;
 
-export type SlackEvent = SlackURLVerificationEvent | SlackEventCallbackEvent;
+export type SlackEventRequestBody =
+  | SlackURLVerificationEventRequestBody
+  | SlackEventCallbackRequestBody;
 
 export type SlackHTTPHeaders = {
   'x-slack-signature': string;

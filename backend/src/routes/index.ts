@@ -1,26 +1,11 @@
-import express, { Request, Response } from 'express';
-import { HttpError } from 'http-errors';
-import bodyParser from 'body-parser';
+import express from 'express';
 
 import events from './events';
+import actions from './actions';
 
 const router = express.Router();
 
-/* Configure body parser */
-router.use(bodyParser.urlencoded({ extended: true }));
-router.use(bodyParser.json());
-
 router.use('/events', events);
-
-/* Handle HTTP errors */
-router.use((error: HttpError, request: Request, response: Response) => {
-  response.status(error.status);
-
-  response.json({
-    status: error.status,
-    message: error.message,
-    stack: error.stack,
-  });
-});
+router.use('/actions', actions);
 
 export default router;

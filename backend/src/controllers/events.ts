@@ -2,16 +2,16 @@ import { Request, Response } from 'express';
 import createHttpError from 'http-errors';
 import asyncHandler from 'express-async-handler';
 
-import { SlackEvent, SlackURLVerificationEvent } from '../types/events';
+import { SlackEventRequestBody, SlackURLVerificationEventRequestBody } from '../types/events';
 import { handleSlackEventType } from '../utils/events';
 
 export const receive = asyncHandler(async (request: Request, response: Response) => {
   if (request?.body) {
-    const eventBody: SlackEvent = request.body;
+    const requestBody: SlackEventRequestBody = request.body;
 
-    switch (eventBody?.type) {
+    switch (requestBody?.type) {
       case 'url_verification': {
-        const { challenge } = eventBody as SlackURLVerificationEvent;
+        const { challenge } = requestBody as SlackURLVerificationEventRequestBody;
 
         /* Send the challenge string back */
         return response.json({

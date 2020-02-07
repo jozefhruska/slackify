@@ -1,6 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
 import createHttpError from 'http-errors';
-import rawBody from 'raw-body';
 import crypto from 'crypto';
 import tsscmp from 'tsscmp';
 
@@ -19,9 +18,6 @@ export const verifySlackSignature = async (
     const requestTimestamp = Number(headers['x-slack-request-timestamp']);
     const requestSignature = request.headers['x-slack-signature'] as string;
 
-    /* Get request raw body */
-    const requestRawBody = (await rawBody(request)).toString();
-
     /* Check if timestamp is not older than five minutes */
     if (requestTimestamp < Math.floor(Date.now() / 1000) - 60 * 5) {
       throw createHttpError(400, 'Incorrect Slack request timestamp.');
@@ -32,7 +28,7 @@ export const verifySlackSignature = async (
 
     /* Create a signature hash */
     const [version, hash] = requestSignature.split('=');
-    const baseString = `${version}:${requestTimestamp}:${requestRawBody}`;
+    const baseString = `${version}:${requestTimestamp}:${request?.rawBody}`;
     hmac.update(baseString, 'utf8');
 
     /* Compare signatures */
