@@ -1,6 +1,6 @@
 import { ApolloServer } from 'apollo-server-express';
 import bodyParser from 'body-parser';
-import express, { Request, Response } from 'express';
+import express, { Request, Response, NextFunction } from 'express';
 import { HttpError } from 'http-errors';
 
 import { schema } from './schema';
@@ -35,7 +35,7 @@ app.use(bodyParser.json({ verify: rawBodyBuffer }));
 app.use('/', routes);
 
 /* Handle HTTP errors */
-app.use((error: HttpError, request: Request, response: Response) => {
+app.use((error: HttpError, request: Request, response: Response, next: NextFunction) => {
   response.status(error.status);
 
   response.json({

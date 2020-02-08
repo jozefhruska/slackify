@@ -20,7 +20,7 @@ export const verifySlackSignature = async (
 
     /* Check if timestamp is not older than five minutes */
     if (requestTimestamp < Math.floor(Date.now() / 1000) - 60 * 5) {
-      throw createHttpError(400, 'Incorrect Slack request timestamp.');
+      return next(createHttpError(400, 'Incorrect Slack request timestamp.'));
     }
 
     /* Create HMAC */
@@ -33,11 +33,12 @@ export const verifySlackSignature = async (
 
     /* Compare signatures */
     if (!tsscmp(hash, hmac.digest('hex'))) {
-      throw createHttpError(400, 'Incorrect Slack verification signature.');
+      return next(createHttpError(400, 'Incorrect Slack verification signature.'));
     }
 
-    next();
-  } else {
-    throw createHttpError(400, 'Undefined Slack verification signature or timestamp.');
+    /* Success - continue */
+    return next();
   }
+
+  return next(createHttpError(400, 'Undefined Slack verification signature or timestamp.'));
 };
