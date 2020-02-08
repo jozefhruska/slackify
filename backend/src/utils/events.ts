@@ -38,10 +38,10 @@ export const updateHomeTab = (userId: SlackUser['id']) =>
               },
               {
                 type: 'button',
-                action_id: 'create_new_category',
+                action_id: 'app_home_manage_categories_open',
                 text: {
                   type: 'plain_text',
-                  text: '📂 \tCreate new category',
+                  text: '📂 \tManage categories',
                   emoji: true,
                 },
               },

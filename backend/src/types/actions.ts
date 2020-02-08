@@ -1,5 +1,5 @@
 export type SlackCreateNewCategoryAction = {
-  action_id: 'create_new_category';
+  action_id: 'app_home_manage_categories_open';
   type: 'button';
 };
 

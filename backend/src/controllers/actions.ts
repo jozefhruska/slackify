@@ -18,32 +18,67 @@ export const receive = asyncHandler(
       }
 
       switch (requestBody.actions[0].action_id) {
-        case 'create_new_category': {
+        case 'app_home_manage_categories_open': {
           response.sendStatus(200);
 
           const modal = {
             type: 'modal',
             title: {
               type: 'plain_text',
-              text: 'Categories',
+              text: 'Manage categories',
               emoji: false,
             },
             blocks: [
               {
+                type: 'actions',
+                elements: [
+                  {
+                    type: 'button',
+                    text: {
+                      type: 'plain_text',
+                      text: '📂 \tCreate new category',
+                      emoji: true,
+                    },
+                    style: 'primary',
+                  },
+                ],
+              },
+              {
+                type: 'context',
+                elements: [
+                  {
+                    type: 'image',
+                    image_url:
+                      'https://api.slack.com/img/blocks/bkb_template_images/placeholder.png',
+                    alt_text: 'placeholder',
+                  },
+                ],
+              },
+              {
                 type: 'section',
                 text: {
                   type: 'mrkdwn',
-                  text: 'Demo category name',
+                  text: '*Categories:*',
+                },
+              },
+              {
+                type: 'divider',
+              },
+              {
+                type: 'section',
+                text: {
+                  type: 'mrkdwn',
+                  text: '*@demo-category*\nDemo category name',
                 },
                 accessory: {
                   type: 'button',
+                  style: 'danger',
                   text: {
                     type: 'plain_text',
                     text: 'Delete',
                     emoji: false,
                   },
-                  style: 'danger',
-                  value: 'click_me_123',
+                  value: 'public-relations',
                 },
               },
             ],
@@ -51,7 +86,7 @@ export const receive = asyncHandler(
 
           await openModal(modal, requestBody.trigger_id).catch(() => {
             console.error(
-              new Error('Unable to open "create new category" modal. (Request failed)')
+              new Error('Unable to open "app_home_manage_categories_open" modal. (Request failed)')
             );
           });
           return;
