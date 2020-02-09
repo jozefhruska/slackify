@@ -4,6 +4,7 @@ import asyncHandler from 'express-async-handler';
 
 import { SlackActionRequestBody } from '../types/actions';
 import { openModal } from '../utils/views';
+import { prisma } from '../context';
 
 /**
  * Receive actions from Slack.
@@ -20,6 +21,48 @@ export const receive = asyncHandler(
       switch (requestBody.actions[0].action_id) {
         case 'app_home_manage_categories_open': {
           response.sendStatus(200);
+
+          const categories = await prisma.category.findMany();
+
+          /* Set message as default */
+          let categoryList = [
+            {
+              type: 'divider',
+            },
+            {
+              type: 'section',
+              text: {
+                type: 'mrkdwn',
+                text: "You don' have any categories created.",
+              },
+            },
+          ];
+
+          /* Render list of categories if there are some */
+          if (categories.length) {
+            categoryList = categories.flatMap(({ id, handle }) => [
+              {
+                type: 'divider',
+              },
+              {
+                type: 'section',
+                text: {
+                  type: 'mrkdwn',
+                  text: `*${handle}*`,
+                },
+                accessory: {
+                  type: 'button',
+                  style: 'danger',
+                  text: {
+                    type: 'plain_text',
+                    text: 'Delete',
+                    emoji: false,
+                  },
+                  value: id,
+                },
+              },
+            ]);
+          }
 
           const modal = {
             type: 'modal',
@@ -61,26 +104,7 @@ export const receive = asyncHandler(
                   text: '*Categories:*',
                 },
               },
-              {
-                type: 'divider',
-              },
-              {
-                type: 'section',
-                text: {
-                  type: 'mrkdwn',
-                  text: '*@demo-category*\nDemo category name',
-                },
-                accessory: {
-                  type: 'button',
-                  style: 'danger',
-                  text: {
-                    type: 'plain_text',
-                    text: 'Delete',
-                    emoji: false,
-                  },
-                  value: 'public-relations',
-                },
-              },
+              ...categoryList,
             ],
           };
 

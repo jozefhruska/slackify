@@ -21,7 +21,16 @@
         "source": "db"
       },
       "argument": "url",
-      "value": "\"postgresql://qtmrhuucmgibdm:f4831b677866d97fbbd839a615d0797ec9c685e57f94cc1ff208f30fceb8afeb@ec2-46-137-173-221.eu-west-1.compute.amazonaws.com/d2no7tpsdocnbt?schema=main&sslmode=prefer\""
+      "value": "env(\"POSTGRES_URL\")"
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Source",
+        "source": "db"
+      },
+      "argument": "enabled",
+      "value": "env(\"POSTGRES_URL\")"
     },
     {
       "tag": "CreateModel",
@@ -97,6 +106,67 @@
     },
     {
       "tag": "CreateModel",
+      "model": "Category"
+    },
+    {
+      "tag": "CreateField",
+      "model": "Category",
+      "field": "id",
+      "type": "String",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "Category",
+          "field": "id"
+        },
+        "directive": "default"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "Category",
+          "field": "id"
+        },
+        "directive": "default"
+      },
+      "argument": "",
+      "value": "cuid()"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "Category",
+          "field": "id"
+        },
+        "directive": "id"
+      }
+    },
+    {
+      "tag": "CreateField",
+      "model": "Category",
+      "field": "handle",
+      "type": "String",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateField",
+      "model": "Category",
+      "field": "posts",
+      "type": "Post",
+      "arity": "List"
+    },
+    {
+      "tag": "CreateModel",
       "model": "Post"
     },
     {
@@ -141,6 +211,55 @@
         },
         "directive": "id"
       }
+    },
+    {
+      "tag": "CreateField",
+      "model": "Post",
+      "field": "type",
+      "type": "String",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateField",
+      "model": "Post",
+      "field": "title",
+      "type": "String",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateField",
+      "model": "Post",
+      "field": "short",
+      "type": "String",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateField",
+      "model": "Post",
+      "field": "content",
+      "type": "String",
+      "arity": "Optional"
+    },
+    {
+      "tag": "CreateField",
+      "model": "Post",
+      "field": "isPublished",
+      "type": "Boolean",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateField",
+      "model": "Post",
+      "field": "category",
+      "type": "Category",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateField",
+      "model": "Post",
+      "field": "author",
+      "type": "User",
+      "arity": "Required"
     },
     {
       "tag": "CreateField",
@@ -191,34 +310,6 @@
         },
         "directive": "updatedAt"
       }
-    },
-    {
-      "tag": "CreateField",
-      "model": "Post",
-      "field": "published",
-      "type": "Boolean",
-      "arity": "Required"
-    },
-    {
-      "tag": "CreateField",
-      "model": "Post",
-      "field": "title",
-      "type": "String",
-      "arity": "Required"
-    },
-    {
-      "tag": "CreateField",
-      "model": "Post",
-      "field": "content",
-      "type": "String",
-      "arity": "Optional"
-    },
-    {
-      "tag": "CreateField",
-      "model": "Post",
-      "field": "author",
-      "type": "User",
-      "arity": "Optional"
     }
   ]
 }
