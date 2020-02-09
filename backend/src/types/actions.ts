@@ -1,9 +1,14 @@
-export type SlackCreateNewCategoryAction = {
+export type SlackAppHomeManageCategoriesOpenAction = {
   action_id: 'app_home_manage_categories_open';
   type: 'button';
 };
 
-export type SlackAction = SlackCreateNewCategoryAction;
+export type SlackCreateNewCategoryAction = {
+  action_id: 'create_new_category_open';
+  type: 'button';
+};
+
+export type SlackAction = SlackAppHomeManageCategoriesOpenAction | SlackCreateNewCategoryAction;
 
 export type SlackActionRequestBody = {
   type: 'block_actions';
@@ -18,5 +23,10 @@ export type SlackActionRequestBody = {
     team_id: string;
   };
   trigger_id: string;
-  actions: SlackCreateNewCategoryAction[];
+  view: {
+    id: string;
+    team_id: string;
+    type: 'home' | 'modal';
+  };
+  actions: SlackAction[];
 };

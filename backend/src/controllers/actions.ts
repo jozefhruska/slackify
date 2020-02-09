@@ -3,8 +3,9 @@ import createHttpError from 'http-errors';
 import asyncHandler from 'express-async-handler';
 
 import { SlackActionRequestBody } from '../types/actions';
-import { openModal } from '../utils/views';
+import { openView, updateView } from '../utils/views';
 import { prisma } from '../context';
+import { BLOCK_DIVIDER, BLOCK_TEXT } from '../constants/views';
 
 /**
  * Receive actions from Slack.
@@ -18,32 +19,67 @@ export const receive = asyncHandler(
         return next(createHttpError(400, 'Action not specified.'));
       }
 
-      switch (requestBody.actions[0].action_id) {
+      const actionId = requestBody.actions[0].action_id;
+      switch (actionId) {
+        case 'create_new_category_open': {
+          response.sendStatus(200);
+
+          const modal = {
+            type: 'modal',
+            title: {
+              type: 'plain_text',
+              text: 'Create new category',
+              emoji: false,
+            },
+            submit: {
+              type: 'plain_text',
+              text: 'Create',
+            },
+            blocks: [
+              {
+                type: 'input',
+                label: {
+                  type: 'plain_text',
+                  text: 'Category handle:',
+                  emoji: true,
+                },
+                element: {
+                  type: 'plain_text_input',
+                },
+              },
+              BLOCK_TEXT(
+                "Category handle will serve as an *endpoint for posts in this category*. Category handle must be URL compatible, that means it must contain only *alphanumeric characters* and/or *'-' (dash)*."
+              ),
+            ],
+          };
+
+          /* Get view ID off Slack action */
+          const viewId = requestBody?.view?.id;
+          if (!viewId) {
+            console.error(
+              new Error(`Unable to update "${actionId}" modal. (View ID is not defined)`)
+            );
+          }
+
+          /* Update modal layout */
+          await updateView(modal, viewId).catch(() => {
+            console.error(new Error(`Unable to open "${actionId}" modal. (Request failed)`));
+          });
+          return;
+        }
+
         case 'app_home_manage_categories_open': {
           response.sendStatus(200);
 
           const categories = await prisma.category.findMany();
 
           /* Set message as default */
-          let categoryList = [
-            {
-              type: 'divider',
-            },
-            {
-              type: 'section',
-              text: {
-                type: 'mrkdwn',
-                text: "You don' have any categories created.",
-              },
-            },
-          ];
+          let categoryList = [BLOCK_DIVIDER, BLOCK_TEXT("You don' have any categories created.")];
 
           /* Render list of categories if there are some */
           if (categories.length) {
             categoryList = categories.flatMap(({ id, handle }) => [
-              {
-                type: 'divider',
-              },
+              BLOCK_DIVIDER,
               {
                 type: 'section',
                 text: {
@@ -77,6 +113,7 @@ export const receive = asyncHandler(
                 elements: [
                   {
                     type: 'button',
+                    action_id: 'create_new_category_open',
                     text: {
                       type: 'plain_text',
                       text: '📂 \tCreate new category',
@@ -97,22 +134,15 @@ export const receive = asyncHandler(
                   },
                 ],
               },
-              {
-                type: 'section',
-                text: {
-                  type: 'mrkdwn',
-                  text: '*Categories:*',
-                },
-              },
+              BLOCK_TEXT('*Categories:*'),
               ...categoryList,
             ],
           };
 
-          await openModal(modal, requestBody.trigger_id).catch(() => {
-            console.error(
-              new Error('Unable to open "app_home_manage_categories_open" modal. (Request failed)')
-            );
+          await openView(modal, requestBody.trigger_id).catch(() => {
+            console.error(new Error(`Unable to open "${actionId}" modal. (Request failed)`));
           });
+
           return;
         }
 
