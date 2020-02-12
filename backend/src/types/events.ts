@@ -1,5 +1,5 @@
-/* Events
-============================================================================= */
+import { SlackEvent } from '@slack/bolt';
+
 export type SlackURLVerificationEventRequestBody = {
   type: 'url_verification';
   token: string;
@@ -15,17 +15,6 @@ export type SlackEventCallbackRequestBody = {
   event_id: string;
   event_time: number;
 };
-
-/* Event types
-============================================================================= */
-export type SlackAppHomeOpenedEvent = {
-  type: 'app_home_opened';
-  user: string;
-  channel: string;
-  tab: 'home' | 'messages';
-};
-
-export type SlackEvent = SlackAppHomeOpenedEvent;
 
 export type SlackEventRequestBody =
   | SlackURLVerificationEventRequestBody

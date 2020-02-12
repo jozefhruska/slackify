@@ -1,13 +1,9 @@
 import { Request, Response, NextFunction } from 'express';
 import createHttpError from 'http-errors';
 import asyncHandler from 'express-async-handler';
+import { SlackEvent } from '@slack/bolt';
 
-import {
-  SlackEventRequestBody,
-  SlackURLVerificationEventRequestBody,
-  SlackEvent,
-  SlackAppHomeOpenedEvent,
-} from '../types/events';
+import { SlackEventRequestBody, SlackURLVerificationEventRequestBody } from '../types/events';
 import { updateHomeTab } from '../utils/events';
 
 /**
@@ -33,7 +29,7 @@ export const receive = asyncHandler(
 
           switch (event?.type) {
             case 'app_home_opened': {
-              const { user: userId } = event as SlackAppHomeOpenedEvent;
+              const { user: userId } = event;
 
               /* Confirm Slack event */
               response.sendStatus(200);
