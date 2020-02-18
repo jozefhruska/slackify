@@ -30,6 +30,7 @@ const manage_categories_open = async ({ body, ack }: SlackActionMiddlewareArgs<B
           accessory: {
             type: 'button',
             style: 'danger',
+            action_id: 'delete_category',
             text: {
               type: 'plain_text',
               text: 'Delete',

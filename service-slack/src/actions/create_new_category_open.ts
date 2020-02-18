@@ -4,7 +4,7 @@ import { app } from '..';
 import { SLACK_BOT_TOKEN } from '../config';
 
 /**
- * Opens the cateory create modal.
+ * Opens the category create modal.
  */
 const create_new_category_open = async ({ body, ack }: SlackActionMiddlewareArgs<BlockAction>) => {
   ack();
