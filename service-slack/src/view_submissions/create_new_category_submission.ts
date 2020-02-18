@@ -1,5 +1,4 @@
 import { SlackViewMiddlewareArgs, ViewSubmitAction, Middleware } from '@slack/bolt';
-import { CreateNewCategoryModalSubmissionValues } from '../types/view_submissions';
 import { prisma } from '../prisma';
 
 /* Local types
@@ -18,7 +17,7 @@ type CreateNewCategoryModalSubmissionState = {
 /**
  * Handles the submission event of create new category modal.
  */
-const createNewCategoryModalSubmission: Middleware<SlackViewMiddlewareArgs<
+const create_new_category_submission: Middleware<SlackViewMiddlewareArgs<
   ViewSubmitAction
 >> = async ({ view, body, ack }) => {
   const teamId = body?.user?.team_id;
@@ -42,7 +41,7 @@ const createNewCategoryModalSubmission: Middleware<SlackViewMiddlewareArgs<
 
   /* Check if there is a category with the same handle amd team ID */
   try {
-    const categories = await prisma.category.findMany({
+    const teamCategories = await prisma.category.findMany({
       where: {
         team: {
           id: teamId,
@@ -50,7 +49,9 @@ const createNewCategoryModalSubmission: Middleware<SlackViewMiddlewareArgs<
       },
     });
 
-    if (categories.length) {
+    const duplicateCategory = teamCategories.find(({ handle }) => handle === categoryHandle);
+
+    if (duplicateCategory) {
       ack({
         response_action: 'errors',
         errors: {
@@ -84,4 +85,4 @@ const createNewCategoryModalSubmission: Middleware<SlackViewMiddlewareArgs<
   }
 };
 
-export default createNewCategoryModalSubmission;
+export default create_new_category_submission;

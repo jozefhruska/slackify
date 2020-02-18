@@ -4,7 +4,7 @@ import { WebClient } from '@slack/web-api';
 import { SLACK_BOT_TOKEN, SLACK_SIGNING_SECRET, PORT } from './config';
 import { app_home_opened } from './events';
 import { manage_categories_open, create_new_category_open } from './actions';
-import { createNewCategoryModalSubmission } from './view_submissions';
+import { create_new_category_submission } from './view_submissions';
 
 /* Create a Bolt instance
 ============================================================================= */
@@ -31,7 +31,7 @@ app.action('create_new_category_open', create_new_category_open);
 
 /* View submissions
 ============================================================================= */
-app.view('create_new_category_modal', createNewCategoryModalSubmission);
+app.view('create_new_category_modal', create_new_category_submission);
 
 /* Start up
 ============================================================================= */

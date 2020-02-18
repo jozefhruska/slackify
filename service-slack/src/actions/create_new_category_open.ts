@@ -1,6 +1,5 @@
 import { SlackActionMiddlewareArgs, BlockAction } from '@slack/bolt';
 
-import { BLOCK_TEXT } from '../constants/views';
 import { app } from '..';
 import { SLACK_BOT_TOKEN } from '../config';
 
