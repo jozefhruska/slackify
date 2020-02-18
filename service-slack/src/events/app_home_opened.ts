@@ -16,7 +16,7 @@ const app_home_opened = async ({ event }: SlackEventMiddlewareArgs<AppHomeOpened
             type: 'section',
             text: {
               type: 'mrkdwn',
-              text: "*Here's what you can do with Slackify FUCK:*",
+              text: "*Here's what you can do with Slackify:*",
             },
           },
           {

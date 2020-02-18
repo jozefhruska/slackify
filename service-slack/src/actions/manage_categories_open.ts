@@ -9,9 +9,9 @@ import { SLACK_BOT_TOKEN } from '../config';
  * Opens the categories modal.
  */
 const manage_categories_open = async ({ body, ack }: SlackActionMiddlewareArgs<BlockAction>) => {
-  try {
-    ack();
+  ack();
 
+  try {
     const categories = await prisma.category.findMany();
 
     /* Set message as default */
@@ -84,7 +84,7 @@ const manage_categories_open = async ({ body, ack }: SlackActionMiddlewareArgs<B
       },
     });
   } catch (error) {
-    console.error(error.data.response_metadata.messages);
+    console.error(error);
   }
 };
 

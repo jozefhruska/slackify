@@ -8,15 +8,16 @@ import { SLACK_BOT_TOKEN } from '../config';
  * Opens the cateory create modal.
  */
 const create_new_category_open = async ({ body, ack }: SlackActionMiddlewareArgs<BlockAction>) => {
-  try {
-    ack();
+  ack();
 
+  try {
     /* Open modal */
     await app.client.views.update({
       token: SLACK_BOT_TOKEN,
       view_id: body?.view?.id,
       view: {
         type: 'modal',
+        callback_id: 'create_new_category_modal',
         title: {
           type: 'plain_text',
           text: 'Create new category',
@@ -29,6 +30,7 @@ const create_new_category_open = async ({ body, ack }: SlackActionMiddlewareArgs
         blocks: [
           {
             type: 'input',
+            block_id: 'category_handle_block',
             label: {
               type: 'plain_text',
               text: 'Category handle:',
@@ -36,16 +38,18 @@ const create_new_category_open = async ({ body, ack }: SlackActionMiddlewareArgs
             },
             element: {
               type: 'plain_text_input',
+              action_id: 'category_handle_input',
+            },
+            hint: {
+              type: 'plain_text',
+              text: 'Category handle will serve as an endpoint for posts in this category.',
             },
           },
-          BLOCK_TEXT(
-            "Category handle will serve as an *endpoint for posts in this category*. Category handle must be URL compatible, that means it must contain only *alphanumeric characters* and/or *'-' (dash)*."
-          ),
         ],
       },
     });
   } catch (error) {
-    console.error(error.data.response_metadata.messages);
+    console.error(error);
   }
 };
 
