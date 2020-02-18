@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/camelcase */
 import { SlackUser } from '../types/auth';
-import { SLACK_API } from '.';
+import { SLACK_API } from '../utils';
 
 /**
  * Updates Slack app's home tab for a specific user.

@@ -26,8 +26,8 @@ if (!SLACK_VERIFICATION_TOKEN) {
   process.exit(1);
 }
 
-export const SLACK_BOT_ACCESS_TOKEN = process?.env?.SLACK_BOT_USER_ACCESS_TOKEN as string;
-if (!SLACK_BOT_ACCESS_TOKEN) {
+export const SLACK_BOT_TOKEN = process?.env?.SLACK_BOT_TOKEN as string;
+if (!SLACK_BOT_TOKEN) {
   console.error(new Error('Environment variable "SLACK_BOT_ACCESS_TOKEN" is not defined.'));
   process.exit(1);
 }

@@ -1,6 +1,6 @@
 import { SLACK_BOT_ACCESS_TOKEN } from '../config';
 import { SlackActionRequestBody } from '../types/actions';
-import { SLACK_API } from '.';
+import { SLACK_API } from '../utils';
 
 /**
  * Sends a view.open request to Slack with view payload.

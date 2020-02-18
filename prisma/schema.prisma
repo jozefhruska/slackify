@@ -7,6 +7,7 @@ datasource db {
 
 generator photon {
   provider = "prisma-client-js"
+  output = "../service-slack/generated/client"
 }
 
 model User {

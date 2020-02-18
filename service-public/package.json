@@ -1,5 +1,5 @@
 {
-  "name": "slackify-backend",
+  "name": "slackify-service-public",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -8,13 +8,10 @@
     "dev": "ts-node-dev --no-notify --respawn --transpileOnly src/server",
     "build": "npm -s run clean && npm -s run generate && tsc",
     "generate": "npm -s run prisma:generate && npm -s run nexus:generate",
-    "nexus:generate": "ts-node --transpile-only src/schema",
-    "prisma:generate": "prisma2 generate",
-    "prisma:save": "prisma2 migrate save --experimental",
-    "prisma:deploy": "prisma2 migrate up --experimental"
+    "nexus:generate": "ts-node --transpile-only src/schema"
   },
-  "author": "Jozef Hruška",
-  "license": "UNLICENSED",
+  "author": "Jozef Hruška (xhrusk25@vutbr.cz)",
+  "license": "ISC",
   "dependencies": {
     "@prisma/client": "^2.0.0-preview021",
     "@slack/bolt": "^1.6.0",
