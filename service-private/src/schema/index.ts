@@ -1,14 +1,13 @@
 import { makeSchema } from 'nexus';
 import { nexusPrismaPlugin } from 'nexus-prisma';
 
-import * as userTypes from './User';
-import * as postTypes from './Post';
 import * as queryTypes from './Query';
-import * as mutationTypes from './Mutation';
-import path = require('path');
+import * as teamTypes from './Team';
+
+const path = require('path');
 
 export const schema = makeSchema({
-  types: { ...userTypes, ...postTypes, ...queryTypes, ...mutationTypes },
+  types: { ...teamTypes, ...queryTypes },
   plugins: [nexusPrismaPlugin()],
   outputs: {
     schema: path.join(__dirname, '../generated/schema.graphql'),
@@ -22,7 +21,7 @@ export const schema = makeSchema({
         alias: 'prisma',
       },
       {
-        source: require.resolve('../context'),
+        source: path.join(__dirname, '../context.ts'),
         alias: 'Context',
       },
     ],

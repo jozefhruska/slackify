@@ -37,8 +37,7 @@ app.view('create_new_category_modal', create_new_category_submission);
 /* Start up
 ============================================================================= */
 (async () => {
-  // Start your app
   await app.start(PORT || 4000);
 
-  console.log(`[service-slack] ⚡️ Running on port ${PORT}.`);
+  console.log(`[service-slack] ⚡️ Running on http://localhost:${PORT}/.`);
 })();

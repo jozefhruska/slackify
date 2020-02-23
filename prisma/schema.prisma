@@ -5,9 +5,14 @@ datasource db {
   // url      = "postgresql://postgres:password@localhost:5432/postgres"
 }
 
-generator photon {
+generator cient_service_slack {
   provider = "prisma-client-js"
-  output   = "../service-slack/generated/client"
+  output   = "../service-slack/node_modules/@prisma/client"
+}
+
+generator client_service_private {
+  provider = "prisma-client-js"
+  output   = "../service-private/node_modules/@prisma/client"
 }
 
 model User {
