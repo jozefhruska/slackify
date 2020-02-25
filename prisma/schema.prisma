@@ -5,6 +5,10 @@ datasource db {
   // url      = "postgresql://postgres:password@localhost:5432/postgres"
 }
 
+generator cient_prisma {
+  provider = "prisma-client-js"
+}
+
 generator cient_service_slack {
   provider = "prisma-client-js"
   output   = "../service-slack/node_modules/@prisma/client"

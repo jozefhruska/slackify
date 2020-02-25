@@ -1,4 +1,4 @@
-import { SlackActionMiddlewareArgs, BlockAction } from '@slack/bolt';
+import { SlackActionMiddlewareArgs, BlockAction, Middleware } from '@slack/bolt';
 
 import { app } from '..';
 import { SLACK_BOT_TOKEN } from '../config';
@@ -6,7 +6,10 @@ import { SLACK_BOT_TOKEN } from '../config';
 /**
  * Opens the category create modal.
  */
-const create_new_category_open = async ({ body, ack }: SlackActionMiddlewareArgs<BlockAction>) => {
+const create_new_category_open: Middleware<SlackActionMiddlewareArgs<BlockAction>> = async ({
+  body,
+  ack,
+}) => {
   ack();
 
   try {
