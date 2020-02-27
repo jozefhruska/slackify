@@ -1,10 +1,10 @@
 import { prisma } from '../prisma';
 import { BLOCK_DIVIDER, BLOCK_TEXT } from '../constants/views';
-import { View } from '@slack/web-api';
+import { View, Option } from '@slack/web-api';
 
 /**
- * Composes view of 'manage categories' modal.
- * @param teamId Team ID for which to generate view
+ * Composes a view of 'manage categories' modal.
+ * @param teamId Team ID of workspace for which to get categories
  */
 export const compose_manage_categories_view = async (teamId: string): Promise<View | undefined> => {
   try {
@@ -79,6 +79,91 @@ export const compose_manage_categories_view = async (teamId: string): Promise<Vi
         },
         BLOCK_TEXT('*Categories:*'),
         ...categoryList,
+      ],
+    };
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+/**
+ * Composes a view of 'create new post' modal.
+ * @param teamId Team ID of workspace for which to get categories
+ */
+export const compose_create_new_post_view = async (teamId: string): Promise<View | undefined> => {
+  try {
+    const categories = await prisma.category.findMany({
+      where: {
+        team: {
+          id: teamId,
+        },
+      },
+    });
+
+    /* Render a list of category options */
+    let categoryList: Option[] = [];
+    if (categories.length) {
+      categoryList = categories.map(({ id, handle }) => ({
+        text: {
+          type: 'plain_text',
+          text: handle,
+        },
+        value: id,
+      }));
+    }
+
+    return {
+      type: 'modal',
+      callback_id: 'create_new_post_modal',
+      title: {
+        type: 'plain_text',
+        text: 'Create new post',
+        emoji: false,
+      },
+      submit: {
+        type: 'plain_text',
+        text: 'Create',
+      },
+      blocks: [
+        {
+          type: 'input',
+          label: {
+            type: 'plain_text',
+            text: 'Title',
+            emoji: true,
+          },
+          element: {
+            type: 'plain_text_input',
+          },
+        },
+        {
+          type: 'input',
+          label: {
+            type: 'plain_text',
+            text: 'Category',
+            emoji: true,
+          },
+          element: {
+            type: 'static_select',
+            placeholder: {
+              type: 'plain_text',
+              text: 'Select category',
+            },
+            options: categoryList,
+          },
+        },
+        {
+          type: 'input',
+          label: {
+            type: 'plain_text',
+            text: 'Content',
+            emoji: true,
+          },
+          element: {
+            type: 'plain_text_input',
+            multiline: true,
+          },
+        },
       ],
     };
   } catch (error) {

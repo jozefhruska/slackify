@@ -24,6 +24,7 @@ const app_home_opened = async ({ event }: SlackEventMiddlewareArgs<AppHomeOpened
             elements: [
               {
                 type: 'button',
+                action_id: 'create_new_post_open',
                 text: {
                   type: 'plain_text',
                   text: '✏️ \tCreate new post',
