@@ -17,7 +17,7 @@ export const compose_manage_categories_view = async (teamId: string): Promise<Vi
     });
 
     /* Set message as default */
-    let categoryList = [BLOCK_DIVIDER, BLOCK_TEXT("You don' have any categories created.")];
+    let categoryList = [BLOCK_DIVIDER, BLOCK_TEXT("You don't have any categories created.")];
 
     /* Render list of categories if there are some */
     if (categories.length) {
@@ -183,6 +183,193 @@ export const compose_create_new_post_view = async (teamId: string): Promise<View
             multiline: true,
           },
         },
+      ],
+    };
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const compose_app_home_view = async (
+  teamId: string,
+  initialCategory?: Option
+): Promise<View | undefined> => {
+  try {
+    /* Get workspace categories */
+    const categories = await prisma.category.findMany({
+      where: {
+        team: {
+          id: teamId,
+        },
+      },
+    });
+
+    /* Render a list of category options */
+    let categoryList: Option[] = [];
+    if (categories.length) {
+      categoryList = categories.map(({ id, handle }) => ({
+        text: {
+          type: 'plain_text',
+          text: handle,
+        },
+        value: id,
+      }));
+    }
+
+    const activeCategory = initialCategory ?? categoryList[0];
+
+    /* Get workspace posts */
+    const posts = await prisma.post.findMany({
+      where: {
+        category: {
+          id: activeCategory.value,
+        },
+      },
+    });
+
+    /* Set message as default */
+    let postList = [BLOCK_DIVIDER, BLOCK_TEXT('No posts here 🤷‍♂️')];
+
+    /* Render list of categories if there are some */
+    if (posts.length) {
+      postList = posts.flatMap(({ title, short }) => [
+        BLOCK_DIVIDER,
+        {
+          type: 'section',
+          text: {
+            type: 'mrkdwn',
+            text: `*${title}* \n ${short}`,
+          },
+        },
+
+        {
+          type: 'context',
+          elements: [
+            {
+              type: 'mrkdwn',
+              text: 'Submitted by',
+            },
+            {
+              type: 'image',
+              image_url: 'https://api.slack.com/img/blocks/bkb_template_images/profile_3.png',
+              alt_text: 'Dwight Schrute',
+            },
+            {
+              type: 'mrkdwn',
+              text: '*Dwight Schrute*',
+            },
+          ],
+        },
+        {
+          type: 'actions',
+          elements: [
+            {
+              type: 'button',
+              text: {
+                type: 'plain_text',
+                text: '👍 \tApprove',
+                emoji: true,
+              },
+              style: 'primary',
+              value: 'approve',
+            },
+            {
+              type: 'button',
+              text: {
+                type: 'plain_text',
+                text: '👎 \tDecline',
+                emoji: true,
+              },
+              style: 'danger',
+              value: 'decline',
+            },
+            {
+              type: 'button',
+              text: {
+                type: 'plain_text',
+                text: '👀 \tView',
+                emoji: true,
+              },
+              value: 'details',
+            },
+          ],
+        },
+      ]);
+    }
+
+    return {
+      type: 'home',
+      blocks: [
+        {
+          type: 'section',
+          text: {
+            type: 'mrkdwn',
+            text: "*Here's what you can do with Slackify:*",
+          },
+        },
+        {
+          type: 'actions',
+          elements: [
+            {
+              type: 'button',
+              action_id: 'create_new_post_open',
+              text: {
+                type: 'plain_text',
+                text: '✏️ \tCreate new post',
+                emoji: true,
+              },
+              style: 'primary',
+              value: 'create_post',
+            },
+            {
+              type: 'button',
+              action_id: 'manage_categories_open',
+              text: {
+                type: 'plain_text',
+                text: '📂 \tManage categories',
+                emoji: true,
+              },
+            },
+            {
+              type: 'button',
+              text: {
+                type: 'plain_text',
+                text: '❓\tHelp',
+                emoji: true,
+              },
+              value: 'help',
+            },
+          ],
+        },
+        {
+          type: 'context',
+          elements: [
+            {
+              type: 'image',
+              image_url: 'https://api.slack.com/img/blocks/bkb_template_images/placeholder.png',
+              alt_text: 'placeholder',
+            },
+          ],
+        },
+        {
+          type: 'section',
+          text: {
+            type: 'mrkdwn',
+            text: '*Posts in your workspace*',
+          },
+          accessory: {
+            type: 'static_select',
+            action_id: 'app_home_category_select',
+            placeholder: {
+              type: 'plain_text',
+              text: 'Select a category',
+              emoji: true,
+            },
+            options: categoryList,
+            initial_option: activeCategory,
+          },
+        },
+        ...postList,
       ],
     };
   } catch (error) {

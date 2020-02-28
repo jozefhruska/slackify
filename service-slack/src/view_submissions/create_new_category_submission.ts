@@ -1,5 +1,8 @@
 import { SlackViewMiddlewareArgs, ViewSubmitAction, Middleware } from '@slack/bolt';
+
 import { prisma } from '../prisma';
+import { compose_app_home_view } from '../utils/views';
+import { app } from '..';
 
 /* Local types
 ============================================================================= */
@@ -68,8 +71,8 @@ const create_new_category_submission: Middleware<SlackViewMiddlewareArgs<
   /* Acknowledge Slack action */
   ack();
 
-  /* Create new category */
   try {
+    /* Create new category */
     await prisma.category.create({
       data: {
         handle: categoryHandle,
@@ -80,6 +83,23 @@ const create_new_category_submission: Middleware<SlackViewMiddlewareArgs<
         },
       },
     });
+
+    /* Update app home view */
+    if (teamId) {
+      const view = await compose_app_home_view(teamId);
+
+      if (view) {
+        /* Publish app home view */
+        await app.client.views.publish({
+          user_id: body.user.id,
+          view,
+        });
+      } else {
+        throw new Error("Unable to compose 'app home' view.");
+      }
+    } else {
+      throw new Error('Team ID is not defined.');
+    }
   } catch (error) {
     console.error(error);
   }
