@@ -127,6 +127,7 @@ export const compose_create_new_post_view = async (teamId: string): Promise<View
       blocks: [
         {
           type: 'input',
+          block_id: 'post_title_block',
           label: {
             type: 'plain_text',
             text: 'Title',
@@ -134,10 +135,25 @@ export const compose_create_new_post_view = async (teamId: string): Promise<View
           },
           element: {
             type: 'plain_text_input',
+            action_id: 'post_title_element',
           },
         },
         {
           type: 'input',
+          block_id: 'post_short_block',
+          label: {
+            type: 'plain_text',
+            text: 'Lead',
+            emoji: true,
+          },
+          element: {
+            type: 'plain_text_input',
+            action_id: 'post_short_element',
+          },
+        },
+        {
+          type: 'input',
+          block_id: 'post_category_block',
           label: {
             type: 'plain_text',
             text: 'Category',
@@ -145,6 +161,7 @@ export const compose_create_new_post_view = async (teamId: string): Promise<View
           },
           element: {
             type: 'static_select',
+            action_id: 'post_category_element',
             placeholder: {
               type: 'plain_text',
               text: 'Select category',
@@ -154,6 +171,7 @@ export const compose_create_new_post_view = async (teamId: string): Promise<View
         },
         {
           type: 'input',
+          block_id: 'post_content_block',
           label: {
             type: 'plain_text',
             text: 'Content',
@@ -161,6 +179,7 @@ export const compose_create_new_post_view = async (teamId: string): Promise<View
           },
           element: {
             type: 'plain_text_input',
+            action_id: 'post_content_element',
             multiline: true,
           },
         },

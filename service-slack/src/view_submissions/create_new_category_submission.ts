@@ -6,7 +6,7 @@ import { prisma } from '../prisma';
 type CreateNewCategoryModalSubmissionState = {
   values: {
     category_handle_block: {
-      category_handle_input: {
+      category_handle_element: {
         type: 'plain_text_input';
         value: string;
       };
@@ -24,7 +24,7 @@ const create_new_category_submission: Middleware<SlackViewMiddlewareArgs<
 
   /* Extract field values */
   const values = (view?.state as CreateNewCategoryModalSubmissionState).values;
-  const categoryHandle = values?.category_handle_block?.category_handle_input.value;
+  const categoryHandle = values?.category_handle_block?.category_handle_element.value;
 
   /* Check if category handle is in correct format */
   if (!categoryHandle.match(/^([a-z]|-|_)*$/)) {

@@ -9,7 +9,7 @@ import {
   delete_category,
   create_new_post_open,
 } from './actions';
-import { create_new_category_submission } from './view_submissions';
+import { create_new_category_submission, create_new_post_submission } from './view_submissions';
 
 /* Create a Bolt instance
 ============================================================================= */
@@ -39,6 +39,7 @@ app.action('delete_category', delete_category);
 /* View submissions
 ============================================================================= */
 app.view('create_new_category_modal', create_new_category_submission);
+app.view('create_new_post_modal', create_new_post_submission);
 
 /* Start up
 ============================================================================= */

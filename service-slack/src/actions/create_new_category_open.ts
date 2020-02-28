@@ -40,7 +40,7 @@ const create_new_category_open: Middleware<SlackActionMiddlewareArgs<BlockAction
             },
             element: {
               type: 'plain_text_input',
-              action_id: 'category_handle_input',
+              action_id: 'category_handle_element',
             },
             hint: {
               type: 'plain_text',

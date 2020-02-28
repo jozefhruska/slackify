@@ -13,6 +13,7 @@ export default async (prisma: PrismaClient) => {
     });
   } catch (error) {
     console.error(error);
+    return;
   }
 
   console.log('Seeding teams done.');
