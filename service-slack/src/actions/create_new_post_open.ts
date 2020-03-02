@@ -27,7 +27,7 @@ const create_new_post_open: Middleware<SlackActionMiddlewareArgs<BlockAction>> =
       throw new Error("Unable to compose 'create new post' view.");
     }
   } catch (error) {
-    console.error(error);
+    console.error(error.data);
   }
 };
 

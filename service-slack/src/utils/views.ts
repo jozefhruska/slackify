@@ -230,7 +230,7 @@ export const compose_app_home_view = async (
     /* Set message as default */
     let postList = [BLOCK_DIVIDER, BLOCK_TEXT('No posts here 🤷‍♂️')];
 
-    /* Render list of categories if there are some */
+    /* Render list of posts if there are some */
     if (posts.length) {
       postList = posts.flatMap(({ title, short }) => [
         BLOCK_DIVIDER,
