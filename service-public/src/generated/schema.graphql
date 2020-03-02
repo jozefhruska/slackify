@@ -2,54 +2,25 @@
 ### Do not make changes to this file directly
 
 
-input CategoryCreateOneWithoutPostsInput {
-  connect: CategoryWhereUniqueInput
-  create: CategoryCreateWithoutPostsInput
-}
-
-input CategoryCreateWithoutPostsInput {
+type Category {
   handle: String!
-  id: String
-}
-
-input CategoryWhereUniqueInput {
-  id: String
+  id: String!
+  posts(after: PostWhereUniqueInput, before: PostWhereUniqueInput, first: Int, last: Int, skip: Int): [Post!]!
+  team: Team!
 }
 
 scalar DateTime
 
-type Mutation {
-  authorizeWithSlack(code: String): User
-  createDraft(authorEmail: String, content: String, title: String!): Post!
-  deleteOnePost(where: PostWhereUniqueInput!): Post
-  publish(id: ID): Post
-  signupUser(data: UserCreateInput!): User!
-}
-
 type Post {
-  author: User!
+  category: Category!
   content: String
   createdAt: DateTime!
   id: String!
-  title: String!
-  updatedAt: DateTime!
-}
-
-input PostCreateManyWithoutAuthorInput {
-  connect: [PostWhereUniqueInput!]
-  create: [PostCreateWithoutAuthorInput!]
-}
-
-input PostCreateWithoutAuthorInput {
-  category: CategoryCreateOneWithoutPostsInput!
-  content: String
-  createdAt: DateTime
-  id: String
   isPublished: Boolean!
   short: String!
   title: String!
   type: String!
-  updatedAt: DateTime
+  updatedAt: DateTime!
 }
 
 input PostWhereUniqueInput {
@@ -57,25 +28,11 @@ input PostWhereUniqueInput {
 }
 
 type Query {
-  feed: [Post!]!
-  filterPosts(searchString: String): [Post!]!
-  post(where: PostWhereUniqueInput!): Post
-  posts(after: String, before: String, first: Int, last: Int, skip: Int): [Post!]!
-  users(after: String, before: String, first: Int, last: Int, skip: Int): [User!]!
+  getCategories(teamId: String): [Category!]!
 }
 
-type User {
-  accessToken: String!
-  email: String!
+type Team {
+  domain: String!
   id: String!
   name: String!
-  posts: [Post!]!
-}
-
-input UserCreateInput {
-  accessToken: String!
-  email: String!
-  id: String!
-  name: String!
-  posts: PostCreateManyWithoutAuthorInput
 }

@@ -20,41 +20,8 @@ declare global {
 }
 
 export interface NexusGenInputs {
-  CategoryCreateOneWithoutPostsInput: { // input type
-    connect?: NexusGenInputs['CategoryWhereUniqueInput'] | null; // CategoryWhereUniqueInput
-    create?: NexusGenInputs['CategoryCreateWithoutPostsInput'] | null; // CategoryCreateWithoutPostsInput
-  }
-  CategoryCreateWithoutPostsInput: { // input type
-    handle: string; // String!
-    id?: string | null; // String
-  }
-  CategoryWhereUniqueInput: { // input type
-    id?: string | null; // String
-  }
-  PostCreateManyWithoutAuthorInput: { // input type
-    connect?: NexusGenInputs['PostWhereUniqueInput'][] | null; // [PostWhereUniqueInput!]
-    create?: NexusGenInputs['PostCreateWithoutAuthorInput'][] | null; // [PostCreateWithoutAuthorInput!]
-  }
-  PostCreateWithoutAuthorInput: { // input type
-    category: NexusGenInputs['CategoryCreateOneWithoutPostsInput']; // CategoryCreateOneWithoutPostsInput!
-    content?: string | null; // String
-    createdAt?: any | null; // DateTime
-    id?: string | null; // String
-    isPublished: boolean; // Boolean!
-    short: string; // String!
-    title: string; // String!
-    type: string; // String!
-    updatedAt?: any | null; // DateTime
-  }
   PostWhereUniqueInput: { // input type
     id?: string | null; // String
-  }
-  UserCreateInput: { // input type
-    accessToken: string; // String!
-    email: string; // String!
-    id: string; // String!
-    name: string; // String!
-    posts?: NexusGenInputs['PostCreateManyWithoutAuthorInput'] | null; // PostCreateManyWithoutAuthorInput
   }
 }
 
@@ -62,10 +29,10 @@ export interface NexusGenEnums {
 }
 
 export interface NexusGenRootTypes {
-  Mutation: {};
+  Category: prisma.Category;
   Post: prisma.Post;
   Query: {};
-  User: prisma.User;
+  Team: prisma.Team;
   String: string;
   Int: number;
   Float: number;
@@ -75,87 +42,50 @@ export interface NexusGenRootTypes {
 }
 
 export interface NexusGenAllTypes extends NexusGenRootTypes {
-  CategoryCreateOneWithoutPostsInput: NexusGenInputs['CategoryCreateOneWithoutPostsInput'];
-  CategoryCreateWithoutPostsInput: NexusGenInputs['CategoryCreateWithoutPostsInput'];
-  CategoryWhereUniqueInput: NexusGenInputs['CategoryWhereUniqueInput'];
-  PostCreateManyWithoutAuthorInput: NexusGenInputs['PostCreateManyWithoutAuthorInput'];
-  PostCreateWithoutAuthorInput: NexusGenInputs['PostCreateWithoutAuthorInput'];
   PostWhereUniqueInput: NexusGenInputs['PostWhereUniqueInput'];
-  UserCreateInput: NexusGenInputs['UserCreateInput'];
 }
 
 export interface NexusGenFieldTypes {
-  Mutation: { // field return type
-    authorizeWithSlack: NexusGenRootTypes['User'] | null; // User
-    createDraft: NexusGenRootTypes['Post']; // Post!
-    deleteOnePost: NexusGenRootTypes['Post'] | null; // Post
-    publish: NexusGenRootTypes['Post'] | null; // Post
-    signupUser: NexusGenRootTypes['User']; // User!
+  Category: { // field return type
+    handle: string; // String!
+    id: string; // String!
+    posts: NexusGenRootTypes['Post'][]; // [Post!]!
+    team: NexusGenRootTypes['Team']; // Team!
   }
   Post: { // field return type
-    author: NexusGenRootTypes['User']; // User!
+    category: NexusGenRootTypes['Category']; // Category!
     content: string | null; // String
     createdAt: any; // DateTime!
     id: string; // String!
+    isPublished: boolean; // Boolean!
+    short: string; // String!
     title: string; // String!
+    type: string; // String!
     updatedAt: any; // DateTime!
   }
   Query: { // field return type
-    feed: NexusGenRootTypes['Post'][]; // [Post!]!
-    filterPosts: NexusGenRootTypes['Post'][]; // [Post!]!
-    post: NexusGenRootTypes['Post'] | null; // Post
-    posts: NexusGenRootTypes['Post'][]; // [Post!]!
-    users: NexusGenRootTypes['User'][]; // [User!]!
+    getCategories: NexusGenRootTypes['Category'][]; // [Category!]!
   }
-  User: { // field return type
-    accessToken: string; // String!
-    email: string; // String!
+  Team: { // field return type
+    domain: string; // String!
     id: string; // String!
     name: string; // String!
-    posts: NexusGenRootTypes['Post'][]; // [Post!]!
   }
 }
 
 export interface NexusGenArgTypes {
-  Mutation: {
-    authorizeWithSlack: { // args
-      code?: string | null; // String
-    }
-    createDraft: { // args
-      authorEmail?: string | null; // String
-      content?: string | null; // String
-      title: string; // String!
-    }
-    deleteOnePost: { // args
-      where: NexusGenInputs['PostWhereUniqueInput']; // PostWhereUniqueInput!
-    }
-    publish: { // args
-      id?: string | null; // ID
-    }
-    signupUser: { // args
-      data: NexusGenInputs['UserCreateInput']; // UserCreateInput!
+  Category: {
+    posts: { // args
+      after?: NexusGenInputs['PostWhereUniqueInput'] | null; // PostWhereUniqueInput
+      before?: NexusGenInputs['PostWhereUniqueInput'] | null; // PostWhereUniqueInput
+      first?: number | null; // Int
+      last?: number | null; // Int
+      skip?: number | null; // Int
     }
   }
   Query: {
-    filterPosts: { // args
-      searchString?: string | null; // String
-    }
-    post: { // args
-      where: NexusGenInputs['PostWhereUniqueInput']; // PostWhereUniqueInput!
-    }
-    posts: { // args
-      after?: string | null; // String
-      before?: string | null; // String
-      first?: number | null; // Int
-      last?: number | null; // Int
-      skip?: number | null; // Int
-    }
-    users: { // args
-      after?: string | null; // String
-      before?: string | null; // String
-      first?: number | null; // Int
-      last?: number | null; // Int
-      skip?: number | null; // Int
+    getCategories: { // args
+      teamId?: string | null; // String
     }
   }
 }
@@ -165,9 +95,9 @@ export interface NexusGenAbstractResolveReturnTypes {
 
 export interface NexusGenInheritedFields {}
 
-export type NexusGenObjectNames = "Mutation" | "Post" | "Query" | "User";
+export type NexusGenObjectNames = "Category" | "Post" | "Query" | "Team";
 
-export type NexusGenInputNames = "CategoryCreateOneWithoutPostsInput" | "CategoryCreateWithoutPostsInput" | "CategoryWhereUniqueInput" | "PostCreateManyWithoutAuthorInput" | "PostCreateWithoutAuthorInput" | "PostWhereUniqueInput" | "UserCreateInput";
+export type NexusGenInputNames = "PostWhereUniqueInput";
 
 export type NexusGenEnumNames = never;
 
