@@ -6,7 +6,8 @@
     "clean": "rm -rf dist",
     "dev": "ts-node-dev --no-notify --respawn --transpileOnly src/index.ts",
     "build": "npm -s run clean && npm -s run generate && tsc",
-    "nexus:generate": "ts-node --transpile-only src/schema"
+    "nexus:generate": "ts-node --transpile-only src/schema",
+    "nexus:generate:watch": "ts-node-dev --no-notify --transpileOnly --respawn src/schema"
   },
   "author": "Jozef Hruška (xhrusk25@vutbr.cz)",
   "license": "ISC",

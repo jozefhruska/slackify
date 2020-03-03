@@ -65,6 +65,9 @@ export interface NexusGenFieldTypes {
   }
   Query: { // field return type
     getCategories: NexusGenRootTypes['Category'][]; // [Category!]!
+    getCategory: NexusGenRootTypes['Category'] | null; // Category
+    getPost: NexusGenRootTypes['Post'] | null; // Post
+    getPosts: NexusGenRootTypes['Post'][]; // [Post!]!
   }
   Team: { // field return type
     domain: string; // String!
@@ -86,6 +89,15 @@ export interface NexusGenArgTypes {
   Query: {
     getCategories: { // args
       teamId?: string | null; // String
+    }
+    getCategory: { // args
+      categoryId?: string | null; // String
+    }
+    getPost: { // args
+      postId?: string | null; // String
+    }
+    getPosts: { // args
+      categoryId?: string | null; // String
     }
   }
 }

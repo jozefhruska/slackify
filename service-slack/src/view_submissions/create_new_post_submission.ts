@@ -1,6 +1,8 @@
 import { SlackViewMiddlewareArgs, ViewSubmitAction, Middleware } from '@slack/bolt';
 import { prisma } from '../prisma';
 import { PlainTextElement } from '@slack/web-api';
+import { compose_app_home_view } from '../utils/views';
+import { app } from '..';
 
 /* Local types
 ============================================================================= */
@@ -45,6 +47,7 @@ const create_new_post_submission: Middleware<SlackViewMiddlewareArgs<ViewSubmitA
   ack,
 }) => {
   const userId = body?.user?.id;
+  const teamId = body.user.team_id;
 
   /* Extract field values */
   const values = (view?.state as CreateNewPostModalSubmissionState).values;
@@ -56,8 +59,8 @@ const create_new_post_submission: Middleware<SlackViewMiddlewareArgs<ViewSubmitA
   /* Acknowledge Slack action */
   ack();
 
-  /* Create new category */
   try {
+    /* Create new category */
     await prisma.post.create({
       data: {
         title,
@@ -77,6 +80,20 @@ const create_new_post_submission: Middleware<SlackViewMiddlewareArgs<ViewSubmitA
         content,
       },
     });
+
+    if (teamId) {
+      const appHomeView = await compose_app_home_view(teamId);
+
+      if (appHomeView) {
+        /* Publish app home view */
+        await app.client.views.publish({
+          user_id: userId,
+          view: appHomeView,
+        });
+      } else {
+        throw new Error("Unable to compose 'app home' view.");
+      }
+    }
   } catch (error) {
     console.error(error);
   }

@@ -19,5 +19,52 @@ export default objectType({
         });
       },
     });
+
+    t.field('getCategory', {
+      type: 'Category',
+      nullable: true,
+      args: {
+        categoryId: stringArg(),
+      },
+      resolve: (_, { categoryId }, { prisma }) => {
+        return prisma.category.findOne({
+          where: {
+            id: categoryId,
+          },
+        });
+      },
+    });
+
+    t.field('getPosts', {
+      type: 'Post',
+      list: true,
+      args: {
+        categoryId: stringArg(),
+      },
+      resolve: (_, { categoryId }, { prisma }) => {
+        return prisma.post.findMany({
+          where: {
+            category: {
+              id: categoryId,
+            },
+          },
+        });
+      },
+    });
+
+    t.field('getPost', {
+      type: 'Post',
+      nullable: true,
+      args: {
+        postId: stringArg(),
+      },
+      resolve: (_, { postId }, { prisma }) => {
+        return prisma.post.findOne({
+          where: {
+            id: postId,
+          },
+        });
+      },
+    });
   },
 });
