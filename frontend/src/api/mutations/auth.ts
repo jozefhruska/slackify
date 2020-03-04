@@ -1,10 +1,11 @@
 import { gql } from 'apollo-boost';
 
-export const AUTHORIZE_WITH_SLACK = gql`
-  mutation AuthorizeWithSlack($code: String!) {
-    authorizeWithSlack(code: $code) {
+export const SIGN_IN = gql`
+  mutation signIn($code: String!) {
+    signIn(code: $code) {
       id
       email
     }
   }
 `;
+ 

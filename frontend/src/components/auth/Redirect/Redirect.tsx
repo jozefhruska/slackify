@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import { useMutation } from '@apollo/react-hooks';
 
-import { AuthorizeWithSlack, AuthorizeWithSlackVariables } from '../../../types/generated/schema';
-import { AUTHORIZE_WITH_SLACK } from '../../../api/mutations/auth';
+import { signIn, signInVariables } from '../../../types/generated/schema';
+import { SIGN_IN } from '../../../api/mutations/auth';
 
 /* Props - <Redirect />
 ============================================================================= */
@@ -13,13 +13,10 @@ type Props = {
 /* <Redirect />
 ============================================================================= */
 const Redirect: React.FunctionComponent<Props> = ({ code }) => {
-  const [authorizeWithSlack, { loading, error, data }] = useMutation<
-    AuthorizeWithSlack,
-    AuthorizeWithSlackVariables
-  >(AUTHORIZE_WITH_SLACK);
+  const [signInMutation, { loading, error, data }] = useMutation<signIn, signInVariables>(SIGN_IN);
 
   useEffect(() => {
-    authorizeWithSlack({
+    signInMutation({
       variables: {
         code,
       },
@@ -29,10 +26,10 @@ const Redirect: React.FunctionComponent<Props> = ({ code }) => {
   if (loading) return <span>Loading...</span>;
   if (error) return <span>{error.message}</span>;
 
-  if (data?.authorizeWithSlack) {
+  if (data?.signIn) {
     return (
       <span>
-        Success! ID: {data.authorizeWithSlack.id} ({data.authorizeWithSlack.email})
+        Success! ID: {data.signIn.id} ({data.signIn.email})
       </span>
     );
   }

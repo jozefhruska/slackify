@@ -26,8 +26,9 @@ export interface NexusGenEnums {
 }
 
 export interface NexusGenRootTypes {
+  Mutation: {};
   Query: {};
-  Team: prisma.Team;
+  User: prisma.User;
   String: string;
   Int: number;
   Float: number;
@@ -39,17 +40,26 @@ export interface NexusGenAllTypes extends NexusGenRootTypes {
 }
 
 export interface NexusGenFieldTypes {
-  Query: { // field return type
-    teams: NexusGenRootTypes['Team'][]; // [Team!]!
+  Mutation: { // field return type
+    signIn: NexusGenRootTypes['User']; // User!
   }
-  Team: { // field return type
-    domain: string; // String!
+  Query: { // field return type
+    ok: boolean; // Boolean!
+  }
+  User: { // field return type
+    accessToken: string; // String!
+    email: string; // String!
     id: string; // String!
     name: string; // String!
   }
 }
 
 export interface NexusGenArgTypes {
+  Mutation: {
+    signIn: { // args
+      code?: string | null; // String
+    }
+  }
 }
 
 export interface NexusGenAbstractResolveReturnTypes {
@@ -57,7 +67,7 @@ export interface NexusGenAbstractResolveReturnTypes {
 
 export interface NexusGenInheritedFields {}
 
-export type NexusGenObjectNames = "Query" | "Team";
+export type NexusGenObjectNames = "Mutation" | "Query" | "User";
 
 export type NexusGenInputNames = never;
 

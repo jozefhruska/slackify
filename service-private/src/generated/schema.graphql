@@ -2,12 +2,17 @@
 ### Do not make changes to this file directly
 
 
-type Query {
-  teams: [Team!]!
+type Mutation {
+  signIn(code: String): User!
 }
 
-type Team {
-  domain: String!
+type Query {
+  ok: Boolean!
+}
+
+type User {
+  accessToken: String!
+  email: String!
   id: String!
   name: String!
 }
