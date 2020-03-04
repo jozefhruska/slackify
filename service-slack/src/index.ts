@@ -9,6 +9,8 @@ import {
   delete_category,
   create_new_post_open,
   app_home_category_select,
+  post_publish,
+  post_hide,
 } from './actions';
 import { create_new_category_submission, create_new_post_submission } from './view_submissions';
 
@@ -37,6 +39,8 @@ app.action('create_new_category_open', create_new_category_open);
 app.action('create_new_post_open', create_new_post_open);
 app.action('delete_category', delete_category);
 app.action('app_home_category_select', app_home_category_select);
+app.action('post_publish', post_publish);
+app.action('post_hide', post_hide);
 
 /* View submissions
 ============================================================================= */

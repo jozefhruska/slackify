@@ -66,7 +66,7 @@ const create_new_post_submission: Middleware<SlackViewMiddlewareArgs<ViewSubmitA
         title,
         type: 'default',
         short,
-        isPublished: true,
+        isPublished: false,
         category: {
           connect: {
             id: category,

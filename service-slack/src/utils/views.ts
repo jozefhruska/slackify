@@ -1,6 +1,7 @@
+import { View, Option } from '@slack/web-api';
+
 import { prisma } from '../prisma';
 import { BLOCK_DIVIDER, BLOCK_TEXT } from '../constants/views';
-import { View, Option } from '@slack/web-api';
 
 /**
  * Composes a view of 'manage categories' modal.
@@ -190,6 +191,11 @@ export const compose_create_new_post_view = async (teamId: string): Promise<View
   }
 };
 
+/**
+ * Composes a view of 'app home'.
+ * @param teamId Team ID of user's workspace
+ * @param initialCategory Category that should be selected as default
+ */
 export const compose_app_home_view = async (
   teamId: string,
   initialCategory?: Option
@@ -201,6 +207,10 @@ export const compose_app_home_view = async (
         team: {
           id: teamId,
         },
+      },
+      select: {
+        id: true,
+        handle: true,
       },
     });
 
@@ -225,6 +235,16 @@ export const compose_app_home_view = async (
           id: activeCategory.value,
         },
       },
+      orderBy: {
+        createdAt: 'desc',
+      },
+      select: {
+        id: true,
+        title: true,
+        short: true,
+        author: true,
+        isPublished: true,
+      },
     });
 
     /* Set message as default */
@@ -232,69 +252,83 @@ export const compose_app_home_view = async (
 
     /* Render list of posts if there are some */
     if (posts.length) {
-      postList = posts.flatMap(({ title, short }) => [
-        BLOCK_DIVIDER,
-        {
-          type: 'section',
-          text: {
-            type: 'mrkdwn',
-            text: `*${title}* \n ${short}`,
+      postList = posts.flatMap(({ id, title, short, isPublished, author }) => {
+        const result: View['blocks'] = [
+          BLOCK_DIVIDER,
+          {
+            type: 'section',
+            text: {
+              type: 'mrkdwn',
+              text: `*${title}* \n ${short}`,
+            },
           },
-        },
+          {
+            type: 'context',
+            elements: [
+              {
+                type: 'mrkdwn',
+                text: `Submitted by *${author.name}*`,
+              },
+            ],
+          },
+        ];
 
-        {
-          type: 'context',
-          elements: [
-            {
-              type: 'mrkdwn',
-              text: 'Submitted by',
-            },
-            {
-              type: 'image',
-              image_url: 'https://api.slack.com/img/blocks/bkb_template_images/profile_3.png',
-              alt_text: 'Dwight Schrute',
-            },
-            {
-              type: 'mrkdwn',
-              text: '*Dwight Schrute*',
-            },
-          ],
-        },
-        {
-          type: 'actions',
-          elements: [
-            {
-              type: 'button',
-              text: {
-                type: 'plain_text',
-                text: '👍 \tApprove',
-                emoji: true,
+        if (isPublished) {
+          result.push({
+            type: 'actions',
+            elements: [
+              {
+                type: 'button',
+                action_id: 'post_hide',
+                text: {
+                  type: 'plain_text',
+                  text: '👀 \tHide',
+                  emoji: true,
+                },
+                style: 'danger',
+                value: id,
               },
-              style: 'primary',
-              value: 'approve',
-            },
-            {
-              type: 'button',
-              text: {
-                type: 'plain_text',
-                text: '👎 \tDecline',
-                emoji: true,
+              {
+                type: 'button',
+                text: {
+                  type: 'plain_text',
+                  text: '\tEdit',
+                  emoji: true,
+                },
+                value: 'details',
               },
-              style: 'danger',
-              value: 'decline',
-            },
-            {
-              type: 'button',
-              text: {
-                type: 'plain_text',
-                text: '👀 \tView',
-                emoji: true,
+            ],
+          });
+        } else {
+          result.push({
+            type: 'actions',
+            elements: [
+              {
+                type: 'button',
+                action_id: 'post_publish',
+                text: {
+                  type: 'plain_text',
+                  text: '👀 \tPublish',
+                  emoji: true,
+                },
+                style: 'primary',
+                value: id,
               },
-              value: 'details',
-            },
-          ],
-        },
-      ]);
+              {
+                type: 'button',
+                text: {
+                  type: 'plain_text',
+                  text: '\tEdit',
+                  emoji: true,
+                },
+                value: 'details',
+              },
+            ],
+          });
+        }
+
+        return result;
+      });
     }
 
     return {
