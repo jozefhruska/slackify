@@ -4,12 +4,14 @@ import { prisma } from '../prisma';
 import { BLOCK_DIVIDER, BLOCK_TEXT } from '../constants/views';
 
 /**
- * Composes a view of 'manage categories' modal.
- * @param teamId Team ID of workspace for which to get categories
+ * Composes a view of 'manage collections' modal.
+ * @param teamId Team ID of workspace for which to get collections
  */
-export const compose_manage_categories_view = async (teamId: string): Promise<View | undefined> => {
+export const compose_manage_collections_view = async (
+  teamId: string
+): Promise<View | undefined> => {
   try {
-    const categories = await prisma.category.findMany({
+    const collections = await prisma.collection.findMany({
       where: {
         team: {
           id: teamId,
@@ -18,11 +20,11 @@ export const compose_manage_categories_view = async (teamId: string): Promise<Vi
     });
 
     /* Set message as default */
-    let categoryList = [BLOCK_DIVIDER, BLOCK_TEXT("You don't have any categories created.")];
+    let collectionList = [BLOCK_DIVIDER, BLOCK_TEXT("You don't have any collections created.")];
 
-    /* Render list of categories if there are some */
-    if (categories.length) {
-      categoryList = categories.flatMap(({ id, handle }) => [
+    /* Render list of collections if there are some */
+    if (collections.length) {
+      collectionList = collections.flatMap(({ id, handle }) => [
         BLOCK_DIVIDER,
         {
           type: 'section',
@@ -33,7 +35,7 @@ export const compose_manage_categories_view = async (teamId: string): Promise<Vi
           accessory: {
             type: 'button',
             style: 'danger',
-            action_id: 'delete_category',
+            action_id: 'delete_collection',
             text: {
               type: 'plain_text',
               text: 'Delete',
@@ -49,7 +51,7 @@ export const compose_manage_categories_view = async (teamId: string): Promise<Vi
       type: 'modal',
       title: {
         type: 'plain_text',
-        text: 'Manage categories',
+        text: 'Manage collections',
         emoji: false,
       },
       blocks: [
@@ -58,10 +60,10 @@ export const compose_manage_categories_view = async (teamId: string): Promise<Vi
           elements: [
             {
               type: 'button',
-              action_id: 'create_new_category_open',
+              action_id: 'create_new_collection_open',
               text: {
                 type: 'plain_text',
-                text: '📂 \tCreate new category',
+                text: '📂 \tCreate new collection',
                 emoji: true,
               },
               style: 'primary',
@@ -78,8 +80,8 @@ export const compose_manage_categories_view = async (teamId: string): Promise<Vi
             },
           ],
         },
-        BLOCK_TEXT('*Categories:*'),
-        ...categoryList,
+        BLOCK_TEXT('*Collections:*'),
+        ...collectionList,
       ],
     };
   } catch (error) {
@@ -89,7 +91,7 @@ export const compose_manage_categories_view = async (teamId: string): Promise<Vi
 
 /**
  * Composes a view of 'settings' modal.
- * @param teamId Team ID of workspace for which to get categories
+ * @param teamId Team ID of workspace for which to get collections
  */
 export const compose_settings_view = async (teamId: string): Promise<View | undefined> => {
   try {
@@ -118,11 +120,11 @@ export const compose_settings_view = async (teamId: string): Promise<View | unde
 
 /**
  * Composes a view of 'create new post' modal.
- * @param teamId Team ID of workspace for which to get categories
+ * @param teamId Team ID of workspace for which to get collections
  */
 export const compose_create_new_post_view = async (teamId: string): Promise<View | undefined> => {
   try {
-    const categories = await prisma.category.findMany({
+    const collections = await prisma.collection.findMany({
       where: {
         team: {
           id: teamId,
@@ -130,10 +132,10 @@ export const compose_create_new_post_view = async (teamId: string): Promise<View
       },
     });
 
-    /* Render a list of category options */
-    let categoryList: Option[] = [];
-    if (categories.length) {
-      categoryList = categories.map(({ id, handle }) => ({
+    /* Render a list of collection options */
+    let collectionList: Option[] = [];
+    if (collections.length) {
+      collectionList = collections.map(({ id, handle }) => ({
         text: {
           type: 'plain_text',
           text: handle,
@@ -183,20 +185,20 @@ export const compose_create_new_post_view = async (teamId: string): Promise<View
         },
         {
           type: 'input',
-          block_id: 'post_category_block',
+          block_id: 'post_collection_block',
           label: {
             type: 'plain_text',
-            text: 'Category',
+            text: 'Collection',
             emoji: true,
           },
           element: {
             type: 'static_select',
-            action_id: 'post_category_element',
+            action_id: 'post_collection_element',
             placeholder: {
               type: 'plain_text',
-              text: 'Select category',
+              text: 'Select collection',
             },
-            options: categoryList,
+            options: collectionList,
           },
         },
         {
@@ -223,15 +225,15 @@ export const compose_create_new_post_view = async (teamId: string): Promise<View
 /**
  * Composes a view of 'app home'.
  * @param teamId Team ID of user's workspace
- * @param initialCategory Category that should be selected as default
+ * @param initialCollection Collection that should be selected as default
  */
 export const compose_app_home_view = async (
   teamId: string,
-  initialCategory?: Option
+  initialCollection?: Option
 ): Promise<View | undefined> => {
   try {
-    /* Get workspace categories */
-    const categories = await prisma.category.findMany({
+    /* Get workspace collections */
+    const collections = await prisma.collection.findMany({
       where: {
         team: {
           id: teamId,
@@ -243,10 +245,10 @@ export const compose_app_home_view = async (
       },
     });
 
-    /* Render a list of category options */
-    let categoryList: Option[] = [];
-    if (categories.length) {
-      categoryList = categories.map(({ id, handle }) => ({
+    /* Render a list of collection options */
+    let collectionList: Option[] = [];
+    if (collections.length) {
+      collectionList = collections.map(({ id, handle }) => ({
         text: {
           type: 'plain_text',
           text: handle,
@@ -255,13 +257,13 @@ export const compose_app_home_view = async (
       }));
     }
 
-    const activeCategory = initialCategory ?? categoryList[0];
+    const activeCollection = initialCollection ?? collectionList[0];
 
     /* Get workspace posts */
     const posts = await prisma.post.findMany({
       where: {
-        category: {
-          id: activeCategory.value,
+        collection: {
+          id: activeCollection.value,
         },
       },
       orderBy: {
@@ -386,10 +388,10 @@ export const compose_app_home_view = async (
             },
             {
               type: 'button',
-              action_id: 'manage_categories_open',
+              action_id: 'manage_collections_open',
               text: {
                 type: 'plain_text',
-                text: '📂 \tManage categories',
+                text: '📂 \tManage collections',
                 emoji: true,
               },
             },
@@ -422,14 +424,14 @@ export const compose_app_home_view = async (
           },
           accessory: {
             type: 'static_select',
-            action_id: 'app_home_category_select',
+            action_id: 'app_home_collection_select',
             placeholder: {
               type: 'plain_text',
-              text: 'Select a category',
+              text: 'Select a collection',
               emoji: true,
             },
-            options: categoryList,
-            initial_option: activeCategory,
+            options: collectionList,
+            initial_option: activeCollection,
           },
         },
         ...postList,

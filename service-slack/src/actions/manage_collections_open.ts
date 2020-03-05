@@ -2,19 +2,19 @@ import { SlackActionMiddlewareArgs, BlockButtonAction } from '@slack/bolt';
 
 import { app } from '..';
 import { SLACK_BOT_TOKEN } from '../config';
-import { compose_manage_categories_view } from '../utils/views';
+import { compose_manage_collections_view } from '../utils/views';
 
 /**
- * Opens the categories modal.
+ * Opens the collections modal.
  */
-const manage_categories_open = async ({
+const manage_collections_open = async ({
   body,
   ack,
 }: SlackActionMiddlewareArgs<BlockButtonAction>) => {
   ack();
 
   try {
-    const view = await compose_manage_categories_view(body?.team.id);
+    const view = await compose_manage_collections_view(body?.team.id);
 
     if (view) {
       /* Open modal in user's slack */
@@ -24,11 +24,11 @@ const manage_categories_open = async ({
         view,
       });
     } else {
-      throw new Error("Unable to compose 'manage categories' view.");
+      throw new Error("Unable to compose 'manage collections' view.");
     }
   } catch (error) {
     console.error(error);
   }
 };
 
-export default manage_categories_open;
+export default manage_collections_open;

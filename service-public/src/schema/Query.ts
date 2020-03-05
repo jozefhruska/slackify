@@ -4,10 +4,10 @@ export default objectType({
   name: 'Query',
   definition(t) {
     t.field('getCategories', {
-      type: 'Category',
+      type: 'Collection',
       list: true,
       resolve: (_parent, _args, { prisma, team }) => {
-        return prisma.category.findMany({
+        return prisma.collection.findMany({
           where: {
             team: {
               id: team.id,
@@ -17,16 +17,16 @@ export default objectType({
       },
     });
 
-    t.field('getCategory', {
-      type: 'Category',
+    t.field('getCollection', {
+      type: 'Collection',
       nullable: true,
       args: {
-        categoryId: stringArg(),
+        collectionId: stringArg(),
       },
-      resolve: (_, { categoryId }, { prisma }) => {
-        return prisma.category.findOne({
+      resolve: (_, { collectionId }, { prisma }) => {
+        return prisma.collection.findOne({
           where: {
-            id: categoryId,
+            id: collectionId,
           },
         });
       },
@@ -36,13 +36,13 @@ export default objectType({
       type: 'Post',
       list: true,
       args: {
-        categoryId: stringArg(),
+        collectionId: stringArg(),
       },
-      resolve: (_, { categoryId }, { prisma }) => {
+      resolve: (_, { collectionId }, { prisma }) => {
         return prisma.post.findMany({
           where: {
-            category: {
-              id: categoryId,
+            collection: {
+              id: collectionId,
             },
           },
         });

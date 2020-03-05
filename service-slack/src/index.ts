@@ -4,16 +4,16 @@ import { WebClient } from '@slack/web-api';
 import { SLACK_BOT_TOKEN, SLACK_SIGNING_SECRET, PORT } from './config';
 import { app_home_opened } from './events';
 import {
-  manage_categories_open,
-  create_new_category_open,
-  delete_category,
+  manage_collections_open,
+  create_new_collection_open,
+  delete_collection,
   create_new_post_open,
-  app_home_category_select,
+  app_home_collection_select,
   post_publish,
   post_hide,
   settings_open,
 } from './actions';
-import { create_new_category_submission, create_new_post_submission } from './view_submissions';
+import { create_new_collection_submission, create_new_post_submission } from './view_submissions';
 
 /* Create a Bolt instance
 ============================================================================= */
@@ -35,18 +35,18 @@ app.event('app_home_opened', app_home_opened);
 
 /* Actions
 ============================================================================= */
-app.action('manage_categories_open', manage_categories_open);
-app.action('create_new_category_open', create_new_category_open);
+app.action('manage_collections_open', manage_collections_open);
+app.action('create_new_collection_open', create_new_collection_open);
 app.action('create_new_post_open', create_new_post_open);
-app.action('delete_category', delete_category);
-app.action('app_home_category_select', app_home_category_select);
+app.action('delete_collection', delete_collection);
+app.action('app_home_collection_select', app_home_collection_select);
 app.action('post_publish', post_publish);
 app.action('post_hide', post_hide);
 app.action('settings_open', settings_open);
 
 /* View submissions
 ============================================================================= */
-app.view('create_new_category_modal', create_new_category_submission);
+app.view('create_new_collection_modal', create_new_collection_submission);
 app.view('create_new_post_modal', create_new_post_submission);
 
 /* Start up

@@ -1,12 +1,12 @@
 import { PrismaClient } from '@prisma/client';
 
 export default async (prisma: PrismaClient) => {
-  console.log('Seeding categories ...');
+  console.log('Seeding collections ...');
 
   try {
-    await prisma.category.create({
+    await prisma.collection.create({
       data: {
-        handle: 'test-category',
+        handle: 'test-collection',
         team: {
           connect: {
             id: 'TP9A3CF2N',
@@ -15,9 +15,9 @@ export default async (prisma: PrismaClient) => {
       },
     });
 
-    await prisma.category.create({
+    await prisma.collection.create({
       data: {
-        handle: 'test-category-x',
+        handle: 'test-collection-x',
         team: {
           connect: {
             id: 'TP9A3CF2N',
@@ -30,5 +30,5 @@ export default async (prisma: PrismaClient) => {
     return;
   }
 
-  console.log('Seeding categories done.');
+  console.log('Seeding collections done.');
 };

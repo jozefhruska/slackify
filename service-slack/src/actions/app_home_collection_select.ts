@@ -4,18 +4,18 @@ import { compose_app_home_view } from '../utils/views';
 import { app } from '..';
 
 /**
- * Handles selection of category on app home.
+ * Handles selection of collection on app home.
  */
-const app_home_category_select: Middleware<SlackActionMiddlewareArgs<
+const app_home_collection_select: Middleware<SlackActionMiddlewareArgs<
   BlockStaticSelectAction
 >> = async ({ body, action, ack }) => {
   ack();
 
-  const selectedCategory = action.selected_option;
+  const selectedCollection = action.selected_option;
 
   try {
     if (body?.user?.team_id) {
-      const view = await compose_app_home_view(body?.user?.team_id, selectedCategory);
+      const view = await compose_app_home_view(body?.user?.team_id, selectedCollection);
 
       if (view) {
         /* Publish app home view */
@@ -34,4 +34,4 @@ const app_home_category_select: Middleware<SlackActionMiddlewareArgs<
   }
 };
 
-export default app_home_category_select;
+export default app_home_collection_select;

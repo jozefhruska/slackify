@@ -3,29 +3,29 @@ import { Middleware, SlackActionMiddlewareArgs, BlockButtonAction } from '@slack
 import { prisma } from '../prisma';
 import { app } from '..';
 import { SLACK_BOT_TOKEN } from '../config';
-import { compose_manage_categories_view } from '../utils/views';
+import { compose_manage_collections_view } from '../utils/views';
 
-const delete_category: Middleware<SlackActionMiddlewareArgs<BlockButtonAction>> = async ({
+const delete_collection: Middleware<SlackActionMiddlewareArgs<BlockButtonAction>> = async ({
   action,
   body,
   ack,
 }) => {
-  const categoryId = action?.value;
+  const collectionId = action?.value;
 
-  /* Check if category ID is defined */
-  if (categoryId == undefined) {
-    console.error('[delete_category] - Category ID is undefined.');
+  /* Check if collection ID is defined */
+  if (collectionId == undefined) {
+    console.error('[delete_collection] - Collection ID is undefined.');
     return;
   }
 
   /* Acknowledge Slack action */
   ack();
 
-  /* Delete category */
+  /* Delete collection */
   try {
-    await prisma.category.delete({
+    await prisma.collection.delete({
       where: {
-        id: categoryId,
+        id: collectionId,
       },
     });
   } catch (error) {
@@ -34,7 +34,7 @@ const delete_category: Middleware<SlackActionMiddlewareArgs<BlockButtonAction>> 
 
   /* Update modal view */
   try {
-    const view = await compose_manage_categories_view(body?.team.id);
+    const view = await compose_manage_collections_view(body?.team.id);
 
     if (view) {
       await app.client.views.update({
@@ -48,4 +48,4 @@ const delete_category: Middleware<SlackActionMiddlewareArgs<BlockButtonAction>> 
   }
 };
 
-export default delete_category;
+export default delete_collection;

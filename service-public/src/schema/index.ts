@@ -4,11 +4,11 @@ import path from 'path';
 
 import Query from './Query';
 import Team from './Team';
-import Category from './Category';
+import Collection from './Collection';
 import Post from './Post';
 
 export const schema = makeSchema({
-  types: { Query, Team, Category, Post },
+  types: { Query, Team, Collection, Post },
   plugins: [nexusPrismaPlugin()],
   outputs: {
     schema: path.join(__dirname, '../generated/schema.graphql'),

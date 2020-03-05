@@ -33,7 +33,7 @@ model User {
   posts       Post[]
 }
 
-model Category {
+model Collection {
   id     String @default(cuid()) @id
   handle String
   team   Team
@@ -42,20 +42,20 @@ model Category {
 
 model Team {
   id          String @id
-  name        String 
+  name        String
   domain      String @unique
   accessToken String @unique
 }
 
 model Post {
-  id          String   @default(cuid()) @id
+  id          String     @default(cuid()) @id
   type        String
   title       String
   short       String
   content     String?
   isPublished Boolean
-  category    Category
+  collection  Collection
   author      User
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
 }

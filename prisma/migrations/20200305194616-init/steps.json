@@ -100,17 +100,24 @@
     {
       "tag": "CreateField",
       "model": "User",
+      "field": "team",
+      "type": "Team",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateField",
+      "model": "User",
       "field": "posts",
       "type": "Post",
       "arity": "List"
     },
     {
       "tag": "CreateModel",
-      "model": "Category"
+      "model": "Collection"
     },
     {
       "tag": "CreateField",
-      "model": "Category",
+      "model": "Collection",
       "field": "id",
       "type": "String",
       "arity": "Required"
@@ -120,7 +127,7 @@
       "location": {
         "path": {
           "tag": "Field",
-          "model": "Category",
+          "model": "Collection",
           "field": "id"
         },
         "directive": "default"
@@ -132,7 +139,7 @@
         "tag": "Directive",
         "path": {
           "tag": "Field",
-          "model": "Category",
+          "model": "Collection",
           "field": "id"
         },
         "directive": "default"
@@ -145,7 +152,7 @@
       "location": {
         "path": {
           "tag": "Field",
-          "model": "Category",
+          "model": "Collection",
           "field": "id"
         },
         "directive": "id"
@@ -153,17 +160,89 @@
     },
     {
       "tag": "CreateField",
-      "model": "Category",
+      "model": "Collection",
       "field": "handle",
       "type": "String",
       "arity": "Required"
     },
     {
       "tag": "CreateField",
-      "model": "Category",
+      "model": "Collection",
+      "field": "team",
+      "type": "Team",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateField",
+      "model": "Collection",
       "field": "posts",
       "type": "Post",
       "arity": "List"
+    },
+    {
+      "tag": "CreateModel",
+      "model": "Team"
+    },
+    {
+      "tag": "CreateField",
+      "model": "Team",
+      "field": "id",
+      "type": "String",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "Team",
+          "field": "id"
+        },
+        "directive": "id"
+      }
+    },
+    {
+      "tag": "CreateField",
+      "model": "Team",
+      "field": "name",
+      "type": "String",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateField",
+      "model": "Team",
+      "field": "domain",
+      "type": "String",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "Team",
+          "field": "domain"
+        },
+        "directive": "unique"
+      }
+    },
+    {
+      "tag": "CreateField",
+      "model": "Team",
+      "field": "accessToken",
+      "type": "String",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "Team",
+          "field": "accessToken"
+        },
+        "directive": "unique"
+      }
     },
     {
       "tag": "CreateModel",
@@ -250,8 +329,8 @@
     {
       "tag": "CreateField",
       "model": "Post",
-      "field": "category",
-      "type": "Category",
+      "field": "collection",
+      "type": "Collection",
       "arity": "Required"
     },
     {

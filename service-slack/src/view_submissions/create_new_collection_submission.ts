@@ -6,10 +6,10 @@ import { app } from '..';
 
 /* Local types
 ============================================================================= */
-type CreateNewCategoryModalSubmissionState = {
+type CreateNewCollectionModalSubmissionState = {
   values: {
-    category_handle_block: {
-      category_handle_element: {
+    collection_handle_block: {
+      collection_handle_element: {
         type: 'plain_text_input';
         value: string;
       };
@@ -18,33 +18,33 @@ type CreateNewCategoryModalSubmissionState = {
 };
 
 /**
- * Handles the submission event of create new category modal.
+ * Handles the submission event of create new collection modal.
  */
-const create_new_category_submission: Middleware<SlackViewMiddlewareArgs<
+const create_new_collection_submission: Middleware<SlackViewMiddlewareArgs<
   ViewSubmitAction
 >> = async ({ view, body, ack }) => {
   const teamId = body?.user?.team_id;
 
   /* Extract field values */
-  const values = (view?.state as CreateNewCategoryModalSubmissionState).values;
-  const categoryHandle = values?.category_handle_block?.category_handle_element.value;
+  const values = (view?.state as CreateNewCollectionModalSubmissionState).values;
+  const collectionHandle = values?.collection_handle_block?.collection_handle_element.value;
 
-  /* Check if category handle is in correct format */
-  if (!categoryHandle.match(/^([a-z]|-|_)*$/)) {
+  /* Check if collection handle is in correct format */
+  if (!collectionHandle.match(/^([a-z]|-|_)*$/)) {
     ack({
       response_action: 'errors',
       errors: {
-        category_handle_block:
-          "Category handle must contain only lowercase characters, '_' (underscore) and '–' (dash).",
+        collection_handle_block:
+          "Collection handle must contain only lowercase characters, '_' (underscore) and '–' (dash).",
       },
     });
 
     return;
   }
 
-  /* Check if there is a category with the same handle amd team ID */
+  /* Check if there is a collection with the same handle amd team ID */
   try {
-    const teamCategories = await prisma.category.findMany({
+    const teamCategories = await prisma.collection.findMany({
       where: {
         team: {
           id: teamId,
@@ -52,13 +52,13 @@ const create_new_category_submission: Middleware<SlackViewMiddlewareArgs<
       },
     });
 
-    const duplicateCategory = teamCategories.find(({ handle }) => handle === categoryHandle);
+    const duplicateCollection = teamCategories.find(({ handle }) => handle === collectionHandle);
 
-    if (duplicateCategory) {
+    if (duplicateCollection) {
       ack({
         response_action: 'errors',
         errors: {
-          category_handle_block: 'Category with this handle already exists in your workspace.',
+          collection_handle_block: 'Collection with this handle already exists in your workspace.',
         },
       });
 
@@ -72,10 +72,10 @@ const create_new_category_submission: Middleware<SlackViewMiddlewareArgs<
   ack();
 
   try {
-    /* Create new category */
-    await prisma.category.create({
+    /* Create new collection */
+    await prisma.collection.create({
       data: {
-        handle: categoryHandle,
+        handle: collectionHandle,
         team: {
           connect: {
             id: teamId,
@@ -105,4 +105,4 @@ const create_new_category_submission: Middleware<SlackViewMiddlewareArgs<
   }
 };
 
-export default create_new_category_submission;
+export default create_new_collection_submission;

@@ -5,9 +5,23 @@ datasource db {
   // url = "***"
 }
 
-generator photon {
+generator cient_prisma {
   provider = "prisma-client-js"
-  output   = "../service-slack/generated/client"
+}
+
+generator cient_service_slack {
+  provider = "prisma-client-js"
+  output   = "../service-slack/node_modules/@prisma/client"
+}
+
+generator client_service_private {
+  provider = "prisma-client-js"
+  output   = "../service-private/node_modules/@prisma/client"
+}
+
+generator client_service_public {
+  provider = "prisma-client-js"
+  output   = "../service-public/node_modules/@prisma/client"
 }
 
 model User {
@@ -19,7 +33,7 @@ model User {
   posts       Post[]
 }
 
-model Category {
+model Collection {
   id     String @default(cuid()) @id
   handle String
   team   Team
@@ -27,9 +41,10 @@ model Category {
 }
 
 model Team {
-  id     String @id
-  name   String
-  domain String
+  id          String @id
+  name        String 
+  domain      String @unique
+  accessToken String @unique
 }
 
 model Post {
@@ -39,7 +54,7 @@ model Post {
   short       String
   content     String?
   isPublished Boolean
-  category    Category
+  collection    Collection
   author      User
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt

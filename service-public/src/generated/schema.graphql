@@ -2,7 +2,7 @@
 ### Do not make changes to this file directly
 
 
-type Category {
+type Collection {
   handle: String!
   id: String!
   posts(after: PostWhereUniqueInput, before: PostWhereUniqueInput, first: Int, last: Int, skip: Int): [Post!]!
@@ -12,7 +12,7 @@ type Category {
 scalar DateTime
 
 type Post {
-  category: Category!
+  collection: Collection!
   content: String
   createdAt: DateTime!
   id: String!
@@ -28,10 +28,10 @@ input PostWhereUniqueInput {
 }
 
 type Query {
-  getCategories: [Category!]!
-  getCategory(categoryId: String): Category
+  getCategories: [Collection!]!
+  getCollection(collectionId: String): Collection
   getPost(postId: String): Post
-  getPosts(categoryId: String): [Post!]!
+  getPosts(collectionId: String): [Post!]!
 }
 
 type Team {

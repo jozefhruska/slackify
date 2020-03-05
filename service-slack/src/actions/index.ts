@@ -1,8 +1,8 @@
-export { default as manage_categories_open } from './manage_categories_open';
-export { default as create_new_category_open } from './create_new_category_open';
+export { default as manage_collections_open } from './manage_collections_open';
+export { default as create_new_collection_open } from './create_new_collection_open';
 export { default as create_new_post_open } from './create_new_post_open';
-export { default as delete_category } from './delete_category';
-export { default as app_home_category_select } from './app_home_category_select';
+export { default as delete_collection } from './delete_collection';
+export { default as app_home_collection_select } from './app_home_collection_select';
 export { default as post_publish } from './post_publish';
 export { default as post_hide } from './post_hide';
 export { default as settings_open } from './settings_open';

@@ -20,8 +20,8 @@ type CreateNewPostModalSubmissionState = {
         value: string;
       };
     };
-    post_category_block: {
-      post_category_element: {
+    post_collection_block: {
+      post_collection_element: {
         type: 'static_select';
         selected_option: {
           text: PlainTextElement;
@@ -53,23 +53,23 @@ const create_new_post_submission: Middleware<SlackViewMiddlewareArgs<ViewSubmitA
   const values = (view?.state as CreateNewPostModalSubmissionState).values;
   const title = values?.post_title_block?.post_title_element.value;
   const short = values?.post_short_block?.post_short_element.value;
-  const category = values?.post_category_block?.post_category_element.selected_option.value;
+  const collection = values?.post_collection_block?.post_collection_element.selected_option.value;
   const content = values?.post_content_block?.post_content_element.value;
 
   /* Acknowledge Slack action */
   ack();
 
   try {
-    /* Create new category */
+    /* Create new collection */
     await prisma.post.create({
       data: {
         title,
         type: 'default',
         short,
         isPublished: false,
-        category: {
+        collection: {
           connect: {
-            id: category,
+            id: collection,
           },
         },
         author: {

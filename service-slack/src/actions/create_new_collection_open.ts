@@ -4,12 +4,11 @@ import { app } from '..';
 import { SLACK_BOT_TOKEN } from '../config';
 
 /**
- * Opens the category create modal.
+ * Opens the collection create modal.
  */
-const create_new_category_open: Middleware<SlackActionMiddlewareArgs<BlockButtonAction>> = async ({
-  body,
-  ack,
-}) => {
+const create_new_collection_open: Middleware<SlackActionMiddlewareArgs<
+  BlockButtonAction
+>> = async ({ body, ack }) => {
   ack();
 
   try {
@@ -19,10 +18,10 @@ const create_new_category_open: Middleware<SlackActionMiddlewareArgs<BlockButton
       view_id: body?.view?.id,
       view: {
         type: 'modal',
-        callback_id: 'create_new_category_modal',
+        callback_id: 'create_new_collection_modal',
         title: {
           type: 'plain_text',
-          text: 'Create new category',
+          text: 'Create new collection',
           emoji: false,
         },
         submit: {
@@ -32,19 +31,19 @@ const create_new_category_open: Middleware<SlackActionMiddlewareArgs<BlockButton
         blocks: [
           {
             type: 'input',
-            block_id: 'category_handle_block',
+            block_id: 'collection_handle_block',
             label: {
               type: 'plain_text',
-              text: 'Category handle:',
+              text: 'Collection handle:',
               emoji: true,
             },
             element: {
               type: 'plain_text_input',
-              action_id: 'category_handle_element',
+              action_id: 'collection_handle_element',
             },
             hint: {
               type: 'plain_text',
-              text: 'Category handle will serve as an endpoint for posts in this category.',
+              text: 'Collection handle will serve as an endpoint for posts in this collection.',
             },
           },
         ],
@@ -55,4 +54,4 @@ const create_new_category_open: Middleware<SlackActionMiddlewareArgs<BlockButton
   }
 };
 
-export default create_new_category_open;
+export default create_new_collection_open;

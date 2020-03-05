@@ -6,7 +6,7 @@ export default objectType({
     t.model.id();
     t.model.title();
     t.model.type();
-    t.model.category();
+    t.model.collection();
     t.model.short();
     t.model.content();
     t.model.isPublished();
