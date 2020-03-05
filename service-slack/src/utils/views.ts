@@ -231,6 +231,63 @@ export const compose_app_home_view = async (
   teamId: string,
   initialCollection?: Option
 ): Promise<View | undefined> => {
+  const result: View = {
+    type: 'home',
+    blocks: [
+      {
+        type: 'section',
+        text: {
+          type: 'mrkdwn',
+          text: "*Here's what you can do with Slackify:*",
+        },
+      },
+      {
+        type: 'actions',
+        elements: [
+          {
+            type: 'button',
+            action_id: 'create_new_post_open',
+            text: {
+              type: 'plain_text',
+              text: '✏️ \tCreate new post',
+              emoji: true,
+            },
+            style: 'primary',
+            value: 'create_post',
+          },
+          {
+            type: 'button',
+            action_id: 'manage_collections_open',
+            text: {
+              type: 'plain_text',
+              text: '📂 \tManage collections',
+              emoji: true,
+            },
+          },
+          {
+            type: 'button',
+            action_id: 'settings_open',
+            text: {
+              type: 'plain_text',
+              text: '🛠 \tSettings',
+              emoji: true,
+            },
+          },
+        ],
+      },
+      {
+        type: 'context',
+        elements: [
+          {
+            type: 'image',
+            image_url: 'https://api.slack.com/img/blocks/bkb_template_images/placeholder.png',
+            alt_text: 'placeholder',
+          },
+        ],
+      },
+    ],
+  };
+
   try {
     /* Get workspace collections */
     const collections = await prisma.collection.findMany({
@@ -255,6 +312,23 @@ export const compose_app_home_view = async (
         },
         value: id,
       }));
+    }
+
+    if (!collections.length) {
+      return {
+        ...result,
+        blocks: [
+          ...result.blocks,
+          {
+            type: 'section',
+            text: {
+              type: 'mrkdwn',
+              text:
+                'You need to create a collection first. You can do that in "*Manage collections*" section above.',
+            },
+          },
+        ],
+      };
     }
 
     const activeCollection = initialCollection ?? collectionList[0];
@@ -363,59 +437,9 @@ export const compose_app_home_view = async (
     }
 
     return {
-      type: 'home',
+      ...result,
       blocks: [
-        {
-          type: 'section',
-          text: {
-            type: 'mrkdwn',
-            text: "*Here's what you can do with Slackify:*",
-          },
-        },
-        {
-          type: 'actions',
-          elements: [
-            {
-              type: 'button',
-              action_id: 'create_new_post_open',
-              text: {
-                type: 'plain_text',
-                text: '✏️ \tCreate new post',
-                emoji: true,
-              },
-              style: 'primary',
-              value: 'create_post',
-            },
-            {
-              type: 'button',
-              action_id: 'manage_collections_open',
-              text: {
-                type: 'plain_text',
-                text: '📂 \tManage collections',
-                emoji: true,
-              },
-            },
-            {
-              type: 'button',
-              action_id: 'settings_open',
-              text: {
-                type: 'plain_text',
-                text: '🛠 \tSettings',
-                emoji: true,
-              },
-            },
-          ],
-        },
-        {
-          type: 'context',
-          elements: [
-            {
-              type: 'image',
-              image_url: 'https://api.slack.com/img/blocks/bkb_template_images/placeholder.png',
-              alt_text: 'placeholder',
-            },
-          ],
-        },
+        ...result.blocks,
         {
           type: 'section',
           text: {
