@@ -88,6 +88,35 @@ export const compose_manage_categories_view = async (teamId: string): Promise<Vi
 };
 
 /**
+ * Composes a view of 'settings' modal.
+ * @param teamId Team ID of workspace for which to get categories
+ */
+export const compose_settings_view = async (teamId: string): Promise<View | undefined> => {
+  try {
+    const team = await prisma.team.findOne({
+      where: {
+        id: teamId,
+      },
+      select: {
+        accessToken: true,
+      },
+    });
+
+    return {
+      type: 'modal',
+      title: {
+        type: 'plain_text',
+        text: 'Settings',
+        emoji: false,
+      },
+      blocks: [BLOCK_TEXT('*Authorization token:*'), BLOCK_TEXT('```' + team?.accessToken + '```')],
+    };
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+/**
  * Composes a view of 'create new post' modal.
  * @param teamId Team ID of workspace for which to get categories
  */
@@ -366,12 +395,12 @@ export const compose_app_home_view = async (
             },
             {
               type: 'button',
+              action_id: 'settings_open',
               text: {
                 type: 'plain_text',
-                text: '❓\tHelp',
+                text: '🛠 \tSettings',
                 emoji: true,
               },
-              value: 'help',
             },
           ],
         },

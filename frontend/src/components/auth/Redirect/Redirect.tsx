@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react';
 import { useMutation } from '@apollo/react-hooks';
 
-import { signIn, signInVariables } from '../../../types/generated/schema';
+import { SignIn, SignInVariables } from '../../../types/generated/schema';
 import { SIGN_IN } from '../../../api/mutations/auth';
+import { setAuthToken } from '../../../cookies';
 
 /* Props - <Redirect />
 ============================================================================= */
@@ -13,28 +14,27 @@ type Props = {
 /* <Redirect />
 ============================================================================= */
 const Redirect: React.FunctionComponent<Props> = ({ code }) => {
-  const [signInMutation, { loading, error, data }] = useMutation<signIn, signInVariables>(SIGN_IN);
+  const [signIn, { loading, error, data }] = useMutation<SignIn, SignInVariables>(SIGN_IN);
 
   useEffect(() => {
-    signInMutation({
-      variables: {
-        code,
-      },
-    });
+    (async () => {
+      const { data } = await signIn({
+        variables: {
+          code,
+        },
+      });
+
+      const authToken = data?.signIn;
+      if (authToken) {
+        setAuthToken(authToken);
+      }
+    })();
   }, []);
 
   if (loading) return <span>Loading...</span>;
   if (error) return <span>{error.message}</span>;
 
-  if (data?.signIn) {
-    return (
-      <span>
-        Success! ID: {data.signIn.id} ({data.signIn.email})
-      </span>
-    );
-  }
-
-  return null;
+  return <span>Success!</span>;
 };
 
 export default Redirect;

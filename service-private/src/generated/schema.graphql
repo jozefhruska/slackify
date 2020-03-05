@@ -3,7 +3,7 @@
 
 
 type Mutation {
-  signIn(code: String): User!
+  signIn(code: String): String
 }
 
 type Query {

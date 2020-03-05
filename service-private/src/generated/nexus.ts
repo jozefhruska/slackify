@@ -41,7 +41,7 @@ export interface NexusGenAllTypes extends NexusGenRootTypes {
 
 export interface NexusGenFieldTypes {
   Mutation: { // field return type
-    signIn: NexusGenRootTypes['User']; // User!
+    signIn: string | null; // String
   }
   Query: { // field return type
     ok: boolean; // Boolean!

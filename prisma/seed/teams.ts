@@ -9,6 +9,7 @@ export default async (prisma: PrismaClient) => {
         id: 'TP9A3CF2N',
         name: 'team-name',
         domain: 'team-domain',
+        accessToken: '4c8d40d6850b716d181362d28986da65d806488c9d70bb1f993774739a9f0e45',
       },
     });
   } catch (error) {

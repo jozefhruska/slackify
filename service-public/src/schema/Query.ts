@@ -6,14 +6,11 @@ export default objectType({
     t.field('getCategories', {
       type: 'Category',
       list: true,
-      args: {
-        teamId: stringArg(),
-      },
-      resolve: (_, { teamId }, { prisma }) => {
+      resolve: (_parent, _args, { prisma, team }) => {
         return prisma.category.findMany({
           where: {
             team: {
-              id: teamId,
+              id: team.id,
             },
           },
         });

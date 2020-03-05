@@ -1,4 +1,4 @@
-import { SlackActionMiddlewareArgs, BlockAction } from '@slack/bolt';
+import { SlackActionMiddlewareArgs, BlockButtonAction } from '@slack/bolt';
 
 import { app } from '..';
 import { SLACK_BOT_TOKEN } from '../config';
@@ -7,7 +7,10 @@ import { compose_manage_categories_view } from '../utils/views';
 /**
  * Opens the categories modal.
  */
-const manage_categories_open = async ({ body, ack }: SlackActionMiddlewareArgs<BlockAction>) => {
+const manage_categories_open = async ({
+  body,
+  ack,
+}: SlackActionMiddlewareArgs<BlockButtonAction>) => {
   ack();
 
   try {

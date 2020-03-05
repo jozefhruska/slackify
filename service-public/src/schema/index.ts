@@ -22,7 +22,7 @@ export const schema = makeSchema({
         alias: 'prisma',
       },
       {
-        source: path.join(__dirname, '../context.ts'),
+        source: path.join(__dirname, '../index.ts'),
         alias: 'Context',
       },
     ],

@@ -16,4 +16,10 @@ if (!SLACK_CLIENT_SECRET) {
 
 /* Common
 ============================================================================= */
+export const SIGNING_SECRET = process?.env?.SIGNING_SECRET as string;
+if (!SIGNING_SECRET) {
+  console.error(new Error('Environment variable "SIGNING_SECRET" is not defined.'));
+  process.exit(1);
+}
+
 export const PORT = process?.env?.PORT;

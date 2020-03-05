@@ -28,7 +28,7 @@ input PostWhereUniqueInput {
 }
 
 type Query {
-  getCategories(teamId: String): [Category!]!
+  getCategories: [Category!]!
   getCategory(categoryId: String): Category
   getPost(postId: String): Post
   getPosts(categoryId: String): [Post!]!

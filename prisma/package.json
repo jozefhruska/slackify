@@ -9,8 +9,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@prisma/client": "~2.0.0-preview022",
-    "prisma2": "~2.0.0-preview022"
+    "@prisma/client": "~2.0.0-preview023",
+    "prisma2": "~2.0.0-preview023"
   },
   "devDependencies": {
     "@types/node": "~13.7.6",

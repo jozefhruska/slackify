@@ -5,3 +5,4 @@ export { default as delete_category } from './delete_category';
 export { default as app_home_category_select } from './app_home_category_select';
 export { default as post_publish } from './post_publish';
 export { default as post_hide } from './post_hide';
+export { default as settings_open } from './settings_open';

@@ -3,7 +3,7 @@
  * Do not make changes to this file directly
  */
 
-import * as Context from "../context"
+import * as Context from "../index"
 import * as prisma from "@prisma/client"
 
 
@@ -87,9 +87,6 @@ export interface NexusGenArgTypes {
     }
   }
   Query: {
-    getCategories: { // args
-      teamId?: string | null; // String
-    }
     getCategory: { // args
       categoryId?: string | null; // String
     }
