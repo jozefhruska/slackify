@@ -1,17 +1,25 @@
-import { useEffect } from 'react';
 import App, { AppProps, AppContext } from 'next/app';
 import { ThemeProvider } from 'styled-components';
 
-import * as THEMES from '../src/themes';
-import { getColorScheme, getAuthToken } from '../src/cookies';
+import theme from '../src/theme';
+import { getAuthToken } from '../src/cookies';
 import { BaseProps } from '../src/types/common';
 import { GlobalStyles } from '../src/styles';
+import Head from 'next/head';
+
+import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
 
 /* <AppWrapper />
 ============================================================================= */
-const AppWrapper = ({ Component, pageProps, colorScheme }: AppProps & BaseProps) => (
-  <ThemeProvider theme={THEMES[colorScheme]}>
-    <GlobalStyles theme={THEMES[colorScheme]} />
+const AppWrapper = ({ Component, pageProps }: AppProps & BaseProps) => (
+  <ThemeProvider theme={theme}>
+    <GlobalStyles />
+    <Head>
+      <link
+        href="https://fonts.googleapis.com/css?family=Lato:300,400,700|Roboto:300,400,700&display=swap"
+        rel="stylesheet"
+      />
+    </Head>
 
     <Component {...pageProps} />
   </ThemeProvider>
@@ -23,15 +31,12 @@ AppWrapper.getInitialProps = async (appContext: AppContext) => {
   const appProps = await App.getInitialProps(appContext);
 
   const authToken = getAuthToken(appContext?.ctx);
-  const colorScheme = getColorScheme(appContext?.ctx);
 
   return {
     ...appProps,
-    colorScheme,
     authToken,
     pageProps: {
       ...appProps.pageProps,
-      colorScheme,
       authToken,
     },
   };
