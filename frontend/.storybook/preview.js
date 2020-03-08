@@ -6,6 +6,10 @@ import { setConfig } from 'next/config';
 import theme from '../src/theme';
 import { GlobalStyles } from '../src/styles';
 
+import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
+import 'react-tippy/dist/tippy.css'
+import 'normalize.css';
+
 /* Global decorators
 ============================================================================= */
 addDecorator(story => (

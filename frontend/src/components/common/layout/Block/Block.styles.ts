@@ -7,13 +7,13 @@ type ContentProps = {
 export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  border-radius: ${({ theme }) => theme.borderRadius};
+  border-radius: ${({ theme }) => theme.radii.medium};
   background: ${({ theme }) => theme.colors.base[40]};
-  box-shadow: ${({ theme }) => theme.boxShadow};
+  box-shadow: ${({ theme }) => theme.shadows.box.small()};
 `;
 
 export const TitleBar = styled.div`
-  padding: ${({ theme }) => `${theme.space.s4} ${theme.space.s4} ${theme.space.s2}`};
+  padding: ${({ theme }) => `${theme.space.s6} ${theme.space.s6} ${theme.space.s2}`};
 `;
 
 export const Content = styled.div<ContentProps>`

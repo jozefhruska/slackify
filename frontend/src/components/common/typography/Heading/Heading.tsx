@@ -21,7 +21,6 @@ Heading.defaultProps = {
   mt: 0,
   mb: 's4',
   color: 'base.10',
-  fontFamily: "'Lato', sans-serif",
   letterSpacing: 1.2,
   fontWeight: 700,
 };

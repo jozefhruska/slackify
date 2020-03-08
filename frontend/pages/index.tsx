@@ -3,14 +3,14 @@ import { NextPage } from 'next';
 
 import { BaseProps } from '../src/types/common';
 import { Flex, Box } from '../src/components/common/layout/base';
-import { Block } from '../src/components/common/layout';
+import { Block, Navigation } from '../src/components/common/layout';
 import { Paragraph } from '../src/components/common/typography';
 
 /* <HomePage />
 ============================================================================= */
 const HomePage: NextPage<BaseProps> = ({ authToken }) => {
   if (authToken) {
-    return <span>Signed in.</span>;
+    return <Navigation />;
   }
 
   return (

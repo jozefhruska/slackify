@@ -8,6 +8,8 @@ import { GlobalStyles } from '../src/styles';
 import Head from 'next/head';
 
 import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
+import 'react-tippy/dist/tippy.css';
+import 'normalize.css';
 
 /* <AppWrapper />
 ============================================================================= */
@@ -16,7 +18,7 @@ const AppWrapper = ({ Component, pageProps }: AppProps & BaseProps) => (
     <GlobalStyles />
     <Head>
       <link
-        href="https://fonts.googleapis.com/css?family=Lato:300,400,700|Roboto:300,400,700&display=swap"
+        href="https://fonts.googleapis.com/css?family=Roboto:300,400,700&display=swap"
         rel="stylesheet"
       />
     </Head>

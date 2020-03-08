@@ -6,7 +6,7 @@ const colors = {
   base: {
     10: '#ffffff',
     20: '#ababab',
-    30: '#343434',
+    30: '#434343',
     40: '#2c2c2c',
     50: '#1c1c1c',
     60: '#000000',
@@ -31,6 +31,16 @@ export default {
     s20: '5rem',
     s40: '10rem',
   },
-  borderRadius: '8px',
-  boxShadow: '0px 5px 25px -10px rgba(0, 0, 0, .2)',
+  radii: {
+    small: '4px',
+    medium: '10px',
+    large: '14px',
+  },
+  shadows: {
+    box: {
+      small: (color: string = '#000000') => `0px 3px 14px -3px ${color.concat('4D')}`,
+      medium: (color: string = '#000000') => `0px 4px 20px -4px ${color.concat('4D')}`,
+      large: (color: string = '#000000') => `0px 5px 25px -10px ${color.concat('4D')}`,
+    },
+  },
 };
