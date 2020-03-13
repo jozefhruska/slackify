@@ -3,7 +3,7 @@
  * Do not make changes to this file directly
  */
 
-import * as Context from "../context"
+import * as Context from "../index"
 import * as prisma from "@prisma/client"
 
 
@@ -28,6 +28,7 @@ export interface NexusGenEnums {
 export interface NexusGenRootTypes {
   Mutation: {};
   Query: {};
+  Team: prisma.Team;
   User: prisma.User;
   String: string;
   Int: number;
@@ -44,7 +45,14 @@ export interface NexusGenFieldTypes {
     signIn: string | null; // String
   }
   Query: { // field return type
-    ok: boolean; // Boolean!
+    getTeam: NexusGenRootTypes['Team'] | null; // Team
+    getUser: NexusGenRootTypes['User'] | null; // User
+  }
+  Team: { // field return type
+    accessToken: string; // String!
+    domain: string; // String!
+    id: string; // String!
+    name: string; // String!
   }
   User: { // field return type
     accessToken: string; // String!
@@ -67,7 +75,7 @@ export interface NexusGenAbstractResolveReturnTypes {
 
 export interface NexusGenInheritedFields {}
 
-export type NexusGenObjectNames = "Mutation" | "Query" | "User";
+export type NexusGenObjectNames = "Mutation" | "Query" | "Team" | "User";
 
 export type NexusGenInputNames = never;
 

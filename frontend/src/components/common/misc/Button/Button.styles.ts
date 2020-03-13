@@ -32,7 +32,7 @@ export const Main = styled.button<ButtonProps>`
     }
 
     svg {
-      opacity: .6;
+      opacity: 0.6;
     }
 
     :focus,

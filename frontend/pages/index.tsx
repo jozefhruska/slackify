@@ -1,15 +1,20 @@
 import React from 'react';
 import { NextPage } from 'next';
+import { useQuery } from '@apollo/client';
 
-import { BaseProps } from '../src/types/common';
 import { Flex, Box } from '../src/components/common/layout/base';
 import { Block, Navigation } from '../src/components/common/layout';
 import { Paragraph } from '../src/components/common/typography';
+import { GET_USER } from '../src/api/query/auth';
+import { withApollo } from '../src/api';
+import { GetUserQuery, GetUserQueryVariables } from '../src/types/generated/graphql';
 
 /* <HomePage />
 ============================================================================= */
-const HomePage: NextPage<BaseProps> = ({ authToken }) => {
-  if (authToken) {
+const HomePage: NextPage = () => {
+  const { data } = useQuery<GetUserQuery, GetUserQueryVariables>(GET_USER);
+
+  if (data?.getUser) {
     return <Navigation />;
   }
 
@@ -34,4 +39,4 @@ const HomePage: NextPage<BaseProps> = ({ authToken }) => {
   );
 };
 
-export default HomePage;
+export default withApollo({ ssr: true })(HomePage);

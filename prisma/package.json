@@ -4,17 +4,20 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "seed": "ts-node seed/index.ts"
+    "seed": "ts-node seed/index.ts",
+    "migrate:up": "prisma2 migrate up --experimental",
+    "migrate:save": "prisma2 migrate save --experimental",
+    "generate": "prisma2 generate"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@prisma/client": "~2.0.0-preview023",
-    "prisma2": "~2.0.0-preview023"
+    "@prisma/client": "~2.0.0-preview024",
+    "prisma2": "~2.0.0-preview024"
   },
   "devDependencies": {
-    "@types/node": "~13.7.6",
+    "@types/node": "~13.9.1",
     "ts-node": "~8.6.2",
-    "typescript": "~3.8.2"
+    "typescript": "~3.8.3"
   }
 }

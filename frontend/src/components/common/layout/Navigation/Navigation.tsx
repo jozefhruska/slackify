@@ -1,20 +1,33 @@
 import React from 'react';
 import { useRouter } from 'next/router';
-import { FiLogOut, FiFolder, FiEdit3, FiUsers, FiPieChart, FiSettings } from 'react-icons/fi';
 import Link from 'next/link';
+import { useQuery } from '@apollo/client';
+import { FiLogOut, FiFolder, FiEdit3, FiUsers, FiPieChart, FiSettings } from 'react-icons/fi';
 import { Tooltip } from 'react-tippy';
 
 import { Heading } from '../../typography';
 import { Flex, Box } from '../base';
 import { Button } from '../../misc';
 import { removeAuthToken } from '../../../../cookies';
+import {
+  GetUserQuery,
+  GetUserQueryVariables,
+  GetTeamQuery,
+  GetTeamQueryVariables,
+} from '../../../../types/generated/graphql';
+import { GET_USER, GET_TEAM } from '../../../../api/query/auth';
 
 import * as S from './Navigation.styles';
 
 /* <Navigation />
 ============================================================================= */
 const Navigation: React.FunctionComponent = () => {
+  const { data: userData } = useQuery<GetUserQuery, GetUserQueryVariables>(GET_USER);
+  const { data: teamData } = useQuery<GetTeamQuery, GetTeamQueryVariables>(GET_TEAM);
   const router = useRouter();
+
+  const user = userData?.getUser;
+  const team = teamData?.getTeam;
 
   return (
     <S.Wrapper>
@@ -23,9 +36,9 @@ const Navigation: React.FunctionComponent = () => {
           <S.Avatar>JH</S.Avatar>
           <Box ml="s4">
             <Heading as="h3" mb="s1">
-              Jozef Hruška
+              {user?.name}
             </Heading>
-            <span>Workspace</span>
+            <span>{team?.name}</span>
           </Box>
         </Flex>
 

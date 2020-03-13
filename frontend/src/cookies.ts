@@ -18,7 +18,7 @@ export function getAuthToken(): string;
  * Gets the Auth token cookie on server.
  * @param ctx Next JS Context
  */
-export function getAuthToken(ctx: NextPageContext): string;
+export function getAuthToken(ctx?: NextPageContext): string;
 
 export function getAuthToken(ctx?: NextPageContext) {
   if (ctx === undefined) {
@@ -39,7 +39,7 @@ export function setAuthToken(token: string): void;
  * @param token Auth token
  * @param ctx Next JS Context
  */
-export function setAuthToken(token: string, ctx: NextPageContext): void;
+export function setAuthToken(token: string, ctx?: NextPageContext): void;
 
 export function setAuthToken(token: string, ctx?: NextPageContext) {
   if (ctx === undefined) {
@@ -61,7 +61,7 @@ export function removeAuthToken(): void;
  * Removes the Auth token cookie on server.
  * @param ctx Next JS Context
  */
-export function removeAuthToken(ctx: NextPageContext): void;
+export function removeAuthToken(ctx?: NextPageContext): void;
 
 export function removeAuthToken(ctx?: NextPageContext) {
   if (ctx === undefined) {

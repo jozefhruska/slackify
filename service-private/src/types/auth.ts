@@ -1,4 +1,4 @@
-import {} from '@slack/bolt';
+import { User } from '@prisma/client';
 
 export type SlackAuthResponse = {
   ok: boolean;
@@ -20,4 +20,8 @@ export type SlackUser = {
 export type SlackTeam = {
   id: string;
   name: string;
+};
+
+export type JWTUser = {
+  data: User;
 };

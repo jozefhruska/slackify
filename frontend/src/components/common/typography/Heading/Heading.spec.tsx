@@ -2,11 +2,11 @@ import React from 'react';
 import { shallow } from 'enzyme';
 
 import { Heading } from '..';
-import { THEME } from '../../../../theme';
+import theme from '../../../../theme';
 
 describe('<Heading />', () => {
   it('Renders without fail. (Snapshot)', () => {
-    const tree = shallow(<Heading theme={THEME} />);
+    const tree = shallow(<Heading theme={theme} />);
     expect(tree).toMatchSnapshot();
   });
 });

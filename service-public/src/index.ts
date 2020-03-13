@@ -37,6 +37,11 @@ const server = new ApolloServer({
       },
     });
 
+    /* Check if user was found */
+    if (!team) {
+      throw new AuthenticationError("Auth token doesn't belong to any team.");
+    }
+
     return { prisma, team };
   },
 });

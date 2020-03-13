@@ -7,7 +7,15 @@ type Mutation {
 }
 
 type Query {
-  ok: Boolean!
+  getTeam: Team
+  getUser: User
+}
+
+type Team {
+  accessToken: String!
+  domain: String!
+  id: String!
+  name: String!
 }
 
 type User {

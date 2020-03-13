@@ -38,9 +38,9 @@ export default {
   },
   shadows: {
     box: {
-      small: (color: string = '#000000') => `0px 3px 14px -3px ${color.concat('4D')}`,
-      medium: (color: string = '#000000') => `0px 4px 20px -4px ${color.concat('4D')}`,
-      large: (color: string = '#000000') => `0px 5px 25px -10px ${color.concat('4D')}`,
+      small: (color = '#000000') => `0px 3px 14px -3px ${color.concat('4D')}`,
+      medium: (color = '#000000') => `0px 4px 20px -4px ${color.concat('4D')}`,
+      large: (color = '#000000') => `0px 5px 25px -10px ${color.concat('4D')}`,
     },
   },
 };

@@ -65,9 +65,9 @@ export const NavLink = styled.a<NavLinkProps>`
   ${({ isActive, theme }) =>
     isActive &&
     css`
-      background: ${({ theme }) => theme.colors.success} !important;
-      box-shadow: ${({ theme }) => theme.shadows.box.medium(theme.colors.success)} !important;
-      color: ${({ theme }) => theme.colors.base[10]} !important;
+      background: ${theme.colors.success} !important;
+      box-shadow: ${theme.shadows.box.medium(theme.colors.success)} !important;
+      color: ${theme.colors.base[10]} !important;
     `};
 `;
 

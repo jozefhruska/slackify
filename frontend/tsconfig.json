@@ -3,7 +3,7 @@
     "target": "es2016",
     "module": "esnext",
     "outDir": "dist",
-    "rootDirs": ["src", ".storybook"],
+    "rootDir": "src",
     "lib": ["esnext", "DOM"],
     "esModuleInterop": true,
     "strict": true,
@@ -16,6 +16,6 @@
     "isolatedModules": true,
     "jsx": "preserve"
   },
-  "include": ["src/**/*"],
+  "include": ["src/**/*", "pages/**/*"],
   "exclude": ["node_modules/*", "dist/*"]
 }

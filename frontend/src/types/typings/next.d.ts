@@ -1,8 +1,8 @@
-import ApolloClient from 'apollo-client';
-import { AppApolloCache } from './lib/apollo';
+import { ApolloClient } from '@apollo/client';
+import { AppCache } from '../../api';
 
 declare module 'next' {
   export interface NextPageContext {
-    apolloClient?: ApolloClient<AppApolloCache>;
+    apolloClient: ApolloClient<AppCache>;
   }
 }

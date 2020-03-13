@@ -12,11 +12,7 @@ import styled from 'styled-components';
 /* <Paragraph />
 ============================================================================= */
 const Paragraph = styled.p<SpaceProps & TypographyProps & ColorProps>(
-  compose(
-    color,
-    space,
-    typography,
-  ),
+  compose(color, space, typography)
 );
 
 /* Default props - <Paragraph />

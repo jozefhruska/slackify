@@ -21,8 +21,7 @@ export default {
 export const normal = () => (
   <Box p="s6">
     <Button
-      // @ts-ignore
-      variant={select('variant', variantOptions, 'info')}
+      variant={select<any>('variant', variantOptions, 'info')}
       disabled={boolean('disabled', false)}
     >
       {text('children', 'Button')}
@@ -34,8 +33,7 @@ export const icon = () => (
   <Box p="s6">
     <Button
       icon={<FiLogOut />}
-      // @ts-ignore
-      variant={select('variant', variantOptions, 'info')}
+      variant={select<any>('variant', variantOptions, 'info')}
       disabled={boolean('disabled', false)}
     >
       {text('children', 'Button')}

@@ -73,6 +73,7 @@ export default objectType({
           return jwt.sign(
             {
               data: {
+                id: user.id,
                 name: user.name,
                 email: user.email,
                 accessToken,

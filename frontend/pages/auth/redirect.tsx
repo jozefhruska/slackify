@@ -1,15 +1,15 @@
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { NextPage } from 'next';
-import { useMutation } from '@apollo/react-hooks';
+import { useMutation } from '@apollo/client';
 
 import { withApollo } from '../../src/api';
 import { Flex, Box } from '../../src/components/common/layout/base';
 import { Block } from '../../src/components/common/layout';
 import { Paragraph } from '../../src/components/common/typography';
 import { Loader } from '../../src/components/common/misc';
-import { SignIn, SignInVariables } from '../../src/types/generated/schema';
-import { SIGN_IN } from '../../src/api/mutations/auth';
+import { SIGN_IN } from '../../src/api/mutation/auth';
 import { setAuthToken } from '../../src/cookies';
+import { SignInMutation, SignInMutationVariables } from '../../src/types/generated/graphql';
 
 /* Props - <RedirectPage />
 ============================================================================= */
@@ -20,7 +20,9 @@ type Props = {
 /* <RedirectPage />
 ============================================================================= */
 const RedirectPage: NextPage<Props> = ({ code }) => {
-  const [signIn, { loading, error }] = useMutation<SignIn, SignInVariables>(SIGN_IN);
+  const [signIn, { loading, error }] = useMutation<SignInMutation, SignInMutationVariables>(
+    SIGN_IN
+  );
 
   useEffect(() => {
     (async () => {
@@ -42,7 +44,7 @@ const RedirectPage: NextPage<Props> = ({ code }) => {
       <Flex alignItems="center" justifyContent="center" mx="auto" minHeight="100vh" padding="s2">
         <Block>
           <Box textAlign="center">
-            <Paragraph mb={0}>Please wait, we're signing you in...</Paragraph>
+            <Paragraph mb={0}>{"Please wait, we're signing you in..."}</Paragraph>
             <Loader />
           </Box>
         </Block>
@@ -79,4 +81,4 @@ RedirectPage.getInitialProps = async ({ query: { code } }) => {
   return { code: code as string };
 };
 
-export default withApollo(RedirectPage);
+export default withApollo<Props>({ ssr: true })(RedirectPage);
