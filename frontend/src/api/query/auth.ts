@@ -6,6 +6,12 @@ export const GET_USER = gql`
       id
       name
       email
+      image_24
+      image_32
+      image_48
+      image_72
+      image_192
+      image_512
     }
   }
 `;

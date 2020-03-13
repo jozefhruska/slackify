@@ -12,7 +12,9 @@ export default objectType({
       type: 'String',
       nullable: true,
       args: {
-        code: stringArg(),
+        code: stringArg({
+          required: true,
+        }),
       },
       resolve: async (_, { code }, { prisma }) => {
         const slackAuthResponse = await axios
@@ -28,7 +30,7 @@ export default objectType({
             throw new Error('Slack authorization failed (unable to fetch auth token).');
           });
 
-        const user = slackAuthResponse.user;
+        const { image_1024, ...user } = slackAuthResponse.user;
         const accessToken = slackAuthResponse.access_token;
         const teamId = slackAuthResponse.team_id;
 
@@ -36,30 +38,31 @@ export default objectType({
           throw new Error('Slack authorization failed (invalid auth response data).');
         }
 
-        if (slackAuthResponse.ok) {
-          const existingUser = await prisma.user.findOne({
-            where: {
-              id: user.id,
-            },
-          });
+        const existingUser = await prisma.user.findOne({
+          where: {
+            id: user.id,
+          },
+        });
 
+        if (!slackAuthResponse.ok) {
+          throw new Error('Slack authorization failed (response not ok).');
+        }
+
+        try {
           if (existingUser) {
             await prisma.user.update({
               where: {
                 id: user.id,
               },
               data: {
-                name: user.name,
-                email: user.email,
+                ...user,
                 accessToken,
               },
             });
           } else {
             await prisma.user.create({
               data: {
-                id: user.id,
-                name: user.name,
-                email: user.email,
+                ...user,
                 accessToken,
                 team: {
                   connect: {
@@ -69,22 +72,23 @@ export default objectType({
               },
             });
           }
-
-          return jwt.sign(
-            {
-              data: {
-                id: user.id,
-                name: user.name,
-                email: user.email,
-                accessToken,
-              },
-              exp: Math.floor(Date.now() / 1000) + 60 * 60 * 24 * 30,
-            },
-            SIGNING_SECRET
-          );
-        } else {
-          throw new Error('Slack authorization failed (response not ok).');
+        } catch (error) {
+          console.log(error);
+          throw error;
         }
+
+        return jwt.sign(
+          {
+            data: {
+              id: user.id,
+              name: user.name,
+              email: user.email,
+              accessToken,
+            },
+            exp: Math.floor(Date.now() / 1000) + 60 * 60 * 24 * 30,
+          },
+          SIGNING_SECRET
+        );
       },
     });
   },

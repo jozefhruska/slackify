@@ -24,7 +24,7 @@ const HomePage: NextPage = () => {
         <Box textAlign="center">
           <Paragraph>To continue, please sign in with your Slack account:</Paragraph>
 
-          <a href="https://slack.com/oauth/authorize?scope=identity.basic,identity.email&client_id=791343423090.804137961685">
+          <a href="https://slack.com/oauth/authorize?scope=identity.basic,identity.email,identity.avatar&client_id=791343423090.804137961685">
             <img
               alt="Sign in with Slack"
               height="40"

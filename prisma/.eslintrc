@@ -9,6 +9,12 @@
     "ecmaVersion": 2018, // Allows for the parsing of modern ECMAScript features
     "sourceType": "module" // Allows for the use of imports
   },
+  "settings": {
+    "react": {
+      "pragma": "React",
+      "version": "detect"
+    }
+  },
   "rules": {
     "@typescript-eslint/explicit-function-return-type": "off"
   }

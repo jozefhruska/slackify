@@ -16,20 +16,6 @@ export const Wrapper = styled.nav`
   box-shadow: ${({ theme }) => theme.shadows.box.large()};
 `;
 
-export const Avatar = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 60px;
-  height: 60px;
-  border-radius: ${({ theme }) => theme.radii.medium};
-  background: ${({ theme }) => theme.colors.success};
-  box-shadow: ${({ theme }) => theme.shadows.box.medium(theme.colors.success)};
-  color: ${({ theme }) => theme.colors.base[10]};
-  letter-spacing: 2px;
-  user-select: none;
-`;
-
 export const NavList = styled.ul`
   display: flex;
   flex-direction: column;

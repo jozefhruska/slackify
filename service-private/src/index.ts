@@ -48,6 +48,12 @@ const server = new ApolloServer({
             name: true,
             email: true,
             accessToken: true,
+            image_24: true,
+            image_32: true,
+            image_48: true,
+            image_72: true,
+            image_192: true,
+            image_512: true,
             team: true,
           },
         });

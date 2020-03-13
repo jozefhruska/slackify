@@ -58,6 +58,12 @@ export interface NexusGenFieldTypes {
     accessToken: string; // String!
     email: string; // String!
     id: string; // String!
+    image_192: string | null; // String
+    image_24: string | null; // String
+    image_32: string | null; // String
+    image_48: string | null; // String
+    image_512: string | null; // String
+    image_72: string | null; // String
     name: string; // String!
   }
 }
@@ -65,7 +71,7 @@ export interface NexusGenFieldTypes {
 export interface NexusGenArgTypes {
   Mutation: {
     signIn: { // args
-      code?: string | null; // String
+      code: string; // String!
     }
   }
 }
