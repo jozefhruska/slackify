@@ -2,19 +2,19 @@ import { SlackActionMiddlewareArgs, BlockAction, Middleware } from '@slack/bolt'
 
 import { app } from '..';
 import { SLACK_BOT_TOKEN } from '../config';
-import { compose_create_new_post_view } from '../utils/views';
+import { compose_create_new_component_view } from '../utils/views';
 
 /**
- * Opens the post create modal.
+ * Opens the component create modal.
  */
-const create_new_post_open: Middleware<SlackActionMiddlewareArgs<BlockAction>> = async ({
+const create_new_component_open: Middleware<SlackActionMiddlewareArgs<BlockAction>> = async ({
   body,
   ack,
 }) => {
   ack();
 
   try {
-    const view = await compose_create_new_post_view(body?.team.id);
+    const view = await compose_create_new_component_view(body?.team.id);
 
     if (view) {
       /* Open modal in user's slack */
@@ -24,11 +24,11 @@ const create_new_post_open: Middleware<SlackActionMiddlewareArgs<BlockAction>> =
         view,
       });
     } else {
-      throw new Error("Unable to compose 'create new post' view.");
+      throw new Error("Unable to compose 'create new component' view.");
     }
   } catch (error) {
     console.error(error.data);
   }
 };
 
-export default create_new_post_open;
+export default create_new_component_open;

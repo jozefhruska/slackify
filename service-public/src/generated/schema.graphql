@@ -3,15 +3,13 @@
 
 
 type Collection {
+  components(after: ComponentWhereUniqueInput, before: ComponentWhereUniqueInput, first: Int, last: Int, skip: Int): [Component!]!
   handle: String!
   id: String!
-  posts(after: PostWhereUniqueInput, before: PostWhereUniqueInput, first: Int, last: Int, skip: Int): [Post!]!
   team: Team!
 }
 
-scalar DateTime
-
-type Post {
+type Component {
   collection: Collection!
   content: String
   createdAt: DateTime!
@@ -23,15 +21,17 @@ type Post {
   updatedAt: DateTime!
 }
 
-input PostWhereUniqueInput {
+input ComponentWhereUniqueInput {
   id: String
 }
 
+scalar DateTime
+
 type Query {
-  getCategories: [Collection!]!
   getCollection(collectionId: String): Collection
-  getPost(postId: String): Post
-  getPosts(collectionId: String): [Post!]!
+  getCollections: [Collection!]!
+  getComponent(componentId: String): Component
+  getComponents(collectionId: String): [Component!]!
 }
 
 type Team {

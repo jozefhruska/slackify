@@ -88,12 +88,12 @@ const Navigation: React.FunctionComponent = () => {
             </S.NavItem>
 
             <S.NavItem>
-              <Link href="/posts" passHref>
+              <Link href="/components" passHref>
                 <S.NavLink>
                   <Box mr="s4">
                     <FiEdit3 size={20} />
                   </Box>
-                  <span>Posts</span>
+                  <span>Components</span>
                 </S.NavLink>
               </Link>
             </S.NavItem>
@@ -141,21 +141,21 @@ const Navigation: React.FunctionComponent = () => {
           <Box display={['none', null, null, null, null, 'block']} pt="s4" px="s4">
             <Flex alignItems="center" justifyContent="space-between" mb="s4">
               <Heading as="h4" mb={0} color="base.20" fontWeight="normal">
-                Latest posts
+                Latest components
               </Heading>
 
-              <Link href="/posts" passHref>
+              <Link href="/components" passHref>
                 <S.ShowMoreLink>Show more</S.ShowMoreLink>
               </Link>
             </Flex>
 
             <Link href="/" passHref>
-              <S.PostWrapper>
-                <S.PostTitle>Post title</S.PostTitle>
-                <S.PostMeta>
+              <S.ComponentWrapper>
+                <S.ComponentTitle>Component title</S.ComponentTitle>
+                <S.ComponentMeta>
                   <span>Jozef Hruška</span>, 14:34 8. 3. 2019
-                </S.PostMeta>
-              </S.PostWrapper>
+                </S.ComponentMeta>
+              </S.ComponentWrapper>
             </Link>
           </Box>
 

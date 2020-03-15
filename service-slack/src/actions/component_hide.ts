@@ -5,34 +5,34 @@ import { compose_app_home_view } from '../utils/views';
 import { app } from '..';
 
 /**
- * Handles post publish event.
+ * Handles component hide event.
  */
-const post_publish: Middleware<SlackActionMiddlewareArgs<BlockButtonAction>> = async ({
+const component_hide: Middleware<SlackActionMiddlewareArgs<BlockButtonAction>> = async ({
   action,
   body,
   ack,
 }) => {
   ack();
 
-  const postId = action.value;
+  const componentId = action.value;
   const userId = body.user.id;
   const teamId = body.team.id;
 
   try {
-    const post = await prisma.post.findOne({
+    const component = await prisma.component.findOne({
       where: {
-        id: postId,
+        id: componentId,
       },
     });
 
-    if (post) {
-      /* Mark post as published */
-      await prisma.post.update({
+    if (component) {
+      /* Mark component as published */
+      await prisma.component.update({
         where: {
-          id: postId,
+          id: componentId,
         },
         data: {
-          isPublished: true,
+          isPublished: false,
         },
       });
 
@@ -48,11 +48,11 @@ const post_publish: Middleware<SlackActionMiddlewareArgs<BlockButtonAction>> = a
         throw new Error("Unable to compose 'app home' view.");
       }
     } else {
-      throw new Error(`Unable to find a post with id '${postId}'`);
+      throw new Error(`Unable to find a component with id '${componentId}'`);
     }
   } catch (error) {
     console.error(error);
   }
 };
 
-export default post_publish;
+export default component_hide;

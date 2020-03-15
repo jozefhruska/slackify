@@ -8,8 +8,8 @@ export const schema = makeSchema({
   types,
   plugins: [nexusPrismaPlugin()],
   outputs: {
-    schema: path.join(__dirname, '../generated/schema.graphql'),
-    typegen: path.join(__dirname, '../generated/nexus.ts'),
+    schema: path.join(__dirname, './generated/schema.graphql'),
+    typegen: path.join(__dirname, './generated/nexus.ts'),
   },
   typegenAutoConfig: {
     contextType: 'Context.Context',

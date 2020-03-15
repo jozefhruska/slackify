@@ -7,13 +7,16 @@ import {
   manage_collections_open,
   create_new_collection_open,
   delete_collection,
-  create_new_post_open,
+  create_new_component_open,
   app_home_collection_select,
-  post_publish,
-  post_hide,
+  component_publish,
+  component_hide,
   settings_open,
 } from './actions';
-import { create_new_collection_submission, create_new_post_submission } from './view_submissions';
+import {
+  create_new_collection_submission,
+  create_new_component_submission,
+} from './view_submissions';
 
 /* Create a Bolt instance
 ============================================================================= */
@@ -37,17 +40,17 @@ app.event('app_home_opened', app_home_opened);
 ============================================================================= */
 app.action('manage_collections_open', manage_collections_open);
 app.action('create_new_collection_open', create_new_collection_open);
-app.action('create_new_post_open', create_new_post_open);
+app.action('create_new_component_open', create_new_component_open);
 app.action('delete_collection', delete_collection);
 app.action('app_home_collection_select', app_home_collection_select);
-app.action('post_publish', post_publish);
-app.action('post_hide', post_hide);
+app.action('component_publish', component_publish);
+app.action('component_hide', component_hide);
 app.action('settings_open', settings_open);
 
 /* View submissions
 ============================================================================= */
 app.view('create_new_collection_modal', create_new_collection_submission);
-app.view('create_new_post_modal', create_new_post_submission);
+app.view('create_new_component_modal', create_new_component_submission);
 
 /* Start up
 ============================================================================= */

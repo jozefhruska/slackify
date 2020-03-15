@@ -1,6 +1,6 @@
 import { objectType } from 'nexus';
 
-export default objectType({
+export const Team = objectType({
   name: 'Team',
   definition(t) {
     t.model.id();

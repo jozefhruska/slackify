@@ -1,7 +1,7 @@
 import { objectType } from 'nexus';
 
-export default objectType({
-  name: 'Post',
+export const Component = objectType({
+  name: 'Component',
   definition(t) {
     t.model.id();
     t.model.title();

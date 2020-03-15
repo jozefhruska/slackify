@@ -119,10 +119,12 @@ export const compose_settings_view = async (teamId: string): Promise<View | unde
 };
 
 /**
- * Composes a view of 'create new post' modal.
+ * Composes a view of 'create new component' modal.
  * @param teamId Team ID of workspace for which to get collections
  */
-export const compose_create_new_post_view = async (teamId: string): Promise<View | undefined> => {
+export const compose_create_new_component_view = async (
+  teamId: string
+): Promise<View | undefined> => {
   try {
     const collections = await prisma.collection.findMany({
       where: {
@@ -146,10 +148,10 @@ export const compose_create_new_post_view = async (teamId: string): Promise<View
 
     return {
       type: 'modal',
-      callback_id: 'create_new_post_modal',
+      callback_id: 'create_new_component_modal',
       title: {
         type: 'plain_text',
-        text: 'Create new post',
+        text: 'Create new component',
         emoji: false,
       },
       submit: {
@@ -159,7 +161,7 @@ export const compose_create_new_post_view = async (teamId: string): Promise<View
       blocks: [
         {
           type: 'input',
-          block_id: 'post_title_block',
+          block_id: 'component_title_block',
           label: {
             type: 'plain_text',
             text: 'Title',
@@ -167,12 +169,12 @@ export const compose_create_new_post_view = async (teamId: string): Promise<View
           },
           element: {
             type: 'plain_text_input',
-            action_id: 'post_title_element',
+            action_id: 'component_title_element',
           },
         },
         {
           type: 'input',
-          block_id: 'post_short_block',
+          block_id: 'component_short_block',
           label: {
             type: 'plain_text',
             text: 'Lead',
@@ -180,12 +182,12 @@ export const compose_create_new_post_view = async (teamId: string): Promise<View
           },
           element: {
             type: 'plain_text_input',
-            action_id: 'post_short_element',
+            action_id: 'component_short_element',
           },
         },
         {
           type: 'input',
-          block_id: 'post_collection_block',
+          block_id: 'component_collection_block',
           label: {
             type: 'plain_text',
             text: 'Collection',
@@ -193,7 +195,7 @@ export const compose_create_new_post_view = async (teamId: string): Promise<View
           },
           element: {
             type: 'static_select',
-            action_id: 'post_collection_element',
+            action_id: 'component_collection_element',
             placeholder: {
               type: 'plain_text',
               text: 'Select collection',
@@ -203,7 +205,7 @@ export const compose_create_new_post_view = async (teamId: string): Promise<View
         },
         {
           type: 'input',
-          block_id: 'post_content_block',
+          block_id: 'component_content_block',
           label: {
             type: 'plain_text',
             text: 'Content',
@@ -211,7 +213,7 @@ export const compose_create_new_post_view = async (teamId: string): Promise<View
           },
           element: {
             type: 'plain_text_input',
-            action_id: 'post_content_element',
+            action_id: 'component_content_element',
             multiline: true,
           },
         },
@@ -246,14 +248,14 @@ export const compose_app_home_view = async (
         elements: [
           {
             type: 'button',
-            action_id: 'create_new_post_open',
+            action_id: 'create_new_component_open',
             text: {
               type: 'plain_text',
-              text: '✏️ \tCreate new post',
+              text: '✏️ \tCreate new component',
               emoji: true,
             },
             style: 'primary',
-            value: 'create_post',
+            value: 'create_component',
           },
           {
             type: 'button',
@@ -333,8 +335,8 @@ export const compose_app_home_view = async (
 
     const activeCollection = initialCollection ?? collectionList[0];
 
-    /* Get workspace posts */
-    const posts = await prisma.post.findMany({
+    /* Get workspace components */
+    const components = await prisma.component.findMany({
       where: {
         collection: {
           id: activeCollection.value,
@@ -353,11 +355,11 @@ export const compose_app_home_view = async (
     });
 
     /* Set message as default */
-    let postList = [BLOCK_DIVIDER, BLOCK_TEXT('No posts here 🤷‍♂️')];
+    let componentList = [BLOCK_DIVIDER, BLOCK_TEXT('No components here 🤷‍♂️')];
 
-    /* Render list of posts if there are some */
-    if (posts.length) {
-      postList = posts.flatMap(({ id, title, short, isPublished, author }) => {
+    /* Render list of components if there are some */
+    if (components.length) {
+      componentList = components.flatMap(({ id, title, short, isPublished, author }) => {
         const result: View['blocks'] = [
           BLOCK_DIVIDER,
           {
@@ -384,7 +386,7 @@ export const compose_app_home_view = async (
             elements: [
               {
                 type: 'button',
-                action_id: 'post_hide',
+                action_id: 'component_hide',
                 text: {
                   type: 'plain_text',
                   text: '👀 \tHide',
@@ -410,7 +412,7 @@ export const compose_app_home_view = async (
             elements: [
               {
                 type: 'button',
-                action_id: 'post_publish',
+                action_id: 'component_publish',
                 text: {
                   type: 'plain_text',
                   text: '👀 \tPublish',
@@ -444,7 +446,7 @@ export const compose_app_home_view = async (
           type: 'section',
           text: {
             type: 'mrkdwn',
-            text: '*Posts in your workspace*',
+            text: '*Components in your workspace*',
           },
           accessory: {
             type: 'static_select',
@@ -458,7 +460,7 @@ export const compose_app_home_view = async (
             initial_option: activeCollection,
           },
         },
-        ...postList,
+        ...componentList,
       ],
     };
   } catch (error) {

@@ -6,22 +6,22 @@ import { app } from '..';
 
 /* Local types
 ============================================================================= */
-type CreateNewPostModalSubmissionState = {
+type CreateNewComponentModalSubmissionState = {
   values: {
-    post_title_block: {
-      post_title_element: {
+    component_title_block: {
+      component_title_element: {
         type: 'plain_text_input';
         value: string;
       };
     };
-    post_short_block: {
-      post_short_element: {
+    component_short_block: {
+      component_short_element: {
         type: 'plain_text_input';
         value: string;
       };
     };
-    post_collection_block: {
-      post_collection_element: {
+    component_collection_block: {
+      component_collection_element: {
         type: 'static_select';
         selected_option: {
           text: PlainTextElement;
@@ -29,8 +29,8 @@ type CreateNewPostModalSubmissionState = {
         };
       };
     };
-    post_content_block: {
-      post_content_element: {
+    component_content_block: {
+      component_content_element: {
         type: 'plain_text_input';
         value: string;
       };
@@ -39,29 +39,28 @@ type CreateNewPostModalSubmissionState = {
 };
 
 /**
- * Handles the submission event of create new post modal.
+ * Handles the submission event of create new component modal.
  */
-const create_new_post_submission: Middleware<SlackViewMiddlewareArgs<ViewSubmitAction>> = async ({
-  view,
-  body,
-  ack,
-}) => {
+const create_new_component_submission: Middleware<SlackViewMiddlewareArgs<
+  ViewSubmitAction
+>> = async ({ view, body, ack }) => {
   const userId = body?.user?.id;
   const teamId = body.user.team_id;
 
   /* Extract field values */
-  const values = (view?.state as CreateNewPostModalSubmissionState).values;
-  const title = values?.post_title_block?.post_title_element.value;
-  const short = values?.post_short_block?.post_short_element.value;
-  const collection = values?.post_collection_block?.post_collection_element.selected_option.value;
-  const content = values?.post_content_block?.post_content_element.value;
+  const values = (view?.state as CreateNewComponentModalSubmissionState).values;
+  const title = values?.component_title_block?.component_title_element.value;
+  const short = values?.component_short_block?.component_short_element.value;
+  const collection =
+    values?.component_collection_block?.component_collection_element.selected_option.value;
+  const content = values?.component_content_block?.component_content_element.value;
 
   /* Acknowledge Slack action */
   ack();
 
   try {
     /* Create new collection */
-    await prisma.post.create({
+    await prisma.component.create({
       data: {
         title,
         type: 'default',
@@ -99,4 +98,4 @@ const create_new_post_submission: Middleware<SlackViewMiddlewareArgs<ViewSubmitA
   }
 };
 
-export default create_new_post_submission;
+export default create_new_component_submission;

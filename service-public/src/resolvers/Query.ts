@@ -1,9 +1,9 @@
 import { objectType, stringArg } from 'nexus';
 
-export default objectType({
+export const Query = objectType({
   name: 'Query',
   definition(t) {
-    t.field('getCategories', {
+    t.field('getCollections', {
       type: 'Collection',
       list: true,
       resolve: (_parent, _args, { prisma, team }) => {
@@ -32,14 +32,14 @@ export default objectType({
       },
     });
 
-    t.field('getPosts', {
-      type: 'Post',
+    t.field('getComponents', {
+      type: 'Component',
       list: true,
       args: {
         collectionId: stringArg(),
       },
       resolve: (_, { collectionId }, { prisma }) => {
-        return prisma.post.findMany({
+        return prisma.component.findMany({
           where: {
             collection: {
               id: collectionId,
@@ -49,16 +49,16 @@ export default objectType({
       },
     });
 
-    t.field('getPost', {
-      type: 'Post',
+    t.field('getComponent', {
+      type: 'Component',
       nullable: true,
       args: {
-        postId: stringArg(),
+        componentId: stringArg(),
       },
-      resolve: (_, { postId }, { prisma }) => {
-        return prisma.post.findOne({
+      resolve: (_, { componentId }, { prisma }) => {
+        return prisma.component.findOne({
           where: {
-            id: postId,
+            id: componentId,
           },
         });
       },

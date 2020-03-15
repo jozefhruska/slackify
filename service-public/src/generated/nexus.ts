@@ -20,7 +20,7 @@ declare global {
 }
 
 export interface NexusGenInputs {
-  PostWhereUniqueInput: { // input type
+  ComponentWhereUniqueInput: { // input type
     id?: string | null; // String
   }
 }
@@ -30,7 +30,7 @@ export interface NexusGenEnums {
 
 export interface NexusGenRootTypes {
   Collection: prisma.Collection;
-  Post: prisma.Post;
+  Component: prisma.Component;
   Query: {};
   Team: prisma.Team;
   String: string;
@@ -42,17 +42,17 @@ export interface NexusGenRootTypes {
 }
 
 export interface NexusGenAllTypes extends NexusGenRootTypes {
-  PostWhereUniqueInput: NexusGenInputs['PostWhereUniqueInput'];
+  ComponentWhereUniqueInput: NexusGenInputs['ComponentWhereUniqueInput'];
 }
 
 export interface NexusGenFieldTypes {
   Collection: { // field return type
+    components: NexusGenRootTypes['Component'][]; // [Component!]!
     handle: string; // String!
     id: string; // String!
-    posts: NexusGenRootTypes['Post'][]; // [Post!]!
     team: NexusGenRootTypes['Team']; // Team!
   }
-  Post: { // field return type
+  Component: { // field return type
     collection: NexusGenRootTypes['Collection']; // Collection!
     content: string | null; // String
     createdAt: any; // DateTime!
@@ -64,10 +64,10 @@ export interface NexusGenFieldTypes {
     updatedAt: any; // DateTime!
   }
   Query: { // field return type
-    getCategories: NexusGenRootTypes['Collection'][]; // [Collection!]!
     getCollection: NexusGenRootTypes['Collection'] | null; // Collection
-    getPost: NexusGenRootTypes['Post'] | null; // Post
-    getPosts: NexusGenRootTypes['Post'][]; // [Post!]!
+    getCollections: NexusGenRootTypes['Collection'][]; // [Collection!]!
+    getComponent: NexusGenRootTypes['Component'] | null; // Component
+    getComponents: NexusGenRootTypes['Component'][]; // [Component!]!
   }
   Team: { // field return type
     domain: string; // String!
@@ -78,9 +78,9 @@ export interface NexusGenFieldTypes {
 
 export interface NexusGenArgTypes {
   Collection: {
-    posts: { // args
-      after?: NexusGenInputs['PostWhereUniqueInput'] | null; // PostWhereUniqueInput
-      before?: NexusGenInputs['PostWhereUniqueInput'] | null; // PostWhereUniqueInput
+    components: { // args
+      after?: NexusGenInputs['ComponentWhereUniqueInput'] | null; // ComponentWhereUniqueInput
+      before?: NexusGenInputs['ComponentWhereUniqueInput'] | null; // ComponentWhereUniqueInput
       first?: number | null; // Int
       last?: number | null; // Int
       skip?: number | null; // Int
@@ -90,10 +90,10 @@ export interface NexusGenArgTypes {
     getCollection: { // args
       collectionId?: string | null; // String
     }
-    getPost: { // args
-      postId?: string | null; // String
+    getComponent: { // args
+      componentId?: string | null; // String
     }
-    getPosts: { // args
+    getComponents: { // args
       collectionId?: string | null; // String
     }
   }
@@ -104,9 +104,9 @@ export interface NexusGenAbstractResolveReturnTypes {
 
 export interface NexusGenInheritedFields {}
 
-export type NexusGenObjectNames = "Collection" | "Post" | "Query" | "Team";
+export type NexusGenObjectNames = "Collection" | "Component" | "Query" | "Team";
 
-export type NexusGenInputNames = "PostWhereUniqueInput";
+export type NexusGenInputNames = "ComponentWhereUniqueInput";
 
 export type NexusGenEnumNames = never;
 

@@ -45,7 +45,6 @@ export interface NexusGenFieldTypes {
     signIn: string | null; // String
   }
   Query: { // field return type
-    getTeam: NexusGenRootTypes['Team'] | null; // Team
     getUser: NexusGenRootTypes['User'] | null; // User
   }
   Team: { // field return type
@@ -65,6 +64,7 @@ export interface NexusGenFieldTypes {
     image_512: string | null; // String
     image_72: string | null; // String
     name: string; // String!
+    team: NexusGenRootTypes['Team']; // Team!
   }
 }
 

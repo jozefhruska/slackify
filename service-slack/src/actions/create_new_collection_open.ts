@@ -43,7 +43,8 @@ const create_new_collection_open: Middleware<SlackActionMiddlewareArgs<
             },
             hint: {
               type: 'plain_text',
-              text: 'Collection handle will serve as an endpoint for posts in this collection.',
+              text:
+                'Collection handle will serve as an endpoint for components in this collection.',
             },
           },
         ],

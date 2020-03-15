@@ -83,13 +83,13 @@ export const ShowMoreLink = styled.a`
   font-size: 0.8rem;
 `;
 
-export const PostTitle = styled.div`
+export const ComponentTitle = styled.div`
   transition: color 0.2s ease-out;
   padding-bottom: ${({ theme }) => theme.space.s2};
   font-weight: bold;
 `;
 
-export const PostMeta = styled.div`
+export const ComponentMeta = styled.div`
   font-size: 0.8rem;
 
   span {
@@ -97,7 +97,7 @@ export const PostMeta = styled.div`
   }
 `;
 
-export const PostWrapper = styled.a`
+export const ComponentWrapper = styled.a`
   transition: box-shadow 0.2s ease-out;
   display: flex;
   flex-direction: column;
@@ -113,7 +113,7 @@ export const PostWrapper = styled.a`
   :hover {
     box-shadow: ${({ theme }) => theme.shadows.box.medium()};
 
-    ${PostMeta} {
+    ${ComponentMeta} {
       color: ${({ theme }) => theme.colors.base[20]};
     }
   }
