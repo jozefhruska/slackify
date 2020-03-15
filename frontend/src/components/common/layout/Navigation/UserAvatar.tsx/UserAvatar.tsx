@@ -1,23 +1,23 @@
 import React from 'react';
+import { useQuery } from '@apollo/client';
 
-import { User } from '../../../../../types/generated/graphql';
+import { UserQuery, UserQueryVariables } from '../../../../../types/generated/graphql';
+import { USER } from '../../../../../schema/auth';
 
 import * as S from './UserAvatar.styles';
 
-/* Props - <UserAvatar />
-============================================================================= */
-type Props = {
-  name: User['name'];
-  src: User['image_72'];
-};
-
 /* <UserAvatar />
 ============================================================================= */
-const UserAvatar: React.FunctionComponent<Props> = ({ name, src }) => {
-  if (src) {
+const UserAvatar: React.FunctionComponent = () => {
+  const { data } = useQuery<UserQuery, UserQueryVariables>(USER);
+
+  const image = data?.user?.image_72;
+  const name = data?.user?.name;
+
+  if (image) {
     return (
       <S.ImageWrapper>
-        <img src={src} alt="user_avatar" />
+        <img src={image} alt="user_avatar" />
       </S.ImageWrapper>
     );
   }
@@ -28,9 +28,5 @@ const UserAvatar: React.FunctionComponent<Props> = ({ name, src }) => {
 
   return null;
 };
-
-/* Default props - <UserAvatar />
-============================================================================= */
-UserAvatar.defaultProps = {};
 
 export default UserAvatar;

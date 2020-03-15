@@ -1,6 +1,6 @@
 import { objectType } from 'nexus';
 
-export default objectType({
+export const User = objectType({
   name: 'User',
   definition(t) {
     t.model.id();
@@ -13,5 +13,6 @@ export default objectType({
     t.model.image_72();
     t.model.image_192();
     t.model.image_512();
+    t.model.team();
   },
 });

@@ -5,7 +5,7 @@ import jwt from 'jsonwebtoken';
 import { SlackAuthResponse } from '../types/auth';
 import { SLACK_CLIENT_ID, SLACK_CLIENT_SECRET, SIGNING_SECRET } from '../config';
 
-export default objectType({
+export const Mutation = objectType({
   name: 'Mutation',
   definition(t) {
     t.field('signIn', {
@@ -30,7 +30,7 @@ export default objectType({
             throw new Error('Slack authorization failed (unable to fetch auth token).');
           });
 
-        const { image_1024, ...user } = slackAuthResponse.user;
+        const user = slackAuthResponse.user;
         const accessToken = slackAuthResponse.access_token;
         const teamId = slackAuthResponse.team_id;
 
@@ -38,6 +38,7 @@ export default objectType({
           throw new Error('Slack authorization failed (invalid auth response data).');
         }
 
+        /* Check if user with this ID already exists */
         const existingUser = await prisma.user.findOne({
           where: {
             id: user.id,
@@ -55,14 +56,30 @@ export default objectType({
                 id: user.id,
               },
               data: {
-                ...user,
+                id: user.id,
+                name: user.name,
+                email: user.email,
+                image_24: user.image_24,
+                image_32: user.image_32,
+                image_48: user.image_48,
+                image_72: user.image_72,
+                image_192: user.image_192,
+                image_512: user.image_512,
                 accessToken,
               },
             });
           } else {
             await prisma.user.create({
               data: {
-                ...user,
+                id: user.id,
+                name: user.name,
+                email: user.email,
+                image_24: user.image_24,
+                image_32: user.image_32,
+                image_48: user.image_48,
+                image_72: user.image_72,
+                image_192: user.image_192,
+                image_512: user.image_512,
                 accessToken,
                 team: {
                   connect: {
@@ -73,7 +90,7 @@ export default objectType({
             });
           }
         } catch (error) {
-          console.log(error);
+          console.error(error);
           throw error;
         }
 

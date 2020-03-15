@@ -1,7 +1,6 @@
 import React from 'react';
-import { useRouter } from 'next/router';
 import Link from 'next/link';
-import { useQuery } from '@apollo/client';
+import { useQuery, useApolloClient, gql } from '@apollo/client';
 import { FiLogOut, FiFolder, FiEdit3, FiUsers, FiPieChart, FiSettings } from 'react-icons/fi';
 import { Tooltip } from 'react-tippy';
 
@@ -9,33 +8,28 @@ import { Heading } from '../../typography';
 import { Flex, Box } from '../base';
 import { Button } from '../../misc';
 import { removeAuthToken } from '../../../../cookies';
-import {
-  GetUserQuery,
-  GetUserQueryVariables,
-  GetTeamQuery,
-  GetTeamQueryVariables,
-} from '../../../../types/generated/graphql';
-import { GET_USER, GET_TEAM } from '../../../../api/query/auth';
+import { UserQuery, UserQueryVariables } from '../../../../types/generated/graphql';
+import UserAvatar from './UserAvatar.tsx/UserAvatar';
+import { USER } from '../../../../schema/auth';
 
 import * as S from './Navigation.styles';
-import UserAvatar from './UserAvatar.tsx/UserAvatar';
 
 /* <Navigation />
 ============================================================================= */
 const Navigation: React.FunctionComponent = () => {
-  const { data: userData } = useQuery<GetUserQuery, GetUserQueryVariables>(GET_USER);
-  const { data: teamData } = useQuery<GetTeamQuery, GetTeamQueryVariables>(GET_TEAM);
-  const router = useRouter();
+  const { data } = useQuery<UserQuery, UserQueryVariables>(USER);
+  const client = useApolloClient();
 
-  const user = userData?.getUser;
-  const team = teamData?.getTeam;
+  const user = data?.user;
+  const team = user?.team;
 
   if (user && team) {
     return (
       <S.Wrapper>
         <Flex alignItems="center" justifyContent="space-between" p="s6" mb="s4">
           <Flex alignItems="center">
-            <UserAvatar name={user.name} src={user.image_72} />
+            <UserAvatar />
+
             <Box ml="s4">
               <Heading as="h3" mb="s1">
                 {user.name}
@@ -48,8 +42,23 @@ const Navigation: React.FunctionComponent = () => {
             <Button
               icon={<FiLogOut />}
               onClick={() => {
+                /* Remove auth token from cookies */
                 removeAuthToken();
-                router.push('/');
+
+                /* Remove user from local state */
+                client.writeQuery({
+                  query: gql`
+                    {
+                      user @client
+                    }
+                  `,
+                  data: {
+                    user: null,
+                  },
+                });
+
+                /* Remove user from cache */
+                client.cache.evict('User:' + user.id);
               }}
             />
           </Tooltip>

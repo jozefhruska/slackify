@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { NextPage } from 'next';
+import { useRouter } from 'next/router';
 import { useMutation } from '@apollo/client';
 
 import { withApollo } from '../../src/api';
@@ -11,30 +12,29 @@ import { SIGN_IN } from '../../src/api/mutation/auth';
 import { setAuthToken } from '../../src/cookies';
 import { SignInMutation, SignInMutationVariables } from '../../src/types/generated/graphql';
 
-/* Props - <RedirectPage />
-============================================================================= */
-type Props = {
-  code: string;
-};
-
 /* <RedirectPage />
 ============================================================================= */
-const RedirectPage: NextPage<Props> = ({ code }) => {
+const RedirectPage: NextPage = () => {
   const [signIn, { loading, error }] = useMutation<SignInMutation, SignInMutationVariables>(
     SIGN_IN
   );
+  const { query, push } = useRouter();
 
   useEffect(() => {
     (async () => {
-      const { data } = await signIn({
-        variables: {
-          code,
-        },
-      });
+      const code = query?.code;
+      if (typeof code === 'string') {
+        const { data } = await signIn({
+          variables: {
+            code,
+          },
+        });
 
-      const authToken = data?.signIn;
-      if (authToken) {
-        setAuthToken(authToken);
+        const authToken = data?.signIn;
+        if (authToken) {
+          setAuthToken(authToken);
+          push('/');
+        }
       }
     })();
   }, []);
@@ -75,10 +75,4 @@ const RedirectPage: NextPage<Props> = ({ code }) => {
   );
 };
 
-/* getInitialProps - <RedirectPage />
-============================================================================= */
-RedirectPage.getInitialProps = async ({ query: { code } }) => {
-  return { code: code as string };
-};
-
-export default withApollo<Props>({ ssr: true })(RedirectPage);
+export default withApollo({ ssr: true })(RedirectPage);

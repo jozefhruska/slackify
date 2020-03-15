@@ -1,8 +1,10 @@
 import { ApolloServer, AuthenticationError } from 'apollo-server';
+import { applyMiddleware } from 'graphql-middleware';
 import { PrismaClient, Team, User } from '@prisma/client';
 import jwtDecode from 'jwt-decode';
 
 import { schema } from './schema';
+import { permissions } from './permissions';
 import { PORT } from './config';
 import { JWTUser } from './types/auth';
 
@@ -17,7 +19,7 @@ export interface Context {
 
 /* Create Apollo Server instance */
 const server = new ApolloServer({
-  schema,
+  schema: applyMiddleware(schema, permissions),
   context: async ({ req }) => {
     let user;
     let authToken = req.headers.authorization;
@@ -38,34 +40,14 @@ const server = new ApolloServer({
         throw new AuthenticationError('Unable to decode JWT token.');
       }
 
-      try {
-        user = await prisma.user.findOne({
-          where: {
-            id: decodedToken.data.id,
-          },
-          select: {
-            id: true,
-            name: true,
-            email: true,
-            accessToken: true,
-            image_24: true,
-            image_32: true,
-            image_48: true,
-            image_72: true,
-            image_192: true,
-            image_512: true,
-            team: true,
-          },
-        });
-      } catch (error) {
-        console.error(error);
-        throw new AuthenticationError('Unable to find the requested user.');
-      }
-
-      /* Check if user was found */
-      if (!user) {
-        throw new AuthenticationError("Requested user doesn't exist.");
-      }
+      user = await prisma.user.findOne({
+        where: {
+          id: decodedToken.data.id,
+        },
+        include: {
+          team: true,
+        },
+      });
     }
 
     return { prisma, user, team: user?.team };

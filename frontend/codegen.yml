@@ -1,9 +1,18 @@
 overwrite: true
-schema: "http://localhost:5000"
-documents: "src/**/*.ts"
+schema:
+  - 'http://localhost:5000'
+  - './src/schema/index.ts'
+documents: 'src/**/*.ts'
 generates:
   src/types/generated/graphql.tsx:
     plugins:
-      - "typescript"
-      - "typescript-operations"
-      - "typescript-react-apollo"
+      - 'typescript'
+      - 'typescript-operations'
+      - 'typescript-react-apollo'
+    config:
+      apolloReactCommonImportFrom: '@apollo/client'
+      apolloReactComponentsImportFrom: '@apollo/client'
+      apolloReactHocImportFrom: '@apollo/client'
+      apolloReactHooksImportFrom: '@apollo/client'
+      withComponent: false
+      withHOC: false

@@ -2,13 +2,10 @@ import { makeSchema } from 'nexus';
 import { nexusPrismaPlugin } from 'nexus-prisma';
 import path from 'path';
 
-import Query from './Query';
-import Mutation from './Mutation';
-import User from './User';
-import Team from './Team';
+import * as types from './resolvers';
 
 export const schema = makeSchema({
-  types: { Query, Mutation, User, Team },
+  types,
   plugins: [nexusPrismaPlugin()],
   outputs: {
     schema: path.join(__dirname, '../generated/schema.graphql'),
@@ -22,7 +19,7 @@ export const schema = makeSchema({
         alias: 'prisma',
       },
       {
-        source: path.join(__dirname, '../index.ts'),
+        source: path.join(__dirname, './index.ts'),
         alias: 'Context',
       },
     ],

@@ -5,16 +5,16 @@ import { useQuery } from '@apollo/client';
 import { Flex, Box } from '../src/components/common/layout/base';
 import { Block, Navigation } from '../src/components/common/layout';
 import { Paragraph } from '../src/components/common/typography';
-import { GET_USER } from '../src/api/query/auth';
 import { withApollo } from '../src/api';
-import { GetUserQuery, GetUserQueryVariables } from '../src/types/generated/graphql';
+import { USER } from '../src/schema/auth';
+import { loadUserData } from '../src/utils';
 
 /* <HomePage />
 ============================================================================= */
 const HomePage: NextPage = () => {
-  const { data } = useQuery<GetUserQuery, GetUserQueryVariables>(GET_USER);
+  const { data } = useQuery(USER);
 
-  if (data?.getUser) {
+  if (data?.user) {
     return <Navigation />;
   }
 
@@ -38,5 +38,9 @@ const HomePage: NextPage = () => {
     </Flex>
   );
 };
+
+/* <HomePage /> - getInitialProps
+============================================================================= */
+HomePage.getInitialProps = async ctx => loadUserData(ctx);
 
 export default withApollo({ ssr: true })(HomePage);

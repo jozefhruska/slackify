@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-ignore */
 import React from 'react';
 import { NextPageContext, NextPage } from 'next';
 import Head from 'next/head';
@@ -6,6 +7,7 @@ import fetch from 'isomorphic-unfetch';
 
 import { API_URL } from '../config';
 import { getAuthToken } from '../cookies';
+import { typeDefs } from '../schema';
 
 export type AppCache = any;
 
@@ -20,9 +22,11 @@ let globalApolloClient: ApolloClient<AppCache> | null = null;
 const createApolloClient = (initialState: AppCache, ctx?: NextPageContext) => {
   const authToken = getAuthToken(ctx);
 
+  const cache = new InMemoryCache().restore(initialState);
+
   // The `ctx` (NextPageContext) will only be present on the server.
   // use it to extract auth headers (ctx.req) or similar.
-  return new ApolloClient({
+  const client = new ApolloClient({
     ssrMode: Boolean(ctx),
     link: new HttpLink({
       uri: API_URL ?? 'http://localhost:5000', // Server URL (must be absolute)
@@ -32,8 +36,11 @@ const createApolloClient = (initialState: AppCache, ctx?: NextPageContext) => {
       },
       fetch,
     }),
-    cache: new InMemoryCache().restore(initialState),
+    typeDefs,
+    cache,
   });
+
+  return client;
 };
 
 /**
@@ -52,6 +59,8 @@ const initApolloClient = (initialState: AppCache, ctx?: NextPageContext) => {
   // Reuse client on the client-side
   if (!globalApolloClient) {
     globalApolloClient = createApolloClient(initialState, ctx);
+    //@ts-ignore
+    window.__APOLLO_CLIENT__ = globalApolloClient;
   }
 
   return globalApolloClient;
@@ -71,6 +80,7 @@ const initOnContext = (ctx: NextApolloPageContext) => {
   // Otherwise, the component would have to call initApollo() again but this
   // time without the context. Once that happens, the following code will make sure we send
   // the prop as `null` to the browser.
+  //@ts-ignore
   apolloClient.toJSON = () => null;
 
   // Add apolloClient to NextPageContext.
