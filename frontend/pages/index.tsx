@@ -19,7 +19,7 @@ const HomePage: NextPage = () => {
   }
 
   return (
-    <Flex alignItems="center" justifyContent="center" mx="auto" minHeight="100vh" padding="s2">
+    <Flex alignItems="center" justifyContent="center" mx="auto" minHeight="100vh" px="s2">
       <Block>
         <Box textAlign="center">
           <Paragraph>To continue, please sign in with your Slack account:</Paragraph>

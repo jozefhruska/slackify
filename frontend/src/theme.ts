@@ -14,6 +14,7 @@ const colors = {
 };
 
 export default {
+  breakpoints: ['450px', '576px', '768px', '992px', '1200px'],
   colors,
   space: {
     s0: '0',

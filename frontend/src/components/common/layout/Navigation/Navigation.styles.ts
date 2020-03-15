@@ -1,19 +1,34 @@
 import styled, { css } from 'styled-components';
+import { Button } from '../../misc';
+
+type WrapperProps = {
+  isOpen: boolean;
+};
 
 type NavLinkProps = {
   isActive?: boolean;
 };
 
-export const Wrapper = styled.nav`
+export const Wrapper = styled.nav<WrapperProps>`
+  transition: transform 0.3s ease-out;
+  transform: translateX(${({ isOpen }) => (isOpen ? '0' : '-100%')});
   display: flex;
   flex-direction: column;
-  position: absolute;
+  position: fixed;
+  width: 100%;
   top: 0;
   left: 0;
-  width: 360px;
   height: 100vh;
   background: ${({ theme }) => theme.colors.base[40]};
   box-shadow: ${({ theme }) => theme.shadows.box.large()};
+
+  @media (min-width: ${({ theme }) => theme.breakpoints[1]}) {
+    max-width: 360px;
+  }
+
+  @media (min-width: ${({ theme }) => theme.breakpoints[3]}) {
+    transform: none;
+  }
 `;
 
 export const NavList = styled.ul`
@@ -101,5 +116,15 @@ export const PostWrapper = styled.a`
     ${PostMeta} {
       color: ${({ theme }) => theme.colors.base[20]};
     }
+  }
+`;
+
+export const MenuToggle = styled(Button)`
+  position: fixed;
+  bottom: ${({ theme }) => theme.space.s4};
+  left: ${({ theme }) => theme.space.s4};
+
+  @media (min-width: ${({ theme }) => theme.breakpoints[4]}) {
+    display: none;
   }
 `;

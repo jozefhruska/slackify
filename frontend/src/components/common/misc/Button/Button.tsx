@@ -28,6 +28,7 @@ const Button: React.FunctionComponent<ButtonProps> = ({ icon, isDisabled, childr
 /* Default props - <Button />
 ============================================================================= */
 Button.defaultProps = {
+  type: 'button',
   isDisabled: false,
 };
 
