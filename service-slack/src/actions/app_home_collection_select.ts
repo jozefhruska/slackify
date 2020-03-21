@@ -1,6 +1,6 @@
 import { SlackActionMiddlewareArgs, Middleware, BlockStaticSelectAction } from '@slack/bolt';
 
-import { compose_app_home_view } from '../utils/views';
+import { compose_app_home_view } from '../views/app_home';
 import { app } from '..';
 
 /**
@@ -15,7 +15,7 @@ const app_home_collection_select: Middleware<SlackActionMiddlewareArgs<
 
   try {
     if (body?.user?.team_id) {
-      const view = await compose_app_home_view(body?.user?.team_id, selectedCollection);
+      const view = await compose_app_home_view(body?.user?.team_id, selectedCollection.value);
 
       if (view) {
         /* Publish app home view */

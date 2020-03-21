@@ -1,7 +1,7 @@
 import { Middleware, SlackActionMiddlewareArgs, BlockButtonAction } from '@slack/bolt';
 
 import { prisma } from '../prisma';
-import { compose_app_home_view } from '../utils/views';
+import { compose_app_home_view } from '../views/app_home';
 import { app } from '..';
 
 /**
@@ -32,7 +32,7 @@ const component_publish: Middleware<SlackActionMiddlewareArgs<BlockButtonAction>
           id: componentId,
         },
         data: {
-          isPublished: true,
+          published: true,
         },
       });
 

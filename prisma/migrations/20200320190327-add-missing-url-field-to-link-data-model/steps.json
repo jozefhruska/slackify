@@ -1,0 +1,23 @@
+{
+  "version": "0.3.14-fixed",
+  "steps": [
+    {
+      "tag": "DeleteField",
+      "model": "ArticleComponentData",
+      "field": "component"
+    },
+    {
+      "tag": "CreateField",
+      "model": "LinkComponentData",
+      "field": "url",
+      "type": "String",
+      "arity": "Required"
+    },
+    {
+      "tag": "UpdateField",
+      "model": "LinkComponentData",
+      "field": "text",
+      "arity": "Optional"
+    }
+  ]
+}

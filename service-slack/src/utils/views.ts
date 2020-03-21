@@ -1,7 +1,10 @@
+/* eslint-disable @typescript-eslint/ban-ts-ignore */
 import { View, Option } from '@slack/web-api';
 
 import { prisma } from '../prisma';
 import { BLOCK_DIVIDER, BLOCK_TEXT } from '../constants/views';
+import { AppHomeComponentPreview } from '../types';
+import { Component } from '@prisma/client';
 
 /**
  * Composes a view of 'manage collections' modal.
@@ -24,13 +27,13 @@ export const compose_manage_collections_view = async (
 
     /* Render list of collections if there are some */
     if (collections.length) {
-      collectionList = collections.flatMap(({ id, handle }) => [
+      collectionList = collections.flatMap(({ id, name }) => [
         BLOCK_DIVIDER,
         {
           type: 'section',
           text: {
             type: 'mrkdwn',
-            text: `*${handle}*`,
+            text: `*${name}*`,
           },
           accessory: {
             type: 'button',
@@ -119,10 +122,10 @@ export const compose_settings_view = async (teamId: string): Promise<View | unde
 };
 
 /**
- * Composes a view of 'create new component' modal.
+ * Composes a view of 'create new component' modal (collection & type).
  * @param teamId Team ID of workspace for which to get collections
  */
-export const compose_create_new_component_view = async (
+export const compose_create_new_component_meta_view = async (
   teamId: string
 ): Promise<View | undefined> => {
   try {
@@ -137,10 +140,10 @@ export const compose_create_new_component_view = async (
     /* Render a list of collection options */
     let collectionList: Option[] = [];
     if (collections.length) {
-      collectionList = collections.map(({ id, handle }) => ({
+      collectionList = collections.map(({ id, name }) => ({
         text: {
           type: 'plain_text',
-          text: handle,
+          text: name,
         },
         value: id,
       }));
@@ -148,7 +151,7 @@ export const compose_create_new_component_view = async (
 
     return {
       type: 'modal',
-      callback_id: 'create_new_component_modal',
+      callback_id: 'create_new_component_meta_submission',
       title: {
         type: 'plain_text',
         text: 'Create new component',
@@ -161,33 +164,7 @@ export const compose_create_new_component_view = async (
       blocks: [
         {
           type: 'input',
-          block_id: 'component_title_block',
-          label: {
-            type: 'plain_text',
-            text: 'Title',
-            emoji: true,
-          },
-          element: {
-            type: 'plain_text_input',
-            action_id: 'component_title_element',
-          },
-        },
-        {
-          type: 'input',
-          block_id: 'component_short_block',
-          label: {
-            type: 'plain_text',
-            text: 'Lead',
-            emoji: true,
-          },
-          element: {
-            type: 'plain_text_input',
-            action_id: 'component_short_element',
-          },
-        },
-        {
-          type: 'input',
-          block_id: 'component_collection_block',
+          block_id: 'component_create_collection',
           label: {
             type: 'plain_text',
             text: 'Collection',
@@ -195,7 +172,7 @@ export const compose_create_new_component_view = async (
           },
           element: {
             type: 'static_select',
-            action_id: 'component_collection_element',
+            action_id: 'component_create_collection',
             placeholder: {
               type: 'plain_text',
               text: 'Select collection',
@@ -205,16 +182,42 @@ export const compose_create_new_component_view = async (
         },
         {
           type: 'input',
-          block_id: 'component_content_block',
+          block_id: 'component_create_type',
           label: {
             type: 'plain_text',
-            text: 'Content',
+            text: 'Type',
             emoji: true,
           },
           element: {
-            type: 'plain_text_input',
-            action_id: 'component_content_element',
-            multiline: true,
+            type: 'static_select',
+            action_id: 'component_create_type',
+            placeholder: {
+              type: 'plain_text',
+              text: 'Select component type',
+            },
+            options: [
+              {
+                text: {
+                  type: 'plain_text',
+                  text: 'Plain text',
+                },
+                value: 'PLAIN_TEXT',
+              },
+              {
+                text: {
+                  type: 'plain_text',
+                  text: 'Article',
+                },
+                value: 'ARTICLE',
+              },
+              {
+                text: {
+                  type: 'plain_text',
+                  text: 'Link',
+                },
+                value: 'LINK',
+              },
+            ],
           },
         },
       ],
@@ -225,245 +228,32 @@ export const compose_create_new_component_view = async (
 };
 
 /**
- * Composes a view of 'app home'.
- * @param teamId Team ID of user's workspace
- * @param initialCollection Collection that should be selected as default
+ * Composes a view of 'create new component' modal (component data).
  */
-export const compose_app_home_view = async (
-  teamId: string,
-  initialCollection?: Option
-): Promise<View | undefined> => {
-  const result: View = {
-    type: 'home',
-    blocks: [
-      {
-        type: 'section',
-        text: {
-          type: 'mrkdwn',
-          text: "*Here's what you can do with Slackify:*",
-        },
+export const compose_create_new_component_data_view = (type: Component['type']): View => ({
+  type: 'modal',
+  callback_id: 'create_new_component_data_submission',
+  title: {
+    type: 'plain_text',
+    text: 'Create new component',
+    emoji: false,
+  },
+  submit: {
+    type: 'plain_text',
+    text: 'Create',
+  },
+  blocks: [
+    {
+      type: 'input',
+      label: {
+        type: 'plain_text',
+        text: 'What can we do to improve your experience working here?',
+        emoji: true,
       },
-      {
-        type: 'actions',
-        elements: [
-          {
-            type: 'button',
-            action_id: 'create_new_component_open',
-            text: {
-              type: 'plain_text',
-              text: '✏️ \tCreate new component',
-              emoji: true,
-            },
-            style: 'primary',
-            value: 'create_component',
-          },
-          {
-            type: 'button',
-            action_id: 'manage_collections_open',
-            text: {
-              type: 'plain_text',
-              text: '📂 \tManage collections',
-              emoji: true,
-            },
-          },
-          {
-            type: 'button',
-            action_id: 'settings_open',
-            text: {
-              type: 'plain_text',
-              text: '🛠 \tSettings',
-              emoji: true,
-            },
-          },
-        ],
+      element: {
+        type: 'plain_text_input',
+        multiline: true,
       },
-      {
-        type: 'context',
-        elements: [
-          {
-            type: 'image',
-            image_url: 'https://api.slack.com/img/blocks/bkb_template_images/placeholder.png',
-            alt_text: 'placeholder',
-          },
-        ],
-      },
-    ],
-  };
-
-  try {
-    /* Get workspace collections */
-    const collections = await prisma.collection.findMany({
-      where: {
-        team: {
-          id: teamId,
-        },
-      },
-      select: {
-        id: true,
-        handle: true,
-      },
-    });
-
-    /* Render a list of collection options */
-    let collectionList: Option[] = [];
-    if (collections.length) {
-      collectionList = collections.map(({ id, handle }) => ({
-        text: {
-          type: 'plain_text',
-          text: handle,
-        },
-        value: id,
-      }));
-    }
-
-    if (!collections.length) {
-      return {
-        ...result,
-        blocks: [
-          ...result.blocks,
-          {
-            type: 'section',
-            text: {
-              type: 'mrkdwn',
-              text:
-                'You need to create a collection first. You can do that in "*Manage collections*" section above.',
-            },
-          },
-        ],
-      };
-    }
-
-    const activeCollection = initialCollection ?? collectionList[0];
-
-    /* Get workspace components */
-    const components = await prisma.component.findMany({
-      where: {
-        collection: {
-          id: activeCollection.value,
-        },
-      },
-      orderBy: {
-        createdAt: 'desc',
-      },
-      select: {
-        id: true,
-        title: true,
-        short: true,
-        author: true,
-        isPublished: true,
-      },
-    });
-
-    /* Set message as default */
-    let componentList = [BLOCK_DIVIDER, BLOCK_TEXT('No components here 🤷‍♂️')];
-
-    /* Render list of components if there are some */
-    if (components.length) {
-      componentList = components.flatMap(({ id, title, short, isPublished, author }) => {
-        const result: View['blocks'] = [
-          BLOCK_DIVIDER,
-          {
-            type: 'section',
-            text: {
-              type: 'mrkdwn',
-              text: `*${title}* \n ${short}`,
-            },
-          },
-          {
-            type: 'context',
-            elements: [
-              {
-                type: 'mrkdwn',
-                text: `Submitted by *${author.name}*`,
-              },
-            ],
-          },
-        ];
-
-        if (isPublished) {
-          result.push({
-            type: 'actions',
-            elements: [
-              {
-                type: 'button',
-                action_id: 'component_hide',
-                text: {
-                  type: 'plain_text',
-                  text: '👀 \tHide',
-                  emoji: true,
-                },
-                style: 'danger',
-                value: id,
-              },
-              {
-                type: 'button',
-                text: {
-                  type: 'plain_text',
-                  text: '\tEdit',
-                  emoji: true,
-                },
-                value: 'details',
-              },
-            ],
-          });
-        } else {
-          result.push({
-            type: 'actions',
-            elements: [
-              {
-                type: 'button',
-                action_id: 'component_publish',
-                text: {
-                  type: 'plain_text',
-                  text: '👀 \tPublish',
-                  emoji: true,
-                },
-                style: 'primary',
-                value: id,
-              },
-              {
-                type: 'button',
-                text: {
-                  type: 'plain_text',
-                  text: '\tEdit',
-                  emoji: true,
-                },
-                value: 'details',
-              },
-            ],
-          });
-        }
-
-        return result;
-      });
-    }
-
-    return {
-      ...result,
-      blocks: [
-        ...result.blocks,
-        {
-          type: 'section',
-          text: {
-            type: 'mrkdwn',
-            text: '*Components in your workspace*',
-          },
-          accessory: {
-            type: 'static_select',
-            action_id: 'app_home_collection_select',
-            placeholder: {
-              type: 'plain_text',
-              text: 'Select a collection',
-              emoji: true,
-            },
-            options: collectionList,
-            initial_option: activeCollection,
-          },
-        },
-        ...componentList,
-      ],
-    };
-  } catch (error) {
-    console.error(error);
-  }
-};
+    },
+  ],
+});

@@ -1,7 +1,7 @@
 import { SlackEventMiddlewareArgs, AppHomeOpenedEvent } from '@slack/bolt';
 
 import { app } from '..';
-import { compose_app_home_view } from '../utils/views';
+import { compose_app_home_view } from '../views/app_home';
 
 /**
  * Updates app home tab when users visits it.

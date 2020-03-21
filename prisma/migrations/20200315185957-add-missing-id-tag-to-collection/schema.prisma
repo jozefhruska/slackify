@@ -1,8 +1,8 @@
 datasource db {
   provider = "postgresql"
-  url      = env("POSTGRES_URL")
+  url = "***"
   enabled  = env("POSTGRES_URL")
-  // url      = "postgresql://postgres:password@localhost:5432/postgres"
+  // url = "***"
 }
 
 generator cient_prisma {
@@ -40,14 +40,12 @@ model User {
 }
 
 model Collection {
-  id          String        @default(cuid()) @id
-  name        String
-  type        ComponentType
-  description String?
-  team        Team
-  components  Component[]
+  id         String      @default(cuid()) @id
+  handle     String
+  team       Team
+  components Component[]
 
-  @@unique([name, team])
+  @@unique([handle, team])
 }
 
 model Team {
@@ -79,14 +77,14 @@ model PlainTextComponentData {
 model ArticleComponentData {
   id        String    @default(cuid()) @id
   title     String
-  lead      String?
-  content   String
+  lead      String
+  content   String?
+  component Component
 }
 
 model LinkComponentData {
   id   String @default(cuid()) @id
-  text String?
-  url  String
+  text String
 }
 
 enum ComponentType {

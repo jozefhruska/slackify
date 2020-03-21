@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-ignore */
 import { Middleware, SlackActionMiddlewareArgs, BlockButtonAction } from '@slack/bolt';
 
 import { prisma } from '../prisma';
@@ -39,6 +40,7 @@ const delete_collection: Middleware<SlackActionMiddlewareArgs<BlockButtonAction>
     if (view) {
       await app.client.views.update({
         token: SLACK_BOT_TOKEN,
+        //@ts-ignore
         view_id: body?.view?.id,
         view,
       });

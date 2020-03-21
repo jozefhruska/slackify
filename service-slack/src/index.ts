@@ -12,6 +12,7 @@ import {
   component_publish,
   component_hide,
   settings_open,
+  create_new_component_collection_select,
 } from './actions';
 import {
   create_new_collection_submission,
@@ -46,11 +47,12 @@ app.action('app_home_collection_select', app_home_collection_select);
 app.action('component_publish', component_publish);
 app.action('component_hide', component_hide);
 app.action('settings_open', settings_open);
+app.action('create_new_component_collection_select', create_new_component_collection_select);
 
 /* View submissions
 ============================================================================= */
-app.view('create_new_collection_modal', create_new_collection_submission);
-app.view('create_new_component_modal', create_new_component_submission);
+app.view('create_new_collection', create_new_collection_submission);
+app.view('create_new_component_submission', create_new_component_submission);
 
 /* Start up
 ============================================================================= */

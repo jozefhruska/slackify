@@ -6,3 +6,4 @@ export { default as app_home_collection_select } from './app_home_collection_sel
 export { default as component_publish } from './component_publish';
 export { default as component_hide } from './component_hide';
 export { default as settings_open } from './settings_open';
+export { default as create_new_component_collection_select } from './create_new_component_collection_select';

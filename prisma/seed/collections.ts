@@ -6,7 +6,9 @@ export default async (prisma: PrismaClient) => {
   try {
     await prisma.collection.create({
       data: {
-        handle: 'test-collection',
+        name: 'Collection #1 (Link)',
+        type: 'LINK',
+        description: 'Description',
         team: {
           connect: {
             id: 'TP9A3CF2N',
@@ -17,7 +19,9 @@ export default async (prisma: PrismaClient) => {
 
     await prisma.collection.create({
       data: {
-        handle: 'test-collection-x',
+        name: 'Collection #2 (Plain text)',
+        type: 'PLAIN_TEXT',
+        description: 'Description',
         team: {
           connect: {
             id: 'TP9A3CF2N',

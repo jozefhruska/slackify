@@ -12,7 +12,7 @@
   "license": "ISC",
   "dependencies": {
     "@prisma/client": "~2.0.0-preview024",
-    "@slack/bolt": "~1.7.0",
+    "@slack/bolt": "~1.8.0",
     "@slack/web-api": "~5.8.0",
     "dotenv": "~8.2.0"
   },

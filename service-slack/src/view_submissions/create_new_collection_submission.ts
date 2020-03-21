@@ -1,17 +1,34 @@
 import { SlackViewMiddlewareArgs, ViewSubmitAction, Middleware } from '@slack/bolt';
+import { PlainTextElement } from '@slack/web-api';
+import { ComponentType } from '@prisma/client';
 
 import { prisma } from '../prisma';
-import { compose_app_home_view } from '../utils/views';
+import { compose_app_home_view } from '../views/app_home';
 import { app } from '..';
 
 /* Local types
 ============================================================================= */
-type CreateNewCollectionModalSubmissionState = {
+type SubmissionState = {
   values: {
-    collection_handle_block: {
-      collection_handle_element: {
+    name: {
+      name: {
         type: 'plain_text_input';
         value: string;
+      };
+    };
+    description: {
+      description: {
+        type: 'plain_text_input';
+        value: string;
+      };
+    };
+    type: {
+      type: {
+        type: 'static_select';
+        selected_option: {
+          text: PlainTextElement;
+          value: ComponentType;
+        };
       };
     };
   };
@@ -26,39 +43,31 @@ const create_new_collection_submission: Middleware<SlackViewMiddlewareArgs<
   const teamId = body?.user?.team_id;
 
   /* Extract field values */
-  const values = (view?.state as CreateNewCollectionModalSubmissionState).values;
-  const collectionHandle = values?.collection_handle_block?.collection_handle_element.value;
-
-  /* Check if collection handle is in correct format */
-  if (!collectionHandle.match(/^([a-z]|-|_)*$/)) {
-    ack({
-      response_action: 'errors',
-      errors: {
-        collection_handle_block:
-          "Collection handle must contain only lowercase characters, '_' (underscore) and '–' (dash).",
-      },
-    });
-
-    return;
-  }
+  const values = (view?.state as SubmissionState).values;
+  const name = values?.name?.name.value;
+  const description = values?.description?.description.value;
+  const type = values?.type?.type?.selected_option.value;
 
   /* Check if there is a collection with the same handle amd team ID */
   try {
-    const teamCategories = await prisma.collection.findMany({
+    const teamCollections = await prisma.collection.findMany({
       where: {
         team: {
           id: teamId,
         },
       },
+      select: {
+        name: true,
+      },
     });
 
-    const duplicateCollection = teamCategories.find(({ handle }) => handle === collectionHandle);
+    const duplicateCollection = teamCollections.find(({ name: catName }) => catName === name);
 
     if (duplicateCollection) {
       ack({
         response_action: 'errors',
         errors: {
-          collection_handle_block: 'Collection with this handle already exists in your workspace.',
+          name: 'There is already a collection with this name in your workspace.',
         },
       });
 
@@ -73,9 +82,11 @@ const create_new_collection_submission: Middleware<SlackViewMiddlewareArgs<
 
   try {
     /* Create new collection */
-    await prisma.collection.create({
+    const collection = await prisma.collection.create({
       data: {
-        handle: collectionHandle,
+        name,
+        type,
+        description,
         team: {
           connect: {
             id: teamId,
@@ -86,7 +97,7 @@ const create_new_collection_submission: Middleware<SlackViewMiddlewareArgs<
 
     /* Update app home view */
     if (teamId) {
-      const view = await compose_app_home_view(teamId);
+      const view = await compose_app_home_view(teamId, collection.id);
 
       if (view) {
         /* Publish app home view */

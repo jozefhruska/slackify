@@ -1,0 +1,26 @@
+{
+  "version": "0.3.14-fixed",
+  "steps": [
+    {
+      "tag": "CreateField",
+      "model": "Component",
+      "field": "plainTextData",
+      "type": "PlainTextComponentData",
+      "arity": "Optional"
+    },
+    {
+      "tag": "CreateField",
+      "model": "Component",
+      "field": "articleData",
+      "type": "ArticleComponentData",
+      "arity": "Optional"
+    },
+    {
+      "tag": "CreateField",
+      "model": "Component",
+      "field": "linkData",
+      "type": "LinkComponentData",
+      "arity": "Optional"
+    }
+  ]
+}

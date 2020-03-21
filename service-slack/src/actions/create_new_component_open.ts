@@ -1,20 +1,21 @@
-import { SlackActionMiddlewareArgs, BlockAction, Middleware } from '@slack/bolt';
+import { SlackActionMiddlewareArgs, Middleware, BlockButtonAction } from '@slack/bolt';
 
 import { app } from '..';
 import { SLACK_BOT_TOKEN } from '../config';
-import { compose_create_new_component_view } from '../utils/views';
+import { compose_create_new_component_modal } from '../views/components';
 
 /**
  * Opens the component create modal.
  */
-const create_new_component_open: Middleware<SlackActionMiddlewareArgs<BlockAction>> = async ({
+const create_new_component_open: Middleware<SlackActionMiddlewareArgs<BlockButtonAction>> = async ({
   body,
+  action,
   ack,
 }) => {
   ack();
 
   try {
-    const view = await compose_create_new_component_view(body?.team.id);
+    const view = await compose_create_new_component_modal(body?.team.id, action.value);
 
     if (view) {
       /* Open modal in user's slack */
