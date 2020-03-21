@@ -41,6 +41,6 @@ const HomePage: NextPage = () => {
 
 /* <HomePage /> - getInitialProps
 ============================================================================= */
-HomePage.getInitialProps = async ctx => loadUserData(ctx);
+HomePage.getInitialProps = async ctx => loadUserData(ctx, false);
 
-export default withApollo({ ssr: true })(HomePage);
+export default withApollo()(HomePage);

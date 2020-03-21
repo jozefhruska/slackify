@@ -1,6 +1,7 @@
 import React, { ReactNode, ButtonHTMLAttributes } from 'react';
 
 import { Box } from '../../layout/base';
+import { WidthProps } from 'styled-system';
 
 import * as S from './Button.styles';
 
@@ -10,7 +11,8 @@ export type ButtonProps = {
   variant?: 'info' | 'success' | 'danger' | 'warning';
   icon?: ReactNode;
   isDisabled?: boolean;
-} & ButtonHTMLAttributes<HTMLButtonElement>;
+} & ButtonHTMLAttributes<HTMLButtonElement> &
+  WidthProps;
 
 /* <Button />
 ============================================================================= */

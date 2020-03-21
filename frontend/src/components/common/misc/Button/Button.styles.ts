@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components';
+import { width } from 'styled-system';
 
 import { ButtonProps } from './Button';
 
@@ -19,12 +20,15 @@ export const Overlay = styled.div`
 export const Main = styled.button<ButtonProps>`
   display: flex;
   align-items: center;
+  justify-content: center;
   position: relative;
   padding: ${({ theme }) => theme.space.s3};
   border: none;
   border-radius: ${({ theme }) => theme.radii.small};
   color: ${({ theme }) => theme.colors.base[10]};
   overflow: hidden;
+
+  ${width}
 
   :disabled {
     ${Overlay} {
