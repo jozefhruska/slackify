@@ -1,8 +1,33 @@
 const colors = {
-  info: '#0061fa',
-  success: '#4fc84b',
+  brand: '#4ac561',
+  gray: {
+    0: '#ffffff',
+    1: '#f1f1f1',
+    2: '#e2e2e2',
+    3: '#b5b5b5',
+    4: '#757575',
+    5: '#696969',
+    6: '#444444',
+    7: '#333333',
+    8: '#232323',
+    9: '#121212',
+    10: '#000000',
+  },
+  accent: {
+    blue: '#50b5ff',
+    yellow: '#fec543',
+    orange: '#ff974a',
+    red: '#fc5a5a',
+    green: '#82c43c',
+    purple: '#a461d8',
+    pink: '#ff9ad5',
+  },
+
+  // TODO: Remove after refactoring
+  info: '#0062ff',
+  success: '#0062FF',
   danger: '#fe4759',
-  warning: '#ffb931',
+  warning: '#ffc542',
   base: {
     10: '#ffffff',
     20: '#ababab',

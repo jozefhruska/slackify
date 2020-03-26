@@ -9,7 +9,6 @@ export const Wrapper = styled.div`
   flex-direction: column;
   border-radius: ${({ theme }) => theme.radii.medium};
   background: ${({ theme }) => theme.colors.base[40]};
-  box-shadow: ${({ theme }) => theme.shadows.box.small()};
 `;
 
 export const TitleBar = styled.div`

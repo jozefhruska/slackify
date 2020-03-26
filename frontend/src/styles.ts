@@ -5,8 +5,8 @@ export const GlobalStyles = createGlobalStyle`
     padding: 0;
     margin: 0;
     font-family: 'Roboto', sans-serif;
-    color: ${({ theme }) => theme.colors.base[20]};
-    background: ${({ theme }) => theme.colors.base[50]};
+    color: ${({ theme }) => theme.colors.gray[3]};
+    background: ${({ theme }) => theme.colors.gray[10]};
   }
 
   svg {
@@ -16,12 +16,12 @@ export const GlobalStyles = createGlobalStyle`
   a {
     transition: color 0.2s ease-out;
     text-decoration: none;
-    color: ${({ theme }) => theme.colors.base[20]};
+    color: ${({ theme }) => theme.colors.gray[3]};
 
     :focus,
     :hover {
       cursor: pointer;
-      color: ${({ theme }) => theme.colors.success};
+      color: ${({ theme }) => theme.colors.brand};
       outline: none;
     }
   }

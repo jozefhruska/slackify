@@ -2,13 +2,14 @@ import React, { ReactNode, ButtonHTMLAttributes } from 'react';
 
 import { Box } from '../../layout/base';
 import { WidthProps } from 'styled-system';
+import theme from '../../../../theme';
 
 import * as S from './Button.styles';
 
 /* Props - <Button />
 ============================================================================= */
 export type ButtonProps = {
-  variant?: 'info' | 'success' | 'danger' | 'warning';
+  variant?: keyof typeof theme.colors;
   icon?: ReactNode;
   isDisabled?: boolean;
 } & ButtonHTMLAttributes<HTMLButtonElement> &
@@ -19,10 +20,8 @@ export type ButtonProps = {
 const Button: React.FunctionComponent<ButtonProps> = ({ icon, isDisabled, children, ...props }) => {
   return (
     <S.Main disabled={isDisabled} {...props}>
-      {icon && <Box mr={children ? 's2' : 0}>{icon}</Box>}
+      {icon && <Box mr={children ? 's3' : 0}>{icon}</Box>}
       {children}
-
-      <S.Overlay />
     </S.Main>
   );
 };

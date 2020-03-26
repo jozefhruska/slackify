@@ -3,7 +3,7 @@ import { NextPage } from 'next';
 import { useQuery } from '@apollo/client';
 
 import { Flex, Box } from '../src/components/common/layout/base';
-import { Block, Navigation } from '../src/components/common/layout';
+import { Block, Navigation, Content, Header, PageHeader } from '../src/components/common/layout';
 import { Paragraph } from '../src/components/common/typography';
 import { withApollo } from '../src/api';
 import { USER } from '../src/schema/auth';
@@ -15,7 +15,16 @@ const HomePage: NextPage = () => {
   const { data } = useQuery(USER);
 
   if (data?.user) {
-    return <Navigation />;
+    return (
+      <>
+        <Header />
+        <Navigation />
+
+        <Content>
+          <PageHeader heading="Dashboard" />
+        </Content>
+      </>
+    );
   }
 
   return (

@@ -14,19 +14,20 @@ export const Wrapper = styled.nav<WrapperProps>`
   transform: translateX(${({ isOpen }) => (isOpen ? '0' : '-100%')});
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   position: fixed;
+  z-index: 400;
   width: 100%;
-  top: 0;
+  top: 90px;
   left: 0;
-  height: 100vh;
-  background: ${({ theme }) => theme.colors.base[40]};
-  box-shadow: ${({ theme }) => theme.shadows.box.large()};
+  height: calc(100vh - 90px);
+  background: ${({ theme }) => theme.colors.gray[9]};
 
   @media (min-width: ${({ theme }) => theme.breakpoints[1]}) {
     max-width: 360px;
   }
 
-  @media (min-width: ${({ theme }) => theme.breakpoints[3]}) {
+  @media (min-width: ${({ theme }) => theme.breakpoints[4]}) {
     transform: none;
   }
 `;
@@ -37,6 +38,10 @@ export const NavList = styled.ul`
   margin: 0;
   padding: 0 ${({ theme }) => theme.space.s6};
   list-style: none;
+
+  :first-child {
+    margin-top: ${({ theme }) => theme.space.s8};
+  }
 `;
 
 export const NavItem = styled.li`
@@ -46,83 +51,41 @@ export const NavItem = styled.li`
 `;
 
 export const NavLink = styled.a<NavLinkProps>`
-  transition: all 0.2s ease-out;
   display: flex;
   align-items: center;
   padding: ${({ theme }) => theme.space.s4};
-  border-radius: ${({ theme }) => theme.radii.small};
-  color: ${({ theme }) => theme.colors.base[20]};
+  border-radius: ${({ theme }) => theme.radii.medium};
+  color: ${({ theme }) => theme.colors.gray[3]};
   text-decoration: none;
 
   :focus,
   :hover {
     cursor: pointer;
-    background: ${({ theme }) => theme.colors.base[30]};
-    box-shadow: ${({ theme }) => theme.shadows.box.medium()};
-    color: ${({ theme }) => theme.colors.base[10]};
+    background: ${({ theme }) => theme.colors.gray[8]};
+    color: ${({ theme }) => theme.colors.gray[0]};
     outline: none;
   }
 
   ${({ isActive, theme }) =>
     isActive &&
     css`
-      background: ${theme.colors.success} !important;
-      box-shadow: ${theme.shadows.box.medium(theme.colors.success)} !important;
-      color: ${theme.colors.base[10]} !important;
+      background: ${theme.colors.brand} !important;
+      color: ${theme.colors.gray[1]} !important;
     `};
 `;
 
 export const Divider = styled.div`
   display: block;
   height: 1px;
-  margin: ${({ theme }) => theme.space.s4};
-  background: ${({ theme }) => theme.colors.base[30]};
-`;
-
-export const ShowMoreLink = styled.a`
-  font-size: 0.8rem;
-`;
-
-export const ComponentTitle = styled.div`
-  transition: color 0.2s ease-out;
-  padding-bottom: ${({ theme }) => theme.space.s2};
-  font-weight: bold;
-`;
-
-export const ComponentMeta = styled.div`
-  font-size: 0.8rem;
-
-  span {
-    font-style: italic;
-  }
-`;
-
-export const ComponentWrapper = styled.a`
-  transition: box-shadow 0.2s ease-out;
-  display: flex;
-  flex-direction: column;
-  padding: ${({ theme }) => theme.space.s4};
-  border-radius: ${({ theme }) => theme.radii.small};
-  background: ${({ theme }) => theme.colors.base[50]};
-
-  :not(:last-child) {
-    margin-bottom: ${({ theme }) => theme.space.s3};
-  }
-
-  :focus,
-  :hover {
-    box-shadow: ${({ theme }) => theme.shadows.box.medium()};
-
-    ${ComponentMeta} {
-      color: ${({ theme }) => theme.colors.base[20]};
-    }
-  }
+  margin: ${({ theme }) => theme.space.s6};
+  background: ${({ theme }) => theme.colors.gray[8]};
 `;
 
 export const MenuToggle = styled(Button)`
   position: fixed;
-  bottom: ${({ theme }) => theme.space.s4};
-  left: ${({ theme }) => theme.space.s4};
+  z-index: 390;
+  bottom: ${({ theme }) => theme.space.s6};
+  left: ${({ theme }) => theme.space.s6};
 
   @media (min-width: ${({ theme }) => theme.breakpoints[4]}) {
     display: none;

@@ -3,7 +3,7 @@ import { NextPage } from 'next';
 import { useQuery } from '@apollo/client';
 
 import { USER } from '../../src/schema/auth';
-import { Content, Navigation, PageHeader } from '../../src/components/common/layout';
+import { Content, Navigation, PageHeader, Header } from '../../src/components/common/layout';
 import { withApollo } from '../../src/api';
 import { loadUserData } from '../../src/utils';
 
@@ -15,6 +15,7 @@ const CollectionsPage: NextPage = () => {
   if (data?.user) {
     return (
       <>
+        <Header />
         <Navigation />
 
         <Content>
@@ -26,6 +27,7 @@ const CollectionsPage: NextPage = () => {
               },
             ]}
           />
+          sssssss
         </Content>
       </>
     );

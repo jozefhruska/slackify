@@ -28,12 +28,12 @@ type Props = {
 ============================================================================= */
 const PageHeader: React.FC<Props> = ({ heading, breadcrumbs, primaryButton, secondaryButton }) => {
   return (
-    <Box as="header" mb="s6">
+    <Box as="header" mb="s10">
       {breadcrumbs && (
         <S.Breadcrumbs>
           <S.BreadcrumbsItem>
             <Link href="/">
-              <a>Home</a>
+              <a>Dashboard</a>
             </Link>
           </S.BreadcrumbsItem>
 
@@ -67,7 +67,7 @@ const PageHeader: React.FC<Props> = ({ heading, breadcrumbs, primaryButton, seco
 
         <Box display={['none', null, 'block']}>
           {primaryButton && (
-            <Button variant="success" {...primaryButton}>
+            <Button variant="brand" {...primaryButton}>
               {primaryButton.text}
             </Button>
           )}
@@ -75,7 +75,7 @@ const PageHeader: React.FC<Props> = ({ heading, breadcrumbs, primaryButton, seco
 
         <Grid display={['grid', null, 'none']} gridTemplateColumns="1fr 1fr" gridGap="s4">
           {secondaryButton && <Button {...secondaryButton}></Button>}
-          {primaryButton && <Button variant="success" {...primaryButton} />}
+          {primaryButton && <Button variant="brand" {...primaryButton} />}
         </Grid>
       </Flex>
     </Box>
