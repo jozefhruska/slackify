@@ -40,14 +40,18 @@ const server = new ApolloServer({
         throw new AuthenticationError('Unable to decode JWT token.');
       }
 
-      user = await prisma.user.findOne({
-        where: {
-          id: decodedToken.data.id,
-        },
-        include: {
-          team: true,
-        },
-      });
+      try {
+        user = await prisma.user.findOne({
+          where: {
+            id: decodedToken.data.id,
+          },
+          include: {
+            team: true,
+          },
+        });
+      } catch (error) {
+        console.log(error);
+      }
     }
 
     return { prisma, user, team: user?.team };

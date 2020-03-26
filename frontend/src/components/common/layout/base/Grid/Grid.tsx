@@ -5,6 +5,11 @@ import { Box, BoxProps } from '..';
 
 /* <Grid />
 ============================================================================= */
-const Grid = styled(Box)<BoxProps & GridProps & FlexboxProps>({ display: 'grid' }, grid, flexbox);
+const Grid = styled(Box)<BoxProps & GridProps & FlexboxProps>`
+  display: grid;
+
+  ${flexbox}
+  ${grid}
+`;
 
 export default Grid;

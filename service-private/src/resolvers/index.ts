@@ -1,6 +1,9 @@
-import { Query } from './Query';
-import { Mutation } from './Mutation';
+export * from './mutations';
+export * from './queries';
+
 import { User } from './User';
 import { Team } from './Team';
+import { Collection } from './Collection';
+import { Component, ComponentType } from './Component';
 
-export { Query, Mutation, User, Team };
+export { User, Team, Collection, Component, ComponentType };

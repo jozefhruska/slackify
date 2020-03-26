@@ -20,14 +20,28 @@ declare global {
 }
 
 export interface NexusGenInputs {
+  ComponentWhereUniqueInput: { // input type
+    id?: string | null; // String
+  }
+  PaginationInput: { // input type
+    limit?: number | null; // Int
+    skip?: number | null; // Int
+  }
 }
 
 export interface NexusGenEnums {
+  ComponentType: prisma.ComponentType
 }
 
 export interface NexusGenRootTypes {
+  Collection: prisma.Collection;
+  Component: prisma.Component;
   Mutation: {};
   Query: {};
+  SignInOutput: { // root type
+    authToken: string; // String!
+    user: NexusGenRootTypes['User']; // User!
+  }
   Team: prisma.Team;
   User: prisma.User;
   String: string;
@@ -38,14 +52,37 @@ export interface NexusGenRootTypes {
 }
 
 export interface NexusGenAllTypes extends NexusGenRootTypes {
+  ComponentWhereUniqueInput: NexusGenInputs['ComponentWhereUniqueInput'];
+  PaginationInput: NexusGenInputs['PaginationInput'];
+  ComponentType: NexusGenEnums['ComponentType'];
 }
 
 export interface NexusGenFieldTypes {
+  Collection: { // field return type
+    components: NexusGenRootTypes['Component'][]; // [Component!]!
+    description: string | null; // String
+    id: string; // String!
+    name: string; // String!
+    team: NexusGenRootTypes['Team']; // Team!
+    type: NexusGenEnums['ComponentType']; // ComponentType!
+  }
+  Component: { // field return type
+    author: NexusGenRootTypes['User']; // User!
+    id: string; // String!
+    published: boolean; // Boolean!
+    type: NexusGenEnums['ComponentType']; // ComponentType!
+  }
   Mutation: { // field return type
-    signIn: string | null; // String
+    deleteCollection: NexusGenRootTypes['Collection']; // Collection!
+    signIn: NexusGenRootTypes['SignInOutput'] | null; // SignInOutput
   }
   Query: { // field return type
+    getCollections: NexusGenRootTypes['Collection'][]; // [Collection!]!
     getUser: NexusGenRootTypes['User'] | null; // User
+  }
+  SignInOutput: { // field return type
+    authToken: string; // String!
+    user: NexusGenRootTypes['User']; // User!
   }
   Team: { // field return type
     accessToken: string; // String!
@@ -69,9 +106,26 @@ export interface NexusGenFieldTypes {
 }
 
 export interface NexusGenArgTypes {
+  Collection: {
+    components: { // args
+      after?: NexusGenInputs['ComponentWhereUniqueInput'] | null; // ComponentWhereUniqueInput
+      before?: NexusGenInputs['ComponentWhereUniqueInput'] | null; // ComponentWhereUniqueInput
+      first?: number | null; // Int
+      last?: number | null; // Int
+      skip?: number | null; // Int
+    }
+  }
   Mutation: {
+    deleteCollection: { // args
+      collectionId: string; // String!
+    }
     signIn: { // args
       code: string; // String!
+    }
+  }
+  Query: {
+    getCollections: { // args
+      input?: NexusGenInputs['PaginationInput'] | null; // PaginationInput
     }
   }
 }
@@ -81,11 +135,11 @@ export interface NexusGenAbstractResolveReturnTypes {
 
 export interface NexusGenInheritedFields {}
 
-export type NexusGenObjectNames = "Mutation" | "Query" | "Team" | "User";
+export type NexusGenObjectNames = "Collection" | "Component" | "Mutation" | "Query" | "SignInOutput" | "Team" | "User";
 
-export type NexusGenInputNames = never;
+export type NexusGenInputNames = "ComponentWhereUniqueInput" | "PaginationInput";
 
-export type NexusGenEnumNames = never;
+export type NexusGenEnumNames = "ComponentType";
 
 export type NexusGenInterfaceNames = never;
 

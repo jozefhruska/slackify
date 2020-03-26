@@ -2,12 +2,50 @@
 ### Do not make changes to this file directly
 
 
+type Collection {
+  components(after: ComponentWhereUniqueInput, before: ComponentWhereUniqueInput, first: Int, last: Int, skip: Int): [Component!]!
+  description: String
+  id: String!
+  name: String!
+  team: Team!
+  type: ComponentType!
+}
+
+type Component {
+  author: User!
+  id: String!
+  published: Boolean!
+  type: ComponentType!
+}
+
+enum ComponentType {
+  ARTICLE
+  LINK
+  PLAIN_TEXT
+}
+
+input ComponentWhereUniqueInput {
+  id: String
+}
+
 type Mutation {
-  signIn(code: String!): String
+  deleteCollection(collectionId: String!): Collection!
+  signIn(code: String!): SignInOutput
+}
+
+input PaginationInput {
+  limit: Int
+  skip: Int
 }
 
 type Query {
+  getCollections(input: PaginationInput): [Collection!]!
   getUser: User
+}
+
+type SignInOutput {
+  authToken: String!
+  user: User!
 }
 
 type Team {

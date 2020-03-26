@@ -1,4 +1,4 @@
-const colors = {
+export const colors = {
   brand: '#4ac561',
   gray: {
     0: '#ffffff',
@@ -36,7 +36,7 @@ const colors = {
     50: '#1c1c1c',
     60: '#000000',
   },
-};
+} as const;
 
 export default {
   breakpoints: ['450px', '576px', '768px', '992px', '1200px'],

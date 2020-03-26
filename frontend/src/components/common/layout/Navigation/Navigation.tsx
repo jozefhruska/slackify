@@ -4,13 +4,13 @@ import { useQuery, useApolloClient, gql } from '@apollo/client';
 import {
   FiLogOut,
   FiFolder,
-  FiEdit3,
   FiUsers,
   FiPieChart,
   FiSettings,
   FiArrowLeft,
   FiMenu,
   FiGrid,
+  FiTag,
 } from 'react-icons/fi';
 
 import { Flex, Box, Grid } from '../base';
@@ -18,11 +18,11 @@ import { Button } from '../../misc';
 import { removeAuthToken } from '../../../../cookies';
 import { UserQuery, UserQueryVariables } from '../../../../types/generated/graphql';
 import { USER } from '../../../../schema/auth';
-
-import * as S from './Navigation.styles';
 import UserAvatar from '../Header/UserAvatar/UserAvatar';
 import { Paragraph } from '../../typography';
 import ActiveLink from '../../misc/ActiveLink/ActiveLink';
+
+import * as S from './Navigation.styles';
 
 /* <Navigation />
 ============================================================================= */
@@ -77,7 +77,7 @@ const Navigation: React.FunctionComponent = () => {
                     <Link href="/components" passHref>
                       <S.NavLink isActive={isActive}>
                         <Box mr="s4">
-                          <FiEdit3 size={20} />
+                          <FiTag size={20} />
                         </Box>
                         <span>Components</span>
                       </S.NavLink>

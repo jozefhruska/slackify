@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 /* <Content />
 ============================================================================= */
-const Content = styled.div`
+const Content = styled.main`
   display: flex;
   flex-direction: column;
   padding: ${({ theme }) => theme.space.s6};

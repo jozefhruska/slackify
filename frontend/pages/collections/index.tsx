@@ -1,39 +1,38 @@
 import React from 'react';
 import { NextPage } from 'next';
-import { useQuery } from '@apollo/client';
 
-import { USER } from '../../src/schema/auth';
 import { Content, Navigation, PageHeader, Header } from '../../src/components/common/layout';
 import { withApollo } from '../../src/api';
 import { loadUserData } from '../../src/utils';
+import ListingPage from '../../src/components/collections/listing/ListingPage/ListingPage';
+import { FiPlus } from 'react-icons/fi';
 
 /* <CollectionsPage />
 ============================================================================= */
 const CollectionsPage: NextPage = () => {
-  const { data } = useQuery(USER);
+  return (
+    <>
+      <Header />
+      <Navigation />
 
-  if (data?.user) {
-    return (
-      <>
-        <Header />
-        <Navigation />
+      <Content>
+        <PageHeader
+          heading="Collections"
+          breadcrumbs={[
+            {
+              text: 'Collections',
+            },
+          ]}
+          primaryButton={{
+            icon: <FiPlus />,
+            text: 'Add new collection',
+          }}
+        />
 
-        <Content>
-          <PageHeader
-            heading="Collections"
-            breadcrumbs={[
-              {
-                text: 'Collections',
-              },
-            ]}
-          />
-          sssssss
-        </Content>
-      </>
-    );
-  }
-
-  return null;
+        <ListingPage />
+      </Content>
+    </>
+  );
 };
 
 /* <CollectionsPage /> - getInitialProps

@@ -5,6 +5,10 @@ import { Box, BoxProps } from '..';
 
 /* <Flex />
 ============================================================================= */
-const Flex = styled(Box)<BoxProps & FlexboxProps>({ display: 'flex' }, flexbox);
+const Flex = styled(Box)<BoxProps & FlexboxProps>`
+  display: flex;
+
+  ${flexbox}
+`;
 
 export default Flex;

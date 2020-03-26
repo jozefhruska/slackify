@@ -58,7 +58,7 @@ const PageHeader: React.FC<Props> = ({ heading, breadcrumbs, primaryButton, seco
         mt={breadcrumbs ? 's6' : 0}
       >
         <Flex alignItems="center">
-          <Heading mb={['s6', null, 0]}>{heading}</Heading>
+          <Heading mb={[primaryButton || secondaryButton ? 's6' : 0, null, 0]}>{heading}</Heading>
 
           <Box display={['none', null, 'block']} ml="s4">
             {secondaryButton && <Button {...secondaryButton}>{secondaryButton.text}</Button>}
@@ -73,9 +73,13 @@ const PageHeader: React.FC<Props> = ({ heading, breadcrumbs, primaryButton, seco
           )}
         </Box>
 
-        <Grid display={['grid', null, 'none']} gridTemplateColumns="1fr 1fr" gridGap="s4">
+        <Grid display={['grid', null, 'none']} gridAutoColumns="1fr" gridGap="s4">
           {secondaryButton && <Button {...secondaryButton}></Button>}
-          {primaryButton && <Button variant="brand" {...primaryButton} />}
+          {primaryButton && (
+            <Button variant="brand" {...primaryButton}>
+              {!secondaryButton ? primaryButton.text : ''}
+            </Button>
+          )}
         </Grid>
       </Flex>
     </Box>

@@ -1,10 +1,12 @@
 import styled from 'styled-components';
 
+import { Box } from '../base';
+
 type ContentProps = {
   isPadded?: boolean;
 };
 
-export const Wrapper = styled.div`
+export const Wrapper = styled(Box)`
   display: flex;
   flex-direction: column;
   border-radius: ${({ theme }) => theme.radii.medium};
