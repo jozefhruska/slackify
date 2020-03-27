@@ -41,19 +41,19 @@ export const signIn: FieldResolver<'Mutation', 'signIn'> = async (_, { code }, {
     throw new Error('Slack authorization failed (invalid auth response data).');
   }
 
-  /* Check if user with this ID already exists */
-  const existingUser = await prisma.user.findOne({
-    where: {
-      id: user.id,
-    },
-  });
-
   if (!slackAuthResponse.ok) {
     throw new Error('Slack authorization failed (response not ok).');
   }
 
-  let resultUser;
   try {
+    /* Check if user with this ID already exists */
+    const existingUser = await prisma.user.findOne({
+      where: {
+        id: user.id,
+      },
+    });
+
+    let resultUser;
     if (existingUser) {
       resultUser = await prisma.user.update({
         where: {
@@ -93,26 +93,27 @@ export const signIn: FieldResolver<'Mutation', 'signIn'> = async (_, { code }, {
         },
       });
     }
+
+    const authToken = jwt.sign(
+      {
+        data: {
+          id: user.id,
+          name: user.name,
+          email: user.email,
+          accessToken,
+        },
+        exp: Math.floor(Date.now() / 1000) + 60 * 60 * 24 * 30,
+      },
+      SIGNING_SECRET
+    );
+
+    return {
+      authToken,
+      user: resultUser,
+    };
   } catch (error) {
     console.error(error);
-    throw error;
   }
 
-  const authToken = jwt.sign(
-    {
-      data: {
-        id: user.id,
-        name: user.name,
-        email: user.email,
-        accessToken,
-      },
-      exp: Math.floor(Date.now() / 1000) + 60 * 60 * 24 * 30,
-    },
-    SIGNING_SECRET
-  );
-
-  return {
-    authToken,
-    user: resultUser,
-  };
+  return null;
 };

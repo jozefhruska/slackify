@@ -20,12 +20,654 @@ declare global {
 }
 
 export interface NexusGenInputs {
+  ArticleComponentDataCreateOneWithoutComponentsInput: { // input type
+    connect?: NexusGenInputs['ArticleComponentDataWhereUniqueInput'] | null; // ArticleComponentDataWhereUniqueInput
+    create?: NexusGenInputs['ArticleComponentDataCreateWithoutComponentsInput'] | null; // ArticleComponentDataCreateWithoutComponentsInput
+  }
+  ArticleComponentDataCreateWithoutComponentsInput: { // input type
+    content: string; // String!
+    id?: string | null; // String
+    lead?: string | null; // String
+    title: string; // String!
+  }
+  ArticleComponentDataUpdateOneWithoutComponentsInput: { // input type
+    connect?: NexusGenInputs['ArticleComponentDataWhereUniqueInput'] | null; // ArticleComponentDataWhereUniqueInput
+    create?: NexusGenInputs['ArticleComponentDataCreateWithoutComponentsInput'] | null; // ArticleComponentDataCreateWithoutComponentsInput
+    delete?: boolean | null; // Boolean
+    disconnect?: boolean | null; // Boolean
+    update?: NexusGenInputs['ArticleComponentDataUpdateWithoutComponentsDataInput'] | null; // ArticleComponentDataUpdateWithoutComponentsDataInput
+    upsert?: NexusGenInputs['ArticleComponentDataUpsertWithoutComponentsInput'] | null; // ArticleComponentDataUpsertWithoutComponentsInput
+  }
+  ArticleComponentDataUpdateWithoutComponentsDataInput: { // input type
+    content?: string | null; // String
+    id?: string | null; // String
+    lead?: string | null; // String
+    title?: string | null; // String
+  }
+  ArticleComponentDataUpsertWithoutComponentsInput: { // input type
+    create: NexusGenInputs['ArticleComponentDataCreateWithoutComponentsInput']; // ArticleComponentDataCreateWithoutComponentsInput!
+    update: NexusGenInputs['ArticleComponentDataUpdateWithoutComponentsDataInput']; // ArticleComponentDataUpdateWithoutComponentsDataInput!
+  }
+  ArticleComponentDataWhereInput: { // input type
+    AND?: NexusGenInputs['ArticleComponentDataWhereInput'][] | null; // [ArticleComponentDataWhereInput!]
+    components?: NexusGenInputs['ComponentFilter'] | null; // ComponentFilter
+    content?: NexusGenInputs['StringFilter'] | null; // StringFilter
+    id?: NexusGenInputs['StringFilter'] | null; // StringFilter
+    lead?: NexusGenInputs['NullableStringFilter'] | null; // NullableStringFilter
+    NOT?: NexusGenInputs['ArticleComponentDataWhereInput'][] | null; // [ArticleComponentDataWhereInput!]
+    OR?: NexusGenInputs['ArticleComponentDataWhereInput'][] | null; // [ArticleComponentDataWhereInput!]
+    title?: NexusGenInputs['StringFilter'] | null; // StringFilter
+  }
+  ArticleComponentDataWhereUniqueInput: { // input type
+    id?: string | null; // String
+  }
+  BooleanFilter: { // input type
+    equals?: boolean | null; // Boolean
+    not?: boolean | null; // Boolean
+  }
+  CollectionCreateManyWithoutTeamInput: { // input type
+    connect?: NexusGenInputs['CollectionWhereUniqueInput'][] | null; // [CollectionWhereUniqueInput!]
+    create?: NexusGenInputs['CollectionCreateWithoutTeamInput'][] | null; // [CollectionCreateWithoutTeamInput!]
+  }
+  CollectionCreateOneWithoutComponentsInput: { // input type
+    connect?: NexusGenInputs['CollectionWhereUniqueInput'] | null; // CollectionWhereUniqueInput
+    create?: NexusGenInputs['CollectionCreateWithoutComponentsInput'] | null; // CollectionCreateWithoutComponentsInput
+  }
+  CollectionCreateWithoutComponentsInput: { // input type
+    description?: string | null; // String
+    id?: string | null; // String
+    name: string; // String!
+    published?: boolean | null; // Boolean
+    team: NexusGenInputs['TeamCreateOneWithoutCollectionsInput']; // TeamCreateOneWithoutCollectionsInput!
+    type: NexusGenEnums['ComponentType']; // ComponentType!
+    updatedAt?: any | null; // DateTime
+  }
+  CollectionCreateWithoutTeamInput: { // input type
+    components?: NexusGenInputs['ComponentCreateManyWithoutCollectionInput'] | null; // ComponentCreateManyWithoutCollectionInput
+    description?: string | null; // String
+    id?: string | null; // String
+    name: string; // String!
+    published?: boolean | null; // Boolean
+    type: NexusGenEnums['ComponentType']; // ComponentType!
+    updatedAt?: any | null; // DateTime
+  }
+  CollectionFilter: { // input type
+    every?: NexusGenInputs['CollectionWhereInput'] | null; // CollectionWhereInput
+    none?: NexusGenInputs['CollectionWhereInput'] | null; // CollectionWhereInput
+    some?: NexusGenInputs['CollectionWhereInput'] | null; // CollectionWhereInput
+  }
+  CollectionScalarWhereInput: { // input type
+    AND?: NexusGenInputs['CollectionScalarWhereInput'][] | null; // [CollectionScalarWhereInput!]
+    components?: NexusGenInputs['ComponentFilter'] | null; // ComponentFilter
+    description?: NexusGenInputs['NullableStringFilter'] | null; // NullableStringFilter
+    id?: NexusGenInputs['StringFilter'] | null; // StringFilter
+    name?: NexusGenInputs['StringFilter'] | null; // StringFilter
+    NOT?: NexusGenInputs['CollectionScalarWhereInput'][] | null; // [CollectionScalarWhereInput!]
+    OR?: NexusGenInputs['CollectionScalarWhereInput'][] | null; // [CollectionScalarWhereInput!]
+    published?: NexusGenInputs['BooleanFilter'] | null; // BooleanFilter
+    type?: NexusGenEnums['ComponentType'] | null; // ComponentType
+    updatedAt?: NexusGenInputs['DateTimeFilter'] | null; // DateTimeFilter
+  }
+  CollectionUpdateInput: { // input type
+    components?: NexusGenInputs['ComponentUpdateManyWithoutCollectionInput'] | null; // ComponentUpdateManyWithoutCollectionInput
+    description?: string | null; // String
+    id?: string | null; // String
+    name?: string | null; // String
+    published?: boolean | null; // Boolean
+    team?: NexusGenInputs['TeamUpdateOneRequiredWithoutCollectionsInput'] | null; // TeamUpdateOneRequiredWithoutCollectionsInput
+    type?: NexusGenEnums['ComponentType'] | null; // ComponentType
+    updatedAt?: any | null; // DateTime
+  }
+  CollectionUpdateManyDataInput: { // input type
+    description?: string | null; // String
+    id?: string | null; // String
+    name?: string | null; // String
+    published?: boolean | null; // Boolean
+    type?: NexusGenEnums['ComponentType'] | null; // ComponentType
+    updatedAt?: any | null; // DateTime
+  }
+  CollectionUpdateManyWithWhereNestedInput: { // input type
+    data: NexusGenInputs['CollectionUpdateManyDataInput']; // CollectionUpdateManyDataInput!
+    where: NexusGenInputs['CollectionScalarWhereInput']; // CollectionScalarWhereInput!
+  }
+  CollectionUpdateManyWithoutTeamInput: { // input type
+    connect?: NexusGenInputs['CollectionWhereUniqueInput'][] | null; // [CollectionWhereUniqueInput!]
+    create?: NexusGenInputs['CollectionCreateWithoutTeamInput'][] | null; // [CollectionCreateWithoutTeamInput!]
+    delete?: NexusGenInputs['CollectionWhereUniqueInput'][] | null; // [CollectionWhereUniqueInput!]
+    deleteMany?: NexusGenInputs['CollectionScalarWhereInput'][] | null; // [CollectionScalarWhereInput!]
+    disconnect?: NexusGenInputs['CollectionWhereUniqueInput'][] | null; // [CollectionWhereUniqueInput!]
+    set?: NexusGenInputs['CollectionWhereUniqueInput'][] | null; // [CollectionWhereUniqueInput!]
+    update?: NexusGenInputs['CollectionUpdateWithWhereUniqueWithoutTeamInput'][] | null; // [CollectionUpdateWithWhereUniqueWithoutTeamInput!]
+    updateMany?: NexusGenInputs['CollectionUpdateManyWithWhereNestedInput'][] | null; // [CollectionUpdateManyWithWhereNestedInput!]
+    upsert?: NexusGenInputs['CollectionUpsertWithWhereUniqueWithoutTeamInput'][] | null; // [CollectionUpsertWithWhereUniqueWithoutTeamInput!]
+  }
+  CollectionUpdateOneRequiredWithoutComponentsInput: { // input type
+    connect?: NexusGenInputs['CollectionWhereUniqueInput'] | null; // CollectionWhereUniqueInput
+    create?: NexusGenInputs['CollectionCreateWithoutComponentsInput'] | null; // CollectionCreateWithoutComponentsInput
+    update?: NexusGenInputs['CollectionUpdateWithoutComponentsDataInput'] | null; // CollectionUpdateWithoutComponentsDataInput
+    upsert?: NexusGenInputs['CollectionUpsertWithoutComponentsInput'] | null; // CollectionUpsertWithoutComponentsInput
+  }
+  CollectionUpdateWithWhereUniqueWithoutTeamInput: { // input type
+    data: NexusGenInputs['CollectionUpdateWithoutTeamDataInput']; // CollectionUpdateWithoutTeamDataInput!
+    where: NexusGenInputs['CollectionWhereUniqueInput']; // CollectionWhereUniqueInput!
+  }
+  CollectionUpdateWithoutComponentsDataInput: { // input type
+    description?: string | null; // String
+    id?: string | null; // String
+    name?: string | null; // String
+    published?: boolean | null; // Boolean
+    team?: NexusGenInputs['TeamUpdateOneRequiredWithoutCollectionsInput'] | null; // TeamUpdateOneRequiredWithoutCollectionsInput
+    type?: NexusGenEnums['ComponentType'] | null; // ComponentType
+    updatedAt?: any | null; // DateTime
+  }
+  CollectionUpdateWithoutTeamDataInput: { // input type
+    components?: NexusGenInputs['ComponentUpdateManyWithoutCollectionInput'] | null; // ComponentUpdateManyWithoutCollectionInput
+    description?: string | null; // String
+    id?: string | null; // String
+    name?: string | null; // String
+    published?: boolean | null; // Boolean
+    type?: NexusGenEnums['ComponentType'] | null; // ComponentType
+    updatedAt?: any | null; // DateTime
+  }
+  CollectionUpsertWithWhereUniqueWithoutTeamInput: { // input type
+    create: NexusGenInputs['CollectionCreateWithoutTeamInput']; // CollectionCreateWithoutTeamInput!
+    update: NexusGenInputs['CollectionUpdateWithoutTeamDataInput']; // CollectionUpdateWithoutTeamDataInput!
+    where: NexusGenInputs['CollectionWhereUniqueInput']; // CollectionWhereUniqueInput!
+  }
+  CollectionUpsertWithoutComponentsInput: { // input type
+    create: NexusGenInputs['CollectionCreateWithoutComponentsInput']; // CollectionCreateWithoutComponentsInput!
+    update: NexusGenInputs['CollectionUpdateWithoutComponentsDataInput']; // CollectionUpdateWithoutComponentsDataInput!
+  }
+  CollectionWhereInput: { // input type
+    AND?: NexusGenInputs['CollectionWhereInput'][] | null; // [CollectionWhereInput!]
+    components?: NexusGenInputs['ComponentFilter'] | null; // ComponentFilter
+    description?: NexusGenInputs['NullableStringFilter'] | null; // NullableStringFilter
+    id?: NexusGenInputs['StringFilter'] | null; // StringFilter
+    name?: NexusGenInputs['StringFilter'] | null; // StringFilter
+    NOT?: NexusGenInputs['CollectionWhereInput'][] | null; // [CollectionWhereInput!]
+    OR?: NexusGenInputs['CollectionWhereInput'][] | null; // [CollectionWhereInput!]
+    published?: NexusGenInputs['BooleanFilter'] | null; // BooleanFilter
+    team?: NexusGenInputs['TeamWhereInput'] | null; // TeamWhereInput
+    type?: NexusGenEnums['ComponentType'] | null; // ComponentType
+    updatedAt?: NexusGenInputs['DateTimeFilter'] | null; // DateTimeFilter
+  }
+  CollectionWhereUniqueInput: { // input type
+    id?: string | null; // String
+    name_team?: NexusGenInputs['NameTeamCompoundUniqueInput'] | null; // NameTeamCompoundUniqueInput
+  }
+  ComponentCreateManyWithoutAuthorInput: { // input type
+    connect?: NexusGenInputs['ComponentWhereUniqueInput'][] | null; // [ComponentWhereUniqueInput!]
+    create?: NexusGenInputs['ComponentCreateWithoutAuthorInput'][] | null; // [ComponentCreateWithoutAuthorInput!]
+  }
+  ComponentCreateManyWithoutCollectionInput: { // input type
+    connect?: NexusGenInputs['ComponentWhereUniqueInput'][] | null; // [ComponentWhereUniqueInput!]
+    create?: NexusGenInputs['ComponentCreateWithoutCollectionInput'][] | null; // [ComponentCreateWithoutCollectionInput!]
+  }
+  ComponentCreateWithoutAuthorInput: { // input type
+    articleData?: NexusGenInputs['ArticleComponentDataCreateOneWithoutComponentsInput'] | null; // ArticleComponentDataCreateOneWithoutComponentsInput
+    collection: NexusGenInputs['CollectionCreateOneWithoutComponentsInput']; // CollectionCreateOneWithoutComponentsInput!
+    createdAt?: any | null; // DateTime
+    id?: string | null; // String
+    linkData?: NexusGenInputs['LinkComponentDataCreateOneWithoutComponentsInput'] | null; // LinkComponentDataCreateOneWithoutComponentsInput
+    plainTextData?: NexusGenInputs['PlainTextComponentDataCreateOneWithoutComponentsInput'] | null; // PlainTextComponentDataCreateOneWithoutComponentsInput
+    published?: boolean | null; // Boolean
+    type?: NexusGenEnums['ComponentType'] | null; // ComponentType
+    updatedAt?: any | null; // DateTime
+  }
+  ComponentCreateWithoutCollectionInput: { // input type
+    articleData?: NexusGenInputs['ArticleComponentDataCreateOneWithoutComponentsInput'] | null; // ArticleComponentDataCreateOneWithoutComponentsInput
+    author: NexusGenInputs['UserCreateOneWithoutComponentsInput']; // UserCreateOneWithoutComponentsInput!
+    createdAt?: any | null; // DateTime
+    id?: string | null; // String
+    linkData?: NexusGenInputs['LinkComponentDataCreateOneWithoutComponentsInput'] | null; // LinkComponentDataCreateOneWithoutComponentsInput
+    plainTextData?: NexusGenInputs['PlainTextComponentDataCreateOneWithoutComponentsInput'] | null; // PlainTextComponentDataCreateOneWithoutComponentsInput
+    published?: boolean | null; // Boolean
+    type?: NexusGenEnums['ComponentType'] | null; // ComponentType
+    updatedAt?: any | null; // DateTime
+  }
+  ComponentFilter: { // input type
+    every?: NexusGenInputs['ComponentWhereInput'] | null; // ComponentWhereInput
+    none?: NexusGenInputs['ComponentWhereInput'] | null; // ComponentWhereInput
+    some?: NexusGenInputs['ComponentWhereInput'] | null; // ComponentWhereInput
+  }
+  ComponentScalarWhereInput: { // input type
+    AND?: NexusGenInputs['ComponentScalarWhereInput'][] | null; // [ComponentScalarWhereInput!]
+    createdAt?: NexusGenInputs['DateTimeFilter'] | null; // DateTimeFilter
+    id?: NexusGenInputs['StringFilter'] | null; // StringFilter
+    NOT?: NexusGenInputs['ComponentScalarWhereInput'][] | null; // [ComponentScalarWhereInput!]
+    OR?: NexusGenInputs['ComponentScalarWhereInput'][] | null; // [ComponentScalarWhereInput!]
+    published?: NexusGenInputs['BooleanFilter'] | null; // BooleanFilter
+    type?: NexusGenEnums['ComponentType'] | null; // ComponentType
+    updatedAt?: NexusGenInputs['DateTimeFilter'] | null; // DateTimeFilter
+  }
+  ComponentUpdateManyDataInput: { // input type
+    createdAt?: any | null; // DateTime
+    id?: string | null; // String
+    published?: boolean | null; // Boolean
+    type?: NexusGenEnums['ComponentType'] | null; // ComponentType
+    updatedAt?: any | null; // DateTime
+  }
+  ComponentUpdateManyWithWhereNestedInput: { // input type
+    data: NexusGenInputs['ComponentUpdateManyDataInput']; // ComponentUpdateManyDataInput!
+    where: NexusGenInputs['ComponentScalarWhereInput']; // ComponentScalarWhereInput!
+  }
+  ComponentUpdateManyWithoutAuthorInput: { // input type
+    connect?: NexusGenInputs['ComponentWhereUniqueInput'][] | null; // [ComponentWhereUniqueInput!]
+    create?: NexusGenInputs['ComponentCreateWithoutAuthorInput'][] | null; // [ComponentCreateWithoutAuthorInput!]
+    delete?: NexusGenInputs['ComponentWhereUniqueInput'][] | null; // [ComponentWhereUniqueInput!]
+    deleteMany?: NexusGenInputs['ComponentScalarWhereInput'][] | null; // [ComponentScalarWhereInput!]
+    disconnect?: NexusGenInputs['ComponentWhereUniqueInput'][] | null; // [ComponentWhereUniqueInput!]
+    set?: NexusGenInputs['ComponentWhereUniqueInput'][] | null; // [ComponentWhereUniqueInput!]
+    update?: NexusGenInputs['ComponentUpdateWithWhereUniqueWithoutAuthorInput'][] | null; // [ComponentUpdateWithWhereUniqueWithoutAuthorInput!]
+    updateMany?: NexusGenInputs['ComponentUpdateManyWithWhereNestedInput'][] | null; // [ComponentUpdateManyWithWhereNestedInput!]
+    upsert?: NexusGenInputs['ComponentUpsertWithWhereUniqueWithoutAuthorInput'][] | null; // [ComponentUpsertWithWhereUniqueWithoutAuthorInput!]
+  }
+  ComponentUpdateManyWithoutCollectionInput: { // input type
+    connect?: NexusGenInputs['ComponentWhereUniqueInput'][] | null; // [ComponentWhereUniqueInput!]
+    create?: NexusGenInputs['ComponentCreateWithoutCollectionInput'][] | null; // [ComponentCreateWithoutCollectionInput!]
+    delete?: NexusGenInputs['ComponentWhereUniqueInput'][] | null; // [ComponentWhereUniqueInput!]
+    deleteMany?: NexusGenInputs['ComponentScalarWhereInput'][] | null; // [ComponentScalarWhereInput!]
+    disconnect?: NexusGenInputs['ComponentWhereUniqueInput'][] | null; // [ComponentWhereUniqueInput!]
+    set?: NexusGenInputs['ComponentWhereUniqueInput'][] | null; // [ComponentWhereUniqueInput!]
+    update?: NexusGenInputs['ComponentUpdateWithWhereUniqueWithoutCollectionInput'][] | null; // [ComponentUpdateWithWhereUniqueWithoutCollectionInput!]
+    updateMany?: NexusGenInputs['ComponentUpdateManyWithWhereNestedInput'][] | null; // [ComponentUpdateManyWithWhereNestedInput!]
+    upsert?: NexusGenInputs['ComponentUpsertWithWhereUniqueWithoutCollectionInput'][] | null; // [ComponentUpsertWithWhereUniqueWithoutCollectionInput!]
+  }
+  ComponentUpdateWithWhereUniqueWithoutAuthorInput: { // input type
+    data: NexusGenInputs['ComponentUpdateWithoutAuthorDataInput']; // ComponentUpdateWithoutAuthorDataInput!
+    where: NexusGenInputs['ComponentWhereUniqueInput']; // ComponentWhereUniqueInput!
+  }
+  ComponentUpdateWithWhereUniqueWithoutCollectionInput: { // input type
+    data: NexusGenInputs['ComponentUpdateWithoutCollectionDataInput']; // ComponentUpdateWithoutCollectionDataInput!
+    where: NexusGenInputs['ComponentWhereUniqueInput']; // ComponentWhereUniqueInput!
+  }
+  ComponentUpdateWithoutAuthorDataInput: { // input type
+    articleData?: NexusGenInputs['ArticleComponentDataUpdateOneWithoutComponentsInput'] | null; // ArticleComponentDataUpdateOneWithoutComponentsInput
+    collection?: NexusGenInputs['CollectionUpdateOneRequiredWithoutComponentsInput'] | null; // CollectionUpdateOneRequiredWithoutComponentsInput
+    createdAt?: any | null; // DateTime
+    id?: string | null; // String
+    linkData?: NexusGenInputs['LinkComponentDataUpdateOneWithoutComponentsInput'] | null; // LinkComponentDataUpdateOneWithoutComponentsInput
+    plainTextData?: NexusGenInputs['PlainTextComponentDataUpdateOneWithoutComponentsInput'] | null; // PlainTextComponentDataUpdateOneWithoutComponentsInput
+    published?: boolean | null; // Boolean
+    type?: NexusGenEnums['ComponentType'] | null; // ComponentType
+    updatedAt?: any | null; // DateTime
+  }
+  ComponentUpdateWithoutCollectionDataInput: { // input type
+    articleData?: NexusGenInputs['ArticleComponentDataUpdateOneWithoutComponentsInput'] | null; // ArticleComponentDataUpdateOneWithoutComponentsInput
+    author?: NexusGenInputs['UserUpdateOneRequiredWithoutComponentsInput'] | null; // UserUpdateOneRequiredWithoutComponentsInput
+    createdAt?: any | null; // DateTime
+    id?: string | null; // String
+    linkData?: NexusGenInputs['LinkComponentDataUpdateOneWithoutComponentsInput'] | null; // LinkComponentDataUpdateOneWithoutComponentsInput
+    plainTextData?: NexusGenInputs['PlainTextComponentDataUpdateOneWithoutComponentsInput'] | null; // PlainTextComponentDataUpdateOneWithoutComponentsInput
+    published?: boolean | null; // Boolean
+    type?: NexusGenEnums['ComponentType'] | null; // ComponentType
+    updatedAt?: any | null; // DateTime
+  }
+  ComponentUpsertWithWhereUniqueWithoutAuthorInput: { // input type
+    create: NexusGenInputs['ComponentCreateWithoutAuthorInput']; // ComponentCreateWithoutAuthorInput!
+    update: NexusGenInputs['ComponentUpdateWithoutAuthorDataInput']; // ComponentUpdateWithoutAuthorDataInput!
+    where: NexusGenInputs['ComponentWhereUniqueInput']; // ComponentWhereUniqueInput!
+  }
+  ComponentUpsertWithWhereUniqueWithoutCollectionInput: { // input type
+    create: NexusGenInputs['ComponentCreateWithoutCollectionInput']; // ComponentCreateWithoutCollectionInput!
+    update: NexusGenInputs['ComponentUpdateWithoutCollectionDataInput']; // ComponentUpdateWithoutCollectionDataInput!
+    where: NexusGenInputs['ComponentWhereUniqueInput']; // ComponentWhereUniqueInput!
+  }
+  ComponentWhereInput: { // input type
+    AND?: NexusGenInputs['ComponentWhereInput'][] | null; // [ComponentWhereInput!]
+    articleData?: NexusGenInputs['ArticleComponentDataWhereInput'] | null; // ArticleComponentDataWhereInput
+    author?: NexusGenInputs['UserWhereInput'] | null; // UserWhereInput
+    collection?: NexusGenInputs['CollectionWhereInput'] | null; // CollectionWhereInput
+    createdAt?: NexusGenInputs['DateTimeFilter'] | null; // DateTimeFilter
+    id?: NexusGenInputs['StringFilter'] | null; // StringFilter
+    linkData?: NexusGenInputs['LinkComponentDataWhereInput'] | null; // LinkComponentDataWhereInput
+    NOT?: NexusGenInputs['ComponentWhereInput'][] | null; // [ComponentWhereInput!]
+    OR?: NexusGenInputs['ComponentWhereInput'][] | null; // [ComponentWhereInput!]
+    plainTextData?: NexusGenInputs['PlainTextComponentDataWhereInput'] | null; // PlainTextComponentDataWhereInput
+    published?: NexusGenInputs['BooleanFilter'] | null; // BooleanFilter
+    type?: NexusGenEnums['ComponentType'] | null; // ComponentType
+    updatedAt?: NexusGenInputs['DateTimeFilter'] | null; // DateTimeFilter
+  }
   ComponentWhereUniqueInput: { // input type
     id?: string | null; // String
+  }
+  DateTimeFilter: { // input type
+    equals?: any | null; // DateTime
+    gt?: any | null; // DateTime
+    gte?: any | null; // DateTime
+    in?: any[] | null; // [DateTime!]
+    lt?: any | null; // DateTime
+    lte?: any | null; // DateTime
+    not?: any | null; // DateTime
+    notIn?: any[] | null; // [DateTime!]
+  }
+  LinkComponentDataCreateOneWithoutComponentsInput: { // input type
+    connect?: NexusGenInputs['LinkComponentDataWhereUniqueInput'] | null; // LinkComponentDataWhereUniqueInput
+    create?: NexusGenInputs['LinkComponentDataCreateWithoutComponentsInput'] | null; // LinkComponentDataCreateWithoutComponentsInput
+  }
+  LinkComponentDataCreateWithoutComponentsInput: { // input type
+    id?: string | null; // String
+    text?: string | null; // String
+    url: string; // String!
+  }
+  LinkComponentDataUpdateOneWithoutComponentsInput: { // input type
+    connect?: NexusGenInputs['LinkComponentDataWhereUniqueInput'] | null; // LinkComponentDataWhereUniqueInput
+    create?: NexusGenInputs['LinkComponentDataCreateWithoutComponentsInput'] | null; // LinkComponentDataCreateWithoutComponentsInput
+    delete?: boolean | null; // Boolean
+    disconnect?: boolean | null; // Boolean
+    update?: NexusGenInputs['LinkComponentDataUpdateWithoutComponentsDataInput'] | null; // LinkComponentDataUpdateWithoutComponentsDataInput
+    upsert?: NexusGenInputs['LinkComponentDataUpsertWithoutComponentsInput'] | null; // LinkComponentDataUpsertWithoutComponentsInput
+  }
+  LinkComponentDataUpdateWithoutComponentsDataInput: { // input type
+    id?: string | null; // String
+    text?: string | null; // String
+    url?: string | null; // String
+  }
+  LinkComponentDataUpsertWithoutComponentsInput: { // input type
+    create: NexusGenInputs['LinkComponentDataCreateWithoutComponentsInput']; // LinkComponentDataCreateWithoutComponentsInput!
+    update: NexusGenInputs['LinkComponentDataUpdateWithoutComponentsDataInput']; // LinkComponentDataUpdateWithoutComponentsDataInput!
+  }
+  LinkComponentDataWhereInput: { // input type
+    AND?: NexusGenInputs['LinkComponentDataWhereInput'][] | null; // [LinkComponentDataWhereInput!]
+    components?: NexusGenInputs['ComponentFilter'] | null; // ComponentFilter
+    id?: NexusGenInputs['StringFilter'] | null; // StringFilter
+    NOT?: NexusGenInputs['LinkComponentDataWhereInput'][] | null; // [LinkComponentDataWhereInput!]
+    OR?: NexusGenInputs['LinkComponentDataWhereInput'][] | null; // [LinkComponentDataWhereInput!]
+    text?: NexusGenInputs['NullableStringFilter'] | null; // NullableStringFilter
+    url?: NexusGenInputs['StringFilter'] | null; // StringFilter
+  }
+  LinkComponentDataWhereUniqueInput: { // input type
+    id?: string | null; // String
+  }
+  NameTeamCompoundUniqueInput: { // input type
+    name: string; // String!
+    team: string; // String!
+  }
+  NullableStringFilter: { // input type
+    contains?: string | null; // String
+    endsWith?: string | null; // String
+    equals?: string | null; // String
+    gt?: string | null; // String
+    gte?: string | null; // String
+    in?: string[] | null; // [String!]
+    lt?: string | null; // String
+    lte?: string | null; // String
+    not?: string | null; // String
+    notIn?: string[] | null; // [String!]
+    startsWith?: string | null; // String
   }
   PaginationInput: { // input type
     limit?: number | null; // Int
     skip?: number | null; // Int
+  }
+  PlainTextComponentDataCreateOneWithoutComponentsInput: { // input type
+    connect?: NexusGenInputs['PlainTextComponentDataWhereUniqueInput'] | null; // PlainTextComponentDataWhereUniqueInput
+    create?: NexusGenInputs['PlainTextComponentDataCreateWithoutComponentsInput'] | null; // PlainTextComponentDataCreateWithoutComponentsInput
+  }
+  PlainTextComponentDataCreateWithoutComponentsInput: { // input type
+    id?: string | null; // String
+    text: string; // String!
+  }
+  PlainTextComponentDataUpdateOneWithoutComponentsInput: { // input type
+    connect?: NexusGenInputs['PlainTextComponentDataWhereUniqueInput'] | null; // PlainTextComponentDataWhereUniqueInput
+    create?: NexusGenInputs['PlainTextComponentDataCreateWithoutComponentsInput'] | null; // PlainTextComponentDataCreateWithoutComponentsInput
+    delete?: boolean | null; // Boolean
+    disconnect?: boolean | null; // Boolean
+    update?: NexusGenInputs['PlainTextComponentDataUpdateWithoutComponentsDataInput'] | null; // PlainTextComponentDataUpdateWithoutComponentsDataInput
+    upsert?: NexusGenInputs['PlainTextComponentDataUpsertWithoutComponentsInput'] | null; // PlainTextComponentDataUpsertWithoutComponentsInput
+  }
+  PlainTextComponentDataUpdateWithoutComponentsDataInput: { // input type
+    id?: string | null; // String
+    text?: string | null; // String
+  }
+  PlainTextComponentDataUpsertWithoutComponentsInput: { // input type
+    create: NexusGenInputs['PlainTextComponentDataCreateWithoutComponentsInput']; // PlainTextComponentDataCreateWithoutComponentsInput!
+    update: NexusGenInputs['PlainTextComponentDataUpdateWithoutComponentsDataInput']; // PlainTextComponentDataUpdateWithoutComponentsDataInput!
+  }
+  PlainTextComponentDataWhereInput: { // input type
+    AND?: NexusGenInputs['PlainTextComponentDataWhereInput'][] | null; // [PlainTextComponentDataWhereInput!]
+    components?: NexusGenInputs['ComponentFilter'] | null; // ComponentFilter
+    id?: NexusGenInputs['StringFilter'] | null; // StringFilter
+    NOT?: NexusGenInputs['PlainTextComponentDataWhereInput'][] | null; // [PlainTextComponentDataWhereInput!]
+    OR?: NexusGenInputs['PlainTextComponentDataWhereInput'][] | null; // [PlainTextComponentDataWhereInput!]
+    text?: NexusGenInputs['StringFilter'] | null; // StringFilter
+  }
+  PlainTextComponentDataWhereUniqueInput: { // input type
+    id?: string | null; // String
+  }
+  StringFilter: { // input type
+    contains?: string | null; // String
+    endsWith?: string | null; // String
+    equals?: string | null; // String
+    gt?: string | null; // String
+    gte?: string | null; // String
+    in?: string[] | null; // [String!]
+    lt?: string | null; // String
+    lte?: string | null; // String
+    not?: string | null; // String
+    notIn?: string[] | null; // [String!]
+    startsWith?: string | null; // String
+  }
+  TeamCreateOneWithoutCollectionsInput: { // input type
+    connect?: NexusGenInputs['TeamWhereUniqueInput'] | null; // TeamWhereUniqueInput
+    create?: NexusGenInputs['TeamCreateWithoutCollectionsInput'] | null; // TeamCreateWithoutCollectionsInput
+  }
+  TeamCreateOneWithoutUsersInput: { // input type
+    connect?: NexusGenInputs['TeamWhereUniqueInput'] | null; // TeamWhereUniqueInput
+    create?: NexusGenInputs['TeamCreateWithoutUsersInput'] | null; // TeamCreateWithoutUsersInput
+  }
+  TeamCreateWithoutCollectionsInput: { // input type
+    accessToken: string; // String!
+    domain: string; // String!
+    id: string; // String!
+    name: string; // String!
+    users?: NexusGenInputs['UserCreateManyWithoutTeamInput'] | null; // UserCreateManyWithoutTeamInput
+  }
+  TeamCreateWithoutUsersInput: { // input type
+    accessToken: string; // String!
+    collections?: NexusGenInputs['CollectionCreateManyWithoutTeamInput'] | null; // CollectionCreateManyWithoutTeamInput
+    domain: string; // String!
+    id: string; // String!
+    name: string; // String!
+  }
+  TeamUpdateOneRequiredWithoutCollectionsInput: { // input type
+    connect?: NexusGenInputs['TeamWhereUniqueInput'] | null; // TeamWhereUniqueInput
+    create?: NexusGenInputs['TeamCreateWithoutCollectionsInput'] | null; // TeamCreateWithoutCollectionsInput
+    update?: NexusGenInputs['TeamUpdateWithoutCollectionsDataInput'] | null; // TeamUpdateWithoutCollectionsDataInput
+    upsert?: NexusGenInputs['TeamUpsertWithoutCollectionsInput'] | null; // TeamUpsertWithoutCollectionsInput
+  }
+  TeamUpdateOneRequiredWithoutUsersInput: { // input type
+    connect?: NexusGenInputs['TeamWhereUniqueInput'] | null; // TeamWhereUniqueInput
+    create?: NexusGenInputs['TeamCreateWithoutUsersInput'] | null; // TeamCreateWithoutUsersInput
+    update?: NexusGenInputs['TeamUpdateWithoutUsersDataInput'] | null; // TeamUpdateWithoutUsersDataInput
+    upsert?: NexusGenInputs['TeamUpsertWithoutUsersInput'] | null; // TeamUpsertWithoutUsersInput
+  }
+  TeamUpdateWithoutCollectionsDataInput: { // input type
+    accessToken?: string | null; // String
+    domain?: string | null; // String
+    id?: string | null; // String
+    name?: string | null; // String
+    users?: NexusGenInputs['UserUpdateManyWithoutTeamInput'] | null; // UserUpdateManyWithoutTeamInput
+  }
+  TeamUpdateWithoutUsersDataInput: { // input type
+    accessToken?: string | null; // String
+    collections?: NexusGenInputs['CollectionUpdateManyWithoutTeamInput'] | null; // CollectionUpdateManyWithoutTeamInput
+    domain?: string | null; // String
+    id?: string | null; // String
+    name?: string | null; // String
+  }
+  TeamUpsertWithoutCollectionsInput: { // input type
+    create: NexusGenInputs['TeamCreateWithoutCollectionsInput']; // TeamCreateWithoutCollectionsInput!
+    update: NexusGenInputs['TeamUpdateWithoutCollectionsDataInput']; // TeamUpdateWithoutCollectionsDataInput!
+  }
+  TeamUpsertWithoutUsersInput: { // input type
+    create: NexusGenInputs['TeamCreateWithoutUsersInput']; // TeamCreateWithoutUsersInput!
+    update: NexusGenInputs['TeamUpdateWithoutUsersDataInput']; // TeamUpdateWithoutUsersDataInput!
+  }
+  TeamWhereInput: { // input type
+    accessToken?: NexusGenInputs['StringFilter'] | null; // StringFilter
+    AND?: NexusGenInputs['TeamWhereInput'][] | null; // [TeamWhereInput!]
+    collections?: NexusGenInputs['CollectionFilter'] | null; // CollectionFilter
+    domain?: NexusGenInputs['StringFilter'] | null; // StringFilter
+    id?: NexusGenInputs['StringFilter'] | null; // StringFilter
+    name?: NexusGenInputs['StringFilter'] | null; // StringFilter
+    NOT?: NexusGenInputs['TeamWhereInput'][] | null; // [TeamWhereInput!]
+    OR?: NexusGenInputs['TeamWhereInput'][] | null; // [TeamWhereInput!]
+    users?: NexusGenInputs['UserFilter'] | null; // UserFilter
+  }
+  TeamWhereUniqueInput: { // input type
+    accessToken?: string | null; // String
+    domain?: string | null; // String
+    id?: string | null; // String
+  }
+  UserCreateManyWithoutTeamInput: { // input type
+    connect?: NexusGenInputs['UserWhereUniqueInput'][] | null; // [UserWhereUniqueInput!]
+    create?: NexusGenInputs['UserCreateWithoutTeamInput'][] | null; // [UserCreateWithoutTeamInput!]
+  }
+  UserCreateOneWithoutComponentsInput: { // input type
+    connect?: NexusGenInputs['UserWhereUniqueInput'] | null; // UserWhereUniqueInput
+    create?: NexusGenInputs['UserCreateWithoutComponentsInput'] | null; // UserCreateWithoutComponentsInput
+  }
+  UserCreateWithoutComponentsInput: { // input type
+    accessToken: string; // String!
+    email: string; // String!
+    id: string; // String!
+    image_192?: string | null; // String
+    image_24?: string | null; // String
+    image_32?: string | null; // String
+    image_48?: string | null; // String
+    image_512?: string | null; // String
+    image_72?: string | null; // String
+    name: string; // String!
+    team: NexusGenInputs['TeamCreateOneWithoutUsersInput']; // TeamCreateOneWithoutUsersInput!
+  }
+  UserCreateWithoutTeamInput: { // input type
+    accessToken: string; // String!
+    components?: NexusGenInputs['ComponentCreateManyWithoutAuthorInput'] | null; // ComponentCreateManyWithoutAuthorInput
+    email: string; // String!
+    id: string; // String!
+    image_192?: string | null; // String
+    image_24?: string | null; // String
+    image_32?: string | null; // String
+    image_48?: string | null; // String
+    image_512?: string | null; // String
+    image_72?: string | null; // String
+    name: string; // String!
+  }
+  UserFilter: { // input type
+    every?: NexusGenInputs['UserWhereInput'] | null; // UserWhereInput
+    none?: NexusGenInputs['UserWhereInput'] | null; // UserWhereInput
+    some?: NexusGenInputs['UserWhereInput'] | null; // UserWhereInput
+  }
+  UserScalarWhereInput: { // input type
+    accessToken?: NexusGenInputs['StringFilter'] | null; // StringFilter
+    AND?: NexusGenInputs['UserScalarWhereInput'][] | null; // [UserScalarWhereInput!]
+    components?: NexusGenInputs['ComponentFilter'] | null; // ComponentFilter
+    email?: NexusGenInputs['StringFilter'] | null; // StringFilter
+    id?: NexusGenInputs['StringFilter'] | null; // StringFilter
+    image_192?: NexusGenInputs['NullableStringFilter'] | null; // NullableStringFilter
+    image_24?: NexusGenInputs['NullableStringFilter'] | null; // NullableStringFilter
+    image_32?: NexusGenInputs['NullableStringFilter'] | null; // NullableStringFilter
+    image_48?: NexusGenInputs['NullableStringFilter'] | null; // NullableStringFilter
+    image_512?: NexusGenInputs['NullableStringFilter'] | null; // NullableStringFilter
+    image_72?: NexusGenInputs['NullableStringFilter'] | null; // NullableStringFilter
+    name?: NexusGenInputs['StringFilter'] | null; // StringFilter
+    NOT?: NexusGenInputs['UserScalarWhereInput'][] | null; // [UserScalarWhereInput!]
+    OR?: NexusGenInputs['UserScalarWhereInput'][] | null; // [UserScalarWhereInput!]
+  }
+  UserUpdateManyDataInput: { // input type
+    accessToken?: string | null; // String
+    email?: string | null; // String
+    id?: string | null; // String
+    image_192?: string | null; // String
+    image_24?: string | null; // String
+    image_32?: string | null; // String
+    image_48?: string | null; // String
+    image_512?: string | null; // String
+    image_72?: string | null; // String
+    name?: string | null; // String
+  }
+  UserUpdateManyWithWhereNestedInput: { // input type
+    data: NexusGenInputs['UserUpdateManyDataInput']; // UserUpdateManyDataInput!
+    where: NexusGenInputs['UserScalarWhereInput']; // UserScalarWhereInput!
+  }
+  UserUpdateManyWithoutTeamInput: { // input type
+    connect?: NexusGenInputs['UserWhereUniqueInput'][] | null; // [UserWhereUniqueInput!]
+    create?: NexusGenInputs['UserCreateWithoutTeamInput'][] | null; // [UserCreateWithoutTeamInput!]
+    delete?: NexusGenInputs['UserWhereUniqueInput'][] | null; // [UserWhereUniqueInput!]
+    deleteMany?: NexusGenInputs['UserScalarWhereInput'][] | null; // [UserScalarWhereInput!]
+    disconnect?: NexusGenInputs['UserWhereUniqueInput'][] | null; // [UserWhereUniqueInput!]
+    set?: NexusGenInputs['UserWhereUniqueInput'][] | null; // [UserWhereUniqueInput!]
+    update?: NexusGenInputs['UserUpdateWithWhereUniqueWithoutTeamInput'][] | null; // [UserUpdateWithWhereUniqueWithoutTeamInput!]
+    updateMany?: NexusGenInputs['UserUpdateManyWithWhereNestedInput'][] | null; // [UserUpdateManyWithWhereNestedInput!]
+    upsert?: NexusGenInputs['UserUpsertWithWhereUniqueWithoutTeamInput'][] | null; // [UserUpsertWithWhereUniqueWithoutTeamInput!]
+  }
+  UserUpdateOneRequiredWithoutComponentsInput: { // input type
+    connect?: NexusGenInputs['UserWhereUniqueInput'] | null; // UserWhereUniqueInput
+    create?: NexusGenInputs['UserCreateWithoutComponentsInput'] | null; // UserCreateWithoutComponentsInput
+    update?: NexusGenInputs['UserUpdateWithoutComponentsDataInput'] | null; // UserUpdateWithoutComponentsDataInput
+    upsert?: NexusGenInputs['UserUpsertWithoutComponentsInput'] | null; // UserUpsertWithoutComponentsInput
+  }
+  UserUpdateWithWhereUniqueWithoutTeamInput: { // input type
+    data: NexusGenInputs['UserUpdateWithoutTeamDataInput']; // UserUpdateWithoutTeamDataInput!
+    where: NexusGenInputs['UserWhereUniqueInput']; // UserWhereUniqueInput!
+  }
+  UserUpdateWithoutComponentsDataInput: { // input type
+    accessToken?: string | null; // String
+    email?: string | null; // String
+    id?: string | null; // String
+    image_192?: string | null; // String
+    image_24?: string | null; // String
+    image_32?: string | null; // String
+    image_48?: string | null; // String
+    image_512?: string | null; // String
+    image_72?: string | null; // String
+    name?: string | null; // String
+    team?: NexusGenInputs['TeamUpdateOneRequiredWithoutUsersInput'] | null; // TeamUpdateOneRequiredWithoutUsersInput
+  }
+  UserUpdateWithoutTeamDataInput: { // input type
+    accessToken?: string | null; // String
+    components?: NexusGenInputs['ComponentUpdateManyWithoutAuthorInput'] | null; // ComponentUpdateManyWithoutAuthorInput
+    email?: string | null; // String
+    id?: string | null; // String
+    image_192?: string | null; // String
+    image_24?: string | null; // String
+    image_32?: string | null; // String
+    image_48?: string | null; // String
+    image_512?: string | null; // String
+    image_72?: string | null; // String
+    name?: string | null; // String
+  }
+  UserUpsertWithWhereUniqueWithoutTeamInput: { // input type
+    create: NexusGenInputs['UserCreateWithoutTeamInput']; // UserCreateWithoutTeamInput!
+    update: NexusGenInputs['UserUpdateWithoutTeamDataInput']; // UserUpdateWithoutTeamDataInput!
+    where: NexusGenInputs['UserWhereUniqueInput']; // UserWhereUniqueInput!
+  }
+  UserUpsertWithoutComponentsInput: { // input type
+    create: NexusGenInputs['UserCreateWithoutComponentsInput']; // UserCreateWithoutComponentsInput!
+    update: NexusGenInputs['UserUpdateWithoutComponentsDataInput']; // UserUpdateWithoutComponentsDataInput!
+  }
+  UserWhereInput: { // input type
+    accessToken?: NexusGenInputs['StringFilter'] | null; // StringFilter
+    AND?: NexusGenInputs['UserWhereInput'][] | null; // [UserWhereInput!]
+    components?: NexusGenInputs['ComponentFilter'] | null; // ComponentFilter
+    email?: NexusGenInputs['StringFilter'] | null; // StringFilter
+    id?: NexusGenInputs['StringFilter'] | null; // StringFilter
+    image_192?: NexusGenInputs['NullableStringFilter'] | null; // NullableStringFilter
+    image_24?: NexusGenInputs['NullableStringFilter'] | null; // NullableStringFilter
+    image_32?: NexusGenInputs['NullableStringFilter'] | null; // NullableStringFilter
+    image_48?: NexusGenInputs['NullableStringFilter'] | null; // NullableStringFilter
+    image_512?: NexusGenInputs['NullableStringFilter'] | null; // NullableStringFilter
+    image_72?: NexusGenInputs['NullableStringFilter'] | null; // NullableStringFilter
+    name?: NexusGenInputs['StringFilter'] | null; // StringFilter
+    NOT?: NexusGenInputs['UserWhereInput'][] | null; // [UserWhereInput!]
+    OR?: NexusGenInputs['UserWhereInput'][] | null; // [UserWhereInput!]
+    team?: NexusGenInputs['TeamWhereInput'] | null; // TeamWhereInput
+  }
+  UserWhereUniqueInput: { // input type
+    accessToken?: string | null; // String
+    email?: string | null; // String
+    id?: string | null; // String
   }
 }
 
@@ -49,11 +691,102 @@ export interface NexusGenRootTypes {
   Float: number;
   Boolean: boolean;
   ID: string;
+  DateTime: any;
 }
 
 export interface NexusGenAllTypes extends NexusGenRootTypes {
+  ArticleComponentDataCreateOneWithoutComponentsInput: NexusGenInputs['ArticleComponentDataCreateOneWithoutComponentsInput'];
+  ArticleComponentDataCreateWithoutComponentsInput: NexusGenInputs['ArticleComponentDataCreateWithoutComponentsInput'];
+  ArticleComponentDataUpdateOneWithoutComponentsInput: NexusGenInputs['ArticleComponentDataUpdateOneWithoutComponentsInput'];
+  ArticleComponentDataUpdateWithoutComponentsDataInput: NexusGenInputs['ArticleComponentDataUpdateWithoutComponentsDataInput'];
+  ArticleComponentDataUpsertWithoutComponentsInput: NexusGenInputs['ArticleComponentDataUpsertWithoutComponentsInput'];
+  ArticleComponentDataWhereInput: NexusGenInputs['ArticleComponentDataWhereInput'];
+  ArticleComponentDataWhereUniqueInput: NexusGenInputs['ArticleComponentDataWhereUniqueInput'];
+  BooleanFilter: NexusGenInputs['BooleanFilter'];
+  CollectionCreateManyWithoutTeamInput: NexusGenInputs['CollectionCreateManyWithoutTeamInput'];
+  CollectionCreateOneWithoutComponentsInput: NexusGenInputs['CollectionCreateOneWithoutComponentsInput'];
+  CollectionCreateWithoutComponentsInput: NexusGenInputs['CollectionCreateWithoutComponentsInput'];
+  CollectionCreateWithoutTeamInput: NexusGenInputs['CollectionCreateWithoutTeamInput'];
+  CollectionFilter: NexusGenInputs['CollectionFilter'];
+  CollectionScalarWhereInput: NexusGenInputs['CollectionScalarWhereInput'];
+  CollectionUpdateInput: NexusGenInputs['CollectionUpdateInput'];
+  CollectionUpdateManyDataInput: NexusGenInputs['CollectionUpdateManyDataInput'];
+  CollectionUpdateManyWithWhereNestedInput: NexusGenInputs['CollectionUpdateManyWithWhereNestedInput'];
+  CollectionUpdateManyWithoutTeamInput: NexusGenInputs['CollectionUpdateManyWithoutTeamInput'];
+  CollectionUpdateOneRequiredWithoutComponentsInput: NexusGenInputs['CollectionUpdateOneRequiredWithoutComponentsInput'];
+  CollectionUpdateWithWhereUniqueWithoutTeamInput: NexusGenInputs['CollectionUpdateWithWhereUniqueWithoutTeamInput'];
+  CollectionUpdateWithoutComponentsDataInput: NexusGenInputs['CollectionUpdateWithoutComponentsDataInput'];
+  CollectionUpdateWithoutTeamDataInput: NexusGenInputs['CollectionUpdateWithoutTeamDataInput'];
+  CollectionUpsertWithWhereUniqueWithoutTeamInput: NexusGenInputs['CollectionUpsertWithWhereUniqueWithoutTeamInput'];
+  CollectionUpsertWithoutComponentsInput: NexusGenInputs['CollectionUpsertWithoutComponentsInput'];
+  CollectionWhereInput: NexusGenInputs['CollectionWhereInput'];
+  CollectionWhereUniqueInput: NexusGenInputs['CollectionWhereUniqueInput'];
+  ComponentCreateManyWithoutAuthorInput: NexusGenInputs['ComponentCreateManyWithoutAuthorInput'];
+  ComponentCreateManyWithoutCollectionInput: NexusGenInputs['ComponentCreateManyWithoutCollectionInput'];
+  ComponentCreateWithoutAuthorInput: NexusGenInputs['ComponentCreateWithoutAuthorInput'];
+  ComponentCreateWithoutCollectionInput: NexusGenInputs['ComponentCreateWithoutCollectionInput'];
+  ComponentFilter: NexusGenInputs['ComponentFilter'];
+  ComponentScalarWhereInput: NexusGenInputs['ComponentScalarWhereInput'];
+  ComponentUpdateManyDataInput: NexusGenInputs['ComponentUpdateManyDataInput'];
+  ComponentUpdateManyWithWhereNestedInput: NexusGenInputs['ComponentUpdateManyWithWhereNestedInput'];
+  ComponentUpdateManyWithoutAuthorInput: NexusGenInputs['ComponentUpdateManyWithoutAuthorInput'];
+  ComponentUpdateManyWithoutCollectionInput: NexusGenInputs['ComponentUpdateManyWithoutCollectionInput'];
+  ComponentUpdateWithWhereUniqueWithoutAuthorInput: NexusGenInputs['ComponentUpdateWithWhereUniqueWithoutAuthorInput'];
+  ComponentUpdateWithWhereUniqueWithoutCollectionInput: NexusGenInputs['ComponentUpdateWithWhereUniqueWithoutCollectionInput'];
+  ComponentUpdateWithoutAuthorDataInput: NexusGenInputs['ComponentUpdateWithoutAuthorDataInput'];
+  ComponentUpdateWithoutCollectionDataInput: NexusGenInputs['ComponentUpdateWithoutCollectionDataInput'];
+  ComponentUpsertWithWhereUniqueWithoutAuthorInput: NexusGenInputs['ComponentUpsertWithWhereUniqueWithoutAuthorInput'];
+  ComponentUpsertWithWhereUniqueWithoutCollectionInput: NexusGenInputs['ComponentUpsertWithWhereUniqueWithoutCollectionInput'];
+  ComponentWhereInput: NexusGenInputs['ComponentWhereInput'];
   ComponentWhereUniqueInput: NexusGenInputs['ComponentWhereUniqueInput'];
+  DateTimeFilter: NexusGenInputs['DateTimeFilter'];
+  LinkComponentDataCreateOneWithoutComponentsInput: NexusGenInputs['LinkComponentDataCreateOneWithoutComponentsInput'];
+  LinkComponentDataCreateWithoutComponentsInput: NexusGenInputs['LinkComponentDataCreateWithoutComponentsInput'];
+  LinkComponentDataUpdateOneWithoutComponentsInput: NexusGenInputs['LinkComponentDataUpdateOneWithoutComponentsInput'];
+  LinkComponentDataUpdateWithoutComponentsDataInput: NexusGenInputs['LinkComponentDataUpdateWithoutComponentsDataInput'];
+  LinkComponentDataUpsertWithoutComponentsInput: NexusGenInputs['LinkComponentDataUpsertWithoutComponentsInput'];
+  LinkComponentDataWhereInput: NexusGenInputs['LinkComponentDataWhereInput'];
+  LinkComponentDataWhereUniqueInput: NexusGenInputs['LinkComponentDataWhereUniqueInput'];
+  NameTeamCompoundUniqueInput: NexusGenInputs['NameTeamCompoundUniqueInput'];
+  NullableStringFilter: NexusGenInputs['NullableStringFilter'];
   PaginationInput: NexusGenInputs['PaginationInput'];
+  PlainTextComponentDataCreateOneWithoutComponentsInput: NexusGenInputs['PlainTextComponentDataCreateOneWithoutComponentsInput'];
+  PlainTextComponentDataCreateWithoutComponentsInput: NexusGenInputs['PlainTextComponentDataCreateWithoutComponentsInput'];
+  PlainTextComponentDataUpdateOneWithoutComponentsInput: NexusGenInputs['PlainTextComponentDataUpdateOneWithoutComponentsInput'];
+  PlainTextComponentDataUpdateWithoutComponentsDataInput: NexusGenInputs['PlainTextComponentDataUpdateWithoutComponentsDataInput'];
+  PlainTextComponentDataUpsertWithoutComponentsInput: NexusGenInputs['PlainTextComponentDataUpsertWithoutComponentsInput'];
+  PlainTextComponentDataWhereInput: NexusGenInputs['PlainTextComponentDataWhereInput'];
+  PlainTextComponentDataWhereUniqueInput: NexusGenInputs['PlainTextComponentDataWhereUniqueInput'];
+  StringFilter: NexusGenInputs['StringFilter'];
+  TeamCreateOneWithoutCollectionsInput: NexusGenInputs['TeamCreateOneWithoutCollectionsInput'];
+  TeamCreateOneWithoutUsersInput: NexusGenInputs['TeamCreateOneWithoutUsersInput'];
+  TeamCreateWithoutCollectionsInput: NexusGenInputs['TeamCreateWithoutCollectionsInput'];
+  TeamCreateWithoutUsersInput: NexusGenInputs['TeamCreateWithoutUsersInput'];
+  TeamUpdateOneRequiredWithoutCollectionsInput: NexusGenInputs['TeamUpdateOneRequiredWithoutCollectionsInput'];
+  TeamUpdateOneRequiredWithoutUsersInput: NexusGenInputs['TeamUpdateOneRequiredWithoutUsersInput'];
+  TeamUpdateWithoutCollectionsDataInput: NexusGenInputs['TeamUpdateWithoutCollectionsDataInput'];
+  TeamUpdateWithoutUsersDataInput: NexusGenInputs['TeamUpdateWithoutUsersDataInput'];
+  TeamUpsertWithoutCollectionsInput: NexusGenInputs['TeamUpsertWithoutCollectionsInput'];
+  TeamUpsertWithoutUsersInput: NexusGenInputs['TeamUpsertWithoutUsersInput'];
+  TeamWhereInput: NexusGenInputs['TeamWhereInput'];
+  TeamWhereUniqueInput: NexusGenInputs['TeamWhereUniqueInput'];
+  UserCreateManyWithoutTeamInput: NexusGenInputs['UserCreateManyWithoutTeamInput'];
+  UserCreateOneWithoutComponentsInput: NexusGenInputs['UserCreateOneWithoutComponentsInput'];
+  UserCreateWithoutComponentsInput: NexusGenInputs['UserCreateWithoutComponentsInput'];
+  UserCreateWithoutTeamInput: NexusGenInputs['UserCreateWithoutTeamInput'];
+  UserFilter: NexusGenInputs['UserFilter'];
+  UserScalarWhereInput: NexusGenInputs['UserScalarWhereInput'];
+  UserUpdateManyDataInput: NexusGenInputs['UserUpdateManyDataInput'];
+  UserUpdateManyWithWhereNestedInput: NexusGenInputs['UserUpdateManyWithWhereNestedInput'];
+  UserUpdateManyWithoutTeamInput: NexusGenInputs['UserUpdateManyWithoutTeamInput'];
+  UserUpdateOneRequiredWithoutComponentsInput: NexusGenInputs['UserUpdateOneRequiredWithoutComponentsInput'];
+  UserUpdateWithWhereUniqueWithoutTeamInput: NexusGenInputs['UserUpdateWithWhereUniqueWithoutTeamInput'];
+  UserUpdateWithoutComponentsDataInput: NexusGenInputs['UserUpdateWithoutComponentsDataInput'];
+  UserUpdateWithoutTeamDataInput: NexusGenInputs['UserUpdateWithoutTeamDataInput'];
+  UserUpsertWithWhereUniqueWithoutTeamInput: NexusGenInputs['UserUpsertWithWhereUniqueWithoutTeamInput'];
+  UserUpsertWithoutComponentsInput: NexusGenInputs['UserUpsertWithoutComponentsInput'];
+  UserWhereInput: NexusGenInputs['UserWhereInput'];
+  UserWhereUniqueInput: NexusGenInputs['UserWhereUniqueInput'];
   ComponentType: NexusGenEnums['ComponentType'];
 }
 
@@ -64,8 +797,10 @@ export interface NexusGenFieldTypes {
     description: string | null; // String
     id: string; // String!
     name: string; // String!
+    published: boolean; // Boolean!
     team: NexusGenRootTypes['Team']; // Team!
     type: NexusGenEnums['ComponentType']; // ComponentType!
+    updatedAt: any; // DateTime!
   }
   Component: { // field return type
     author: NexusGenRootTypes['User']; // User!
@@ -76,6 +811,7 @@ export interface NexusGenFieldTypes {
   Mutation: { // field return type
     deleteCollection: NexusGenRootTypes['Collection']; // Collection!
     signIn: NexusGenRootTypes['SignInOutput'] | null; // SignInOutput
+    updateOneCollection: NexusGenRootTypes['Collection'] | null; // Collection
   }
   Query: { // field return type
     getCollectionsListing: NexusGenRootTypes['Collection'][]; // [Collection!]!
@@ -123,6 +859,10 @@ export interface NexusGenArgTypes {
     signIn: { // args
       code: string; // String!
     }
+    updateOneCollection: { // args
+      data: NexusGenInputs['CollectionUpdateInput']; // CollectionUpdateInput!
+      where: NexusGenInputs['CollectionWhereUniqueInput']; // CollectionWhereUniqueInput!
+    }
   }
   Query: {
     getCollectionsListing: { // args
@@ -138,13 +878,13 @@ export interface NexusGenInheritedFields {}
 
 export type NexusGenObjectNames = "Collection" | "Component" | "Mutation" | "Query" | "SignInOutput" | "Team" | "User";
 
-export type NexusGenInputNames = "ComponentWhereUniqueInput" | "PaginationInput";
+export type NexusGenInputNames = "ArticleComponentDataCreateOneWithoutComponentsInput" | "ArticleComponentDataCreateWithoutComponentsInput" | "ArticleComponentDataUpdateOneWithoutComponentsInput" | "ArticleComponentDataUpdateWithoutComponentsDataInput" | "ArticleComponentDataUpsertWithoutComponentsInput" | "ArticleComponentDataWhereInput" | "ArticleComponentDataWhereUniqueInput" | "BooleanFilter" | "CollectionCreateManyWithoutTeamInput" | "CollectionCreateOneWithoutComponentsInput" | "CollectionCreateWithoutComponentsInput" | "CollectionCreateWithoutTeamInput" | "CollectionFilter" | "CollectionScalarWhereInput" | "CollectionUpdateInput" | "CollectionUpdateManyDataInput" | "CollectionUpdateManyWithWhereNestedInput" | "CollectionUpdateManyWithoutTeamInput" | "CollectionUpdateOneRequiredWithoutComponentsInput" | "CollectionUpdateWithWhereUniqueWithoutTeamInput" | "CollectionUpdateWithoutComponentsDataInput" | "CollectionUpdateWithoutTeamDataInput" | "CollectionUpsertWithWhereUniqueWithoutTeamInput" | "CollectionUpsertWithoutComponentsInput" | "CollectionWhereInput" | "CollectionWhereUniqueInput" | "ComponentCreateManyWithoutAuthorInput" | "ComponentCreateManyWithoutCollectionInput" | "ComponentCreateWithoutAuthorInput" | "ComponentCreateWithoutCollectionInput" | "ComponentFilter" | "ComponentScalarWhereInput" | "ComponentUpdateManyDataInput" | "ComponentUpdateManyWithWhereNestedInput" | "ComponentUpdateManyWithoutAuthorInput" | "ComponentUpdateManyWithoutCollectionInput" | "ComponentUpdateWithWhereUniqueWithoutAuthorInput" | "ComponentUpdateWithWhereUniqueWithoutCollectionInput" | "ComponentUpdateWithoutAuthorDataInput" | "ComponentUpdateWithoutCollectionDataInput" | "ComponentUpsertWithWhereUniqueWithoutAuthorInput" | "ComponentUpsertWithWhereUniqueWithoutCollectionInput" | "ComponentWhereInput" | "ComponentWhereUniqueInput" | "DateTimeFilter" | "LinkComponentDataCreateOneWithoutComponentsInput" | "LinkComponentDataCreateWithoutComponentsInput" | "LinkComponentDataUpdateOneWithoutComponentsInput" | "LinkComponentDataUpdateWithoutComponentsDataInput" | "LinkComponentDataUpsertWithoutComponentsInput" | "LinkComponentDataWhereInput" | "LinkComponentDataWhereUniqueInput" | "NameTeamCompoundUniqueInput" | "NullableStringFilter" | "PaginationInput" | "PlainTextComponentDataCreateOneWithoutComponentsInput" | "PlainTextComponentDataCreateWithoutComponentsInput" | "PlainTextComponentDataUpdateOneWithoutComponentsInput" | "PlainTextComponentDataUpdateWithoutComponentsDataInput" | "PlainTextComponentDataUpsertWithoutComponentsInput" | "PlainTextComponentDataWhereInput" | "PlainTextComponentDataWhereUniqueInput" | "StringFilter" | "TeamCreateOneWithoutCollectionsInput" | "TeamCreateOneWithoutUsersInput" | "TeamCreateWithoutCollectionsInput" | "TeamCreateWithoutUsersInput" | "TeamUpdateOneRequiredWithoutCollectionsInput" | "TeamUpdateOneRequiredWithoutUsersInput" | "TeamUpdateWithoutCollectionsDataInput" | "TeamUpdateWithoutUsersDataInput" | "TeamUpsertWithoutCollectionsInput" | "TeamUpsertWithoutUsersInput" | "TeamWhereInput" | "TeamWhereUniqueInput" | "UserCreateManyWithoutTeamInput" | "UserCreateOneWithoutComponentsInput" | "UserCreateWithoutComponentsInput" | "UserCreateWithoutTeamInput" | "UserFilter" | "UserScalarWhereInput" | "UserUpdateManyDataInput" | "UserUpdateManyWithWhereNestedInput" | "UserUpdateManyWithoutTeamInput" | "UserUpdateOneRequiredWithoutComponentsInput" | "UserUpdateWithWhereUniqueWithoutTeamInput" | "UserUpdateWithoutComponentsDataInput" | "UserUpdateWithoutTeamDataInput" | "UserUpsertWithWhereUniqueWithoutTeamInput" | "UserUpsertWithoutComponentsInput" | "UserWhereInput" | "UserWhereUniqueInput";
 
 export type NexusGenEnumNames = "ComponentType";
 
 export type NexusGenInterfaceNames = never;
 
-export type NexusGenScalarNames = "Boolean" | "Float" | "ID" | "Int" | "String";
+export type NexusGenScalarNames = "Boolean" | "DateTime" | "Float" | "ID" | "Int" | "String";
 
 export type NexusGenUnionNames = never;
 

@@ -1,7 +1,7 @@
 import { PrismaClient, ComponentType } from '@prisma/client';
 
 const generateProductType = (): ComponentType => {
-  const num = Math.floor(Math.random() * 2);
+  const num = Math.floor(Math.random() * 3);
 
   switch (num) {
     case 0: {
@@ -24,13 +24,14 @@ export default async (prisma: PrismaClient) => {
   console.log('Seeding collections ...');
 
   try {
-    for (let i = 0; i < 100; i++) {
+    for (let i = 0; i < 20; i++) {
       const type = generateProductType();
 
       await prisma.collection.create({
         data: {
           name: `Collection #${i} (${type})`,
           type,
+          published: Math.floor(Math.random() * 2) === 0 ? false : true,
           description: 'Description',
           team: {
             connect: {

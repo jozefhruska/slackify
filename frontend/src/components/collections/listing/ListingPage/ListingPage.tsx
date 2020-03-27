@@ -53,7 +53,7 @@ const ListingPage: React.FC = () => {
         });
       } catch (error) {
         setOutOfResults(true);
-        console.log(error);
+        console.error(error);
       }
     }
   }, [inView]);
@@ -81,13 +81,13 @@ const ListingPage: React.FC = () => {
             flexDirection="column"
             justifyContent="center"
             alignItems="center"
-            mt="s8"
+            mt="s10"
           >
             <ListingLoader />
             Loading more collections...
           </Flex>
         ) : (
-          <Flex justifyContent="center" mt="s8">
+          <Flex justifyContent="center" mt="s10">
             There are no more collections.
           </Flex>
         )}

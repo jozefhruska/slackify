@@ -50,7 +50,7 @@ const server = new ApolloServer({
           },
         });
       } catch (error) {
-        console.log(error);
+        console.error(error);
       }
     }
 

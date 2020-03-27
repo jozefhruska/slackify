@@ -3,7 +3,6 @@ import { View, Option } from '@slack/web-api';
 
 import { prisma } from '../prisma';
 import { BLOCK_DIVIDER, BLOCK_TEXT } from '../constants/views';
-import { AppHomeComponentPreview } from '../types';
 import { Component } from '@prisma/client';
 
 /**

@@ -6,8 +6,10 @@ export const GET_COLLECTIONS_LISTING = gql`
       id
       name
       type
+      published
       description
       componentsCount
+      updatedAt
     }
   }
 `;

@@ -52,11 +52,9 @@ const RedirectPage: NextPage = () => {
           },
         });
 
-        console.log(apolloClient.cache.extract());
-
         push('/');
       } catch (error) {
-        console.log(error);
+        console.error(error);
       }
     })();
   }, []);

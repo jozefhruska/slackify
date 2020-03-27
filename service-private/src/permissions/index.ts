@@ -1,4 +1,4 @@
-import { shield } from 'graphql-shield';
+import { shield, not } from 'graphql-shield';
 
 import { Context } from '..';
 import { isAuthenticated } from './rules';
@@ -8,6 +8,8 @@ export const permissions = shield<unknown, Context>({
     getCollectionsListing: isAuthenticated,
   },
   Mutation: {
+    signIn: not(isAuthenticated, 'Request is available to non-authenticated users.'),
     deleteCollection: isAuthenticated,
+    updateOneCollection: isAuthenticated,
   },
 });

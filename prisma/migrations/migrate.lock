@@ -13,3 +13,4 @@
 20200320190327-add-missing-url-field-to-link-data-model
 20200320201009-make-article-lead-optional
 20200321131604-specify-relations-with-component-data
+20200327122650-add-update-and-published-flags-to-collection-model

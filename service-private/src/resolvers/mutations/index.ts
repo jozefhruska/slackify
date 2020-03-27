@@ -30,5 +30,7 @@ export const Mutation = objectType({
       },
       resolve: deleteCollection,
     });
+
+    t.crud.updateOneCollection();
   },
 });
