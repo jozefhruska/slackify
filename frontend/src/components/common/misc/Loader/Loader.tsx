@@ -14,7 +14,7 @@ const Loader: React.FunctionComponent = () => {
 /* <ButtonLoader />
 ============================================================================= */
 export const ButtonLoader: React.FunctionComponent = () => {
-  return <ReactLoader type="ThreeDots" color={theme.colors.gray[0]} height={25} width={30} />;
+  return <ReactLoader type="ThreeDots" color={theme.colors.gray[0]} height={20} width={25} />;
 };
 
 /* <ListingLoader />

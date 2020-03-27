@@ -8,12 +8,13 @@ import {
   GetCollectionsListingQueryVariables,
 } from '../../../../types/generated/graphql';
 import { Heading, Paragraph } from '../../../common/typography';
-import { Grid, Box } from '../../../common/layout/base';
-import { Button } from '../../../common/misc';
-import { FiEdit, FiTrash2 } from 'react-icons/fi';
+import { Grid, Box, Flex } from '../../../common/layout/base';
+import { Button, PopperButton } from '../../../common/misc';
+import { FiMoreVertical, FiTrash2, FiEdit } from 'react-icons/fi';
 import { useMutation } from '@apollo/client';
 import { DELETE_COLLECTION } from '../../../../api/mutation/collections';
 import { GET_COLLECTIONS_LISTING } from '../../../../api/query/collections';
+import { humanizeComponentType } from '../../../../utils';
 
 import * as S from './ListingItem.styles';
 
@@ -38,48 +39,76 @@ const ListingItem: React.FC<Props> = ({ collection }) => {
   return (
     <S.Wrapper>
       <Box>
-        <Heading as="h2">{collection.name}</Heading>
+        <Box mb="s8">
+          <Heading as="h2" mb="s6">
+            {collection.name}
+          </Heading>
+          <Grid gridTemplateColumns="1fr 1fr" gridColumnGap="s4">
+            <Box>
+              <S.MetaTitle>Type</S.MetaTitle>
+              <span>{humanizeComponentType(collection.type)}</span>
+            </Box>
+
+            <Box>
+              <S.MetaTitle>Components</S.MetaTitle>
+              <span>{collection.componentsCount}</span>
+            </Box>
+          </Grid>
+        </Box>
+
         {collection.description && <Paragraph>{collection.description}</Paragraph>}
       </Box>
 
       <Grid gridTemplateColumns="1fr 1fr" gridColumnGap="s4">
-        <Button icon={<FiEdit />} variant="brand">
-          Edit
-        </Button>
+        <Flex alignItems="center" color="gray.5">
+          Updated 1 day ago
+        </Flex>
 
-        <Button
-          onClick={async () => {
-            if (confirm(`Are you sure you want do delete "${collection.name}"?`)) {
-              await deleteCollection({
-                variables: {
-                  collectionId: collection?.id,
-                },
-                update: (cache, { data: { deleteCollection } }) => {
-                  const { getCollections: collections } = cache.readQuery<
-                    GetCollectionsListingQuery,
-                    GetCollectionsListingQueryVariables
-                  >({ query: GET_COLLECTIONS_LISTING });
+        <Grid gridTemplateColumns="1fr auto" gridColumnGap="s4">
+          <Button variant="brand">View</Button>
 
-                  cache.writeQuery<GetCollectionsListingQuery, GetCollectionsListingQueryVariables>(
-                    {
-                      query: GET_COLLECTIONS_LISTING,
-                      data: {
-                        getCollections: collections.filter(
-                          collection => collection.id !== deleteCollection.id
-                        ),
+          <PopperButton
+            options={[
+              {
+                icon: <FiEdit />,
+              },
+              {
+                onClick: async () => {
+                  if (confirm(`Are you sure you want do delete "${collection.name}"?`)) {
+                    await deleteCollection({
+                      variables: {
+                        collectionId: collection?.id,
                       },
-                    }
-                  );
+                      update: (cache, { data: { deleteCollection } }) => {
+                        const { getCollectionsListing: collections } = cache.readQuery<
+                          GetCollectionsListingQuery,
+                          GetCollectionsListingQueryVariables
+                        >({ query: GET_COLLECTIONS_LISTING });
+
+                        cache.writeQuery<
+                          GetCollectionsListingQuery,
+                          GetCollectionsListingQueryVariables
+                        >({
+                          query: GET_COLLECTIONS_LISTING,
+                          data: {
+                            getCollectionsListing: collections.filter(
+                              collection => collection.id !== deleteCollection.id
+                            ),
+                          },
+                        });
+                      },
+                    });
+                  }
                 },
-              });
-            }
-          }}
-          icon={<FiTrash2 />}
-          variant="danger"
-          isLoading={loading}
-        >
-          Delete
-        </Button>
+                icon: <FiTrash2 />,
+                isLoading: loading,
+                variant: 'danger',
+              },
+            ]}
+          >
+            {(ref, onClick) => <Button ref={ref} onClick={onClick} icon={<FiMoreVertical />} />}
+          </PopperButton>
+        </Grid>
       </Grid>
     </S.Wrapper>
   );

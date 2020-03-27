@@ -60,6 +60,7 @@ export interface NexusGenAllTypes extends NexusGenRootTypes {
 export interface NexusGenFieldTypes {
   Collection: { // field return type
     components: NexusGenRootTypes['Component'][]; // [Component!]!
+    componentsCount: number; // Int!
     description: string | null; // String
     id: string; // String!
     name: string; // String!
@@ -77,7 +78,7 @@ export interface NexusGenFieldTypes {
     signIn: NexusGenRootTypes['SignInOutput'] | null; // SignInOutput
   }
   Query: { // field return type
-    getCollections: NexusGenRootTypes['Collection'][]; // [Collection!]!
+    getCollectionsListing: NexusGenRootTypes['Collection'][]; // [Collection!]!
     getUser: NexusGenRootTypes['User'] | null; // User
   }
   SignInOutput: { // field return type
@@ -124,7 +125,7 @@ export interface NexusGenArgTypes {
     }
   }
   Query: {
-    getCollections: { // args
+    getCollectionsListing: { // args
       input?: NexusGenInputs['PaginationInput'] | null; // PaginationInput
     }
   }

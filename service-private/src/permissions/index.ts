@@ -5,7 +5,7 @@ import { isAuthenticated } from './rules';
 
 export const permissions = shield<unknown, Context>({
   Query: {
-    getCollections: isAuthenticated,
+    getCollectionsListing: isAuthenticated,
   },
   Mutation: {
     deleteCollection: isAuthenticated,

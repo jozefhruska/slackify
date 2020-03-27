@@ -6,6 +6,7 @@ import {
   GetUserQueryVariables,
   UserQuery,
   UserQueryVariables,
+  ComponentType,
 } from './types/generated/graphql';
 import { GET_USER } from './api/query/auth';
 import { USER } from './schema/auth';
@@ -62,5 +63,25 @@ export const loadUserData = async (ctx: NextPageContext, isPrivate = true) => {
     });
   } catch (error) {
     console.error(error);
+  }
+};
+
+/**
+ * Converts component type enum to human readable string.
+ * @param componentType Component type
+ */
+export const humanizeComponentType = (componentType: ComponentType) => {
+  switch (componentType) {
+    case ComponentType['PlainText']: {
+      return 'Plain text';
+    }
+
+    case ComponentType['Article']: {
+      return 'Article';
+    }
+
+    case ComponentType['Link']: {
+      return 'Link';
+    }
   }
 };

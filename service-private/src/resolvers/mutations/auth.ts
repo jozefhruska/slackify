@@ -1,9 +1,20 @@
+import { FieldResolver, objectType } from 'nexus';
 import axios from 'axios';
 import jwt from 'jsonwebtoken';
 
 import { SLACK_CLIENT_ID, SLACK_CLIENT_SECRET, SIGNING_SECRET } from '../../config';
 import { SlackAuthResponse } from '../../types/auth';
-import { FieldResolver } from 'nexus';
+
+/**
+ * Sign in mutation output.
+ */
+export const SignInOutput = objectType({
+  name: 'SignInOutput',
+  definition(t) {
+    t.string('authToken');
+    t.field('user', { type: 'User' });
+  },
+});
 
 /**
  * Resolves sign in with Slack mutation.

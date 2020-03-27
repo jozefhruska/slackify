@@ -3,13 +3,7 @@ import { objectType, stringArg } from 'nexus';
 import { signIn } from './auth';
 import { deleteCollection } from './collections';
 
-export const SignInOutput = objectType({
-  name: 'SignInOutput',
-  definition(t) {
-    t.string('authToken');
-    t.field('user', { type: 'User' });
-  },
-});
+export * from './auth';
 
 export const Mutation = objectType({
   name: 'Mutation',

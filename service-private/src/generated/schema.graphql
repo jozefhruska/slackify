@@ -4,6 +4,7 @@
 
 type Collection {
   components(after: ComponentWhereUniqueInput, before: ComponentWhereUniqueInput, first: Int, last: Int, skip: Int): [Component!]!
+  componentsCount: Int!
   description: String
   id: String!
   name: String!
@@ -39,7 +40,7 @@ input PaginationInput {
 }
 
 type Query {
-  getCollections(input: PaginationInput): [Collection!]!
+  getCollectionsListing(input: PaginationInput): [Collection!]!
   getUser: User
 }
 

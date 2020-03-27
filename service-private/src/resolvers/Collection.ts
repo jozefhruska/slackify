@@ -9,5 +9,18 @@ export const Collection = objectType({
     t.model.description();
     t.model.team();
     t.model.components();
+    t.int('componentsCount', {
+      resolve: async ({ id }, _args, { prisma }) => {
+        const components = await prisma.component.findMany({
+          where: {
+            collection: {
+              id,
+            },
+          },
+        });
+
+        return components.length;
+      },
+    });
   },
 });

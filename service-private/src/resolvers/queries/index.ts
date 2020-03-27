@@ -1,6 +1,6 @@
 import { objectType, inputObjectType } from 'nexus';
 
-import { getCollections } from './collections';
+import { getCollectionsListing } from './collections';
 
 export const PaginationInput = inputObjectType({
   name: 'PaginationInput',
@@ -19,13 +19,13 @@ export const Query = objectType({
       resolve: (_parent, _args, { user }) => user,
     });
 
-    t.field('getCollections', {
+    t.field('getCollectionsListing', {
       type: 'Collection',
       list: true,
       args: {
         input: PaginationInput,
       },
-      resolve: getCollections,
+      resolve: getCollectionsListing,
     });
   },
 });

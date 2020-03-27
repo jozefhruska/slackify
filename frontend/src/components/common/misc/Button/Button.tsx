@@ -19,30 +19,26 @@ export type ButtonProps = {
 
 /* <Button />
 ============================================================================= */
-const Button: React.FunctionComponent<ButtonProps> = ({
-  variant,
-  icon,
-  isDisabled,
-  isLoading,
-  children,
-  ...props
-}) => {
-  return (
-    <S.Main variant={variant} disabled={isDisabled} {...props}>
-      {isLoading && (
-        <S.LoadingOverlay variant={variant}>
-          <ButtonLoader />
-        </S.LoadingOverlay>
-      )}
+const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
+  ({ variant, icon, isDisabled, isLoading, children, ...props }, ref) => {
+    return (
+      <S.Main ref={ref} variant={variant} disabled={isDisabled} {...props}>
+        {isLoading && (
+          <S.LoadingOverlay variant={variant}>
+            <ButtonLoader />
+          </S.LoadingOverlay>
+        )}
 
-      {icon && <Box mr={children ? 's3' : 0}>{icon}</Box>}
-      {children}
-    </S.Main>
-  );
-};
+        {icon && <Box mr={children ? 's3' : 0}>{icon}</Box>}
+        {children}
+      </S.Main>
+    );
+  }
+);
 
 /* Default props - <Button />
 ============================================================================= */
+Button.displayName = 'Button';
 Button.defaultProps = {
   type: 'button',
   isDisabled: false,

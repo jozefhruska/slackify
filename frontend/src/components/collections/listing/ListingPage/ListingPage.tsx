@@ -21,7 +21,6 @@ const ListingPage: React.FC = () => {
   >(GET_COLLECTIONS_LISTING);
 
   const [isOutOfResults, setOutOfResults] = useState<boolean>(false);
-  console.log(isOutOfResults);
 
   const [ref, inView] = useInView();
 
@@ -31,7 +30,7 @@ const ListingPage: React.FC = () => {
         fetchMore({
           variables: {
             input: {
-              skip: data?.getCollections?.length,
+              skip: data?.getCollectionsListing?.length,
               limit: 20,
             },
           },
@@ -40,12 +39,15 @@ const ListingPage: React.FC = () => {
               return prev;
             }
 
-            if (!fetchMoreResult?.getCollections.length) {
+            if (!fetchMoreResult?.getCollectionsListing.length) {
               setOutOfResults(true);
             }
 
             return Object.assign({}, prev, {
-              getCollections: [...prev.getCollections, ...fetchMoreResult.getCollections],
+              getCollectionsListing: [
+                ...prev.getCollectionsListing,
+                ...fetchMoreResult.getCollectionsListing,
+              ],
             });
           },
         });
@@ -68,7 +70,7 @@ const ListingPage: React.FC = () => {
     return (
       <>
         <Listing>
-          {data?.getCollections?.map(collection => (
+          {data?.getCollectionsListing?.map(collection => (
             <ListingItem key={collection?.id} collection={collection} />
           ))}
         </Listing>

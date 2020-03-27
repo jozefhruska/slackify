@@ -1,6 +1,9 @@
 import { FieldResolver } from 'nexus';
 
-export const getCollections: FieldResolver<'Query', 'getCollections'> = async (
+/**
+ * Handles query for collections listing with pagination.
+ */
+export const getCollectionsListing: FieldResolver<'Query', 'getCollectionsListing'> = async (
   _parent,
   { input },
   { team, prisma }

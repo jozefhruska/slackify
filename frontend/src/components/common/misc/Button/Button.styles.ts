@@ -11,7 +11,7 @@ export const Main = styled.button<ButtonProps>`
   padding: ${({ theme }) => theme.space.s3} ${({ theme }) => theme.space.s4};
   border: none;
   border-radius: ${({ theme }) => theme.radii.small};
-  background: ${({ theme, variant }) => (variant ? theme.colors[variant] : theme.colors.gray[8])};
+  background: ${({ theme, variant }) => (variant ? theme.colors[variant] : theme.colors.gray[6])};
   color: ${({ theme }) => theme.colors.gray[0]};
   overflow: hidden;
 
