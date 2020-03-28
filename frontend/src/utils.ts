@@ -4,19 +4,20 @@ import Router from 'next/router';
 import {
   GetUserQuery,
   GetUserQueryVariables,
-  UserQuery,
-  UserQueryVariables,
   ComponentType,
+  User,
 } from './types/generated/graphql';
 import { GET_USER } from './api/query/auth';
-import { USER } from './schema/auth';
 import { getAuthToken, removeAuthToken } from './cookies';
 
 /**
  * Fetches and stores user data.
  * @param param0 Next JS page context
  */
-export const loadUserData = async (ctx: NextPageContext, isPrivate = true) => {
+export const loadUserData = async (
+  ctx: NextPageContext,
+  isPrivate = true
+): Promise<{ user: User }> => {
   const { apolloClient, req, res } = ctx;
   const authToken = getAuthToken(ctx);
 
@@ -54,13 +55,7 @@ export const loadUserData = async (ctx: NextPageContext, isPrivate = true) => {
       Router.push('/');
     }
 
-    /* Store user data to local state */
-    apolloClient.writeQuery<UserQuery, UserQueryVariables>({
-      query: USER,
-      data: {
-        user: data.getUser,
-      },
-    });
+    return { user: data?.getUser };
   } catch (error) {
     console.error(error);
   }

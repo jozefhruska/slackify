@@ -1,7 +1,9 @@
 import React, { useEffect } from 'react';
 import { NextPage } from 'next';
 import { useRouter } from 'next/router';
-import { useMutation, useApolloClient } from '@apollo/client';
+import { useMutation } from '@apollo/client';
+import { useDispatch } from 'react-redux';
+import { Dispatch } from 'redux';
 
 import { withApollo } from '../../src/api';
 import { Flex, Box } from '../../src/components/common/layout/base';
@@ -10,22 +12,18 @@ import { Paragraph } from '../../src/components/common/typography';
 import { Loader } from '../../src/components/common/misc';
 import { SIGN_IN } from '../../src/api/mutation/auth';
 import { setAuthToken } from '../../src/cookies';
-import {
-  SignInMutation,
-  SignInMutationVariables,
-  UserQuery,
-  UserQueryVariables,
-} from '../../src/types/generated/graphql';
-import { USER } from '../../src/schema/auth';
+import { SignInMutation, SignInMutationVariables } from '../../src/types/generated/graphql';
+import { StoreUser } from '../../src/actions/auth';
 
 /* <RedirectPage />
 ============================================================================= */
 const RedirectPage: NextPage = () => {
-  const apolloClient = useApolloClient();
   const [signIn, { loading: signInLoading, error: signInError }] = useMutation<
     SignInMutation,
     SignInMutationVariables
   >(SIGN_IN);
+
+  const dispatch = useDispatch<Dispatch<StoreUser>>();
 
   const { query, push } = useRouter();
 
@@ -40,19 +38,16 @@ const RedirectPage: NextPage = () => {
           },
         });
 
-        /* Set auth token cookie */
         const authToken = data?.signIn?.authToken;
-        setAuthToken(authToken);
+        if (authToken && data?.signIn) {
+          /* Set auth token cookie */
+          setAuthToken(authToken);
 
-        /* Store user into local storage */
-        apolloClient.writeQuery<UserQuery, UserQueryVariables>({
-          query: USER,
-          data: {
-            user: data?.signIn?.user,
-          },
-        });
+          /* Store user into local state */
+          dispatch({ type: '[AUTH] STORE_USER', payload: { user: data?.signIn?.user } });
 
-        push('/');
+          push('/');
+        }
       } catch (error) {
         console.error(error);
       }

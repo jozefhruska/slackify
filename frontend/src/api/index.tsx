@@ -7,7 +7,6 @@ import fetch from 'isomorphic-unfetch';
 
 import { API_URL } from '../config';
 import { getAuthToken } from '../cookies';
-import { typeDefs } from '../schema';
 
 export type AppCache = any;
 
@@ -36,7 +35,6 @@ const createApolloClient = (initialState: AppCache, ctx?: NextPageContext) => {
       },
       fetch,
     }),
-    typeDefs,
     cache,
   });
 

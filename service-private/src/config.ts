@@ -22,4 +22,6 @@ if (!SIGNING_SECRET) {
   process.exit(1);
 }
 
+export const NODE_ENV = process?.env?.NODE_ENV as string;
+
 export const PORT = process?.env?.PORT;

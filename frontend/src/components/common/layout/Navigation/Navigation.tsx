@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { useQuery, useApolloClient, gql } from '@apollo/client';
+import { Dispatch } from 'redux';
+import { useDispatch } from 'react-redux';
 import {
   FiLogOut,
   FiFolder,
@@ -16,23 +17,27 @@ import {
 import { Flex, Box, Grid } from '../base';
 import { Button } from '../../misc';
 import { removeAuthToken } from '../../../../cookies';
-import { UserQuery, UserQueryVariables } from '../../../../types/generated/graphql';
-import { USER } from '../../../../schema/auth';
 import UserAvatar from '../Header/UserAvatar/UserAvatar';
 import { Paragraph } from '../../typography';
 import ActiveLink from '../../misc/ActiveLink/ActiveLink';
+import { SignOut } from '../../../../actions/auth';
+import { User } from '../../../../types/generated/graphql';
 
 import * as S from './Navigation.styles';
 
+/* Props - <Navigation />
+============================================================================= */
+type Props = {
+  user: User;
+};
+
 /* <Navigation />
 ============================================================================= */
-const Navigation: React.FunctionComponent = () => {
-  const { data } = useQuery<UserQuery, UserQueryVariables>(USER);
+const Navigation: React.FC<Props> = ({ user }) => {
+  const dispatch = useDispatch<Dispatch<SignOut>>();
 
   const [isOpen, setOpen] = useState<boolean>(false);
-  const client = useApolloClient();
 
-  const user = data?.user;
   const team = user?.team;
 
   if (user) {
@@ -169,20 +174,8 @@ const Navigation: React.FunctionComponent = () => {
                     /* Remove auth token from cookies */
                     removeAuthToken();
 
-                    /* Remove user from local state */
-                    client.writeQuery({
-                      query: gql`
-                        {
-                          user @client
-                        }
-                      `,
-                      data: {
-                        user: null,
-                      },
-                    });
-
-                    /* Remove user from cache */
-                    client.cache.evict('User:' + user.id);
+                    /* Remove user data from app state */
+                    dispatch({ type: '[AUTH] SIGN_OUT' });
                   }}
                   width="100%"
                 >

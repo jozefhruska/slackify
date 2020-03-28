@@ -1,24 +1,36 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { NextPage } from 'next';
-import { useQuery } from '@apollo/client';
 
 import { Flex, Box } from '../src/components/common/layout/base';
 import { Block, Navigation, Content, Header, PageHeader } from '../src/components/common/layout';
 import { Paragraph } from '../src/components/common/typography';
 import { withApollo } from '../src/api';
-import { USER } from '../src/schema/auth';
 import { loadUserData } from '../src/utils';
+import { User } from '../src/types/generated/graphql';
+import { useDispatch } from 'react-redux';
+import { StoreUser } from '../src/actions/auth';
+import { Dispatch } from 'redux';
+
+/* Props - <HomePage />
+============================================================================= */
+type Props = {
+  user: User;
+};
 
 /* <HomePage />
 ============================================================================= */
-const HomePage: NextPage = () => {
-  const { data } = useQuery(USER);
+const HomePage: NextPage<Props> = ({ user }) => {
+  const dispatch = useDispatch<Dispatch<StoreUser>>();
 
-  if (data?.user) {
+  useEffect(() => {
+    dispatch({ type: '[AUTH] STORE_USER', payload: { user } });
+  }, []);
+
+  if (user) {
     return (
       <>
-        <Header />
-        <Navigation />
+        <Header user={user} />
+        <Navigation user={user} />
 
         <Content>
           <PageHeader heading="Dashboard" />
@@ -48,7 +60,7 @@ const HomePage: NextPage = () => {
   );
 };
 
-/* <HomePage /> - getInitialProps
+/* getInitialProps - <HomePage />
 ============================================================================= */
 HomePage.getInitialProps = async ctx => loadUserData(ctx, false);
 

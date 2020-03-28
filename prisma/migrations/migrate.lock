@@ -14,3 +14,4 @@
 20200320201009-make-article-lead-optional
 20200321131604-specify-relations-with-component-data
 20200327122650-add-update-and-published-flags-to-collection-model
+20200328185927-remove-collection-name-and-team-constraint

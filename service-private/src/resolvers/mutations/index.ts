@@ -32,5 +32,6 @@ export const Mutation = objectType({
     });
 
     t.crud.updateOneCollection();
+    t.crud.createOneCollection();
   },
 });

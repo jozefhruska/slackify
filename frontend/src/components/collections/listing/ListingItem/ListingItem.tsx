@@ -1,4 +1,8 @@
-import React from 'react';
+import React, { Dispatch } from 'react';
+import { useDispatch } from 'react-redux';
+import moment from 'moment';
+import { FiMoreVertical, FiTrash2, FiEdit, FiEye, FiEyeOff } from 'react-icons/fi';
+import { useMutation } from '@apollo/client';
 
 import {
   Collection,
@@ -12,12 +16,10 @@ import {
 import { Heading, Paragraph } from '../../../common/typography';
 import { Grid, Box, Flex } from '../../../common/layout/base';
 import { Button, PopperButton } from '../../../common/misc';
-import { FiMoreVertical, FiTrash2, FiEdit, FiEye, FiEyeOff } from 'react-icons/fi';
-import { useMutation } from '@apollo/client';
 import { DELETE_COLLECTION, UPDATE_ONE_COLLECTION } from '../../../../api/mutation/collections';
 import { GET_COLLECTIONS_LISTING } from '../../../../api/query/collections';
 import { humanizeComponentType } from '../../../../utils';
-import moment from 'moment';
+import { OpenCreateUpdateModal } from '../../../../actions/collections';
 
 import * as S from './ListingItem.styles';
 
@@ -30,6 +32,8 @@ type Props = {
 /* <ListingItem />
 ============================================================================= */
 const ListingItem: React.FC<Props> = ({ collection }) => {
+  const dispatch = useDispatch<Dispatch<OpenCreateUpdateModal>>();
+
   const [deleteCollection, { loading: deleteLoading }] = useMutation<
     DeleteCollectionMutation,
     DeleteCollectionMutationVariables
@@ -97,6 +101,17 @@ const ListingItem: React.FC<Props> = ({ collection }) => {
               {
                 icon: <FiEdit />,
                 variant: 'info',
+                onClick: () => {
+                  dispatch({
+                    type: '[COLLECTIONS] OPEN_CREATE_UPDATE_MODAL',
+                    payload: {
+                      state: {
+                        mode: 'update',
+                        collection,
+                      },
+                    },
+                  });
+                },
               },
               {
                 onClick: async () => {

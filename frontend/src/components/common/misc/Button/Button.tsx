@@ -1,6 +1,6 @@
 import React, { ReactNode, ButtonHTMLAttributes } from 'react';
 
-import { Box } from '../../layout/base';
+import { Box, Flex } from '../../layout/base';
 import { WidthProps } from 'styled-system';
 import theme from '../../../../theme';
 import { ButtonLoader } from '..';
@@ -29,8 +29,12 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
           </S.LoadingOverlay>
         )}
 
-        {icon && <Box mr={children ? 's3' : 0}>{icon}</Box>}
-        {children}
+        <Flex alignItems="center" position="relative" zIndex={1}>
+          {icon && <Box mr={children ? 's3' : 0}>{icon}</Box>}
+          {children}
+        </Flex>
+
+        <S.HoverOverlay />
       </S.Main>
     );
   }

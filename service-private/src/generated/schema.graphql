@@ -67,6 +67,17 @@ type Collection {
   updatedAt: DateTime!
 }
 
+input CollectionCreateInput {
+  components: ComponentCreateManyWithoutCollectionInput
+  description: String
+  id: String
+  name: String!
+  published: Boolean
+  team: TeamCreateOneWithoutCollectionsInput!
+  type: ComponentType!
+  updatedAt: DateTime
+}
+
 input CollectionCreateManyWithoutTeamInput {
   connect: [CollectionWhereUniqueInput!]
   create: [CollectionCreateWithoutTeamInput!]
@@ -441,6 +452,7 @@ input LinkComponentDataWhereUniqueInput {
 }
 
 type Mutation {
+  createOneCollection(data: CollectionCreateInput!): Collection!
   deleteCollection(collectionId: String!): Collection!
   signIn(code: String!): SignInOutput
   updateOneCollection(data: CollectionUpdateInput!, where: CollectionWhereUniqueInput!): Collection

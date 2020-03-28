@@ -3,26 +3,10 @@ import { width } from 'styled-system';
 
 import { ButtonProps } from './Button';
 
-export const Main = styled.button<ButtonProps>`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  padding: ${({ theme }) => theme.space.s3} ${({ theme }) => theme.space.s4};
-  border: none;
-  border-radius: ${({ theme }) => theme.radii.small};
-  background: ${({ theme, variant }) => (variant ? theme.colors[variant] : theme.colors.gray[6])};
-  color: ${({ theme }) => theme.colors.gray[0]};
-  overflow: hidden;
-
-  ${width}
-
-  &:hover {
-    cursor: pointer;
-  }
-`;
-
-export const LoadingOverlay = styled.div<Pick<ButtonProps, 'variant'>>`
+export const HoverOverlay = styled.div<Pick<ButtonProps, 'variant'>>`
+  transition: opacity 0.2s ease-out;
+  position: absolute;
+  opacity: 0;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -31,5 +15,44 @@ export const LoadingOverlay = styled.div<Pick<ButtonProps, 'variant'>>`
   left: 0;
   width: 100%;
   height: 100%;
-  background: ${({ theme, variant }) => (variant ? theme.colors[variant] : theme.colors.gray[8])};
+  background: ${({ theme }) => theme.colors.gray[10] + '33'};
+`;
+
+export const LoadingOverlay = styled.div<Pick<ButtonProps, 'variant'>>`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: ${({ theme, variant }) => (variant ? theme.colors[variant] : theme.colors.gray[6])};
+`;
+
+export const Main = styled.button<ButtonProps>`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  min-height: 44px;
+  padding: ${({ theme }) => theme.space.s3} ${({ theme }) => theme.space.s4};
+  border: none;
+  border-radius: ${({ theme }) => theme.radii.medium};
+  background: ${({ theme, variant }) => (variant ? theme.colors[variant] : theme.colors.gray[6])};
+  color: ${({ theme }) => theme.colors.gray[0]};
+  overflow: hidden;
+
+  ${width}
+
+  &:focus,
+  &:hover {
+    cursor: pointer;
+    outline: none;
+
+    ${HoverOverlay} {
+      opacity: 1;
+    }
+  }
 `;

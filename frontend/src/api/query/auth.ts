@@ -6,6 +6,7 @@ export const GET_USER = gql`
       id
       name
       email
+      accessToken
       image_24
       image_32
       image_48

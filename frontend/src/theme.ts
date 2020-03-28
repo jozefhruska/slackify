@@ -13,21 +13,12 @@ export const colors = {
     9: '#121212',
     10: '#000000',
   },
-  accent: {
-    blue: '#50b5ff',
-    yellow: '#fec543',
-    orange: '#ff974a',
-    red: '#fc5a5a',
-    green: '#82c43c',
-    purple: '#a461d8',
-    pink: '#ff9ad5',
-  },
 
   // TODO: Remove after refactoring
   info: '#0062ff',
-  success: '#0062FF',
   danger: '#fe4759',
   warning: '#ffc542',
+  accent: '#a461d8',
   base: {
     10: '#ffffff',
     20: '#ababab',

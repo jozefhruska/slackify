@@ -14,7 +14,25 @@ export const UPDATE_ONE_COLLECTION = gql`
     updateOneCollection(data: $data, where: $where) {
       id
       name
+      type
       published
+      description
+      componentsCount
+      updatedAt
+    }
+  }
+`;
+
+export const CREATE_ONE_COLLECTION = gql`
+  mutation CreateOneCollection($data: CollectionCreateInput!) {
+    createOneCollection(data: $data) {
+      id
+      name
+      type
+      published
+      description
+      componentsCount
+      updatedAt
     }
   }
 `;

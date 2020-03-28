@@ -11,6 +11,7 @@ import {
 import { PageLoader, ListingLoader } from '../../../common/misc';
 import ListingItem from '../ListingItem/ListingItem';
 import { Flex } from '../../../common/layout/base';
+import CreateUpdateModal from '../../CreateUpdateModal/CreateUpdateModal';
 
 /* <ListingPage />
 ============================================================================= */
@@ -91,6 +92,8 @@ const ListingPage: React.FC = () => {
             There are no more collections.
           </Flex>
         )}
+
+        <CreateUpdateModal />
       </>
     );
   }

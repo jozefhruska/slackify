@@ -1,18 +1,17 @@
 import React from 'react';
-import { useQuery } from '@apollo/client';
+import { useSelector } from 'react-redux';
 
-import { UserQuery, UserQueryVariables } from '../../../../../types/generated/graphql';
-import { USER } from '../../../../../schema/auth';
+import { selectUser } from '../../../../../selectors/auth';
 
 import * as S from './UserAvatar.styles';
 
 /* <UserAvatar />
 ============================================================================= */
 const UserAvatar: React.FunctionComponent = () => {
-  const { data } = useQuery<UserQuery, UserQueryVariables>(USER);
+  const user = useSelector(selectUser);
 
-  const image = data?.user?.image_72;
-  const name = data?.user?.name;
+  const image = user?.image_72;
+  const name = user?.name;
 
   if (image) {
     return (
