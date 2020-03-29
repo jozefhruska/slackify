@@ -6,8 +6,8 @@ import { useMutation } from '@apollo/client';
 
 import {
   Collection,
-  DeleteCollectionMutation,
-  DeleteCollectionMutationVariables,
+  DeleteOneCollectionMutation,
+  DeleteOneCollectionMutationVariables,
   GetCollectionsListingQuery,
   GetCollectionsListingQueryVariables,
   UpdateOneCollectionMutation,
@@ -16,7 +16,7 @@ import {
 import { Heading, Paragraph } from '../../../common/typography';
 import { Grid, Box, Flex } from '../../../common/layout/base';
 import { Button, PopperButton } from '../../../common/misc';
-import { DELETE_COLLECTION, UPDATE_ONE_COLLECTION } from '../../../../api/mutation/collections';
+import { DELETE_ONE_COLLECTION, UPDATE_ONE_COLLECTION } from '../../../../api/mutation/collections';
 import { GET_COLLECTIONS_LISTING } from '../../../../api/query/collections';
 import { humanizeComponentType } from '../../../../utils';
 import { OpenCreateUpdateModal } from '../../../../actions/collections';
@@ -35,9 +35,9 @@ const ListingItem: React.FC<Props> = ({ collection }) => {
   const dispatch = useDispatch<Dispatch<OpenCreateUpdateModal>>();
 
   const [deleteCollection, { loading: deleteLoading }] = useMutation<
-    DeleteCollectionMutation,
-    DeleteCollectionMutationVariables
-  >(DELETE_COLLECTION);
+    DeleteOneCollectionMutation,
+    DeleteOneCollectionMutationVariables
+  >(DELETE_ONE_COLLECTION);
 
   const [updateCollection, { loading: updateLoading }] = useMutation<
     UpdateOneCollectionMutation,
@@ -118,13 +118,22 @@ const ListingItem: React.FC<Props> = ({ collection }) => {
                   if (confirm(`Are you sure you want do delete "${collection.name}"?`)) {
                     await deleteCollection({
                       variables: {
-                        collectionId: collection?.id,
+                        where: {
+                          id: collection?.id,
+                        },
                       },
-                      update: (cache, { data: { deleteCollection } }) => {
-                        const { getCollectionsListing: collections } = cache.readQuery<
+                      update: (cache, { data: { deleteOneCollection } }) => {
+                        const { collections: collections } = cache.readQuery<
                           GetCollectionsListingQuery,
                           GetCollectionsListingQueryVariables
-                        >({ query: GET_COLLECTIONS_LISTING });
+                        >({
+                          query: GET_COLLECTIONS_LISTING,
+                          variables: {
+                            input: {
+                              first: 40,
+                            },
+                          },
+                        });
 
                         cache.writeQuery<
                           GetCollectionsListingQuery,
@@ -132,11 +141,18 @@ const ListingItem: React.FC<Props> = ({ collection }) => {
                         >({
                           query: GET_COLLECTIONS_LISTING,
                           data: {
-                            getCollectionsListing: collections.filter(
-                              collection => collection.id !== deleteCollection.id
+                            collections: collections.filter(
+                              collection => collection.id !== deleteOneCollection?.id
                             ),
                           },
+                          variables: {
+                            input: {
+                              first: 40,
+                            },
+                          },
                         });
+
+                        cache.gc();
                       },
                     });
                   }

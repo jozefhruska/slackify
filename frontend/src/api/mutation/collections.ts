@@ -1,8 +1,8 @@
 import { gql } from '@apollo/client';
 
-export const DELETE_COLLECTION = gql`
-  mutation DeleteCollection($collectionId: String!) {
-    deleteCollection(collectionId: $collectionId) {
+export const DELETE_ONE_COLLECTION = gql`
+  mutation DeleteOneCollection($where: CollectionWhereUniqueInput!) {
+    deleteOneCollection(where: $where) {
       id
       name
     }

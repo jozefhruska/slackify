@@ -453,7 +453,7 @@ input LinkComponentDataWhereUniqueInput {
 
 type Mutation {
   createOneCollection(data: CollectionCreateInput!): Collection!
-  deleteCollection(collectionId: String!): Collection!
+  deleteOneCollection(where: CollectionWhereUniqueInput!): Collection
   signIn(code: String!): SignInOutput
   updateOneCollection(data: CollectionUpdateInput!, where: CollectionWhereUniqueInput!): Collection
 }
@@ -478,7 +478,10 @@ input NullableStringFilter {
 }
 
 input PaginationInput {
-  limit: Int
+  after: CollectionWhereUniqueInput
+  before: CollectionWhereUniqueInput
+  first: Int
+  last: Int
   skip: Int
 }
 
@@ -525,7 +528,7 @@ input PlainTextComponentDataWhereUniqueInput {
 }
 
 type Query {
-  getCollectionsListing(input: PaginationInput): [Collection!]!
+  collections(input: PaginationInput): [Collection!]!
   getUser: User
 }
 

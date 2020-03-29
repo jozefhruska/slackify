@@ -19,7 +19,13 @@ const ListingPage: React.FC = () => {
   const { data, error, loading, fetchMore } = useQuery<
     GetCollectionsListingQuery,
     GetCollectionsListingQueryVariables
-  >(GET_COLLECTIONS_LISTING);
+  >(GET_COLLECTIONS_LISTING, {
+    variables: {
+      input: {
+        first: 40,
+      },
+    },
+  });
 
   const [isOutOfResults, setOutOfResults] = useState<boolean>(false);
 
@@ -31,8 +37,8 @@ const ListingPage: React.FC = () => {
         fetchMore({
           variables: {
             input: {
-              skip: data?.getCollectionsListing?.length,
-              limit: 20,
+              skip: data?.collections?.length,
+              first: 20,
             },
           },
           updateQuery: (prev, { fetchMoreResult }) => {
@@ -40,15 +46,12 @@ const ListingPage: React.FC = () => {
               return prev;
             }
 
-            if (!fetchMoreResult?.getCollectionsListing.length) {
+            if (!fetchMoreResult?.collections.length) {
               setOutOfResults(true);
             }
 
             return Object.assign({}, prev, {
-              getCollectionsListing: [
-                ...prev.getCollectionsListing,
-                ...fetchMoreResult.getCollectionsListing,
-              ],
+              collections: [...prev.collections, ...fetchMoreResult.collections],
             });
           },
         });
@@ -60,7 +63,7 @@ const ListingPage: React.FC = () => {
   }, [inView]);
 
   if (error) {
-    return <span>{error}</span>;
+    return <span>{error.message}</span>;
   }
 
   if (loading) {
@@ -71,7 +74,7 @@ const ListingPage: React.FC = () => {
     return (
       <>
         <Listing>
-          {data?.getCollectionsListing?.map(collection => (
+          {data.collections?.map(collection => (
             <ListingItem key={collection?.id} collection={collection} />
           ))}
         </Listing>

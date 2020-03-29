@@ -1,9 +1,6 @@
 import { objectType, stringArg } from 'nexus';
 
 import { signIn } from './auth';
-import { deleteCollection } from './collections';
-
-export * from './auth';
 
 export const Mutation = objectType({
   name: 'Mutation',
@@ -21,17 +18,8 @@ export const Mutation = objectType({
     });
 
     /* Collections */
-    t.field('deleteCollection', {
-      type: 'Collection',
-      args: {
-        collectionId: stringArg({
-          required: true,
-        }),
-      },
-      resolve: deleteCollection,
-    });
-
-    t.crud.updateOneCollection();
     t.crud.createOneCollection();
+    t.crud.updateOneCollection();
+    t.crud.deleteOneCollection();
   },
 });

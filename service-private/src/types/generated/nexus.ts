@@ -3,7 +3,7 @@
  * Do not make changes to this file directly
  */
 
-import * as Context from "../index"
+import * as Context from "../../index"
 import * as prisma from "@prisma/client"
 
 
@@ -407,7 +407,10 @@ export interface NexusGenInputs {
     startsWith?: string | null; // String
   }
   PaginationInput: { // input type
-    limit?: number | null; // Int
+    after?: NexusGenInputs['CollectionWhereUniqueInput'] | null; // CollectionWhereUniqueInput
+    before?: NexusGenInputs['CollectionWhereUniqueInput'] | null; // CollectionWhereUniqueInput
+    first?: number | null; // Int
+    last?: number | null; // Int
     skip?: number | null; // Int
   }
   PlainTextComponentDataCreateOneWithoutComponentsInput: { // input type
@@ -821,12 +824,12 @@ export interface NexusGenFieldTypes {
   }
   Mutation: { // field return type
     createOneCollection: NexusGenRootTypes['Collection']; // Collection!
-    deleteCollection: NexusGenRootTypes['Collection']; // Collection!
+    deleteOneCollection: NexusGenRootTypes['Collection'] | null; // Collection
     signIn: NexusGenRootTypes['SignInOutput'] | null; // SignInOutput
     updateOneCollection: NexusGenRootTypes['Collection'] | null; // Collection
   }
   Query: { // field return type
-    getCollectionsListing: NexusGenRootTypes['Collection'][]; // [Collection!]!
+    collections: NexusGenRootTypes['Collection'][]; // [Collection!]!
     getUser: NexusGenRootTypes['User'] | null; // User
   }
   SignInOutput: { // field return type
@@ -868,8 +871,8 @@ export interface NexusGenArgTypes {
     createOneCollection: { // args
       data: NexusGenInputs['CollectionCreateInput']; // CollectionCreateInput!
     }
-    deleteCollection: { // args
-      collectionId: string; // String!
+    deleteOneCollection: { // args
+      where: NexusGenInputs['CollectionWhereUniqueInput']; // CollectionWhereUniqueInput!
     }
     signIn: { // args
       code: string; // String!
@@ -880,7 +883,7 @@ export interface NexusGenArgTypes {
     }
   }
   Query: {
-    getCollectionsListing: { // args
+    collections: { // args
       input?: NexusGenInputs['PaginationInput'] | null; // PaginationInput
     }
   }

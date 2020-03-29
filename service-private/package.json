@@ -7,8 +7,8 @@
     "clean": "rm -rf dist",
     "dev": "ts-node-dev --no-notify --respawn --transpileOnly src/index.ts",
     "build": "npm -s run clean && npm -s run generate && tsc",
-    "generate": "ts-node --transpile-only src/resolvers",
-    "generate:watch": "ts-node-dev --no-notify --transpileOnly --respawn src/resolvers"
+    "generate": "ts-node --transpile-only src/schema",
+    "generate:watch": "ts-node-dev --no-notify --transpileOnly --respawn src/schema"
   },
   "author": "Jozef Hruška (xhrusk25@vutbr.cz)",
   "license": "ISC",
@@ -28,13 +28,13 @@
   "devDependencies": {
     "@types/jsonwebtoken": "~8.3.8",
     "@types/jwt-decode": "~2.2.1",
-    "@typescript-eslint/eslint-plugin": "~2.23.0",
-    "@typescript-eslint/parser": "~2.23.0",
+    "@typescript-eslint/eslint-plugin": "~2.25.0",
+    "@typescript-eslint/parser": "~2.25.0",
     "eslint": "~6.8.0",
     "eslint-config-prettier": "~6.10.0",
     "eslint-plugin-prettier": "~3.1.2",
     "prettier": "~1.19.1",
-    "ts-node": "~8.6.2",
+    "ts-node": "~8.8.1",
     "ts-node-dev": "~1.0.0-pre.44",
     "typescript": "~3.8.3"
   }

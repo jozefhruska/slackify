@@ -2,14 +2,16 @@ import { makeSchema } from 'nexus';
 import { nexusPrismaPlugin } from 'nexus-prisma';
 import path from 'path';
 
-import * as types from './resolvers';
+import * as mutationTypes from './mutations';
+import * as queryTypes from './queries';
+import * as otherTypes from './types';
 
 export const schema = makeSchema({
-  types,
+  types: { ...mutationTypes, ...queryTypes, ...otherTypes },
   plugins: [nexusPrismaPlugin()],
   outputs: {
-    schema: path.join(__dirname, './generated/schema.graphql'),
-    typegen: path.join(__dirname, './generated/nexus.ts'),
+    schema: path.join(__dirname, '../types/generated/schema.graphql'),
+    typegen: path.join(__dirname, '../types/generated/nexus.ts'),
   },
   typegenAutoConfig: {
     contextType: 'Context.Context',
@@ -19,7 +21,7 @@ export const schema = makeSchema({
         alias: 'prisma',
       },
       {
-        source: path.join(__dirname, './index.ts'),
+        source: path.join(__dirname, '../index.ts'),
         alias: 'Context',
       },
     ],

@@ -27,7 +27,7 @@ const server = new ApolloServer({
     if (authToken) {
       /* Check if Authorization header is in correct format */
       if (!authToken.match(/^Bearer\s[A-Za-z0-9-_=]+\.[A-Za-z0-9-_=]+\.?[A-Za-z0-9-_.+/=]*$/)) {
-        throw new AuthenticationError('Authorization header wrong format.');
+        throw new AuthenticationError('[context]: Authorization header wrong format.');
       }
 
       /* Cut 'Bearer ' */
@@ -37,10 +37,11 @@ const server = new ApolloServer({
       try {
         decodedToken = jwtDecode<JWTUser>(authToken);
       } catch {
-        throw new AuthenticationError('Unable to decode JWT token.');
+        throw new AuthenticationError('[context]: Unable to decode JWT token.');
       }
 
       try {
+        /* Get user data */
         user = await prisma.user.findOne({
           where: {
             id: decodedToken.data.id,
@@ -51,6 +52,7 @@ const server = new ApolloServer({
         });
       } catch (error) {
         console.error(error);
+        throw new AuthenticationError('[context]: Unable to retrieve user data.');
       }
     }
 
