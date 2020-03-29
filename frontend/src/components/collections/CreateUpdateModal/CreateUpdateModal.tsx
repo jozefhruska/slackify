@@ -85,13 +85,25 @@ const CreateUpdateModal: React.FC = () => {
                   const { collections: collections } = cache.readQuery<
                     GetCollectionsListingQuery,
                     GetCollectionsListingQueryVariables
-                  >({ query: GET_COLLECTIONS_LISTING });
+                  >({
+                    query: GET_COLLECTIONS_LISTING,
+                    variables: {
+                      input: {
+                        first: 40,
+                      },
+                    },
+                  });
 
                   cache.writeQuery<GetCollectionsListingQuery, GetCollectionsListingQueryVariables>(
                     {
                       query: GET_COLLECTIONS_LISTING,
                       data: {
                         collections: collections.concat([createOneCollection]),
+                      },
+                      variables: {
+                        input: {
+                          first: 40,
+                        },
                       },
                     }
                   );
