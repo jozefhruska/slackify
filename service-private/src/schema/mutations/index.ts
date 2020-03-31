@@ -21,5 +21,10 @@ export const Mutation = objectType({
     t.crud.createOneCollection();
     t.crud.updateOneCollection();
     t.crud.deleteOneCollection();
+
+    /* Components - Main */
+    t.crud.createOneComponent();
+    t.crud.updateOneComponent();
+    t.crud.deleteOneComponent();
   },
 });

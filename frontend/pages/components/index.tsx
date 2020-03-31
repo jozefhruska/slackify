@@ -7,21 +7,19 @@ import { FiPlus } from 'react-icons/fi';
 import { Content, Navigation, PageHeader, Header } from '../../src/components/common/layout';
 import { withApollo } from '../../src/api';
 import { loadUserData } from '../../src/utils';
-import ListingPage from '../../src/components/collections/listing/ListingPage/ListingPage';
 import { User } from '../../src/types/generated/graphql';
 import { StoreUser } from '../../src/actions/auth';
-import { OpenCollectionsCreateUpdateModal } from '../../src/actions/collections';
 
-/* Props - <CollectionsPage />
+/* Props - <ComponentsPage />
 ============================================================================= */
 type Props = {
   user: User;
 };
 
-/* <CollectionsPage />
+/* <ComponentsPage />
 ============================================================================= */
-const CollectionsPage: NextPage<Props> = ({ user }) => {
-  const dispatch = useDispatch<Dispatch<StoreUser | OpenCollectionsCreateUpdateModal>>();
+const ComponentsPage: NextPage<Props> = ({ user }) => {
+  const dispatch = useDispatch<Dispatch<StoreUser>>();
 
   useEffect(() => {
     dispatch({ type: '[AUTH] STORE_USER', payload: { user } });
@@ -34,36 +32,25 @@ const CollectionsPage: NextPage<Props> = ({ user }) => {
 
       <Content>
         <PageHeader
-          heading="Collections"
+          heading="Components"
           breadcrumbs={[
             {
-              text: 'Collections',
+              text: 'Components',
             },
           ]}
           primaryButton={{
             icon: <FiPlus />,
-            text: 'Add new collection',
-            onClick: () => {
-              dispatch({
-                type: '[COLLECTIONS] OPEN_CREATE_UPDATE_MODAL',
-                payload: {
-                  state: {
-                    mode: 'create',
-                  },
-                },
-              });
-            },
+            text: 'Add new component',
+            onClick: () => null,
           }}
         />
-
-        <ListingPage />
       </Content>
     </>
   );
 };
 
-/* getInitialProps - <CollectionsPage />
+/* getInitialProps - <ComponentsPage />
 ============================================================================= */
-CollectionsPage.getInitialProps = async ctx => loadUserData(ctx);
+ComponentsPage.getInitialProps = async ctx => loadUserData(ctx);
 
-export default withApollo()(CollectionsPage);
+export default withApollo()(ComponentsPage);

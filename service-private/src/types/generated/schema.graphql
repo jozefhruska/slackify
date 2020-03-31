@@ -2,42 +2,43 @@
 ### Do not make changes to this file directly
 
 
-input ArticleComponentDataCreateOneWithoutComponentsInput {
+input ArticleComponentDataCreateOneWithoutComponentInput {
   connect: ArticleComponentDataWhereUniqueInput
-  create: ArticleComponentDataCreateWithoutComponentsInput
+  create: ArticleComponentDataCreateWithoutComponentInput
 }
 
-input ArticleComponentDataCreateWithoutComponentsInput {
+input ArticleComponentDataCreateWithoutComponentInput {
   content: String!
   id: String
   lead: String
   title: String!
 }
 
-input ArticleComponentDataUpdateOneWithoutComponentsInput {
+input ArticleComponentDataUpdateOneWithoutComponentInput {
   connect: ArticleComponentDataWhereUniqueInput
-  create: ArticleComponentDataCreateWithoutComponentsInput
+  create: ArticleComponentDataCreateWithoutComponentInput
   delete: Boolean
   disconnect: Boolean
-  update: ArticleComponentDataUpdateWithoutComponentsDataInput
-  upsert: ArticleComponentDataUpsertWithoutComponentsInput
+  update: ArticleComponentDataUpdateWithoutComponentDataInput
+  upsert: ArticleComponentDataUpsertWithoutComponentInput
 }
 
-input ArticleComponentDataUpdateWithoutComponentsDataInput {
+input ArticleComponentDataUpdateWithoutComponentDataInput {
   content: String
   id: String
   lead: String
   title: String
 }
 
-input ArticleComponentDataUpsertWithoutComponentsInput {
-  create: ArticleComponentDataCreateWithoutComponentsInput!
-  update: ArticleComponentDataUpdateWithoutComponentsDataInput!
+input ArticleComponentDataUpsertWithoutComponentInput {
+  create: ArticleComponentDataCreateWithoutComponentInput!
+  update: ArticleComponentDataUpdateWithoutComponentDataInput!
 }
 
 input ArticleComponentDataWhereInput {
   AND: [ArticleComponentDataWhereInput!]
-  components: ComponentFilter
+  component: ComponentWhereInput
+  componentId: StringFilter
   content: StringFilter
   id: StringFilter
   lead: NullableStringFilter
@@ -69,6 +70,7 @@ type Collection {
 
 input CollectionCreateInput {
   components: ComponentCreateManyWithoutCollectionInput
+  createdAt: DateTime
   description: String
   id: String
   name: String!
@@ -89,6 +91,7 @@ input CollectionCreateOneWithoutComponentsInput {
 }
 
 input CollectionCreateWithoutComponentsInput {
+  createdAt: DateTime
   description: String
   id: String
   name: String!
@@ -100,6 +103,7 @@ input CollectionCreateWithoutComponentsInput {
 
 input CollectionCreateWithoutTeamInput {
   components: ComponentCreateManyWithoutCollectionInput
+  createdAt: DateTime
   description: String
   id: String
   name: String!
@@ -117,18 +121,21 @@ input CollectionFilter {
 input CollectionScalarWhereInput {
   AND: [CollectionScalarWhereInput!]
   components: ComponentFilter
+  createdAt: DateTimeFilter
   description: NullableStringFilter
   id: StringFilter
   name: StringFilter
   NOT: [CollectionScalarWhereInput!]
   OR: [CollectionScalarWhereInput!]
   published: BooleanFilter
+  teamId: StringFilter
   type: ComponentType
   updatedAt: DateTimeFilter
 }
 
 input CollectionUpdateInput {
   components: ComponentUpdateManyWithoutCollectionInput
+  createdAt: DateTime
   description: String
   id: String
   name: String
@@ -139,6 +146,7 @@ input CollectionUpdateInput {
 }
 
 input CollectionUpdateManyDataInput {
+  createdAt: DateTime
   description: String
   id: String
   name: String
@@ -172,6 +180,7 @@ input CollectionUpdateOneRequiredWithoutComponentsInput {
 }
 
 input CollectionUpdateWithoutComponentsDataInput {
+  createdAt: DateTime
   description: String
   id: String
   name: String
@@ -183,6 +192,7 @@ input CollectionUpdateWithoutComponentsDataInput {
 
 input CollectionUpdateWithoutTeamDataInput {
   components: ComponentUpdateManyWithoutCollectionInput
+  createdAt: DateTime
   description: String
   id: String
   name: String
@@ -210,6 +220,7 @@ input CollectionUpsertWithWhereUniqueWithoutTeamInput {
 input CollectionWhereInput {
   AND: [CollectionWhereInput!]
   components: ComponentFilter
+  createdAt: DateTimeFilter
   description: NullableStringFilter
   id: StringFilter
   name: StringFilter
@@ -217,20 +228,35 @@ input CollectionWhereInput {
   OR: [CollectionWhereInput!]
   published: BooleanFilter
   team: TeamWhereInput
+  teamId: StringFilter
   type: ComponentType
   updatedAt: DateTimeFilter
 }
 
 input CollectionWhereUniqueInput {
   id: String
-  name_team: NameTeamCompoundUniqueInput
 }
 
 type Component {
   author: User!
   id: String!
   published: Boolean!
+  team: Team!
   type: ComponentType!
+}
+
+input ComponentCreateInput {
+  articleData: ArticleComponentDataCreateOneWithoutComponentInput
+  author: UserCreateOneWithoutComponentsInput!
+  collection: CollectionCreateOneWithoutComponentsInput!
+  createdAt: DateTime
+  id: String
+  linkData: LinkComponentDataCreateOneWithoutComponentInput
+  plainTextData: PlainTextComponentDataCreateOneWithoutComponentInput
+  published: Boolean
+  team: TeamCreateOneWithoutComponentsInput!
+  type: ComponentType
+  updatedAt: DateTime
 }
 
 input ComponentCreateManyWithoutAuthorInput {
@@ -243,25 +269,45 @@ input ComponentCreateManyWithoutCollectionInput {
   create: [ComponentCreateWithoutCollectionInput!]
 }
 
+input ComponentCreateManyWithoutTeamInput {
+  connect: [ComponentWhereUniqueInput!]
+  create: [ComponentCreateWithoutTeamInput!]
+}
+
 input ComponentCreateWithoutAuthorInput {
-  articleData: ArticleComponentDataCreateOneWithoutComponentsInput
+  articleData: ArticleComponentDataCreateOneWithoutComponentInput
   collection: CollectionCreateOneWithoutComponentsInput!
   createdAt: DateTime
   id: String
-  linkData: LinkComponentDataCreateOneWithoutComponentsInput
-  plainTextData: PlainTextComponentDataCreateOneWithoutComponentsInput
+  linkData: LinkComponentDataCreateOneWithoutComponentInput
+  plainTextData: PlainTextComponentDataCreateOneWithoutComponentInput
   published: Boolean
+  team: TeamCreateOneWithoutComponentsInput!
   type: ComponentType
   updatedAt: DateTime
 }
 
 input ComponentCreateWithoutCollectionInput {
-  articleData: ArticleComponentDataCreateOneWithoutComponentsInput
+  articleData: ArticleComponentDataCreateOneWithoutComponentInput
   author: UserCreateOneWithoutComponentsInput!
   createdAt: DateTime
   id: String
-  linkData: LinkComponentDataCreateOneWithoutComponentsInput
-  plainTextData: PlainTextComponentDataCreateOneWithoutComponentsInput
+  linkData: LinkComponentDataCreateOneWithoutComponentInput
+  plainTextData: PlainTextComponentDataCreateOneWithoutComponentInput
+  published: Boolean
+  team: TeamCreateOneWithoutComponentsInput!
+  type: ComponentType
+  updatedAt: DateTime
+}
+
+input ComponentCreateWithoutTeamInput {
+  articleData: ArticleComponentDataCreateOneWithoutComponentInput
+  author: UserCreateOneWithoutComponentsInput!
+  collection: CollectionCreateOneWithoutComponentsInput!
+  createdAt: DateTime
+  id: String
+  linkData: LinkComponentDataCreateOneWithoutComponentInput
+  plainTextData: PlainTextComponentDataCreateOneWithoutComponentInput
   published: Boolean
   type: ComponentType
   updatedAt: DateTime
@@ -275,11 +321,14 @@ input ComponentFilter {
 
 input ComponentScalarWhereInput {
   AND: [ComponentScalarWhereInput!]
+  authorId: StringFilter
+  collectionId: StringFilter
   createdAt: DateTimeFilter
   id: StringFilter
   NOT: [ComponentScalarWhereInput!]
   OR: [ComponentScalarWhereInput!]
   published: BooleanFilter
+  teamId: StringFilter
   type: ComponentType
   updatedAt: DateTimeFilter
 }
@@ -288,6 +337,20 @@ enum ComponentType {
   ARTICLE
   LINK
   PLAIN_TEXT
+}
+
+input ComponentUpdateInput {
+  articleData: ArticleComponentDataUpdateOneWithoutComponentInput
+  author: UserUpdateOneRequiredWithoutComponentsInput
+  collection: CollectionUpdateOneRequiredWithoutComponentsInput
+  createdAt: DateTime
+  id: String
+  linkData: LinkComponentDataUpdateOneWithoutComponentInput
+  plainTextData: PlainTextComponentDataUpdateOneWithoutComponentInput
+  published: Boolean
+  team: TeamUpdateOneRequiredWithoutComponentsInput
+  type: ComponentType
+  updatedAt: DateTime
 }
 
 input ComponentUpdateManyDataInput {
@@ -322,30 +385,57 @@ input ComponentUpdateManyWithoutCollectionInput {
   upsert: [ComponentUpsertWithWhereUniqueWithoutCollectionInput!]
 }
 
+input ComponentUpdateManyWithoutTeamInput {
+  connect: [ComponentWhereUniqueInput!]
+  create: [ComponentCreateWithoutTeamInput!]
+  delete: [ComponentWhereUniqueInput!]
+  deleteMany: [ComponentScalarWhereInput!]
+  disconnect: [ComponentWhereUniqueInput!]
+  set: [ComponentWhereUniqueInput!]
+  update: [ComponentUpdateWithWhereUniqueWithoutTeamInput!]
+  updateMany: [ComponentUpdateManyWithWhereNestedInput!]
+  upsert: [ComponentUpsertWithWhereUniqueWithoutTeamInput!]
+}
+
 input ComponentUpdateManyWithWhereNestedInput {
   data: ComponentUpdateManyDataInput!
   where: ComponentScalarWhereInput!
 }
 
 input ComponentUpdateWithoutAuthorDataInput {
-  articleData: ArticleComponentDataUpdateOneWithoutComponentsInput
+  articleData: ArticleComponentDataUpdateOneWithoutComponentInput
   collection: CollectionUpdateOneRequiredWithoutComponentsInput
   createdAt: DateTime
   id: String
-  linkData: LinkComponentDataUpdateOneWithoutComponentsInput
-  plainTextData: PlainTextComponentDataUpdateOneWithoutComponentsInput
+  linkData: LinkComponentDataUpdateOneWithoutComponentInput
+  plainTextData: PlainTextComponentDataUpdateOneWithoutComponentInput
   published: Boolean
+  team: TeamUpdateOneRequiredWithoutComponentsInput
   type: ComponentType
   updatedAt: DateTime
 }
 
 input ComponentUpdateWithoutCollectionDataInput {
-  articleData: ArticleComponentDataUpdateOneWithoutComponentsInput
+  articleData: ArticleComponentDataUpdateOneWithoutComponentInput
   author: UserUpdateOneRequiredWithoutComponentsInput
   createdAt: DateTime
   id: String
-  linkData: LinkComponentDataUpdateOneWithoutComponentsInput
-  plainTextData: PlainTextComponentDataUpdateOneWithoutComponentsInput
+  linkData: LinkComponentDataUpdateOneWithoutComponentInput
+  plainTextData: PlainTextComponentDataUpdateOneWithoutComponentInput
+  published: Boolean
+  team: TeamUpdateOneRequiredWithoutComponentsInput
+  type: ComponentType
+  updatedAt: DateTime
+}
+
+input ComponentUpdateWithoutTeamDataInput {
+  articleData: ArticleComponentDataUpdateOneWithoutComponentInput
+  author: UserUpdateOneRequiredWithoutComponentsInput
+  collection: CollectionUpdateOneRequiredWithoutComponentsInput
+  createdAt: DateTime
+  id: String
+  linkData: LinkComponentDataUpdateOneWithoutComponentInput
+  plainTextData: PlainTextComponentDataUpdateOneWithoutComponentInput
   published: Boolean
   type: ComponentType
   updatedAt: DateTime
@@ -361,6 +451,11 @@ input ComponentUpdateWithWhereUniqueWithoutCollectionInput {
   where: ComponentWhereUniqueInput!
 }
 
+input ComponentUpdateWithWhereUniqueWithoutTeamInput {
+  data: ComponentUpdateWithoutTeamDataInput!
+  where: ComponentWhereUniqueInput!
+}
+
 input ComponentUpsertWithWhereUniqueWithoutAuthorInput {
   create: ComponentCreateWithoutAuthorInput!
   update: ComponentUpdateWithoutAuthorDataInput!
@@ -373,11 +468,19 @@ input ComponentUpsertWithWhereUniqueWithoutCollectionInput {
   where: ComponentWhereUniqueInput!
 }
 
+input ComponentUpsertWithWhereUniqueWithoutTeamInput {
+  create: ComponentCreateWithoutTeamInput!
+  update: ComponentUpdateWithoutTeamDataInput!
+  where: ComponentWhereUniqueInput!
+}
+
 input ComponentWhereInput {
   AND: [ComponentWhereInput!]
   articleData: ArticleComponentDataWhereInput
   author: UserWhereInput
+  authorId: StringFilter
   collection: CollectionWhereInput
+  collectionId: StringFilter
   createdAt: DateTimeFilter
   id: StringFilter
   linkData: LinkComponentDataWhereInput
@@ -385,6 +488,8 @@ input ComponentWhereInput {
   OR: [ComponentWhereInput!]
   plainTextData: PlainTextComponentDataWhereInput
   published: BooleanFilter
+  team: TeamWhereInput
+  teamId: StringFilter
   type: ComponentType
   updatedAt: DateTimeFilter
 }
@@ -406,40 +511,41 @@ input DateTimeFilter {
   notIn: [DateTime!]
 }
 
-input LinkComponentDataCreateOneWithoutComponentsInput {
+input LinkComponentDataCreateOneWithoutComponentInput {
   connect: LinkComponentDataWhereUniqueInput
-  create: LinkComponentDataCreateWithoutComponentsInput
+  create: LinkComponentDataCreateWithoutComponentInput
 }
 
-input LinkComponentDataCreateWithoutComponentsInput {
+input LinkComponentDataCreateWithoutComponentInput {
   id: String
   text: String
   url: String!
 }
 
-input LinkComponentDataUpdateOneWithoutComponentsInput {
+input LinkComponentDataUpdateOneWithoutComponentInput {
   connect: LinkComponentDataWhereUniqueInput
-  create: LinkComponentDataCreateWithoutComponentsInput
+  create: LinkComponentDataCreateWithoutComponentInput
   delete: Boolean
   disconnect: Boolean
-  update: LinkComponentDataUpdateWithoutComponentsDataInput
-  upsert: LinkComponentDataUpsertWithoutComponentsInput
+  update: LinkComponentDataUpdateWithoutComponentDataInput
+  upsert: LinkComponentDataUpsertWithoutComponentInput
 }
 
-input LinkComponentDataUpdateWithoutComponentsDataInput {
+input LinkComponentDataUpdateWithoutComponentDataInput {
   id: String
   text: String
   url: String
 }
 
-input LinkComponentDataUpsertWithoutComponentsInput {
-  create: LinkComponentDataCreateWithoutComponentsInput!
-  update: LinkComponentDataUpdateWithoutComponentsDataInput!
+input LinkComponentDataUpsertWithoutComponentInput {
+  create: LinkComponentDataCreateWithoutComponentInput!
+  update: LinkComponentDataUpdateWithoutComponentDataInput!
 }
 
 input LinkComponentDataWhereInput {
   AND: [LinkComponentDataWhereInput!]
-  components: ComponentFilter
+  component: ComponentWhereInput
+  componentId: StringFilter
   id: StringFilter
   NOT: [LinkComponentDataWhereInput!]
   OR: [LinkComponentDataWhereInput!]
@@ -453,14 +559,12 @@ input LinkComponentDataWhereUniqueInput {
 
 type Mutation {
   createOneCollection(data: CollectionCreateInput!): Collection!
+  createOneComponent(data: ComponentCreateInput!): Component!
   deleteOneCollection(where: CollectionWhereUniqueInput!): Collection
+  deleteOneComponent(where: ComponentWhereUniqueInput!): Component
   signIn(code: String!): SignInOutput
   updateOneCollection(data: CollectionUpdateInput!, where: CollectionWhereUniqueInput!): Collection
-}
-
-input NameTeamCompoundUniqueInput {
-  name: String!
-  team: String!
+  updateOneComponent(data: ComponentUpdateInput!, where: ComponentWhereUniqueInput!): Component
 }
 
 input NullableStringFilter {
@@ -485,38 +589,39 @@ input PaginationInput {
   skip: Int
 }
 
-input PlainTextComponentDataCreateOneWithoutComponentsInput {
+input PlainTextComponentDataCreateOneWithoutComponentInput {
   connect: PlainTextComponentDataWhereUniqueInput
-  create: PlainTextComponentDataCreateWithoutComponentsInput
+  create: PlainTextComponentDataCreateWithoutComponentInput
 }
 
-input PlainTextComponentDataCreateWithoutComponentsInput {
+input PlainTextComponentDataCreateWithoutComponentInput {
   id: String
   text: String!
 }
 
-input PlainTextComponentDataUpdateOneWithoutComponentsInput {
+input PlainTextComponentDataUpdateOneWithoutComponentInput {
   connect: PlainTextComponentDataWhereUniqueInput
-  create: PlainTextComponentDataCreateWithoutComponentsInput
+  create: PlainTextComponentDataCreateWithoutComponentInput
   delete: Boolean
   disconnect: Boolean
-  update: PlainTextComponentDataUpdateWithoutComponentsDataInput
-  upsert: PlainTextComponentDataUpsertWithoutComponentsInput
+  update: PlainTextComponentDataUpdateWithoutComponentDataInput
+  upsert: PlainTextComponentDataUpsertWithoutComponentInput
 }
 
-input PlainTextComponentDataUpdateWithoutComponentsDataInput {
+input PlainTextComponentDataUpdateWithoutComponentDataInput {
   id: String
   text: String
 }
 
-input PlainTextComponentDataUpsertWithoutComponentsInput {
-  create: PlainTextComponentDataCreateWithoutComponentsInput!
-  update: PlainTextComponentDataUpdateWithoutComponentsDataInput!
+input PlainTextComponentDataUpsertWithoutComponentInput {
+  create: PlainTextComponentDataCreateWithoutComponentInput!
+  update: PlainTextComponentDataUpdateWithoutComponentDataInput!
 }
 
 input PlainTextComponentDataWhereInput {
   AND: [PlainTextComponentDataWhereInput!]
-  components: ComponentFilter
+  component: ComponentWhereInput
+  componentId: StringFilter
   id: StringFilter
   NOT: [PlainTextComponentDataWhereInput!]
   OR: [PlainTextComponentDataWhereInput!]
@@ -529,6 +634,7 @@ input PlainTextComponentDataWhereUniqueInput {
 
 type Query {
   collections(input: PaginationInput): [Collection!]!
+  components(input: PaginationInput, where: ComponentWhereInput): [Component!]!
   getUser: User
 }
 
@@ -563,6 +669,11 @@ input TeamCreateOneWithoutCollectionsInput {
   create: TeamCreateWithoutCollectionsInput
 }
 
+input TeamCreateOneWithoutComponentsInput {
+  connect: TeamWhereUniqueInput
+  create: TeamCreateWithoutComponentsInput
+}
+
 input TeamCreateOneWithoutUsersInput {
   connect: TeamWhereUniqueInput
   create: TeamCreateWithoutUsersInput
@@ -570,6 +681,16 @@ input TeamCreateOneWithoutUsersInput {
 
 input TeamCreateWithoutCollectionsInput {
   accessToken: String!
+  components: ComponentCreateManyWithoutTeamInput
+  domain: String!
+  id: String!
+  name: String!
+  users: UserCreateManyWithoutTeamInput
+}
+
+input TeamCreateWithoutComponentsInput {
+  accessToken: String!
+  collections: CollectionCreateManyWithoutTeamInput
   domain: String!
   id: String!
   name: String!
@@ -579,6 +700,7 @@ input TeamCreateWithoutCollectionsInput {
 input TeamCreateWithoutUsersInput {
   accessToken: String!
   collections: CollectionCreateManyWithoutTeamInput
+  components: ComponentCreateManyWithoutTeamInput
   domain: String!
   id: String!
   name: String!
@@ -591,6 +713,13 @@ input TeamUpdateOneRequiredWithoutCollectionsInput {
   upsert: TeamUpsertWithoutCollectionsInput
 }
 
+input TeamUpdateOneRequiredWithoutComponentsInput {
+  connect: TeamWhereUniqueInput
+  create: TeamCreateWithoutComponentsInput
+  update: TeamUpdateWithoutComponentsDataInput
+  upsert: TeamUpsertWithoutComponentsInput
+}
+
 input TeamUpdateOneRequiredWithoutUsersInput {
   connect: TeamWhereUniqueInput
   create: TeamCreateWithoutUsersInput
@@ -600,6 +729,16 @@ input TeamUpdateOneRequiredWithoutUsersInput {
 
 input TeamUpdateWithoutCollectionsDataInput {
   accessToken: String
+  components: ComponentUpdateManyWithoutTeamInput
+  domain: String
+  id: String
+  name: String
+  users: UserUpdateManyWithoutTeamInput
+}
+
+input TeamUpdateWithoutComponentsDataInput {
+  accessToken: String
+  collections: CollectionUpdateManyWithoutTeamInput
   domain: String
   id: String
   name: String
@@ -609,6 +748,7 @@ input TeamUpdateWithoutCollectionsDataInput {
 input TeamUpdateWithoutUsersDataInput {
   accessToken: String
   collections: CollectionUpdateManyWithoutTeamInput
+  components: ComponentUpdateManyWithoutTeamInput
   domain: String
   id: String
   name: String
@@ -617,6 +757,11 @@ input TeamUpdateWithoutUsersDataInput {
 input TeamUpsertWithoutCollectionsInput {
   create: TeamCreateWithoutCollectionsInput!
   update: TeamUpdateWithoutCollectionsDataInput!
+}
+
+input TeamUpsertWithoutComponentsInput {
+  create: TeamCreateWithoutComponentsInput!
+  update: TeamUpdateWithoutComponentsDataInput!
 }
 
 input TeamUpsertWithoutUsersInput {
@@ -628,6 +773,7 @@ input TeamWhereInput {
   accessToken: StringFilter
   AND: [TeamWhereInput!]
   collections: CollectionFilter
+  components: ComponentFilter
   domain: StringFilter
   id: StringFilter
   name: StringFilter
@@ -715,6 +861,7 @@ input UserScalarWhereInput {
   name: StringFilter
   NOT: [UserScalarWhereInput!]
   OR: [UserScalarWhereInput!]
+  teamId: StringFilter
 }
 
 input UserUpdateManyDataInput {
@@ -814,6 +961,7 @@ input UserWhereInput {
   NOT: [UserWhereInput!]
   OR: [UserWhereInput!]
   team: TeamWhereInput
+  teamId: StringFilter
 }
 
 input UserWhereUniqueInput {

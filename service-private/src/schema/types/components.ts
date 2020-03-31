@@ -12,5 +12,6 @@ export const Component = objectType({
     t.model.type();
     t.model.published();
     t.model.author();
+    t.model.team();
   },
 });

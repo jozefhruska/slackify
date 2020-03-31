@@ -1,17 +1,6 @@
 # IF THERE'S A GIT CONFLICT IN THIS FILE, DON'T SOLVE IT MANUALLY!
-# INSTEAD EXECUTE `prisma2 migrate fix`
+# INSTEAD EXECUTE `prisma migrate fix`
 # Prisma Migrate lockfile v1
 # Read more about conflict resolution here: TODO
 
-20200305194616-init
-20200313175008-add-user-avatars
-20200315172318-rename-post-to-component
-20200315184121-split-component-types
-20200315185351-add-missing-relations-to-component-data-models
-20200315185957-add-missing-id-tag-to-collection
-20200317204207-add-type-to-collection-model
-20200320190327-add-missing-url-field-to-link-data-model
-20200320201009-make-article-lead-optional
-20200321131604-specify-relations-with-component-data
-20200327122650-add-update-and-published-flags-to-collection-model
-20200328185927-remove-collection-name-and-team-constraint
+20200331183322-prisma-beta-init
