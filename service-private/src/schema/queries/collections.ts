@@ -5,7 +5,7 @@ import { FieldResolver } from 'nexus';
  */
 export const collections: FieldResolver<'Query', 'collections'> = async (
   _,
-  { input },
+  { input } = {},
   { team, prisma }
 ) => {
   return prisma.collection.findMany({
@@ -14,6 +14,9 @@ export const collections: FieldResolver<'Query', 'collections'> = async (
         id: team?.id,
       },
     },
-    ...input,
+    orderBy: {
+      createdAt: 'desc',
+    },
+    ...input?.pagination,
   });
 };

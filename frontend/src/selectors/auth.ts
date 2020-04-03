@@ -1,6 +1,7 @@
 import { createSelector } from 'reselect';
+
 import { AppState } from '../reducers';
 
-const getAuthState = (state: AppState) => state.auth;
+const getState = (state: AppState) => state.auth;
 
-export const selectUser = createSelector(getAuthState, state => state.user);
+export const selectUser = createSelector(getState, state => state.user);

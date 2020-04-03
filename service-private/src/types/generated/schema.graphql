@@ -2,6 +2,13 @@
 ### Do not make changes to this file directly
 
 
+type ArticleComponentData {
+  content: String!
+  id: String!
+  lead: String
+  title: String!
+}
+
 input ArticleComponentDataCreateOneWithoutComponentInput {
   connect: ArticleComponentDataWhereUniqueInput
   create: ArticleComponentDataCreateWithoutComponentInput
@@ -133,6 +140,10 @@ input CollectionScalarWhereInput {
   updatedAt: DateTimeFilter
 }
 
+input CollectionsListingInput {
+  pagination: PaginationInput
+}
+
 input CollectionUpdateInput {
   components: ComponentUpdateManyWithoutCollectionInput
   createdAt: DateTime
@@ -238,11 +249,16 @@ input CollectionWhereUniqueInput {
 }
 
 type Component {
+  articleData: ArticleComponentData
   author: User!
+  createdAt: DateTime!
   id: String!
+  linkData: LinkComponentData
+  plainTextData: PlainTextComponentData
   published: Boolean!
   team: Team!
   type: ComponentType!
+  updatedAt: DateTime!
 }
 
 input ComponentCreateInput {
@@ -331,6 +347,11 @@ input ComponentScalarWhereInput {
   teamId: StringFilter
   type: ComponentType
   updatedAt: DateTimeFilter
+}
+
+input ComponentsListingInput {
+  collectionId: String
+  pagination: PaginationInput
 }
 
 enum ComponentType {
@@ -511,6 +532,12 @@ input DateTimeFilter {
   notIn: [DateTime!]
 }
 
+type LinkComponentData {
+  id: String!
+  text: String
+  url: String!
+}
+
 input LinkComponentDataCreateOneWithoutComponentInput {
   connect: LinkComponentDataWhereUniqueInput
   create: LinkComponentDataCreateWithoutComponentInput
@@ -589,6 +616,11 @@ input PaginationInput {
   skip: Int
 }
 
+type PlainTextComponentData {
+  id: String!
+  text: String!
+}
+
 input PlainTextComponentDataCreateOneWithoutComponentInput {
   connect: PlainTextComponentDataWhereUniqueInput
   create: PlainTextComponentDataCreateWithoutComponentInput
@@ -633,8 +665,8 @@ input PlainTextComponentDataWhereUniqueInput {
 }
 
 type Query {
-  collections(input: PaginationInput): [Collection!]!
-  components(input: PaginationInput, where: ComponentWhereInput): [Component!]!
+  collections(input: CollectionsListingInput): [Collection!]!
+  components(input: ComponentsListingInput): [Component!]!
   getUser: User
 }
 

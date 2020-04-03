@@ -89,7 +89,9 @@ const CreateUpdateModal: React.FC = () => {
                     query: GET_COLLECTIONS_LISTING,
                     variables: {
                       input: {
-                        first: 40,
+                        pagination: {
+                          first: 40,
+                        },
                       },
                     },
                   });
@@ -102,7 +104,9 @@ const CreateUpdateModal: React.FC = () => {
                       },
                       variables: {
                         input: {
-                          first: 40,
+                          pagination: {
+                            first: 40,
+                          },
                         },
                       },
                     }

@@ -1,4 +1,13 @@
-import { objectType } from 'nexus';
+import { objectType, inputObjectType } from 'nexus';
+
+export const CollectionsListingInput = inputObjectType({
+  name: 'CollectionsListingInput',
+  definition(t) {
+    t.field('pagination', {
+      type: 'PaginationInput',
+    });
+  },
+});
 
 export const Collection = objectType({
   name: 'Collection',

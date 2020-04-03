@@ -13,7 +13,18 @@ export const components: FieldResolver<'Query', 'components'> = async (
       team: {
         id: team?.id,
       },
+      collection: {
+        id: input?.collectionId,
+      },
     },
-    ...input,
+    orderBy: {
+      createdAt: 'desc',
+    },
+    include: {
+      plainTextData: true,
+      articleData: true,
+      linkData: true,
+    },
+    ...input?.pagination,
   });
 };

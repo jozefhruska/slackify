@@ -1,24 +1,8 @@
-import { objectType, inputObjectType } from 'nexus';
+import { objectType } from 'nexus';
 
 import { collections } from './collections';
 import { components } from './components';
-
-export const PaginationInput = inputObjectType({
-  name: 'PaginationInput',
-  definition(t) {
-    t.int('skip', { required: false });
-    t.field('after', {
-      type: 'CollectionWhereUniqueInput',
-      required: false,
-    });
-    t.field('before', {
-      type: 'CollectionWhereUniqueInput',
-      required: false,
-    });
-    t.int('first', { required: false });
-    t.int('last', { required: false });
-  },
-});
+import { ComponentsListingInput, CollectionsListingInput } from '../types';
 
 export const Query = objectType({
   name: 'Query',
@@ -35,7 +19,7 @@ export const Query = objectType({
       type: 'Collection',
       list: true,
       args: {
-        input: PaginationInput,
+        input: CollectionsListingInput,
       },
       resolve: collections,
     });
@@ -45,8 +29,7 @@ export const Query = objectType({
       type: 'Component',
       list: true,
       args: {
-        input: PaginationInput,
-        where: 'ComponentWhereInput',
+        input: ComponentsListingInput,
       },
       resolve: components,
     });

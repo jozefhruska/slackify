@@ -22,7 +22,9 @@ const ListingPage: React.FC = () => {
   >(GET_COLLECTIONS_LISTING, {
     variables: {
       input: {
-        first: 40,
+        pagination: {
+          first: 40,
+        },
       },
     },
   });
@@ -37,8 +39,10 @@ const ListingPage: React.FC = () => {
         fetchMore({
           variables: {
             input: {
-              skip: data?.collections?.length,
-              first: 20,
+              pagination: {
+                skip: data?.collections?.length,
+                first: 20,
+              },
             },
           },
           updateQuery: (prev, { fetchMoreResult }) => {
@@ -46,7 +50,7 @@ const ListingPage: React.FC = () => {
               return prev;
             }
 
-            if (!fetchMoreResult?.collections.length) {
+            if (!fetchMoreResult?.collections?.length) {
               setOutOfResults(true);
             }
 
@@ -74,7 +78,7 @@ const ListingPage: React.FC = () => {
     return (
       <>
         <Listing>
-          {data.collections?.map(collection => (
+          {data.collections?.map((collection) => (
             <ListingItem key={collection?.id} collection={collection} />
           ))}
         </Listing>

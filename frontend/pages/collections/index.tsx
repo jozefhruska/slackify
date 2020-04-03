@@ -10,7 +10,7 @@ import { loadUserData } from '../../src/utils';
 import ListingPage from '../../src/components/collections/listing/ListingPage/ListingPage';
 import { User } from '../../src/types/generated/graphql';
 import { StoreUser } from '../../src/actions/auth';
-import { OpenCollectionsCreateUpdateModal } from '../../src/actions/collections';
+import { OpenCreateUpdateModal } from '../../src/actions/collections';
 
 /* Props - <CollectionsPage />
 ============================================================================= */
@@ -21,7 +21,7 @@ type Props = {
 /* <CollectionsPage />
 ============================================================================= */
 const CollectionsPage: NextPage<Props> = ({ user }) => {
-  const dispatch = useDispatch<Dispatch<StoreUser | OpenCollectionsCreateUpdateModal>>();
+  const dispatch = useDispatch<Dispatch<StoreUser | OpenCreateUpdateModal>>();
 
   useEffect(() => {
     dispatch({ type: '[AUTH] STORE_USER', payload: { user } });

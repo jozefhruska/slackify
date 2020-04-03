@@ -3,24 +3,28 @@ import { useQuery } from '@apollo/client';
 import { useInView } from 'react-intersection-observer';
 
 import Listing from '../../../common/layout/Listing/Listing';
-import { GET_COLLECTIONS_LISTING } from '../../../../api/query/collections';
 import {
-  GetCollectionsListingQueryVariables,
-  GetCollectionsListingQuery,
+  GetComponentsListingQuery,
+  GetComponentsListingQueryVariables,
 } from '../../../../types/generated/graphql';
 import { PageLoader, ListingLoader } from '../../../common/misc';
 import { Flex } from '../../../common/layout/base';
+import { GET_COMPONENTS_LISTING } from '../../../../api/query/components';
+import CreateUpdateModal from '../../CreateUpdateModal/CreateUpdateModal';
+import ListingItem from '../ListingItem/ListingItem';
 
 /* <ListingPage />
 ============================================================================= */
 const ListingPage: React.FC = () => {
   const { data, error, loading, fetchMore } = useQuery<
-    GetCollectionsListingQuery,
-    GetCollectionsListingQueryVariables
-  >(GET_COLLECTIONS_LISTING, {
+    GetComponentsListingQuery,
+    GetComponentsListingQueryVariables
+  >(GET_COMPONENTS_LISTING, {
     variables: {
       input: {
-        first: 40,
+        pagination: {
+          first: 40,
+        },
       },
     },
   });
@@ -35,8 +39,10 @@ const ListingPage: React.FC = () => {
         fetchMore({
           variables: {
             input: {
-              skip: data?.collections?.length,
-              first: 20,
+              pagination: {
+                skip: data?.components?.length,
+                first: 20,
+              },
             },
           },
           updateQuery: (prev, { fetchMoreResult }) => {
@@ -44,12 +50,12 @@ const ListingPage: React.FC = () => {
               return prev;
             }
 
-            if (!fetchMoreResult?.collections.length) {
+            if (!fetchMoreResult?.components?.length) {
               setOutOfResults(true);
             }
 
             return Object.assign({}, prev, {
-              collections: [...prev.collections, ...fetchMoreResult.collections],
+              components: [...prev.components, ...fetchMoreResult.components],
             });
           },
         });
@@ -65,13 +71,17 @@ const ListingPage: React.FC = () => {
   }
 
   if (loading) {
-    return <PageLoader message="Loading collections, please wait..." />;
+    return <PageLoader message="Loading components, please wait..." />;
   }
 
   if (data) {
     return (
       <>
-        <Listing></Listing>
+        <Listing>
+          {data.components?.map((component) => (
+            <ListingItem key={component?.id} component={component} />
+          ))}
+        </Listing>
 
         {!isOutOfResults ? (
           <Flex
@@ -82,13 +92,15 @@ const ListingPage: React.FC = () => {
             mt="s10"
           >
             <ListingLoader />
-            Loading more collections...
+            Loading more components...
           </Flex>
         ) : (
           <Flex justifyContent="center" mt="s10">
-            There are no more collections.
+            There are no more components.
           </Flex>
         )}
+
+        <CreateUpdateModal />
       </>
     );
   }

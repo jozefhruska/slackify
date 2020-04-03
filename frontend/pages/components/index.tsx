@@ -9,6 +9,8 @@ import { withApollo } from '../../src/api';
 import { loadUserData } from '../../src/utils';
 import { User } from '../../src/types/generated/graphql';
 import { StoreUser } from '../../src/actions/auth';
+import ListingPage from '../../src/components/components/listing/ListingPage/ListingPage';
+import { OpenCreateUpdateModal } from '../../src/actions/components';
 
 /* Props - <ComponentsPage />
 ============================================================================= */
@@ -19,7 +21,7 @@ type Props = {
 /* <ComponentsPage />
 ============================================================================= */
 const ComponentsPage: NextPage<Props> = ({ user }) => {
-  const dispatch = useDispatch<Dispatch<StoreUser>>();
+  const dispatch = useDispatch<Dispatch<StoreUser | OpenCreateUpdateModal>>();
 
   useEffect(() => {
     dispatch({ type: '[AUTH] STORE_USER', payload: { user } });
@@ -41,9 +43,19 @@ const ComponentsPage: NextPage<Props> = ({ user }) => {
           primaryButton={{
             icon: <FiPlus />,
             text: 'Add new component',
-            onClick: () => null,
+            onClick: () =>
+              dispatch({
+                type: '[COMPONENTS] OPEN_CREATE_UPDATE_MODAL',
+                payload: {
+                  state: {
+                    mode: 'create',
+                  },
+                },
+              }),
           }}
         />
+
+        <ListingPage />
       </Content>
     </>
   );

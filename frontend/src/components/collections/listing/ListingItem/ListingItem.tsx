@@ -19,7 +19,7 @@ import { Button, PopperButton } from '../../../common/misc';
 import { DELETE_ONE_COLLECTION, UPDATE_ONE_COLLECTION } from '../../../../api/mutation/collections';
 import { GET_COLLECTIONS_LISTING } from '../../../../api/query/collections';
 import { humanizeComponentType } from '../../../../utils';
-import { OpenCollectionsCreateUpdateModal } from '../../../../actions/collections';
+import { OpenCreateUpdateModal } from '../../../../actions/collections';
 
 import * as S from './ListingItem.styles';
 
@@ -32,7 +32,7 @@ type Props = {
 /* <ListingItem />
 ============================================================================= */
 const ListingItem: React.FC<Props> = ({ collection }) => {
-  const dispatch = useDispatch<Dispatch<OpenCollectionsCreateUpdateModal>>();
+  const dispatch = useDispatch<Dispatch<OpenCreateUpdateModal>>();
 
   const [deleteCollection, { loading: deleteLoading }] = useMutation<
     DeleteOneCollectionMutation,
@@ -130,7 +130,9 @@ const ListingItem: React.FC<Props> = ({ collection }) => {
                           query: GET_COLLECTIONS_LISTING,
                           variables: {
                             input: {
-                              first: 40,
+                              pagination: {
+                                first: 40,
+                              },
                             },
                           },
                         });
@@ -142,12 +144,14 @@ const ListingItem: React.FC<Props> = ({ collection }) => {
                           query: GET_COLLECTIONS_LISTING,
                           data: {
                             collections: collections.filter(
-                              collection => collection.id !== deleteOneCollection?.id
+                              (collection) => collection.id !== deleteOneCollection?.id
                             ),
                           },
                           variables: {
                             input: {
-                              first: 40,
+                              pagination: {
+                                first: 40,
+                              },
                             },
                           },
                         });
