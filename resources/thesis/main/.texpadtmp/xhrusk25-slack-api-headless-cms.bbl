@@ -2,6 +2,12 @@
 \makeatother
 \begin{thebibliography}{1}
 
+\bibitem{CamDict}
+{\sc\bgroup}{Cambridge University}{\egroup}.
+\newblock {\em Cambridge Dictionary} [online].
+\newblock Cambridge University Press {\small [cit. 2020-04-03]}.
+\newblock Dostupn{\'{e}} z: ~{\small\url{https://dictionary.cambridge.org/}}.
+
 \bibitem{CernockyEnglish}
 {\sc\bgroup}Černocký{\egroup}, J.
 \newblock {\em English SOS} [online].
@@ -14,6 +20,24 @@
 \newblock {\em Herout.net -- Poznámky učitele, kouče, čtenáře.} [online].
 \newblock 2018 {\small [cit. 2019-10-02]}.
 \newblock Dostupn{\'{e}} z: ~{\small\url{http://www.herout.net/}}.
+
+\bibitem{NetlifyDocs}
+{\sc\bgroup}{Komunita Netlify CMS}{\egroup}.
+\newblock {\em Dokumentácia Netlify CMS} [online].
+\newblock Netlify.com, apríl 2020 {\small [cit. 2020-04-03]}.
+\newblock Dostupn{\'{e}} z: ~{\small\url{https://strapi.io/documentation/}}.
+
+\bibitem{StrapiDocs}
+{\sc\bgroup}{Komunita Strapi.io}{\egroup}.
+\newblock {\em Dokumentácia Strapi.io} [online].
+\newblock Strapi Solutions, apríl 2020 {\small [cit. 2020-04-03]}.
+\newblock Dostupn{\'{e}} z: ~{\small\url{https://strapi.io/documentation/}}.
+
+\bibitem{TSWeb}
+{\sc\bgroup}{Microsoft Corporation}{\egroup}.
+\newblock {\em TypeScript} [online].
+\newblock Microsoft Corporation {\small [cit. 2020-04-03]}.
+\newblock Dostupn{\'{e}} z: ~{\small\url{https://www.typescriptlang.org}}.
 
 \bibitem{Pysny}
 {\sc\bgroup}Py{\v{s}}n{\'{y}}{\egroup}, R.
