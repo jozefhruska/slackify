@@ -10,7 +10,7 @@ Reallocated singl_function (elt_size=4) to 100 items from 50.
 Reallocated singl_function (elt_size=4) to 100 items from 50.
 Reallocated singl_function (elt_size=4) to 100 items from 50.
 Database file #1: xhrusk25-slack-api-headless-cms-20-literatura-bibliography.bib
-I was expecting a `,' or a `}'---line 96 of file xhrusk25-slack-api-headless-cms-20-literatura-bibliography.bib
+I was expecting a `,' or a `}'---line 119 of file xhrusk25-slack-api-headless-cms-20-literatura-bibliography.bib
  :    
  :    publisher = "{RFC Editor}",
 (Error may have been on previous line)
@@ -35,49 +35,55 @@ Warning--empty year in NPM
 Warning--empty year and revised in NPM
 Warning--empty year in NodeJS
 Warning--empty year and revised in NodeJS
+Warning--empty year in Prisma
+Warning--empty year and revised in Prisma
+Warning--empty year in SlackAPI
+Warning--empty year and revised in SlackAPI
 Warning--empty year in GraphQL
 Warning--empty year and revised in GraphQL
+Warning--empty year in PostgreSQL
+Warning--empty year and revised in PostgreSQL
 Warning--empty year in NextJS
 Warning--empty year and revised in NextJS
-You've used 12 entries,
+You've used 15 entries,
             3946 wiz_defined-function locations,
-            884 strings with 6547 characters,
-and the built_in function-call counts, 5053 in all, are:
-= -- 389
-> -- 149
-< -- 12
-+ -- 54
-- -- 42
-* -- 294
-:= -- 594
-add.period$ -- 36
-call.type$ -- 12
-change.case$ -- 86
+            897 strings with 6731 characters,
+and the built_in function-call counts, 6244 in all, are:
+= -- 479
+> -- 176
+< -- 15
++ -- 63
+- -- 48
+* -- 360
+:= -- 726
+add.period$ -- 45
+call.type$ -- 15
+change.case$ -- 104
 chr.to.int$ -- 0
-cite$ -- 34
-duplicate$ -- 321
-empty$ -- 709
-format.name$ -- 42
-if$ -- 1244
+cite$ -- 43
+duplicate$ -- 402
+empty$ -- 889
+format.name$ -- 48
+if$ -- 1544
 int.to.chr$ -- 0
-int.to.str$ -- 12
+int.to.str$ -- 15
 missing$ -- 0
-newline$ -- 77
-num.names$ -- 24
-pop$ -- 196
+newline$ -- 95
+num.names$ -- 30
+pop$ -- 244
 preamble$ -- 1
-purify$ -- 50
+purify$ -- 59
 quote$ -- 0
-skip$ -- 263
+skip$ -- 329
 stack$ -- 0
-substring$ -- 98
-swap$ -- 59
-text.length$ -- 23
+substring$ -- 122
+swap$ -- 74
+text.length$ -- 29
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 24
-warning$ -- 22
-while$ -- 24
-width$ -- 14
-write$ -- 148
+type$ -- 30
+warning$ -- 28
+while$ -- 30
+width$ -- 17
+write$ -- 184
 (There was 1 error message)

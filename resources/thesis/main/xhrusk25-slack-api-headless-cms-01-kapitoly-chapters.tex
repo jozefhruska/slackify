@@ -18,7 +18,7 @@ Správa obsahu a jeho doručenie konzumentom. Táto kapitola popisuje základné
 
 \section{Redakčné systémy s~otvoreným aplikačným rozhraním}
 \label{section:headless}
-Redakčné systémy disponujúce iba skrytou administračnou časťou a verejným aplikačným rozhraním sú typicky nazývané \textbf{headless}\footnote{headless -- ang. bez hlavy (bez webového rozhrania)} redakčné systémy. Tieto riešenia štandardne disponujú rozhraním REST\footnote{REST -- Representational State Transfer} alebo GraphQL, ktoré implementuje aj táto práca. Headless redakčný systém nerieši zobrazenie samotného obsahu. Jediný spôsob ako obsah získať je využiť niektoré z~dostupných rozhraní poskytované konkrétnym riešením. Výhodou oproti tradičným redakčným systémom je možnosť získané dáta optimalizovane zobraziť na rôznych zariadeniach. 
+Redakčné systémy disponujúce iba skrytou administračnou časťou a verejným aplikačným rozhraním sú typicky nazývané \emph{headless}\footnote{headless -- ang. bez hlavy (bez webového rozhrania)} redakčné systémy. Tieto riešenia štandardne disponujú rozhraním REST\footnote{REST -- Representational State Transfer} alebo \nameref{section:graphql}, ktoré implementuje aj táto práca. Headless redakčný systém nerieši zobrazenie samotného obsahu. Jediný spôsob ako obsah získať je využiť niektoré z~dostupných rozhraní poskytované konkrétnym riešením. Výhodou oproti tradičným redakčným systémom je možnosť získané dáta optimalizovane zobraziť na rôznych zariadeniach. 
 
 \begin{figure}[h]
 	\centering
@@ -26,10 +26,10 @@ Redakčné systémy disponujúce iba skrytou administračnou časťou a verejný
 	\caption{Ilustračná schéma generického headless redakčného systému.}
 \end{figure}
 
-\noindent Členenie obsahu v~takýchto redakčných systémoch je typicky v~dvoch vrstvách -- kategórie a obsahové typy (komponenty). Kategórie sú zoznamy združujúce jednotlivé komponenty, môžu byť homogénne (všetky prvky zoznamu sú jednoho typu) alebo heterogénne (prvky zoznamu sú typicky iných typov). Komponenty sú atomickými prvkami headless redakčných systémov. Môžu nadobúdať rôznych typov, ktoré určujú ich vnútornú dátovú štruktúru. Typický príklad často používaných typov komponentov sú napríklad \texttt{prostý text} alebo \texttt{odkaz}. Niektoré headless redakčné systémy umožňujú vytvárať aj vlastné typy komponentov a tak si prospôsobiť dáta vlastným špecifickým potrebám.
+\noindent Členenie obsahu v~takýchto redakčných systémoch je typicky v~dvoch vrstvách -- kategórie a obsahové typy (komponenty). Kategórie sú zoznamy združujúce jednotlivé komponenty, môžu byť homogénne (všetky prvky zoznamu sú jedného typu) alebo heterogénne (prvky zoznamu sú typicky iných typov). Komponenty sú atomickými prvkami headless redakčných systémov. Môžu nadobúdať rôznych typov, ktoré určujú ich vnútornú dátovú štruktúru. Typický príklad často používaných typov komponentov sú napríklad \texttt{prostý text} alebo \texttt{odkaz}. Niektoré headless redakčné systémy umožňujú vytvárať aj vlastné typy komponentov a tak si prospôsobiť dáta vlastným špecifickým potrebám.
 
 \subsection{Strapi}
-Najpopulárnejší Headless redakčný systém. Disponuje administračným panelom zostaveným namieru, REST aj GraphQL rozhraním, systémom uživateľských práv a mnohými inými vlastnosťami. Tento redakčný systém má aj obchod s~aplikáciami, ktoré si môžu používateľia pridať a tým rozšíriť funkcionalitu. 
+Najpopulárnejší Headless redakčný systém. Disponuje administračným panelom zostaveným na mieru, REST aj GraphQL rozhraním, systémom uživateľských práv a mnohými inými vlastnosťami. Tento redakčný systém má aj obchod s~aplikáciami, ktoré si môžu používatelia pridať a tým rozšíriť funkcionalitu. 
 
 \blockquote[Dokumentácia Strapi.io \cite{StrapiDocs}]{Strapi je flexibilný, open-source\footnote{open-source -- otvorený kód, zväčša vyvíjaný komunitou} Headless CMS\footnote{CMS -- ang. content management system (redakčný systém)}, ktorý dáva vývojárom slobodu voľby ich obľúbených nástrojov a zároveň dovoľuje editorom jednoducho spravovať a distribuovať ich obsah.}
 
@@ -43,10 +43,10 @@ Najpopulárnejší Headless redakčný systém. Disponuje administračným panel
 
 \bigskip
 
-\noindent Pre použitie Strapi je nutné systém spustiť na vlastnej infraštruknúre, pripojiť k~predom vytvorenej relačnej databáze a celý systém nakonfigurovať.
+\noindent Pre použitie Strapi je nutné systém spustiť na vlastnej infraštruktúre, pripojiť k~predom vytvorenej relačnej databáze a celý systém nakonfigurovať.
 
 \subsection{Netlify CMS}
-Netlify narozdieľ od väčšiny headless redakčných systémov nevyužíva pre ukladanie svojich dát relačnú databázu. Pre uloženie celého obsahu webovej aplikácie využíva repozitáre vytvorené v prostredí \texttt{git}.
+Netlify na rozdiel od väčšiny headless redakčných systémov nevyužíva pre ukladanie svojich dát relačnú databázu. Pre uloženie celého obsahu webovej aplikácie využíva repozitáre vytvorené v prostredí \texttt{git}.
 
 \blockquote[Dokumentácia Netlify CMS \cite{NetlifyDocs}]{Jadro Netlify CMS tvorí \nameref{subsection:react} aplikácia ktorá využíva rozhranie pre prácu s~GitHub\footnote{\href{https://developer.github.com/v3/}{https://developer.github.com/v3/}}, GitLab\footnote{\href{https://docs.gitlab.com/ee/api/}{https://docs.gitlab.com/ee/api/}} alebo Bitbucket\footnote{\href{https://confluence.atlassian.com/bitbucket/}{https://confluence.atlassian.com/bitbucket/}} API.}
 
@@ -89,11 +89,11 @@ Hypertext Markup Language je \emph{značkovací jazyk}, pomocou ktorého je mož
 \subsubsection{Elementy}
 HTML element je oddelený od zbytku textu v~dokumente \uv{\texttt{tagmi}}, ktoré pozostávajú z~názvu elementu medzi znakmi \uv{\texttt{<}} a \uv{\texttt{>}}. Názov elementu vo vnútri tagu je \emph{case insensitive}, tzn. že nezáleží či je písaný veľkými alebo malými písmenami. Napríklad tag \texttt{<title>} môže byť napísaný aj ako \texttt{<Title>} alebo \texttt{<TITLE>}. Všetky varianty týchto zápisov sú valídne. \cite{MDN} \\
 
-\noindent Tagy sa klasifikujú na dve skupiny -- \emph{párové} a \emph{nepárové}. Párové tagy sú také, ktoré obsah elementu ohraničujú otváracím (\texttt{<title>}) a ozatváracím (\texttt{</title>}) tagom. Nepárové tagy sú také, ktoré nemajú svoj uzatvárací tag, napríklad obrázok (\texttt{<img />}). \\
+\noindent Tagy sa klasifikujú na dve skupiny -- \emph{párové} a \emph{nepárové}. Párové tagy sú také, ktoré obsah elementu ohraničujú otváracím (\texttt{<title>}) a uzatváracím (\texttt{</title>}) tagom. Nepárové tagy sú také, ktoré nemajú svoj uzatvárací tag, napríklad obrázok (\texttt{<img />}). \\
 
 \noindent Zoznam niektorých najpoužívanejších elementov:
 \begin{itemize}
-	\item \texttt{head} -- Obsahuje strojom čítateľné informácie (metadáta) o~dokuemnte ako napríklad titulok, skripty alebo štýly. \cite{MDN}
+	\item \texttt{head} -- Obsahuje strojom čítateľné informácie (metadáta) o~dokumente ako napríklad titulok, skripty alebo štýly. \cite{MDN}
 	\item \texttt{body} -- Reprezentuje obsah HTML dokumentu, pričom sa v~jednom dokumente môže nachádzať maximálne raz. \cite{MDN}
 	\item \texttt{title} -- Definuje titulok dokumentu, ktorý je zobrazený vo webovom prehliadači. \cite{MDN}
 	\item \texttt{button} -- Reprezentuje klikateľné tlačidlo, použiteľné napríklad pre potvrdzovanie formulárov alebo kdekoľvek inde v~HTML dokumente ako štandardné tlačidlo. Tlačidlá sú v~štýle jednotnom s~platformou na ktorej sú zobrazované, ak nie sú priložené štýly, ktoré by ich upravovali. \cite{MDN}
@@ -128,7 +128,7 @@ JavaScript je populárny \emph{interpretovaný} programovací jazyk. Napriek tom
 \label{subsection:typescript}
 TypeScript je rozšírenie programovacieho jazyka \nameref{subsection:javascript}. Jedná sa o~silne typovaný, objektovo orientovaný a kompilovaný programovací jazyk \cite{TSWeb}. TypeScript je obvykle nutné skompilovať do natívneho JavaScriptu pre zachovanie kompatibility. Využívanie TypeScriptu nie je nutné, avšak vďaka vlastnosti silného typovania umožní vývojárovi predísť chybám ešte pred kompiláciou. \\
 
-\blockquote[Dokumentácia TypeScript \cite{TSWeb}]{Vzťah medzi TypeScriptom a JavasScriptom je unikátny medzi modernými programovacími jazykmi. TypeScript existuje ako vrstva nad JavaScriptom; ponúka vlastnosti JavaScriptu a pridáva svoju vlastnú vrstvu navrch. Táto vrstva je nazývaná \emph{typovací systém TypeScript}.}
+\blockquote[Dokumentácia TypeScript \cite{TSWeb}]{Vzťah medzi TypeScriptom a JavaScriptom je unikátny medzi modernými programovacími jazykmi. TypeScript existuje ako vrstva nad JavaScriptom; ponúka vlastnosti JavaScriptu a pridáva svoju vlastnú vrstvu navrch. Táto vrstva je nazývaná \emph{typovací systém TypeScript}.}
 
 \begin{lstlisting}[language=TypeScript, caption=Príklad zápisu v~programovacom jazyku TypeScript.]
 	/* Definicia typu */
@@ -146,7 +146,7 @@ TypeScript je rozšírenie programovacieho jazyka \nameref{subsection:javascript
 
 \bigskip
 
-\noindent Využitie programovacieho jazyka TypeScript nie je limitované pre vývoj klientských aplikácii. Rovnako ako pri JavaScripte sa jedná o~univerzálny programovací jazyk, ktorý je vďaka nástrojom ako \nameref{subsection:nodejs} možné využiť napríklad aj na tvorbu aplikácií serverových.
+\noindent Využitie programovacieho jazyka TypeScript nie je limitované pre vývoj klientských aplikácii. Rovnako ako pri JavaScripte sa jedná o~univerzálny programovací jazyk, ktorý je vďaka nástrojom ako \nameref{subsection:nodejs} možné využiť napríklad aj na tvorbu serverových aplikácií.
 
 \subsection{React}
 \label{subsection:react}
@@ -218,7 +218,7 @@ Komponenty umožňujú vývojárovi rozdeliť uživateľské rozhranie do samost
 \subsection{Next.js}
 Framework\footnote{framework -- kompletný set nástrojov} umožňujúci render (vykresľovanie) React aplikácie na serveri. \\
 
-\noindent Najväčším problémom moderných JavaScript aplikácií je fakt, že samotné vykresľovanie obsahu narozdieľ od napríklad PHP prebieha na strane klienta. To zapríčiňuje, že aplikácie sú nie len \emph{náročné na výpočetný výkon}, ale aj ich prvotné načítanie \emph{trvá dlhšiu dobu}, čož môže negatívne ovplyvniť SEO. \\
+\noindent Najväčším problémom moderných JavaScript aplikácií je fakt, že samotné vykresľovanie obsahu na rozdiel od napríklad PHP prebieha na strane klienta. To zapríčiňuje, že aplikácie sú nie len \emph{náročné na výpočetný výkon}, ale aj ich prvotné načítanie \emph{trvá dlhšiu dobu}, čo môže negatívne ovplyvniť SEO. \\
 
 \noindent Next.js rieši tieto problémy vykreslením stránok vopred. HTML je generované pri každej požiadavke na stránku už na serveri s~priloženým minimálnym JavaScript kódom. Po obdržaní tejto stránky webovým prehliadačom klienta sa JavaScriptový kód inicializuje a zaistí plnú interaktivitu. Tento proces sa nazýva \uv{hydratácia}. \cite{NextJS} \\
 
@@ -226,7 +226,7 @@ Framework\footnote{framework -- kompletný set nástrojov} umožňujúci render 
 \begin{itemize}
 	\item \texttt{Statický export} -- Stránky, ktoré nevyžadujú žiadne dynamické dáta je možné vygenerovať už pri nasadení aplikácie. \cite{NextJS}
 	\item \texttt{Nulová konfigurácia} -- Žiadna vstupná konfigurácia nie je potrebná. Všetky funkcionality Next.js sú dostupné ihneď po inštalácií. \cite{NextJS}
-	\item \texttt{Optimalizácia} -- Automatické optimalizovanie balíčkov, ktoré sú vyžadované, čož umoňuje rýchlejšiu kompiláciu. \cite{NextJS}
+	\item \texttt{Optimalizácia} -- Automatické optimalizovanie balíčkov, ktoré sú vyžadované, čo umoňuje rýchlejšiu kompiláciu. \cite{NextJS}
 \end{itemize}
 
 % Vývoj serverových aplikácii
@@ -240,7 +240,7 @@ Framework\footnote{framework -- kompletný set nástrojov} umožňujúci render 
 
 \subsection{HTTP}
 \label{subsection:http}
-Protokol HTTP je využívaný ako generický protokol pre prenos dát (správ) medzi klientom a serverom, napríklad HTML tokumentov. Komunikácia je zahájená klientom, typicky webovým prehliadačom. \\
+Protokol HTTP je využívaný ako generický protokol pre prenos dát (správ) medzi klientom a serverom, napríklad HTML dokumentov. Komunikácia je zahájená klientom, typicky webovým prehliadačom. \\
 
 \blockquote[RFC 2616 \cite{RFC_HTTP}]{Hypertext Transfer Protocol (HTTP) je protokol na aplikačnej úrovni pre distribuované a spolupracujúce informačné systémy. Protokol HTTP je využívaný iniciatívou World Wide Web od roku 1990.}
  
@@ -278,7 +278,7 @@ Protokol HTTP je využívaný ako generický protokol pre prenos dát (správ) m
 
 \subsection{Node.js}
 \label{subsection:nodejs}
-Asynchrónny udalosťami-riadený Javascriptový runtime\footnote{runtime -- behové prostredie programu} vytvorený pre budovanie škálovateľných sieťových aplikácii \cite{NodeJS}. Node.js umožňuje spustiť JavaScriptový kód mimo prostredia webových prehliadačov a poskytuje rozšírené funkcionality ako napríklad prístup k~súborovému systému alebo kryptografické metódy.
+Asynchrónny udalosťami riadený Javascriptový runtime\footnote{runtime -- behové prostredie programu} vytvorený pre budovanie škálovateľných sieťových aplikácii \cite{NodeJS}. Node.js umožňuje spustiť JavaScriptový kód mimo prostredia webových prehliadačov a poskytuje rozšírené funkcionality ako napríklad prístup k~súborovému systému alebo kryptografické metódy.
 
 \subsubsection{Node Package Manager - NPM}
 Najväčší softvérový register na svete. NPM umožňuje vývojárom open-source softvéru zdieľať JavaScriptové balíčky verejne alebo si vytvoriť súkromný repozitár a balíčky zdieľať iba v~organizácií. \cite{NPM} \\
@@ -291,6 +291,31 @@ Najväčší softvérový register na svete. NPM umožňuje vývojárom open-sou
 \end{itemize}
 
 \noindent Hlavnou časťou je pre vývojára práve \texttt{CLI}, ktoré mu umožňuje spravovať balíčky vo svojej aplikácií. Nainštalované balíčky ale ich závislosti sú inštalované do zložky v~koreňovom adresári projektu \texttt{node\_modules}. Nastavenia, informácie o~projekte a~zoznam nainštalovaných balíčkov sa uchováva v~súbore \texttt{package.json}, taktiež umiestenom v~koreňovom adresári projektu.
+
+\subsection{Relačné databázy}
+V dnešnej dobe štandardný typ databázy pre ukladanie a prístup k dátam vo vzájomných väzbách. Dáta sú rozdelené do tabuliek, kde každý riadok reprezentuje jednu entitu. Entita je vždy identifikovateľná svojim primárnym kľúčom, ktorý musí byť v danej tabulke unikátny. Každý stĺpec tabulky má vopred definovaný dátový typ a nesie hodnoty pre každý element v tabuľke. \\
+
+\noindent \emph{SQL} (\emph{Structured Query Language}) je štandardizovaný dotazovací jazyk pre prístup a manipuláciu s dátami v relačných databázach. \\
+
+\begin{lstlisting}[language=SQL, caption=Príklad jednoduchého dotazu v jazyku SQL.]
+	SELECT * from Users;
+\end{lstlisting}
+
+\subsubsection{PostgreSQL}
+Plnohodnotný open-source objektovo-orientovaný databázový systém, ktorý je v aktívnom vývoji už viac ako 30 rokov. PostgreSQL je kompatibilný so všetkými hlavnými platformami ako Linux, MacOS, Solaris a Windows. Tento systém si obľúbili mnohé veľké spoločnosti po celom svete. \cite{PostgreSQL}
+
+\subsubsection{Prisma}
+Prisma je open-source \emph{sada nástrojov pre správu databázy}. Nahradzuje tradičné ORM\footnote{ORM -- Object-relational mapping} a uľahčuje prístup k databáze pomocou automaticky generovaného klienta pre zostavovanie dotazov. Prisma je implementovaná v jazyku TypeScript, čo znamená, že \emph{podporuje striktnú typovú kontrolu} a zmenšuje tým pravdepodobnosť chyby vo vývoji. \cite{Prisma} \\
+
+\begin{lstlisting}[language=TypeScript, caption=Príklad tvorby užívateľa pomocou nástroja Prisma. \cite{Prisma}]
+	await prisma.users.create({
+			data: {
+			firstName: "Alice",
+			email: "alice@prisma.io",
+			active: true,
+		}
+	})
+\end{lstlisting}
 
 % GraphQL
 \section{GraphQL}
@@ -314,7 +339,7 @@ Dotazovací (query) jazyk pre API a runtime na strane servera pre vykonávanie d
 
 \noindent Po spustení GraphQL služby (typicky URL adresa dostupná cez HTTPS) očakáva GraphQL dotazy, ktoré spracováva a vyhodnocuje. Obdržané dotazy najskôr skontroluje, či požaduje iba type a polia, ktoré sú definované. V prípade, že sú dotazy v poriadku, Graphql spustí požadované resolvery a vracia výsledok. \cite{GraphQL} \\
 
-\noindent GraphQL rozlišuje tri typy operácií s dátami. Prvý typ operácie je \emph{query} a slúži výhradne na čítanie dát. Druhým typ operácie sa nazýva \emph{mutation} a slúží na úpravu vkladanie alebo úpravu dát. Tretím a posledným typom operácie je \emph{subscription}. Ak GraphQL služba spracuje operáciu typu \emph{subscription}, pošle vyžiadané dáta klientovi pri každej ich zmene. \\
+\noindent GraphQL rozlišuje tri typy operácií s dátami. Prvý typ operácie je \emph{query} a slúži výhradne na čítanie dát. Druhým typ operácie sa nazýva \emph{mutation} a slúží na úpravu, vkladanie alebo úpravu dát. Tretím a posledným typom operácie je \emph{subscription}. Ak GraphQL služba spracuje operáciu typu \emph{subscription}, pošle vyžiadané dáta klientovi pri každej ich zmene. \\
 
 \noindent Pre ukážku, \emph{query} dotaz na GraphQL službu so schémou ukázanou vo výpise \ref{lstlisting:graphql_schema}: \\
 
@@ -349,7 +374,7 @@ Implementácia GraphQL špecifikácie pre klientské aplikácie. Apollo Client j
 \noindent Apollo GraphQL umožňuje využiť svoju cache aj pre ukladanie lokálneho stavu aplikácie. Vďaka tomu sa pre danú aplikáciu stáva jediným zdrojom dát.
 
 \subsection{Apollo Server}
-Serverová časť GraphQL implementácie, kompatibilná so všetkými GraphQL kientami, včetne \nameref{subsection:apollo_client}. Apollo Server dokáže pracovať ako samostatný GraphQL server alebo ako súčasť už existujúcej aplikácie ako napríklad Express\footnote{\href{https://expressjs.com/}{https://expressjs.com/}} server. \cite{Apollo} \\
+Serverová časť GraphQL implementácie, kompatibilná so všetkými GraphQL kientami, vrátane \nameref{subsection:apollo_client}. Apollo Server dokáže pracovať ako samostatný GraphQL server alebo ako súčasť už existujúcej aplikácie ako napríklad Express\footnote{\href{https://expressjs.com/}{https://expressjs.com/}} server. \cite{Apollo} \\
 
 \begin{figure}[h]
 	\centering
@@ -359,4 +384,41 @@ Serverová časť GraphQL implementácie, kompatibilná so všetkými GraphQL ki
 
 \noindent Apollo Server dokáže pôsobiť ako \emph{jednotná brána} pre všetky klientské aplikácie. Brána má predom definovanú schému, tzn. že klient presne vie aké operácie môže vykonávať a aké dáta môže očakávať späť.
 
+\section{Slack API}
+\label{section:slack_api}
+Aplikácia pre tímovú a pracovnú komunikáciu Slack umožňuje vývojárom vytvoriť vlastné aplikácie a prepojiť ich so Slackom pomocou ich \emph{otvorenej API}. \cite{SlackAPI} \\
 
+\noindent Aplikácie môžu vykonávať niektoré akcie bežných užívateľov:
+
+\begin{itemize}
+	\item \emph{Odosielať správy} do rôznych koverzácií. \cite{SlackAPI}
+	\item \emph{Čítať správy a konverzácie}. \cite{SlackAPI}
+	\item \emph{Vytvoriť, archivovať a spravovať konverzácie}. \cite{SlackAPI}
+	\item \emph{Reagovať na označenia} od užívateľov. \cite{SlackAPI}
+\end{itemize}
+
+\ldots no API aplikáciam umožňuje aj akcie mimo uživateľských práv:
+
+\begin{itemize}
+	\item \emph{Otvoriť dialógové okná} pre získanie alebo zobrazenie extra informácií. \cite{SlackAPI}
+	\item \emph{Zostaviť interaktívne komponenty} na ktoré môzu reagovať \cite{SlackAPI}
+	\item \emph{Vytvoriť a aktualizovať \uv{Home tab} (domovskú obrazovku)} kde môže užívateľ interagovať s aplikáciou. \cite{SlackAPI}
+	\item \emph{Definovať skratky} vďaka ktorým užívateľ môže rýchlo vykonať akcie v aplikácií. \cite{SlackAPI}
+\end{itemize}
+
+\subsection{Block Kit}
+Framework pre tvorbu uživateľského rozhrania pre Slack aplikácie, ktorý ponúka kompromis kontroly a flexibility pri budovaní rozhraní v správach. \cite{SlackAPI}  Uživateľské rozhranie sa skladá pomocou blokov, ktoré sú vo forme JSON objekov prenášané do Slack aplikácie. Bloky sa delia na dve hlavné kategórie -- \emph{interactive} a \emph{layout} bloky. \\
+
+\begin{lstlisting}[caption=Príklad jednoduchého bloku v Slack aplikácií.]
+	{
+		"type": "section",
+		"text": {
+			"type": "mrkdwn",
+			"text": "Hello, *World*!"
+		}
+	},
+\end{lstlisting}
+
+\bigskip
+
+\noindent Niektoré bloky podporujú formátovanie pomocou modifikovanej verzie jazyka \emph{markdown}.

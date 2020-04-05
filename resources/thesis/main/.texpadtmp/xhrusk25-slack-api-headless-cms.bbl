@@ -66,11 +66,29 @@
 \newblock {\small [cit. 2020-04-04]}.
 \newblock Dostupn{\'{e}} z: ~{\small\url{https://nodejs.org/en/}}.
 
+\bibitem{Prisma}
+{\sc\bgroup}{Prisma}{\egroup}.
+\newblock {\em Prisma} [online].
+\newblock {\small [cit. 2020-04-05]}.
+\newblock Dostupn{\'{e}} z: ~{\small\url{https://www.prisma.io/}}.
+
+\bibitem{SlackAPI}
+{\sc\bgroup}{Slack}{\egroup}.
+\newblock {\em Slack API} [online].
+\newblock {\small [cit. 2020-04-05]}.
+\newblock Dostupn{\'{e}} z: ~{\small\url{https://api.slack.com/}}.
+
 \bibitem{GraphQL}
 {\sc\bgroup}{The GraphQL Foundation}{\egroup}.
 \newblock {\em GraphQL} [online].
 \newblock {\small [cit. 2020-04-05]}.
 \newblock Dostupn{\'{e}} z: ~{\small\url{https://graphql.org/}}.
+
+\bibitem{PostgreSQL}
+{\sc\bgroup}{The PostgreSQL Global Development Group}{\egroup}.
+\newblock {\em PostgreSQL} [online].
+\newblock {\small [cit. 2020-04-05]}.
+\newblock Dostupn{\'{e}} z: ~{\small\url{https://www.postgresql.org/}}.
 
 \bibitem{NextJS}
 {\sc\bgroup}{ZEIT, Inc.}{\egroup}.
