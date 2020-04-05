@@ -67,22 +67,43 @@
 % to avoid unnecessary replacements in the API descriptions etc.
 \csdoublequotesoff
 
-
-\hyphenation{PostgreSQL}
-\hyphenation{read-only}
-
-
+% Doplňujúce balíky
+%---------------------------------------------------------------------------
 \usepackage{url}
-\usepackage{csquotes}
+\usepackage[threshold=0]{csquotes}
 \usepackage{listings}
 
+% Farby
+%---------------------------------------------------------------------------
+\definecolor{codegreen}{rgb}{0.29, 0.77, 0.38}
+\definecolor{codeblack}{rgb}{0, 0, 0}
+\definecolor{codepurple}{rgb}{0.58, 0, 0.82}
+\definecolor{backcolour}{rgb}{0.95, 0.95, 0.95}
 
-\definecolor{codegreen}{rgb}{0,0.6,0}
-\definecolor{codeblack}{rgb}{0,0,0}
-\definecolor{codepurple}{rgb}{0.58,0,0.82}
-\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+% Štýly pre lstlisting (code)
+%---------------------------------------------------------------------------
+\lstdefinelanguage{TypeScript}{
+  morekeywords=[1]{break, continue, delete, else, for, function, if, in, new, return, this, typeof, var, void, while, with, await, async, case, catch, class, const, default, do, enum, export, extends, finally, from, implements, import, instanceof, let, static, super, switch, throw, try, type},
+  morekeywords=[2]{false, null, true, boolean, number, undefined, Array, Boolean, Date, Math, Number, string, String, Object},
+  morekeywords=[3]{eval, fetch, parseInt, parseFloat, STRINGIFY},
+  sensitive,
+  morecomment=[s]{/*}{*/},
+  morecomment=[l]//,
+  morecomment=[s]{/**}{*/},
+  morestring=[b]',
+  morestring=[b]",
+  morestring=[b]`
+}[keywords, comments, strings]
 
-\lstdefinestyle{codestyle}{
+\lstdefinelanguage{GraphQL}{
+  morekeywords=[1]{input, type},
+  morekeywords=[2]{Boolean, ID, Int, String},
+  sensitive,
+  morecomment=[l]\#,
+  morestring=[b]"
+}[keywords, comments, strings]
+
+\lstdefinestyle{CommonCodeStyle}{
     backgroundcolor=\color{backcolour},   
     commentstyle=\color{codegreen},
     keywordstyle=\color{magenta},
@@ -101,6 +122,21 @@
     tabsize=2
 }
 
+\lstdefinestyle{TypeScript}{
+  language=TypeScript,
+  style=CommonCodeStyle
+}
+
+\lstdefinestyle{GraphQL}{
+  language=GraphQL,
+  style=CommonCodeStyle
+}
+
+% Delenie slov
+%---------------------------------------------------------------------------
+\hyphenation{PostgreSQL}
+\hyphenation{JavaScript}
+\hyphenation{TypeScript}
 
 % =======================================================================
 % balíček "hyperref" vytváří klikací odkazy v pdf, pokud tedy použijeme pdflatex
@@ -253,19 +289,8 @@ Uviedol som všetky literárne pramene, publikácie a~ďaľšie zdroje, z~ktorý
 
   % Text prace / Thesis text
   % ----------------------------------------------
-  \ifenglish
-    \input{xhrusk25-slack-api-headless-cms-01-kapitoly-chapters-en}
-  \else
-    \input{xhrusk25-slack-api-headless-cms-01-kapitoly-chapters}
-  \fi
-  
-  % Kompilace po částech (viz výše, nutno odkomentovat)
-  % Compilation piecewise (see above, it is necessary to uncomment it)
-  %\subfile{projekt-01-uvod-introduction}
-  % ...
-  %\subfile{chapters/projekt-05-conclusion}
-
-
+  \input{xhrusk25-slack-api-headless-cms-01-kapitoly-chapters}
+ 
   % Pouzita literatura / Bibliography
   % ----------------------------------------------
 \ifslovak
@@ -347,11 +372,7 @@ Uviedol som všetky literárne pramene, publikácie a~ďaľšie zdroje, z~ktorý
   \fi
   
   % Přílohy / Appendices
-  \ifenglish
-    \input{xhrusk25-slack-api-headless-cms-30-prilohy-appendices-en}
-  \else
-    \input{xhrusk25-slack-api-headless-cms-30-prilohy-appendices}
-  \fi
+  \input{xhrusk25-slack-api-headless-cms-30-prilohy-appendices}
   
   % Kompilace po částech (viz výše, nutno odkomentovat)
   % Compilation piecewise (see above, it is necessary to uncomment it)

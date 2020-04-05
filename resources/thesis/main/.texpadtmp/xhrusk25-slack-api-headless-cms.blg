@@ -10,49 +10,74 @@ Reallocated singl_function (elt_size=4) to 100 items from 50.
 Reallocated singl_function (elt_size=4) to 100 items from 50.
 Reallocated singl_function (elt_size=4) to 100 items from 50.
 Database file #1: ../xhrusk25-slack-api-headless-cms-20-literatura-bibliography.bib
+I was expecting a `,' or a `}'---line 96 of file ../xhrusk25-slack-api-headless-cms-20-literatura-bibliography.bib
+ :    
+ :    publisher = "{RFC Editor}",
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
 Warning--empty year in CamDict
 Warning--empty year and revised in CamDict
+Warning--empty year in React
+Warning--empty year and revised in React
+Warning--"{" isn't a brace-balanced string for entry RFC_HTTP
+while executing--line 3241 of file ../bib-styles/Pysny/skplain.bst
+Warning--empty year in NetlifyDocs
+Warning--empty year and revised in NetlifyDocs
+Warning--empty year in StrapiDocs
+Warning--empty year and revised in StrapiDocs
+Warning--empty year in Apollo
+Warning--empty year and revised in Apollo
 Warning--empty year in TSWeb
 Warning--empty year and revised in TSWeb
-You've used 8 entries,
+Warning--empty year in MDN
+Warning--empty year and revised in MDN
+Warning--empty year in NPM
+Warning--empty year and revised in NPM
+Warning--empty year in NodeJS
+Warning--empty year and revised in NodeJS
+Warning--empty year in GraphQL
+Warning--empty year and revised in GraphQL
+Warning--empty year in NextJS
+Warning--empty year and revised in NextJS
+You've used 12 entries,
             3946 wiz_defined-function locations,
-            877 strings with 6707 characters,
-and the built_in function-call counts, 3684 in all, are:
-= -- 278
-> -- 133
-< -- 19
-+ -- 75
-- -- 63
-* -- 200
-:= -- 465
-add.period$ -- 26
-call.type$ -- 8
-change.case$ -- 55
-chr.to.int$ -- 12
-cite$ -- 12
-duplicate$ -- 239
-empty$ -- 482
-format.name$ -- 23
-if$ -- 871
+            884 strings with 6713 characters,
+and the built_in function-call counts, 5053 in all, are:
+= -- 389
+> -- 149
+< -- 12
++ -- 54
+- -- 42
+* -- 294
+:= -- 594
+add.period$ -- 36
+call.type$ -- 12
+change.case$ -- 86
+chr.to.int$ -- 0
+cite$ -- 34
+duplicate$ -- 321
+empty$ -- 709
+format.name$ -- 42
+if$ -- 1244
 int.to.chr$ -- 0
-int.to.str$ -- 8
+int.to.str$ -- 12
 missing$ -- 0
-newline$ -- 55
-num.names$ -- 15
-pop$ -- 140
+newline$ -- 77
+num.names$ -- 24
+pop$ -- 196
 preamble$ -- 1
-purify$ -- 29
+purify$ -- 50
 quote$ -- 0
-skip$ -- 156
+skip$ -- 263
 stack$ -- 0
-substring$ -- 84
-swap$ -- 48
-text.length$ -- 22
+substring$ -- 98
+swap$ -- 59
+text.length$ -- 23
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 17
-warning$ -- 4
-while$ -- 25
-width$ -- 9
-write$ -- 110
-(There were 4 warnings)
+type$ -- 24
+warning$ -- 22
+while$ -- 24
+width$ -- 14
+write$ -- 148
+(There was 1 error message)

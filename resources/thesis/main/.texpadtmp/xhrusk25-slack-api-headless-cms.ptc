@@ -4,17 +4,28 @@
 \contentsline {section}{\numberline {2.1}Redak\IeC {\v c}n\IeC {\'e} syst\IeC {\'e}my s~otvoren\IeC {\'y}m aplika\IeC {\v c}n\IeC {\'y}m rozhran\IeC {\'\i }m}{3}{section.2.1}% 
 \contentsline {subsection}{\numberline {2.1.1}Strapi}{4}{subsection.2.1.1}% 
 \contentsline {subsection}{\numberline {2.1.2}Netlify CMS}{4}{subsection.2.1.2}% 
-\contentsline {section}{\numberline {2.2}V\IeC {\'y}voj serverov\IeC {\'y}ch aplik\IeC {\'a}cii}{4}{section.2.2}% 
-\contentsline {subsection}{\numberline {2.2.1}TypeScript}{4}{subsection.2.2.1}% 
-\contentsline {section}{\numberline {2.3}V\IeC {\'y}voj klientsk\IeC {\'y}ch aplik\IeC {\'a}cii}{5}{section.2.3}% 
-\contentsline {section}{\numberline {2.4}GraphQL}{5}{section.2.4}% 
-\contentsline {chapter}{Literat\IeC {\'u}ra}{6}{chapter*.3}% 
+\contentsline {section}{\numberline {2.2}V\IeC {\'y}voj klientsk\IeC {\'y}ch aplik\IeC {\'a}cii}{4}{section.2.2}% 
+\contentsline {subsection}{\numberline {2.2.1}User Experience (UX)}{5}{subsection.2.2.1}% 
+\contentsline {subsubsection}{Porozumenie potreb\IeC {\'a}m u\IeC {\v z}\IeC {\'\i }vate\IeC {\v l}a}{5}{section*.3}% 
+\contentsline {subsubsection}{Pou\IeC {\v z}ite\IeC {\v l}nos\IeC {\v t}}{5}{section*.4}% 
+\contentsline {subsection}{\numberline {2.2.2}HTML}{5}{subsection.2.2.2}% 
+\contentsline {subsubsection}{Elementy}{5}{section*.5}% 
+\contentsline {subsection}{\numberline {2.2.3}CSS}{6}{subsection.2.2.3}% 
+\contentsline {subsection}{\numberline {2.2.4}JavaScript}{6}{subsection.2.2.4}% 
+\contentsline {subsection}{\numberline {2.2.5}TypeScript}{7}{subsection.2.2.5}% 
+\contentsline {subsection}{\numberline {2.2.6}React}{7}{subsection.2.2.6}% 
+\contentsline {subsubsection}{JSX}{7}{section*.6}% 
+\contentsline {subsubsection}{Komponenty}{8}{section*.7}% 
+\contentsline {subsection}{\numberline {2.2.7}Next.js}{9}{subsection.2.2.7}% 
+\contentsline {section}{\numberline {2.3}V\IeC {\'y}voj serverov\IeC {\'y}ch aplik\IeC {\'a}cii}{9}{section.2.3}% 
+\contentsline {subsection}{\numberline {2.3.1}HTTP}{10}{subsection.2.3.1}% 
+\contentsline {subsubsection}{Terminol\IeC {\'o}gia}{10}{section*.8}% 
+\contentsline {subsubsection}{Met\IeC {\'o}dy}{10}{section*.9}% 
+\contentsline {subsection}{\numberline {2.3.2}Node.js}{11}{subsection.2.3.2}% 
+\contentsline {subsubsection}{Node Package Manager - NPM}{11}{section*.10}% 
+\contentsline {section}{\numberline {2.4}GraphQL}{11}{section.2.4}% 
+\contentsline {subsection}{\numberline {2.4.1}Apollo Client}{12}{subsection.2.4.1}% 
+\contentsline {subsection}{\numberline {2.4.2}Apollo Server}{13}{subsection.2.4.2}% 
+\contentsline {chapter}{Literat\IeC {\'u}ra}{14}{chapter*.11}% 
 \ttl@starttoc {chapters@1}
-\contentsline {chapter}{\numberline {A}Jak pracovat s~touto \IeC {\v s}ablonou}{7}{appendix.A}% 
-\contentsline {paragraph}{Pozor na \IeC {\v c}\IeC {\'\i }slov\IeC {\'a}n\IeC {\'\i } str\IeC {\'a}nek!}{8}{section*.5}% 
-\contentsline {chapter}{\numberline {B}Psan\IeC {\'\i } anglick\IeC {\'e}ho textu}{12}{appendix.B}% 
-\contentsline {paragraph}{\IeC {\v C}ast\IeC {\'e} chyby ve slovech}{15}{section*.16}% 
-\contentsline {chapter}{\numberline {C}Checklist}{16}{appendix.C}% 
-\contentsline {chapter}{\numberline {D}\LaTeX pro za\IeC {\v c}\IeC {\'a}te\IeC {\v c}n\IeC {\'\i }ky}{20}{appendix.D}% 
-\contentsline {chapter}{\numberline {E}P\IeC {\v r}\IeC {\'\i }klady bibliografick\IeC {\'y}ch citac\IeC {\'\i }}{23}{appendix.E}% 
 \contentsfinish 
