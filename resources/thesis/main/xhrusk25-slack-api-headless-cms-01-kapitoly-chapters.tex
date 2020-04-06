@@ -14,7 +14,7 @@ Prvá kapitola, \nameref{chapter:theory}, sa skladá zo~štyroch sekcií venovan
 %---------------------------------------------------------------------------
 \chapter{Teoretická časť}
 \label{chapter:theory}
-Správa obsahu a jeho doručenie konzumentom. Táto kapitola popisuje základné princípy, techniky a technológie, ktoré sú nutné pre zostavenie a pochopenie princípu fungovania tejto práce. V~prvej sekcií \ref{section:headless} sú bližšie priblízené redakčné systémy s~otvoreným aplikačným rozhraním, v~druhej sekcií \ref{section:server_dev} vývoj serverových aplikácií, tretia sekcia \ref{section:client_dev} popisuje vývoj klientských aplikácii a posledná sekcia \ref{section:graphql} vysveluje špecifikáciu GraphQL.
+Správa obsahu a jeho doručenie konzumentom. Táto kapitola popisuje základné princípy, techniky a technológie, ktoré sú nutné pre zostavenie a pochopenie princípu fungovania tejto práce. V~prvej sekcií \ref{section:headless} sú bližšie priblízené redakčné systémy s~otvoreným aplikačným rozhraním, v~druhej sekcií \ref{section:server_dev} vývoj serverových aplikácií, tretia sekcia \ref{section:client_dev} popisuje vývoj klientských aplikácii, štvrtá sekcia \ref{section:graphql} vysveluje špecifikáciu GraphQL. Posledná sekcia \ref{section:slack_api} je venovaná otvorenej API aplikácie Slack, jej možnostiam a obmedzeniam.
 
 \section{Redakčné systémy s~otvoreným aplikačným rozhraním}
 \label{section:headless}
@@ -33,7 +33,7 @@ Najpopulárnejší Headless redakčný systém. Disponuje administračným panel
 
 \blockquote[Dokumentácia Strapi.io \cite{StrapiDocs}]{Strapi je flexibilný, open-source\footnote{open-source -- otvorený kód, zväčša vyvíjaný komunitou} Headless CMS\footnote{CMS -- ang. content management system (redakčný systém)}, ktorý dáva vývojárom slobodu voľby ich obľúbených nástrojov a zároveň dovoľuje editorom jednoducho spravovať a distribuovať ich obsah.}
 
-\noindent V prípade, že by užívateľ Strapi mal nakonfigurovanú kolekciu s názvom \uv{restaurants}, získanie počtu týchto kolekcií by mohlo vyzerať takto: \\
+\noindent V~prípade, že by užívateľ Strapi mal nakonfigurovanú kolekciu s~názvom \uv{restaurants}, získanie počtu týchto kolekcií by mohlo vyzerať takto: \\
 
 \lstset{style=CommonCodeStyle, language=TypeScript}
 
@@ -46,11 +46,11 @@ Najpopulárnejší Headless redakčný systém. Disponuje administračným panel
 \noindent Pre použitie Strapi je nutné systém spustiť na vlastnej infraštruktúre, pripojiť k~predom vytvorenej relačnej databáze a celý systém nakonfigurovať.
 
 \subsection{Netlify CMS}
-Netlify na rozdiel od väčšiny headless redakčných systémov nevyužíva pre ukladanie svojich dát relačnú databázu. Pre uloženie celého obsahu webovej aplikácie využíva repozitáre vytvorené v prostredí \texttt{git}.
+Netlify na rozdiel od väčšiny headless redakčných systémov nevyužíva pre ukladanie svojich dát relačnú databázu. Pre uloženie celého obsahu webovej aplikácie využíva repozitáre vytvorené v~prostredí \texttt{git}.
 
 \blockquote[Dokumentácia Netlify CMS \cite{NetlifyDocs}]{Jadro Netlify CMS tvorí \nameref{subsection:react} aplikácia ktorá využíva rozhranie pre prácu s~GitHub\footnote{\href{https://developer.github.com/v3/}{https://developer.github.com/v3/}}, GitLab\footnote{\href{https://docs.gitlab.com/ee/api/}{https://docs.gitlab.com/ee/api/}} alebo Bitbucket\footnote{\href{https://confluence.atlassian.com/bitbucket/}{https://confluence.atlassian.com/bitbucket/}} API.}
 
-\noindent Netlify sa využíva väčšinou pre menšie stránky ako sú napríklad dokumentácie alebo produktové stránky, pretože umožňuje udržovať obsah relevantný k danej verzií produktu.
+\noindent Netlify sa využíva väčšinou pre menšie stránky ako sú napríklad dokumentácie alebo produktové stránky, pretože umožňuje udržovať obsah relevantný k~danej verzií produktu.
 
 % Vývoj klientských aplikácii
 \section{Vývoj klientských aplikácii}
@@ -236,8 +236,6 @@ Framework\footnote{framework -- kompletný set nástrojov} umožňujúci render 
 
 \noindent Serverová aplikácia je proces spustený na centrálne dostupnom zariadení. Obvykle slúži ako zdroj informácií pre ostatné zariadenia, typicky v~počítačovej sieti. Tento proces očakáva požiadavky a odpovedá na ne vopred určenou reakciou. Serverové aplikácie je možné implementovať v~rôznych programovacích jazykoch, no medzi najpoužívanejšie patrí PHP, Java, Python alebo \nameref{subsection:javascript} (popr. rozšírenie \nameref{subsection:typescript}). Aplikácia má ďaľej určený komunikačný protokol, pomocou ktorého prijíma požiadavky a odosiela odpovede. Pri bežných aplikáciach ide najčastejšie protokol \nameref{subsection:http}.
 
-\vfill
-
 \subsection{HTTP}
 \label{subsection:http}
 Protokol HTTP je využívaný ako generický protokol pre prenos dát (správ) medzi klientom a serverom, napríklad HTML dokumentov. Komunikácia je zahájená klientom, typicky webovým prehliadačom. \\
@@ -293,19 +291,19 @@ Najväčší softvérový register na svete. NPM umožňuje vývojárom open-sou
 \noindent Hlavnou časťou je pre vývojára práve \texttt{CLI}, ktoré mu umožňuje spravovať balíčky vo svojej aplikácií. Nainštalované balíčky ale ich závislosti sú inštalované do zložky v~koreňovom adresári projektu \texttt{node\_modules}. Nastavenia, informácie o~projekte a~zoznam nainštalovaných balíčkov sa uchováva v~súbore \texttt{package.json}, taktiež umiestenom v~koreňovom adresári projektu.
 
 \subsection{Relačné databázy}
-V dnešnej dobe štandardný typ databázy pre ukladanie a prístup k dátam vo vzájomných väzbách. Dáta sú rozdelené do tabuliek, kde každý riadok reprezentuje jednu entitu. Entita je vždy identifikovateľná svojim primárnym kľúčom, ktorý musí byť v danej tabulke unikátny. Každý stĺpec tabulky má vopred definovaný dátový typ a nesie hodnoty pre každý element v tabuľke. \\
+V~dnešnej dobe štandardný typ databázy pre ukladanie a prístup k~dátam vo vzájomných väzbách. Dáta sú rozdelené do tabuliek, kde každý riadok reprezentuje jednu entitu. Entita je vždy identifikovateľná svojim primárnym kľúčom, ktorý musí byť v~danej tabuľke unikátny. Každý stĺpec tabuľky má vopred definovaný dátový typ a nesie hodnoty pre každý element v~tabuľke. \\
 
-\noindent \emph{SQL} (\emph{Structured Query Language}) je štandardizovaný dotazovací jazyk pre prístup a manipuláciu s dátami v relačných databázach. \\
+\noindent \emph{SQL} (\emph{Structured Query Language}) je štandardizovaný dotazovací jazyk pre prístup a manipuláciu s~dátami v~relačných databázach. \\
 
-\begin{lstlisting}[language=SQL, caption=Príklad jednoduchého dotazu v jazyku SQL.]
+\begin{lstlisting}[language=SQL, caption=Príklad jednoduchého dotazu v~jazyku SQL.]
 	SELECT * from Users;
 \end{lstlisting}
 
 \subsubsection{PostgreSQL}
-Plnohodnotný open-source objektovo-orientovaný databázový systém, ktorý je v aktívnom vývoji už viac ako 30 rokov. PostgreSQL je kompatibilný so všetkými hlavnými platformami ako Linux, MacOS, Solaris a Windows. Tento systém si obľúbili mnohé veľké spoločnosti po celom svete. \cite{PostgreSQL}
+Plnohodnotný open-source objektovo-orientovaný databázový systém, ktorý je v~aktívnom vývoji už viac ako 30 rokov. PostgreSQL je kompatibilný so všetkými hlavnými platformami ako Linux, MacOS, Solaris a Windows. Tento systém si obľúbili mnohé veľké spoločnosti po celom svete. \cite{PostgreSQL}
 
 \subsubsection{Prisma}
-Prisma je open-source \emph{sada nástrojov pre správu databázy}. Nahradzuje tradičné ORM\footnote{ORM -- Object-relational mapping} a uľahčuje prístup k databáze pomocou automaticky generovaného klienta pre zostavovanie dotazov. Prisma je implementovaná v jazyku TypeScript, čo znamená, že \emph{podporuje striktnú typovú kontrolu} a zmenšuje tým pravdepodobnosť chyby vo vývoji. \cite{Prisma} \\
+Prisma je open-source \emph{sada nástrojov pre správu databázy}. Nahradzuje tradičné ORM\footnote{ORM -- Object-relational mapping} a uľahčuje prístup k~databáze pomocou automaticky generovaného klienta pre zostavovanie dotazov. Prisma je implementovaná v~jazyku TypeScript, čo znamená, že \emph{podporuje striktnú typovú kontrolu} a zmenšuje tým pravdepodobnosť chyby vo vývoji. \cite{Prisma} \\
 
 \begin{lstlisting}[language=TypeScript, caption=Príklad tvorby užívateľa pomocou nástroja Prisma. \cite{Prisma}]
 	await prisma.users.create({
@@ -337,9 +335,9 @@ Dotazovací (query) jazyk pre API a runtime na strane servera pre vykonávanie d
 
 \bigskip
 
-\noindent Po spustení GraphQL služby (typicky URL adresa dostupná cez HTTPS) očakáva GraphQL dotazy, ktoré spracováva a vyhodnocuje. Obdržané dotazy najskôr skontroluje, či požaduje iba type a polia, ktoré sú definované. V prípade, že sú dotazy v poriadku, Graphql spustí požadované resolvery a vracia výsledok. \cite{GraphQL} \\
+\noindent Po spustení GraphQL služby (typicky URL adresa dostupná cez HTTPS) očakáva GraphQL dotazy, ktoré spracováva a vyhodnocuje. Obdržané dotazy najskôr skontroluje, či požadujú iba typy a polia, ktoré sú definované. V~prípade, že sú dotazy v~poriadku, Graphql spustí požadované resolvery a vracia výsledok. \cite{GraphQL} \\
 
-\noindent GraphQL rozlišuje tri typy operácií s dátami. Prvý typ operácie je \emph{query} a slúži výhradne na čítanie dát. Druhým typ operácie sa nazýva \emph{mutation} a slúží na úpravu, vkladanie alebo úpravu dát. Tretím a posledným typom operácie je \emph{subscription}. Ak GraphQL služba spracuje operáciu typu \emph{subscription}, pošle vyžiadané dáta klientovi pri každej ich zmene. \\
+\noindent GraphQL rozlišuje tri typy operácií s~dátami. Prvý typ operácie je \emph{query} a slúži výhradne na čítanie dát. Druhým typ operácie sa nazýva \emph{mutation} a slúži na úpravu, vkladanie alebo odstránenie dát. Tretím a posledným typom operácie je \emph{subscription}. Ak GraphQL služba spracuje operáciu typu \emph{subscription}, pošle vyžiadané dáta klientovi pri každej ich zmene. \\
 
 \noindent Pre ukážku, \emph{query} dotaz na GraphQL službu so schémou ukázanou vo výpise \ref{lstlisting:graphql_schema}: \\
 
@@ -353,9 +351,9 @@ Dotazovací (query) jazyk pre API a runtime na strane servera pre vykonávanie d
 
 \bigskip
 
-\ldots by po spracovaní GraphQL službou mohol vrátil JSON\footnote{JSON - javascript object notation} objekt: \\
+\ldots by po spracovaní GraphQL službou mohol vrátiť JSON\footnote{JSON - javascript object notation} objekt: \\
 
-\begin{lstlisting}[caption=Príklad dát obdržaných z GraphQL služby. \cite{GraphQL}]
+\begin{lstlisting}[caption=Príklad dát obdržaných z~GraphQL služby. \cite{GraphQL}]
 	{
 		"me": {
 			"name": "Luke Skywalker"
@@ -365,9 +363,9 @@ Dotazovací (query) jazyk pre API a runtime na strane servera pre vykonávanie d
 
 \subsection{Apollo Client}
 \label{subsection:apollo_client}
-Implementácia GraphQL špecifikácie pre klientské aplikácie. Apollo Client je priamo prepojený s knižnicou React a poskytuje nástroje umožňujúce rýchly vývoj webových aplikácií, ktoré získavajú dáta z GraphQL služby. \\
+Implementácia GraphQL špecifikácie pre klientské aplikácie. Apollo Client je priamo prepojený s~knižnicou React a poskytuje nástroje umožňujúce rýchly vývoj webových aplikácií, ktoré získavajú dáta z~GraphQL služby. \\
 
-\blockquote[Dokumentácia Apollo GraphQL \cite{Apollo}]{Apollo Client je knižnica umožňujúca plnohodnotnú správu stavu dát v JavaScriptových aplikáciach. Umožňuje vývojárovi len napísať požadovaný GraphQL dotaz a Apollo Client sa už postará o získanie, uloženie dát do cache a obnovenie uživateľského rozhrania. Využívanie knižnice Apollo Client vedie vývojára ku správnej štruktúre kódu.}
+\blockquote[Dokumentácia Apollo GraphQL \cite{Apollo}]{Apollo Client je knižnica umožňujúca plnohodnotnú správu stavu dát v~JavaScriptových aplikáciach. Umožňuje vývojárovi len napísať požadovaný GraphQL dotaz a Apollo Client sa už postará o~získanie, uloženie dát do cache a obnovenie uživateľského rozhrania. Využívanie knižnice Apollo Client vedie vývojára ku správnej štruktúre kódu.}
 
 \bigskip
 
@@ -402,14 +400,14 @@ Aplikácia pre tímovú a pracovnú komunikáciu Slack umožňuje vývojárom vy
 \begin{itemize}
 	\item \emph{Otvoriť dialógové okná} pre získanie alebo zobrazenie extra informácií. \cite{SlackAPI}
 	\item \emph{Zostaviť interaktívne komponenty} na ktoré môzu reagovať \cite{SlackAPI}
-	\item \emph{Vytvoriť a aktualizovať \uv{Home tab} (domovskú obrazovku)} kde môže užívateľ interagovať s aplikáciou. \cite{SlackAPI}
-	\item \emph{Definovať skratky} vďaka ktorým užívateľ môže rýchlo vykonať akcie v aplikácií. \cite{SlackAPI}
+	\item \emph{Vytvoriť a aktualizovať \uv{Home tab} (domovskú obrazovku)} kde môže užívateľ interagovať s~aplikáciou. \cite{SlackAPI}
+	\item \emph{Definovať skratky} vďaka ktorým užívateľ môže rýchlo vykonať akcie v~aplikácií. \cite{SlackAPI}
 \end{itemize}
 
 \subsection{Block Kit}
-Framework pre tvorbu uživateľského rozhrania pre Slack aplikácie, ktorý ponúka kompromis kontroly a flexibility pri budovaní rozhraní v správach. \cite{SlackAPI}  Uživateľské rozhranie sa skladá pomocou blokov, ktoré sú vo forme JSON objekov prenášané do Slack aplikácie. Bloky sa delia na dve hlavné kategórie -- \emph{interactive} a \emph{layout} bloky. \\
+Framework pre tvorbu uživateľského rozhrania pre Slack aplikácie, ktorý ponúka kompromis kontroly a flexibility pri budovaní rozhraní v~správach. \cite{SlackAPI}  Uživateľské rozhranie sa skladá pomocou blokov, ktoré sú vo forme JSON objekov prenášané do Slack aplikácie. Bloky sa delia na dve hlavné kategórie -- \emph{interactive} a \emph{layout} bloky. \\
 
-\begin{lstlisting}[caption=Príklad jednoduchého bloku v Slack aplikácií.]
+\begin{lstlisting}[caption=Príklad jednoduchého bloku v~Slack aplikácií.]
 	{
 		"type": "section",
 		"text": {
@@ -421,4 +419,4 @@ Framework pre tvorbu uživateľského rozhrania pre Slack aplikácie, ktorý pon
 
 \bigskip
 
-\noindent Niektoré bloky podporujú formátovanie pomocou modifikovanej verzie jazyka \emph{markdown}.
+\noindent Bloky sa vkladajú do lineárneho zoznamu nazvanom \emph{view}, ktorý je následne odoslaný na príslušnú časť API, aby bol spracovaný. Niektoré bloky podporujú formátovanie pomocou modifikovanej verzie jazyka \emph{markdown}.

@@ -18,17 +18,18 @@
 \contentsline {subsubsection}{Komponenty}{8}{section*.7}% 
 \contentsline {subsection}{\numberline {2.2.7}Next.js}{9}{subsection.2.2.7}% 
 \contentsline {section}{\numberline {2.3}V\IeC {\'y}voj serverov\IeC {\'y}ch aplik\IeC {\'a}cii}{9}{section.2.3}% 
-\contentsline {subsection}{\numberline {2.3.1}HTTP}{10}{subsection.2.3.1}% 
+\contentsline {subsection}{\numberline {2.3.1}HTTP}{9}{subsection.2.3.1}% 
 \contentsline {subsubsection}{Terminol\IeC {\'o}gia}{10}{section*.8}% 
 \contentsline {subsubsection}{Met\IeC {\'o}dy}{10}{section*.9}% 
-\contentsline {subsection}{\numberline {2.3.2}Node.js}{11}{subsection.2.3.2}% 
+\contentsline {subsection}{\numberline {2.3.2}Node.js}{10}{subsection.2.3.2}% 
 \contentsline {subsubsection}{Node Package Manager - NPM}{11}{section*.10}% 
 \contentsline {subsection}{\numberline {2.3.3}Rela\IeC {\v c}n\IeC {\'e} datab\IeC {\'a}zy}{11}{subsection.2.3.3}% 
 \contentsline {subsubsection}{PostgreSQL}{11}{section*.11}% 
-\contentsline {subsubsection}{Prisma}{12}{section*.12}% 
+\contentsline {subsubsection}{Prisma}{11}{section*.12}% 
 \contentsline {section}{\numberline {2.4}GraphQL}{12}{section.2.4}% 
 \contentsline {subsection}{\numberline {2.4.1}Apollo Client}{13}{subsection.2.4.1}% 
 \contentsline {subsection}{\numberline {2.4.2}Apollo Server}{13}{subsection.2.4.2}% 
 \contentsline {section}{\numberline {2.5}Slack API}{14}{section.2.5}% 
 \contentsline {subsection}{\numberline {2.5.1}Block Kit}{14}{subsection.2.5.1}% 
+\contentsline {chapter}{Literat\IeC {\'u}ra}{15}{chapter*.13}% 
 \contentsfinish 
