@@ -420,3 +420,34 @@ Framework pre tvorbu uživateľského rozhrania pre Slack aplikácie, ktorý pon
 \bigskip
 
 \noindent Bloky sa vkladajú do lineárneho zoznamu nazvanom \emph{view}, ktorý je následne odoslaný na príslušnú časť API, aby bol spracovaný. Niektoré bloky podporujú formátovanie pomocou modifikovanej verzie jazyka \emph{markdown}.
+
+\chapter{Návrh riešenia}
+Kapitola popisuje jednotlivé etapy vzniku návrhu služby, ktorá je predmetom tejto práce. Výsledný návrh vznikol po nadobudnutí požadovaných znalostí a analýz požiadavkov kladených na výsledný produkt.
+
+\section{Zadanie práce}
+Zadanie, ktorého celé znenie je priložené na \hyperlink{page.2}{strane 2}, popisuje výsledné riešenie práce ako \emph{headless} redakčný systém. Súhrn hlavných požiadaviek na systém je nasledovný:
+
+\begin{itemize}
+	\item Užívateľ systému by mal byť schopný spravovať obsah v \emph{plnej miere} a bez obmedzení v prostredí aplikácie Slack.
+	\item Užívateľ by mal byť schopný začať využívať službu \emph{okamžite} po nainštalovaní do svojho pracovného prostredia v aplikácií Slack. To znamená, že žiadna konfigurácia alebo nasadenie na vlastnú infraštruktúru by nemalo byť požadované.
+	\item Všetky vytvorené dáta by mali byť dostupné cez verejné API.
+	\item Systém by mal disponovať webovým rozhraním, odkiaľ by malo byť možné spravovať obsah a nastavenia.
+\end{itemize}
+
+\noindent Hlavnou výsadou práce nie je čo najväčšia flexibilita, ale jednoduchosť v použití a možnosť rýchleho nasadenia. 
+
+\subsection{Odchýlky návrhu od pôvodného zadania}
+Slack API umožňuje vytvoriť uživateľské rozhranie zložené z maximálneho počtu 100 blokov. Táto skutočnosť znamená, že nie je možné zobrazovať napríklad dlhé zoznamy prvkov. Pre tento dôvod je maximálny počet zobrazených prvkov v zoznamoch Slack aplikácie limitovaný. Prvky zoznamov nad určený limit sú skryté a uzívateľ ich môže spravovať výhradne vo webovom prostredí. 
+
+\section{Návrh architektúry}
+Na začiatkoch navrhovania architektúry bola služba rozdelená do dvoch hlavných častí podľa vzoru \emph{backend} a \emph{frontend}. Frontend bola webová služba a backend poskytovala GraphQL bránu pre prístup k dátam a logike pre frontend, ale slúžila aj ako prístupový bod pre koncových užívateľov headless redakčného systému a tiež ako bod pre komunikáciu so Slack API. Dáta boli ukladané v relačnej databáze. \\
+
+\noindent Aj keď v prvopočiatkoch tvorby návrhu sa táto architekúra zdala ako vyhovujúca, neskôr sa ukázalo ako lepšia možnosť nasledujúce rozdelenie do štyroch menších služieb:
+
+\begin{itemize}
+	\item \texttt{frontend} -- Webová aplikácia poskytujúca prístup k obsahu a nastaveniam headless redakčného systému. Táto časť zostala nezmenená.
+	\item \texttt{service-slack} -- Serverová aplikácia zodpovedná za komunikáciu so Slack API. Udalosti a akcie prichádzajúce zo Slack aplikácie smerujú na túto službu, kde sú spracované a vyhodnotené.
+	\item \texttt{service-private} -- Serverová GraphQL aplikácia poskytujúca logiku a prístup k dátam \uv{frontend} službe.
+	\item \texttt{service-public} -- Serverová GraphQL aplikácia poskytujúca prístup k obsahu redakčného systému koncovým užívateľom.
+	\item \texttt{database} -- Relačná databáza obsahujúca uživateľské dáta, nastavenia a obsah od koncových užívateľov.
+\end{itemize}
