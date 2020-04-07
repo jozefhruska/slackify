@@ -26,7 +26,7 @@
     "nexus-prisma": "~0.11.1"
   },
   "devDependencies": {
-    "@types/jsonwebtoken": "~8.3.8",
+    "@types/jsonwebtoken": "~8.3.9",
     "@types/jwt-decode": "~2.2.1",
     "@typescript-eslint/eslint-plugin": "~2.27.0",
     "@typescript-eslint/parser": "~2.26.0",
