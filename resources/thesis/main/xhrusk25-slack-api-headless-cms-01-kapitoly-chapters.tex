@@ -464,12 +464,19 @@ Na začiatkoch navrhovania architektúry bola služba rozdelená do dvoch hlavn�
 Jednotlivé služby sú ešte rozdelené do dvoch skupín. \texttt{Frontend} a \texttt{service-public} sú služby dostupné pre verejnosť (\emph{public services}), \texttt{service-private} a \texttt{service-slack} dostupné pre verejnosť nie sú (\emph{private services}). 
 
 \section{Dátové typy}
-Slackify je headless redakčný systém obsahujúci dva hlavné dátové typy -- \emph{collection} (kolekcia) a \emph{component} (komponenta). Pomocou týchto dvoch dátových typov je možné vytvoriť logickú štruktúru obsahu.
+Slackify je headless redakčný systém obsahujúci dva hlavné dátové typy -- \emph{collection} (kolekcia) a \emph{component} (komponenta). Pomocou týchto dvoch dátových typov je možné vytvoriť logickú štruktúru obsahu. U oboch dátových typov sa uchováva momentálny stav uverejnenosti \emph{published}, repretenzovaný dátovým typom boolean.
 
 \subsection{Component}
 Component (komponenta) je základná dátová struktúra v Slackify. Celý obsah redakčného systému je zložený komponent usporiadaných do kolekcií (\nameref{subsection:collection}). Každá komponenta má povinnú položku \emph{type} (typ), ktorá určuje ďaľšie zloženie štruktúry.
 
-% TODO: Add component types
+\subsubsection{Typ \uv{\texttt{Plain Text}}}
+Najjednoduchší typ obsahujúci jediné povinné textové pole s názvom \emph{text}.
+
+\subsubsection{Typ \uv{\texttt{Article}}}
+Typ pre vytvorenie jednoduchého článku. Obsahuje povinné textové položky \emph{title} (titulok), \emph{content} (obsah článku) a nepovinnú textovú položku \emph{lead} (úvodný text).
+
+\subsubsection{Typ \uv{\texttt{Link}}}
+Typ pre vytvorenie hypertextového odkazu. Obsahuje povinnú textovú položku \emph{url} (cieľová adresa) a voliteľnú textovú položku \emph{text}.
 
 \subsection{Collection}
 \label{subsection:collection}
@@ -479,13 +486,7 @@ Collection (kolekcia) je zoznam slúžiaci pre kategorizovanie jednotlivých kom
 Priložené diagramy prípadov použitia zobrazujú chovanie systému z~pohľadu autora a zariadenia, ktoré sa snaží získať obsah z~redakčného systému cez verejné aplikačné rozhranie \texttt{service-public}.
 
 \subsection{Autor}
-Po nainštalovaní aplikácie Slackify sa stáva každý člen pracovného prostredia s~prístupom ku aplikácií \emph{Autorom}.
-
-\begin{figure}[h]
-	\centering
-	\includegraphics[scale=1.4]{obrazky-figures/author_user_case}
-	\caption{Diagram prípadov použitia -- \emph{Autor}.}
-\end{figure}
+Po nainštalovaní aplikácie Slackify sa stáva každý člen pracovného prostredia s~prístupom ku aplikácií \emph{Autorom}. \\
 
 \noindent \emph{Autor} môže v~prostredí Slackify vykonávať nasledujúce akcie:
 
@@ -495,6 +496,12 @@ Po nainštalovaní aplikácie Slackify sa stáva každý člen pracovného prost
 	\item \texttt{Zmazať kolekciu/komponentu} -- Kolekcie alebo komponety je možné zmazať v~ľubovoľný čas. Pri zmazaní kolekcie sa zmazú aj všetky komponenty k~nej priradené.
 	\item \texttt{Publikovať kolekciu/komponentu} -- Publikovaná kolekcia alebo komponenta je okamžite dostupná verejne. \emph{Autor} rovnako môže kolekcie alebo komponenty skryť.
 \end{itemize}
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=1.4]{obrazky-figures/author_user_case}
+	\caption{Diagram prípadov použitia -- \emph{Autor}.}
+\end{figure}
 
 \subsection{Zariadenie}
 Obsah zo Slackify je možné získať z~verejného API (\emph{service-public}) prostredníctvom akéhokoľvek zariadenia, ktoré dokáže komunikovať cez protokol HTTP. Pre ukážku diagramu prípadov použitia je na mobilnom telefóne nainštalovaná aplikácia, ktorá komunikuje s~rozhraním Slackify.
