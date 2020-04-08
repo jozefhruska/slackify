@@ -428,31 +428,31 @@ Kapitola popisuje jednotlivé etapy vzniku návrhu služby, ktorá je predmetom 
 Zadanie, ktorého celé znenie je priložené na \hyperlink{page.2}{strane 2}, popisuje výsledné riešenie práce ako \emph{headless} redakčný systém. Súhrn hlavných požiadaviek na systém je nasledovný:
 
 \begin{itemize}
-	\item Užívateľ systému by mal byť schopný spravovať obsah v \emph{plnej miere} a bez obmedzení v prostredí aplikácie Slack.
-	\item Užívateľ by mal byť schopný začať využívať službu \emph{okamžite} po nainštalovaní do svojho pracovného prostredia v aplikácií Slack. To znamená, že žiadna konfigurácia alebo nasadenie na vlastnú infraštruktúru by nemalo byť požadované.
+	\item Užívateľ systému by mal byť schopný spravovať obsah v~\emph{plnej miere} a bez obmedzení v~prostredí aplikácie Slack.
+	\item Užívateľ by mal byť schopný začať využívať službu \emph{okamžite} po nainštalovaní do svojho pracovného prostredia v~aplikácií Slack. To znamená, že žiadna konfigurácia alebo nasadenie na vlastnú infraštruktúru by nemalo byť požadované.
 	\item Všetky vytvorené dáta by mali byť dostupné cez verejné API.
 	\item Systém by mal disponovať webovým rozhraním, odkiaľ by malo byť možné spravovať obsah a nastavenia.
 \end{itemize}
 
-\noindent Hlavnou výsadou práce nie je čo najväčšia flexibilita, ale jednoduchosť v použití a možnosť rýchleho nasadenia. 
+\noindent Hlavnou výsadou práce nie je čo najväčšia flexibilita, ale jednoduchosť v~použití a možnosť rýchleho nasadenia. 
 
 \subsection{Odchýlky návrhu od pôvodného zadania}
-Slack API umožňuje vytvoriť uživateľské rozhranie zložené z maximálneho počtu 100 blokov. Táto skutočnosť znamená, že nie je možné zobrazovať napríklad dlhé zoznamy prvkov. Pre tento dôvod je maximálny počet zobrazených prvkov v zoznamoch Slack aplikácie limitovaný. Prvky zoznamov nad určený limit sú skryté a uzívateľ ich môže spravovať výhradne vo webovom prostredí. 
+Slack API umožňuje vytvoriť uživateľské rozhranie zložené z~maximálneho počtu 100 blokov. Táto skutočnosť znamená, že nie je možné zobrazovať napríklad dlhé zoznamy prvkov. Pre tento dôvod je maximálny počet zobrazených prvkov v~zoznamoch Slack aplikácie limitovaný. Prvky zoznamov nad určený limit sú skryté a uzívateľ ich môže spravovať výhradne vo webovom prostredí. 
 
 \section{Návrh architektúry}
-Na začiatkoch navrhovania architektúry bola služba rozdelená do dvoch hlavných častí podľa vzoru \emph{backend} a \emph{frontend}. Frontend bola webová služba a backend poskytovala GraphQL bránu pre prístup k dátam a logike pre frontend, ale slúžila aj ako prístupový bod pre koncových užívateľov headless redakčného systému a tiež ako bod pre komunikáciu so Slack API. Dáta boli ukladané v relačnej databáze. \\
+Na začiatkoch navrhovania architektúry bola služba rozdelená do dvoch hlavných častí podľa vzoru \emph{backend} a \emph{frontend}. Frontend bola webová služba a backend poskytovala GraphQL bránu pre prístup k~dátam a logike pre frontend, ale slúžila aj ako prístupový bod pre koncových užívateľov headless redakčného systému a tiež ako bod pre komunikáciu so Slack API. Dáta boli ukladané v~relačnej databáze. \\
 
-\noindent Aj keď v prvopočiatkoch tvorby návrhu sa táto architekúra zdala ako vyhovujúca, neskôr sa ukázalo ako lepšia možnosť nasledujúce rozdelenie do štyroch menších služieb:
+\noindent Aj keď v~prvopočiatkoch tvorby návrhu sa táto architekúra zdala ako vyhovujúca, neskôr sa ukázalo ako lepšia možnosť nasledujúce rozdelenie do štyroch menších služieb:
 
 \begin{itemize}
-	\item \texttt{frontend} -- Webová aplikácia poskytujúca prístup k obsahu a nastaveniam headless redakčného systému. Táto časť zostala nezmenená.
+	\item \texttt{frontend} -- Webová aplikácia poskytujúca prístup k~obsahu a nastaveniam headless redakčného systému. Táto časť zostala nezmenená.
 	\item \texttt{service-slack} -- Serverová aplikácia zodpovedná za komunikáciu so Slack API. Udalosti a akcie prichádzajúce zo Slack aplikácie smerujú na túto službu, kde sú spracované a vyhodnotené.
-	\item \texttt{service-private} -- Serverová GraphQL aplikácia poskytujúca logiku a prístup k dátam \uv{frontend} službe.
-	\item \texttt{service-public} -- Serverová GraphQL aplikácia poskytujúca prístup k obsahu redakčného systému koncovým užívateľom.
+	\item \texttt{service-private} -- Serverová GraphQL aplikácia poskytujúca logiku a prístup k~dátam \uv{frontend} službe.
+	\item \texttt{service-public} -- Serverová GraphQL aplikácia poskytujúca prístup k~obsahu redakčného systému koncovým užívateľom.
 	\item \texttt{database} -- Relačná databáza obsahujúca uživateľské dáta, nastavenia a obsah od koncových užívateľov.
 \end{itemize}
 
-\noindent Takáto architektúra sa oproti jednej veľkej backend službe ukázala ako výhodná z dvoch hlavných dôvodov. Prvým dôvodom je \emph{omnoho jednoduchšia údržba} viacerých menších služieb (napríklad udržovanie logickej súborovej štruktúry bolo pri jednej monolitickej službe obtiažne). Druhým významným dôvodom je možnosť jednotlivé služby \emph{verziovať a vydávať samostatne}, pretože fungujú nezávisle jedna na druhej.
+\noindent Takáto architektúra sa oproti jednej veľkej backend službe ukázala ako výhodná z~dvoch hlavných dôvodov. Prvým dôvodom je \emph{omnoho jednoduchšia údržba} viacerých menších služieb (napríklad udržovanie logickej súborovej štruktúry bolo pri jednej monolitickej službe obtiažne). Druhým významným dôvodom je možnosť jednotlivé služby \emph{verziovať a vydávať samostatne}, pretože fungujú nezávisle jedna na druhej.
 
 
 \begin{figure}[h]
@@ -463,24 +463,52 @@ Na začiatkoch navrhovania architektúry bola služba rozdelená do dvoch hlavn�
 
 Jednotlivé služby sú ešte rozdelené do dvoch skupín. \texttt{Frontend} a \texttt{service-public} sú služby dostupné pre verejnosť (\emph{public services}), \texttt{service-private} a \texttt{service-slack} dostupné pre verejnosť nie sú (\emph{private services}). 
 
+\section{Dátové typy}
+Slackify je headless redakčný systém obsahujúci dva hlavné dátové typy -- \emph{collection} (kolekcia) a \emph{component} (komponenta). Pomocou týchto dvoch dátových typov je možné vytvoriť logickú štruktúru obsahu.
+
+\subsection{Component}
+Component (komponenta) je základná dátová struktúra v Slackify. Celý obsah redakčného systému je zložený komponent usporiadaných do kolekcií (\nameref{subsection:collection}). Každá komponenta má povinnú položku \emph{type} (typ), ktorá určuje ďaľšie zloženie štruktúry.
+
+% TODO: Add component types
+
+\subsection{Collection}
+\label{subsection:collection}
+Collection (kolekcia) je zoznam slúžiaci pre kategorizovanie jednotlivých komponent. Každá kolekcia ich môže obsahovať 0 až $n$. Jedná sa o \emph{homogénny zoznam}, tzn. že pri tvorbe kolekcie sa vždy musí zvoliť práve jeden typ komponent z ktorých sa môže zoznam skladať. Každá kolekcia má povinnú položku \emph{name} (názov) a nepovinnú \emph{description} (popis).
+
 \section{Diagram prípadov použitia}
-Priložené diagramy prípadov použitia zobrazujú chovanie systému z pohľadu autora a zariadenia, ktoré sa snaží získať obsah z redakčného systému cez verejné aplikačné rozhranie \texttt{service-public} (charakterizované mobilným telefónom).
+Priložené diagramy prípadov použitia zobrazujú chovanie systému z~pohľadu autora a zariadenia, ktoré sa snaží získať obsah z~redakčného systému cez verejné aplikačné rozhranie \texttt{service-public}.
 
 \subsection{Autor}
-Po nainštalovaní aplikácie \textbf{Slackify} sa stáva každý člen pracovného prostredia s prístupom ku aplikácií \emph{Autorom}.
+Po nainštalovaní aplikácie Slackify sa stáva každý člen pracovného prostredia s~prístupom ku aplikácií \emph{Autorom}.
 
 \begin{figure}[h]
 	\centering
 	\includegraphics[scale=1.4]{obrazky-figures/author_user_case}
-	\caption{Diagram prípadov použitia - \emph{Autor}}.
+	\caption{Diagram prípadov použitia -- \emph{Autor}.}
 \end{figure}
 
-\noindent \emph{Autor} môže v prostredí \textbf{Slackify} vykonávať nasledujúce akcie:
+\noindent \emph{Autor} môže v~prostredí Slackify vykonávať nasledujúce akcie:
 
 \begin{itemize}
 	\item \texttt{Vytvoriť kolekciu/komponentu} -- Po zadaní a potvrdení vstupných údajov je nová kolekcia alebo komponenta pridaná do databázy. Po vytvorení majú východiskový stav \emph{nepublikovaná}.
-	\item \texttt{Upraviť kolekciu/komponentu} -- Kolekcie alebo komponety je možné upraviť v ľubovoľný čas. Jediná hodnota, ktorú nie je možné modifikovať je typ kolekcie alebo komponenty.
-	\item \texttt{Zmazať kolekciu/komponentu} -- Kolekcie alebo komponety je možné zmazať v ľubovoľný čas. Pri zmazaní kolekcie sa zmazú aj všetky komponenty k nej priradené.
-	\item \texttt{Publikovať kolekciu/komponentu} -- Publikovaná kolekcia alebo komponenta je okamžite dostupná verejne. \emph{Author} rovnako môže kolekcie alebo komponenty skryť.
+	\item \texttt{Upraviť kolekciu/komponentu} -- Kolekcie alebo komponety je možné upraviť v~ľubovoľný čas. Jediná hodnota, ktorú nie je možné modifikovať je typ kolekcie alebo komponenty.
+	\item \texttt{Zmazať kolekciu/komponentu} -- Kolekcie alebo komponety je možné zmazať v~ľubovoľný čas. Pri zmazaní kolekcie sa zmazú aj všetky komponenty k~nej priradené.
+	\item \texttt{Publikovať kolekciu/komponentu} -- Publikovaná kolekcia alebo komponenta je okamžite dostupná verejne. \emph{Autor} rovnako môže kolekcie alebo komponenty skryť.
 \end{itemize}
 
+\subsection{Zariadenie}
+Obsah zo Slackify je možné získať z~verejného API (\emph{service-public}) prostredníctvom akéhokoľvek zariadenia, ktoré dokáže komunikovať cez protokol HTTP. Pre ukážku diagramu prípadov použitia je na mobilnom telefóne nainštalovaná aplikácia, ktorá komunikuje s~rozhraním Slackify.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=1.4]{obrazky-figures/device_user_case}
+	\caption{Diagram prípadov použitia -- \emph{Zariadenie}.}
+\end{figure}
+
+\noindent \emph{Zariadenie} môže v~prostredí Slackify vykonávať nasledujúce akcie:
+
+\begin{itemize}
+	\item \texttt{Vyžiadať detail kolekcie/komponenty} -- Informácie o jednej kolekcií alebo komponente je možné vyžiadať od API pomocou ich unikátneho ID.
+	\item \texttt{Vyžiadať list kolekcií} -- Zariadenie si môže vyžiadať zoznam kolekcií (zoradené chronologicky podľa času vytvorenia).
+	\item \texttt{Vyžiadať list komponent} -- Pomocou unikátneho ID kolekcie je možné vyžiadať k nej priradené komponenty. V prípade neuvedenia ID kolekcie je navrátený lisť všetkých komponent v danom Slack pracovnom prostredí (zoradené chronologicky podľa času vytvorenia). Výsledky je možné zoradiť alebo filtrovať pomocou parametrov operácie.
+\end{itemize}

@@ -1,12 +1,11 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2020.3.2)  7 APR 2020 18:06
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2020.3.2)  8 APR 2020 20:00
 entering extended mode
  restricted \write18 enabled.
- file:line:error style messages enabled.
  %&-line parsing enabled.
-**/Users/jozefhruska/Development/School/slackify/resources/thesis/main/xhrusk25-slack-api-headless-cms.tex
-(/Users/jozefhruska/Development/School/slackify/resources/thesis/main/xhrusk25-slack-api-headless-cms.tex
+**xhrusk25-slack-api-headless-cms
+(./xhrusk25-slack-api-headless-cms.tex
 LaTeX2e <2018-12-01>
-(/Users/jozefhruska/Development/School/slackify/resources/thesis/main/fitthesis.cls
+(./fitthesis.cls
 Document Class: fitthesis 2017/11/07 Sablona pro BP/DP
 (/usr/local/texlive/2019/texmf-dist/tex/latex/base/report.cls
 Document Class: report 2018/09/03 v1.4i Standard LaTeX document class
@@ -25,21 +24,25 @@ File: size11.clo 2018/09/03 v1.4i Standard LaTeX file (size option)
 \abovecaptionskip=\skip41
 \belowcaptionskip=\skip42
 \bibindent=\dimen102
-) (/usr/local/texlive/2019/texmf-dist/tex/latex/amsmath/amsmath.sty
+)
+(/usr/local/texlive/2019/texmf-dist/tex/latex/amsmath/amsmath.sty
 Package: amsmath 2018/12/01 v2.17b AMS math features
 \@mathmargin=\skip43
 
 For additional information on amsmath, use the `?' option.
 (/usr/local/texlive/2019/texmf-dist/tex/latex/amsmath/amstext.sty
 Package: amstext 2000/06/29 v2.01 AMS text
- (/usr/local/texlive/2019/texmf-dist/tex/latex/amsmath/amsgen.sty
+
+(/usr/local/texlive/2019/texmf-dist/tex/latex/amsmath/amsgen.sty
 File: amsgen.sty 1999/11/30 v2.0 generic functions
 \@emptytoks=\toks14
 \ex@=\dimen103
-)) (/usr/local/texlive/2019/texmf-dist/tex/latex/amsmath/amsbsy.sty
+))
+(/usr/local/texlive/2019/texmf-dist/tex/latex/amsmath/amsbsy.sty
 Package: amsbsy 1999/11/29 v1.2d Bold Symbols
 \pmbraise@=\dimen104
-) (/usr/local/texlive/2019/texmf-dist/tex/latex/amsmath/amsopn.sty
+)
+(/usr/local/texlive/2019/texmf-dist/tex/latex/amsmath/amsopn.sty
 Package: amsopn 2016/03/08 v2.02 operator names
 )
 \inf@bad=\count89
@@ -79,25 +82,32 @@ LaTeX Font Info:    Redeclaring font encoding OMS on input line 730.
 \mathdisplay@stack=\toks18
 LaTeX Info: Redefining \[ on input line 2844.
 LaTeX Info: Redefining \] on input line 2845.
-) (/usr/local/texlive/2019/texmf-dist/tex/latex/amsfonts/amssymb.sty
+)
+(/usr/local/texlive/2019/texmf-dist/tex/latex/amsfonts/amssymb.sty
 Package: amssymb 2013/01/14 v3.01 AMS font symbols
- (/usr/local/texlive/2019/texmf-dist/tex/latex/amsfonts/amsfonts.sty
+
+(/usr/local/texlive/2019/texmf-dist/tex/latex/amsfonts/amsfonts.sty
 Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
 \symAMSa=\mathgroup4
 \symAMSb=\mathgroup5
 LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
 (Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
-)) (/usr/local/texlive/2019/texmf-dist/tex/generic/babel/babel.sty
+))
+(/usr/local/texlive/2019/texmf-dist/tex/generic/babel/babel.sty
 Package: babel 2019/05/04 3.31 The Babel package
- (/usr/local/texlive/2019/texmf-dist/tex/generic/babel/switch.def
+
+(/usr/local/texlive/2019/texmf-dist/tex/generic/babel/switch.def
 File: switch.def 2019/05/04 3.31 Babel switching mechanism
-) (/usr/local/texlive/2019/texmf-dist/tex/generic/babel-slovak/slovak.ldf
+)
+(/usr/local/texlive/2019/texmf-dist/tex/generic/babel-slovak/slovak.ldf
 Language: slovak 2008/07/06 v3.1a Slovak support from the babel system
- (/usr/local/texlive/2019/texmf-dist/tex/generic/babel/babel.def
+
+(/usr/local/texlive/2019/texmf-dist/tex/generic/babel/babel.def
 File: babel.def 2019/05/04 3.31 Babel common definitions
 \babel@savecnt=\count101
 \U@D=\dimen112
- (/usr/local/texlive/2019/texmf-dist/tex/generic/babel/txtbabel.def)
+
+(/usr/local/texlive/2019/texmf-dist/tex/generic/babel/txtbabel.def)
 \bbl@dirlevel=\count102
 )
 Package babel Info: Making ^ an active character on input line 123.
@@ -105,32 +115,41 @@ Package babel Info: Making " an active character on input line 126.
 Package babel Info: Making ' an active character on input line 129.
 \cs@wordlen=\count103
 Package babel Info: Making - an active character on input line 294.
-) (/usr/local/texlive/2019/texmf-dist/tex/generic/babel-czech/czech.ldf
+)
+(/usr/local/texlive/2019/texmf-dist/tex/generic/babel-czech/czech.ldf
 Language: czech 2008/07/06 v3.1a Czech support from the babel system
 LaTeX Info: Redefining \uv on input line 210.
 \cs@wordlen=\count104
-) (/usr/local/texlive/2019/texmf-dist/tex/generic/babel-english/english.ldf
+)
+(/usr/local/texlive/2019/texmf-dist/tex/generic/babel-english/english.ldf
 Language: english 2017/06/06 v3.3r English support from the babel system
 \l@canadian = a dialect from \language\l@american 
 \l@australian = a dialect from \language\l@british 
 \l@newzealand = a dialect from \language\l@british 
-)) (/usr/local/texlive/2019/texmf-dist/tex/latex/base/inputenc.sty
+))
+(/usr/local/texlive/2019/texmf-dist/tex/latex/base/inputenc.sty
 Package: inputenc 2018/08/11 v1.3c Input encoding file
 \inpenc@prehook=\toks19
 \inpenc@posthook=\toks20
-) (/usr/local/texlive/2019/texmf-dist/tex/latex/cmap/cmap.sty
+)
+(/usr/local/texlive/2019/texmf-dist/tex/latex/cmap/cmap.sty
 Package: cmap 2008/03/06 v1.0h CMap support: searchable PDF
-) (/usr/local/texlive/2019/texmf-dist/tex/latex/base/fontenc.sty
+)
+(/usr/local/texlive/2019/texmf-dist/tex/latex/base/fontenc.sty
 Package: fontenc 2018/08/11 v2.0j Standard LaTeX package
- (/usr/local/texlive/2019/texmf-dist/tex/latex/base/t1enc.def
+
+(/usr/local/texlive/2019/texmf-dist/tex/latex/base/t1enc.def
 File: t1enc.def 2018/08/11 v2.0j Standard LaTeX file
 LaTeX Font Info:    Redeclaring font encoding T1 on input line 48.
-)<<t1.cmap>>) (/usr/local/texlive/2019/texmf-dist/tex/latex/url/url.sty
+)<<t1.cmap>>)
+(/usr/local/texlive/2019/texmf-dist/tex/latex/url/url.sty
 \Urlmuskip=\muskip11
 Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
-) (/usr/local/texlive/2019/texmf-dist/tex/latex/ms/ragged2e.sty
+)
+(/usr/local/texlive/2019/texmf-dist/tex/latex/ms/ragged2e.sty
 Package: ragged2e 2009/05/21 v2.1 ragged2e Package (MS)
- (/usr/local/texlive/2019/texmf-dist/tex/latex/ms/everysel.sty
+
+(/usr/local/texlive/2019/texmf-dist/tex/latex/ms/everysel.sty
 Package: everysel 2011/10/28 v1.2 EverySelectfont Package (MS)
 )
 \CenteringLeftskip=\skip46
@@ -147,18 +166,23 @@ Package: everysel 2011/10/28 v1.2 EverySelectfont Package (MS)
 \RaggedLeftParindent=\skip57
 \RaggedRightParindent=\skip58
 \JustifyingParindent=\skip59
-) (/usr/local/texlive/2019/texmf-dist/tex/latex/graphics/color.sty
+)
+(/usr/local/texlive/2019/texmf-dist/tex/latex/graphics/color.sty
 Package: color 2016/07/10 v1.1e Standard LaTeX Color (DPC)
- (/usr/local/texlive/2019/texmf-dist/tex/latex/graphics-cfg/color.cfg
+
+(/usr/local/texlive/2019/texmf-dist/tex/latex/graphics-cfg/color.cfg
 File: color.cfg 2016/01/02 v1.6 sample color configuration
 )
 Package color Info: Driver file: pdftex.def on input line 147.
- (/usr/local/texlive/2019/texmf-dist/tex/latex/graphics-def/pdftex.def
+
+(/usr/local/texlive/2019/texmf-dist/tex/latex/graphics-def/pdftex.def
 File: pdftex.def 2018/01/08 v1.0l Graphics/color driver for pdftex
-)) (/usr/local/texlive/2019/texmf-dist/tex/latex/etoolbox/etoolbox.sty
+))
+(/usr/local/texlive/2019/texmf-dist/tex/latex/etoolbox/etoolbox.sty
 Package: etoolbox 2018/08/19 v2.5f e-TeX tools for LaTeX (JAW)
 \etb@tempcnta=\count105
-) (/usr/local/texlive/2019/texmf-dist/tex/latex/enumitem/enumitem.sty
+)
+(/usr/local/texlive/2019/texmf-dist/tex/latex/enumitem/enumitem.sty
 Package: enumitem 2019/02/04 v3.8 Customized lists
 \enitkv@toks@=\toks21
 \labelindent=\skip60
@@ -167,11 +191,14 @@ Package: enumitem 2019/02/04 v3.8 Customized lists
 \enit@inbox=\box29
 \enit@count@id=\count106
 \enitdp@description=\count107
-) (/usr/local/texlive/2019/texmf-dist/tex/latex/pdfpages/pdfpages.sty
+)
+(/usr/local/texlive/2019/texmf-dist/tex/latex/pdfpages/pdfpages.sty
 Package: pdfpages 2017/10/31 v0.5l Insert pages of external PDF documents (AM)
- (/usr/local/texlive/2019/texmf-dist/tex/latex/base/ifthen.sty
+
+(/usr/local/texlive/2019/texmf-dist/tex/latex/base/ifthen.sty
 Package: ifthen 2014/09/29 v1.1c Standard LaTeX ifthen package (DPC)
-) (/usr/local/texlive/2019/texmf-dist/tex/latex/tools/calc.sty
+)
+(/usr/local/texlive/2019/texmf-dist/tex/latex/tools/calc.sty
 Package: calc 2017/05/25 v4.3 Infix arithmetic (KKT,FJ)
 \calc@Acount=\count108
 \calc@Bcount=\count109
@@ -183,26 +210,36 @@ LaTeX Info: Redefining \setlength on input line 80.
 LaTeX Info: Redefining \addtolength on input line 81.
 \calc@Ccount=\count110
 \calc@Cskip=\skip63
-) (/usr/local/texlive/2019/texmf-dist/tex/latex/eso-pic/eso-pic.sty
+)
+(/usr/local/texlive/2019/texmf-dist/tex/latex/eso-pic/eso-pic.sty
 Package: eso-pic 2018/04/12 v2.0h eso-pic (RN)
- (/usr/local/texlive/2019/texmf-dist/tex/generic/oberdiek/atbegshi.sty
+
+(/usr/local/texlive/2019/texmf-dist/tex/generic/oberdiek/atbegshi.sty
 Package: atbegshi 2016/06/09 v1.18 At begin shipout hook (HO)
- (/usr/local/texlive/2019/texmf-dist/tex/generic/oberdiek/infwarerr.sty
+
+(/usr/local/texlive/2019/texmf-dist/tex/generic/oberdiek/infwarerr.sty
 Package: infwarerr 2016/05/16 v1.4 Providing info/warning/error messages (HO)
-) (/usr/local/texlive/2019/texmf-dist/tex/generic/oberdiek/ltxcmds.sty
+)
+(/usr/local/texlive/2019/texmf-dist/tex/generic/oberdiek/ltxcmds.sty
 Package: ltxcmds 2016/05/16 v1.23 LaTeX kernel commands for general use (HO)
-) (/usr/local/texlive/2019/texmf-dist/tex/generic/oberdiek/ifpdf.sty
+)
+(/usr/local/texlive/2019/texmf-dist/tex/generic/oberdiek/ifpdf.sty
 Package: ifpdf 2018/09/07 v3.3 Provides the ifpdf switch
-)) (/usr/local/texlive/2019/texmf-dist/tex/latex/graphics/keyval.sty
+))
+(/usr/local/texlive/2019/texmf-dist/tex/latex/graphics/keyval.sty
 Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
 \KV@toks@=\toks23
-)) (/usr/local/texlive/2019/texmf-dist/tex/latex/graphics/graphicx.sty
+))
+(/usr/local/texlive/2019/texmf-dist/tex/latex/graphics/graphicx.sty
 Package: graphicx 2017/06/01 v1.1a Enhanced LaTeX Graphics (DPC,SPQR)
- (/usr/local/texlive/2019/texmf-dist/tex/latex/graphics/graphics.sty
+
+(/usr/local/texlive/2019/texmf-dist/tex/latex/graphics/graphics.sty
 Package: graphics 2017/06/25 v1.2c Standard LaTeX Graphics (DPC,SPQR)
- (/usr/local/texlive/2019/texmf-dist/tex/latex/graphics/trig.sty
+
+(/usr/local/texlive/2019/texmf-dist/tex/latex/graphics/trig.sty
 Package: trig 2016/01/03 v1.10 sin cos tan (DPC)
-) (/usr/local/texlive/2019/texmf-dist/tex/latex/graphics-cfg/graphics.cfg
+)
+(/usr/local/texlive/2019/texmf-dist/tex/latex/graphics-cfg/graphics.cfg
 File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
 )
 Package graphics Info: Driver file: pdftex.def on input line 99.
@@ -212,7 +249,8 @@ Package graphics Info: Driver file: pdftex.def on input line 99.
 )
 \AM@pagewidth=\dimen118
 \AM@pageheight=\dimen119
- (/usr/local/texlive/2019/texmf-dist/tex/latex/pdfpages/pppdftex.def
+
+(/usr/local/texlive/2019/texmf-dist/tex/latex/pdfpages/pppdftex.def
 File: pppdftex.def 2017/10/31 v0.5l Pdfpages driver for pdfTeX (AM)
 )
 \AM@pagebox=\box30
@@ -224,22 +262,26 @@ File: pppdftex.def 2017/10/31 v0.5l Pdfpages driver for pdfTeX (AM)
 \mkspc=\skip64
 \DESCRIPTION@totalleftmargin=\skip65
 \DESCRIPTION@linewidth=\skip66
- (/usr/local/texlive/2019/texmf-dist/tex/latex/opensans/opensans.sty
+
+(/usr/local/texlive/2019/texmf-dist/tex/latex/opensans/opensans.sty
 Package: opensans 2011/11/11 Opensans
- (/usr/local/texlive/2019/texmf-dist/tex/latex/slantsc/slantsc.sty
+
+(/usr/local/texlive/2019/texmf-dist/tex/latex/slantsc/slantsc.sty
 Package: slantsc 2012/01/01 v2.11 Provide Slanted an Italic Small Caps
 LaTeX Info: Redefining \upshape on input line 35.
 LaTeX Info: Redefining \slshape on input line 45.
 LaTeX Info: Redefining \itshape on input line 55.
 LaTeX Info: Redefining \scshape on input line 65.
-)) (/usr/local/texlive/2019/texmf-dist/tex/latex/float/float.sty
+))
+(/usr/local/texlive/2019/texmf-dist/tex/latex/float/float.sty
 Package: float 2001/11/08 v1.3d Float enhancements (AL)
 \c@float@type=\count112
 \float@exts=\toks26
 \float@box=\box32
 \@float@everytoks=\toks27
 \@floatcapt=\box33
-) (/usr/local/texlive/2019/texmf-dist/tex/latex/tools/longtable.sty
+)
+(/usr/local/texlive/2019/texmf-dist/tex/latex/tools/longtable.sty
 Package: longtable 2014/10/28 v4.11 Multi-page Table package (DPC)+ FMi change
 \LTleft=\skip67
 \LTright=\skip68
@@ -256,7 +298,8 @@ Package: longtable 2014/10/28 v4.11 Multi-page Table package (DPC)+ FMi change
 \c@LT@tables=\count116
 \c@LT@chunks=\count117
 \LT@p@ftn=\toks28
-) (/usr/local/texlive/2019/texmf-dist/tex/latex/booktabs/booktabs.sty
+)
+(/usr/local/texlive/2019/texmf-dist/tex/latex/booktabs/booktabs.sty
 Package: booktabs 2016/04/27 v1.618033 publication quality tables
 \heavyrulewidth=\dimen121
 \lightrulewidth=\dimen122
@@ -275,9 +318,11 @@ Package: booktabs 2016/04/27 v1.618033 publication quality tables
 \@thisruleclass=\count120
 \@lastruleclass=\count121
 \@thisrulewidth=\dimen133
-) (/usr/local/texlive/2019/texmf-dist/tex/latex/xcolor/xcolor.sty
+)
+(/usr/local/texlive/2019/texmf-dist/tex/latex/xcolor/xcolor.sty
 Package: xcolor 2016/05/11 v2.12 LaTeX color extensions (UK)
- (/usr/local/texlive/2019/texmf-dist/tex/latex/graphics-cfg/color.cfg
+
+(/usr/local/texlive/2019/texmf-dist/tex/latex/graphics-cfg/color.cfg
 File: color.cfg 2016/01/02 v1.6 sample color configuration
 )
 Package xcolor Info: Driver file: pdftex.def on input line 225.
@@ -291,9 +336,11 @@ Package xcolor Info: Model `tHsb' substituted by `hsb' on input line 1368.
 Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1369.
 Package xcolor Info: Model `Gray' substituted by `gray' on input line 1370.
 Package xcolor Info: Model `wave' substituted by `hsb' on input line 1371.
-) (/usr/local/texlive/2019/texmf-dist/tex/latex/colortbl/colortbl.sty
+)
+(/usr/local/texlive/2019/texmf-dist/tex/latex/colortbl/colortbl.sty
 Package: colortbl 2018/12/12 v1.0d Color table columns (DPC)
- (/usr/local/texlive/2019/texmf-dist/tex/latex/tools/array.sty
+
+(/usr/local/texlive/2019/texmf-dist/tex/latex/tools/array.sty
 Package: array 2018/12/30 v2.4k Tabular extension package (FMi)
 \col@sep=\dimen134
 \ar@mcellbox=\box38
@@ -305,13 +352,15 @@ Package: array 2018/12/30 v2.4k Tabular extension package (FMi)
 )
 \everycr=\toks30
 \minrowclearance=\skip73
-) (/usr/local/texlive/2019/texmf-dist/tex/latex/multirow/multirow.sty
+)
+(/usr/local/texlive/2019/texmf-dist/tex/latex/multirow/multirow.sty
 Package: multirow 2019/01/01 v2.4 Span multiple rows of a table
 \multirow@colwidth=\skip74
 \multirow@cntb=\count122
 \multirow@dima=\skip75
 \bigstrutjot=\dimen136
-) (/usr/local/texlive/2019/texmf-dist/tex/latex/tools/tabularx.sty
+)
+(/usr/local/texlive/2019/texmf-dist/tex/latex/tools/tabularx.sty
 Package: tabularx 2016/02/03 v2.11b `tabularx' package (DPC)
 \TX@col@width=\dimen137
 \TX@old@table=\dimen138
@@ -320,9 +369,11 @@ Package: tabularx 2016/02/03 v2.11b `tabularx' package (DPC)
 \TX@delta=\dimen141
 \TX@cols=\count123
 \TX@ftn=\toks31
-) (/usr/local/texlive/2019/texmf-dist/tex/latex/blindtext/blindtext.sty
+)
+(/usr/local/texlive/2019/texmf-dist/tex/latex/blindtext/blindtext.sty
 Package: blindtext 2012/01/06 V2.0 blindtext-Package
- (/usr/local/texlive/2019/texmf-dist/tex/latex/tools/xspace.sty
+
+(/usr/local/texlive/2019/texmf-dist/tex/latex/tools/xspace.sty
 Package: xspace 2014/10/28 v1.13 Space after command names (DPC,MH)
 )
 \c@blindtext=\count124
@@ -343,7 +394,8 @@ Package: xspace 2014/10/28 v1.13 Space after command names (DPC,MH)
 \c@blind@randommax=\count139
 \c@blind@pangramcount=\count140
 \c@blind@pangrammax=\count141
-) (/usr/local/texlive/2019/texmf-dist/tex/latex/listings/listings.sty
+)
+(/usr/local/texlive/2019/texmf-dist/tex/latex/listings/listings.sty
 \lst@mode=\count142
 \lst@gtempboxa=\box40
 \lst@token=\toks32
@@ -356,26 +408,33 @@ Package: xspace 2014/10/28 v1.13 Space after command names (DPC,MH)
 \lst@newlines=\count146
 \lst@lineno=\count147
 \lst@maxwidth=\dimen145
- (/usr/local/texlive/2019/texmf-dist/tex/latex/listings/lstmisc.sty
+
+(/usr/local/texlive/2019/texmf-dist/tex/latex/listings/lstmisc.sty
 File: lstmisc.sty 2019/02/27 1.8b (Carsten Heinz)
 \c@lstnumber=\count148
 \lst@skipnumbers=\count149
 \lst@framebox=\box41
-) (/usr/local/texlive/2019/texmf-dist/tex/latex/listings/listings.cfg
+)
+(/usr/local/texlive/2019/texmf-dist/tex/latex/listings/listings.cfg
 File: listings.cfg 2019/02/27 1.8b listings configuration
 ))
 Package: listings 2019/02/27 1.8b (Carsten Heinz)
- (/usr/local/texlive/2019/texmf-dist/tex/latex/appendix/appendix.sty
+
+(/usr/local/texlive/2019/texmf-dist/tex/latex/appendix/appendix.sty
 Package: appendix 2009/09/02 v1.2b extra appendix facilities
 \c@@pps=\count150
 \c@@ppsavesec=\count151
 \c@@ppsaveapp=\count152
-) (/usr/local/texlive/2019/texmf-dist/tex/latex/titlesec/titletoc.sty
+)
+(/usr/local/texlive/2019/texmf-dist/tex/latex/titlesec/titletoc.sty
 Package: titletoc 2011/12/15 v1.6 TOC entries
 \ttl@leftsep=\dimen146
-) (/usr/local/texlive/2019/texmf-dist/tex/latex/regexpatch/regexpatch.sty (/usr/local/texlive/2019/texmf-dist/tex/latex/l3kernel/expl3.sty
+)
+(/usr/local/texlive/2019/texmf-dist/tex/latex/regexpatch/regexpatch.sty
+(/usr/local/texlive/2019/texmf-dist/tex/latex/l3kernel/expl3.sty
 Package: expl3 2019-05-07 L3 programming layer (loader) 
- (/usr/local/texlive/2019/texmf-dist/tex/latex/l3kernel/expl3-code.tex
+
+(/usr/local/texlive/2019/texmf-dist/tex/latex/l3kernel/expl3-code.tex
 Package: expl3 2019-05-07 L3 programming layer (code)
 \c_max_int=\count153
 \l_tmpa_int=\count154
@@ -526,19 +585,22 @@ Package: expl3 2019-05-07 L3 programming layer (code)
 \l__seq_internal_a_int=\count302
 \l__seq_internal_b_int=\count303
 \c__deprecation_minus_one=\count304
-) (/usr/local/texlive/2019/texmf-dist/tex/latex/l3kernel/l3pdfmode.def
+)
+(/usr/local/texlive/2019/texmf-dist/tex/latex/l3kernel/l3pdfmode.def
 File: l3pdfmode.def 2019-04-06 v L3 Experimental driver: PDF mode
 \l__driver_color_stack_int=\count305
 \l__driver_pdf_tmp_box=\box60
 ))
 Package: regexpatch 2018/05/02 v0.2d Extending etoolbox patching commands
- (/usr/local/texlive/2019/texmf-dist/tex/latex/l3packages/xparse/xparse.sty
+
+(/usr/local/texlive/2019/texmf-dist/tex/latex/l3packages/xparse/xparse.sty
 Package: xparse 2019-05-03 L3 Experimental document command parser
 \l__xparse_current_arg_int=\count306
 \g__xparse_grabber_int=\count307
 \l__xparse_m_args_int=\count308
 \l__xparse_v_nesting_int=\count309
-))) (/usr/local/texlive/2019/texmf-dist/tex/latex/csquotes/csquotes.sty
+)))
+(/usr/local/texlive/2019/texmf-dist/tex/latex/csquotes/csquotes.sty
 Package: csquotes 2018/04/13 v5.2d context-sensitive quotations (JAW)
 \csq@reset=\count310
 \csq@gtype=\count311
@@ -547,18 +609,24 @@ Package: csquotes 2018/04/13 v5.2d context-sensitive quotations (JAW)
 \csq@maxlvl=\count314
 \csq@tshold=\count315
 \csq@ltx@everypar=\toks33
- (/usr/local/texlive/2019/texmf-dist/tex/latex/csquotes/csquotes.def
+
+(/usr/local/texlive/2019/texmf-dist/tex/latex/csquotes/csquotes.def
 File: csquotes.def 2018/04/13 v5.2d csquotes generic definitions (JAW)
 )
 Package csquotes Info: Trying to load configuration file 'csquotes.cfg'...
 Package csquotes Info: ... configuration file loaded successfully.
- (/usr/local/texlive/2019/texmf-dist/tex/latex/csquotes/csquotes.cfg
+
+(/usr/local/texlive/2019/texmf-dist/tex/latex/csquotes/csquotes.cfg
 File: csquotes.cfg 
-)) (/usr/local/texlive/2019/texmf-dist/tex/latex/hyperref/hyperref.sty
+))
+(/usr/local/texlive/2019/texmf-dist/tex/latex/hyperref/hyperref.sty
 Package: hyperref 2018/11/30 v6.88e Hypertext links for LaTeX
- (/usr/local/texlive/2019/texmf-dist/tex/generic/oberdiek/hobsub-hyperref.sty
+
+(/usr/local/texlive/2019/texmf-dist/tex/generic/oberdiek/hobsub-hyperref.sty
 Package: hobsub-hyperref 2016/05/16 v1.14 Bundle oberdiek, subset hyperref (HO)
- (/usr/local/texlive/2019/texmf-dist/tex/generic/oberdiek/hobsub-generic.sty
+
+
+(/usr/local/texlive/2019/texmf-dist/tex/generic/oberdiek/hobsub-generic.sty
 Package: hobsub-generic 2016/05/16 v1.14 Bundle oberdiek, subset generic (HO)
 Package: hobsub 2016/05/16 v1.14 Construct package bundles (HO)
 Package hobsub Info: Skipping package `infwarerr' (already loaded).
@@ -572,13 +640,15 @@ Package hobsub Info: Skipping package `ifpdf' (already loaded).
 Package: etexcmds 2016/05/16 v1.6 Avoid name clashes with e-TeX commands (HO)
 Package: kvsetkeys 2016/05/16 v1.17 Key value parser (HO)
 Package: kvdefinekeys 2016/05/16 v1.4 Define keys (HO)
-Package: pdftexcmds 2018/09/10 v0.29 Utility functions of pdfTeX for LuaTeX (HO)
+Package: pdftexcmds 2018/09/10 v0.29 Utility functions of pdfTeX for LuaTeX (HO
+)
 Package pdftexcmds Info: LuaTeX not detected.
 Package pdftexcmds Info: \pdf@primitive is available.
 Package pdftexcmds Info: \pdf@ifprimitive is available.
 Package pdftexcmds Info: \pdfdraftmode found.
 Package: pdfescape 2016/05/16 v1.14 Implements pdfTeX's escape features (HO)
-Package: bigintcalc 2016/05/16 v1.4 Expandable calculations on big integers (HO)
+Package: bigintcalc 2016/05/16 v1.4 Expandable calculations on big integers (HO
+)
 Package: bitset 2016/05/16 v1.2 Handle bit-vector datatype (HO)
 Package: uniquecounter 2016/05/16 v1.3 Provide unlimited unique counter (HO)
 )
@@ -590,27 +660,33 @@ Package: atveryend 2016/05/16 v1.9 Hooks at the very end of document (HO)
 Package hobsub Info: Skipping package `atbegshi' (already loaded).
 Package: refcount 2016/05/16 v3.5 Data extraction from label references (HO)
 Package: hycolor 2016/05/16 v1.8 Color options for hyperref/bookmark (HO)
-) (/usr/local/texlive/2019/texmf-dist/tex/generic/ifxetex/ifxetex.sty
+)
+(/usr/local/texlive/2019/texmf-dist/tex/generic/ifxetex/ifxetex.sty
 Package: ifxetex 2010/09/12 v0.6 Provides ifxetex conditional
-) (/usr/local/texlive/2019/texmf-dist/tex/latex/oberdiek/auxhook.sty
+)
+(/usr/local/texlive/2019/texmf-dist/tex/latex/oberdiek/auxhook.sty
 Package: auxhook 2016/05/16 v1.4 Hooks for auxiliary files (HO)
-) (/usr/local/texlive/2019/texmf-dist/tex/latex/oberdiek/kvoptions.sty
+)
+(/usr/local/texlive/2019/texmf-dist/tex/latex/oberdiek/kvoptions.sty
 Package: kvoptions 2016/05/16 v3.12 Key value format for package options (HO)
 )
 \@linkdim=\dimen179
 \Hy@linkcounter=\count316
 \Hy@pagecounter=\count317
- (/usr/local/texlive/2019/texmf-dist/tex/latex/hyperref/pd1enc.def
+
+(/usr/local/texlive/2019/texmf-dist/tex/latex/hyperref/pd1enc.def
 File: pd1enc.def 2018/11/30 v6.88e Hyperref: PDFDocEncoding definition (HO)
 Now handling font encoding PD1 ...
 ... no UTF-8 mapping file for font encoding PD1
 )
 \Hy@SavedSpaceFactor=\count318
- (/usr/local/texlive/2019/texmf-dist/tex/latex/latexconfig/hyperref.cfg
+
+(/usr/local/texlive/2019/texmf-dist/tex/latex/latexconfig/hyperref.cfg
 File: hyperref.cfg 2002/06/06 v1.2 hyperref configuration of TeXLive
 )
 Package hyperref Info: Option `unicode' set `true' on input line 4393.
- (/usr/local/texlive/2019/texmf-dist/tex/latex/hyperref/puenc.def
+
+(/usr/local/texlive/2019/texmf-dist/tex/latex/hyperref/puenc.def
 File: puenc.def 2018/11/30 v6.88e Hyperref: PDF Unicode definition (HO)
 Now handling font encoding PU ...
 ... no UTF-8 mapping file for font encoding PU
@@ -645,16 +721,20 @@ LaTeX Info: Redefining \pageref on input line 6454.
 \c@Hfootnote=\count323
 )
 Package hyperref Info: Driver: hpdftex.
- (/usr/local/texlive/2019/texmf-dist/tex/latex/hyperref/hpdftex.def
+
+(/usr/local/texlive/2019/texmf-dist/tex/latex/hyperref/hpdftex.def
 File: hpdftex.def 2018/11/30 v6.88e Hyperref driver for pdfTeX
 \Fld@listcount=\count324
 \c@bookmark@seq@number=\count325
- (/usr/local/texlive/2019/texmf-dist/tex/latex/oberdiek/rerunfilecheck.sty
+
+(/usr/local/texlive/2019/texmf-dist/tex/latex/oberdiek/rerunfilecheck.sty
 Package: rerunfilecheck 2016/05/16 v1.8 Rerun checks for auxiliary files (HO)
-Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 282.
+Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
+82.
 )
 \Hy@SectionHShift=\skip82
-) (/usr/local/texlive/2019/texmf-dist/tex/latex/oberdiek/hypcap.sty
+)
+(/usr/local/texlive/2019/texmf-dist/tex/latex/oberdiek/hypcap.sty
 Package: hypcap 2016/05/16 v1.12 Adjusting the anchors of captions (HO)
 )
 \enitdp@checklist=\count326
@@ -667,7 +747,7 @@ Package csquotes Info: Redefining alias 'default' -> 'slovak'.
 LaTeX Warning: Unused global option(s):
     [pdftex].
 
-(/Users/jozefhruska/Development/School/slackify/resources/thesis/main/xhrusk25-slack-api-headless-cms.aux)
+(./xhrusk25-slack-api-headless-cms.aux)
 \openout1 = `xhrusk25-slack-api-headless-cms.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 250.
@@ -687,11 +767,14 @@ LaTeX Font Info:    ... okay on input line 250.
 LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 250.
 LaTeX Font Info:    ... okay on input line 250.
 LaTeX Font Info:    Try loading font information for T1+lmr on input line 250.
- (/usr/local/texlive/2019/texmf-dist/tex/latex/lm/t1lmr.fd
+
+(/usr/local/texlive/2019/texmf-dist/tex/latex/lm/t1lmr.fd
 File: t1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
-) ABD: EverySelectfont initializing macros
+)
+ABD: EverySelectfont initializing macros
 LaTeX Info: Redefining \selectfont on input line 250.
- (/usr/local/texlive/2019/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+
+(/usr/local/texlive/2019/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count327
 \scratchdimen=\dimen183
@@ -706,29 +789,38 @@ LaTeX Info: Redefining \selectfont on input line 250.
 \everyMPtoPDFconversion=\toks35
 ) (/usr/local/texlive/2019/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
 Package: epstopdf-base 2016/05/15 v2.6 Base part for package epstopdf
- (/usr/local/texlive/2019/texmf-dist/tex/latex/oberdiek/grfext.sty
+
+(/usr/local/texlive/2019/texmf-dist/tex/latex/oberdiek/grfext.sty
 Package: grfext 2016/05/16 v1.2 Manage graphics extensions (HO)
 )
-Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 438.
+Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
+38.
 Package grfext Info: Graphics extension search list:
-(grfext)             [.pdf,.png,.jpg,.mps,.jpeg,.jbig2,.jb2,.PDF,.PNG,.JPG,.JPEG,.JBIG2,.JB2,.eps]
+(grfext)             [.pdf,.png,.jpg,.mps,.jpeg,.jbig2,.jb2,.PDF,.PNG,.JPG,.JPE
+G,.JBIG2,.JB2,.eps]
 (grfext)             \AppendGraphicsExtensions on input line 456.
- (/usr/local/texlive/2019/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
-File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
+
+(/usr/local/texlive/2019/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
+File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
+e
 ))
 \AtBeginShipoutBox=\box62
- (/usr/local/texlive/2019/texmf-dist/tex/latex/oberdiek/pdflscape.sty
+
+(/usr/local/texlive/2019/texmf-dist/tex/latex/oberdiek/pdflscape.sty
 Package: pdflscape 2016/05/14 v0.11 Display of landscape pages in PDF (HO)
- (/usr/local/texlive/2019/texmf-dist/tex/latex/graphics/lscape.sty
+
+(/usr/local/texlive/2019/texmf-dist/tex/latex/graphics/lscape.sty
 Package: lscape 2000/10/22 v3.01 Landscape Pages (DPC)
 )
 Package pdflscape Info: Auto-detected driver: pdftex on input line 81.
 )
 \c@lstlisting=\count333
 Package hyperref Info: Link coloring ON on input line 250.
- (/usr/local/texlive/2019/texmf-dist/tex/latex/hyperref/nameref.sty
+
+(/usr/local/texlive/2019/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2016/05/21 v2.44 Cross-referencing by name of section
- (/usr/local/texlive/2019/texmf-dist/tex/generic/oberdiek/gettitlestring.sty
+
+(/usr/local/texlive/2019/texmf-dist/tex/generic/oberdiek/gettitlestring.sty
 Package: gettitlestring 2016/05/16 v1.5 Cleanup title references (HO)
 )
 \c@section@level=\count334
@@ -736,11 +828,13 @@ Package: gettitlestring 2016/05/16 v1.5 Cleanup title references (HO)
 LaTeX Info: Redefining \ref on input line 250.
 LaTeX Info: Redefining \pageref on input line 250.
 LaTeX Info: Redefining \nameref on input line 250.
+
+(./xhrusk25-slack-api-headless-cms.out) (./xhrusk25-slack-api-headless-cms.out)
 \@outlinefile=\write3
 \openout3 = `xhrusk25-slack-api-headless-cms.out'.
 
 LaTeX Font Info:    Try loading font information for T1+qhv on input line 256.
- (/usr/local/texlive/2019/texmf-dist/tex/latex/tex-gyre/t1qhv.fd
+(/usr/local/texlive/2019/texmf-dist/tex/latex/tex-gyre/t1qhv.fd
 File: t1qhv.fd 2009/09/25 v1.2 font definition file for T1/qhv
 )
 \@obrlogo=\box63
@@ -749,13 +843,16 @@ File: t1qhv.fd 2009/09/25 v1.2 font definition file for T1/qhv
 \@sirkartext=\skip84
 \@vyskaobr=\skip85
 \@sirkaobr=\skip86
-<template-fig/VUT_symbol_barevne_CMYK_CZ.pdf, id=5, 167.13641pt x 165.87971pt>
+<template-fig/VUT_symbol_barevne_CMYK_CZ.pdf, id=137, 167.13641pt x 165.87971pt
+>
 File: template-fig/VUT_symbol_barevne_CMYK_CZ.pdf Graphic file (type pdf)
 <use template-fig/VUT_symbol_barevne_CMYK_CZ.pdf>
-Package pdftex.def Info: template-fig/VUT_symbol_barevne_CMYK_CZ.pdf  used on input line 256.
+Package pdftex.def Info: template-fig/VUT_symbol_barevne_CMYK_CZ.pdf  used on i
+nput line 256.
 (pdftex.def)             Requested size: 116.65646pt x 115.17995pt.
 LaTeX Font Info:    Try loading font information for T1+fos on input line 256.
- (/usr/local/texlive/2019/texmf-dist/tex/latex/opensans/t1fos.fd
+
+(/usr/local/texlive/2019/texmf-dist/tex/latex/opensans/t1fos.fd
 File: t1fos.fd 2011/11/11 Fontinst v1.927 font definitions for T1/fos.
 )
 LaTeX Font Info:    Font shape `T1/fos/bx/n' in size <18> not available
@@ -768,26 +865,30 @@ LaTeX Font Info:    Font shape `T1/fos/bx/n' in size <10> not available
 (Font)              Font shape `T1/fos/b/n' tried instead on input line 256.
 
 
-pdfTeX warning: pdflatex (file /Users/jozefhruska/Development/School/slackify/resources/thesis/main/zadani.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
-<zadani.pdf, id=7, 597.50829pt x 845.0471pt>
+pdfTeX warning: pdflatex (file ./zadani.pdf): PDF inclusion: found PDF version 
+<1.7>, but at most version <1.5> allowed
+<zadani.pdf, id=139, 597.50829pt x 845.0471pt>
 File: zadani.pdf Graphic file (type pdf)
 <use zadani.pdf>
 Package pdftex.def Info: zadani.pdf  used on input line 256.
 (pdftex.def)             Requested size: 597.50682pt x 845.04504pt.
 
 
-pdfTeX warning: pdflatex (file /Users/jozefhruska/Development/School/slackify/resources/thesis/main/zadani.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
+pdfTeX warning: pdflatex (file ./zadani.pdf): PDF inclusion: found PDF version 
+<1.7>, but at most version <1.5> allowed
 File: zadani.pdf Graphic file (type pdf)
 <use zadani.pdf>
 Package pdftex.def Info: zadani.pdf  used on input line 256.
 (pdftex.def)             Requested size: 597.50682pt x 845.04504pt.
 
 
-pdfTeX warning: pdflatex (file /Users/jozefhruska/Development/School/slackify/resources/thesis/main/zadani.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
+pdfTeX warning: pdflatex (file ./zadani.pdf): PDF inclusion: found PDF version 
+<1.7>, but at most version <1.5> allowed
 
 
-pdfTeX warning: pdflatex (file /Users/jozefhruska/Development/School/slackify/resources/thesis/main/zadani.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
-<zadani.pdf, id=10, page=1, 597.50829pt x 845.0471pt>
+pdfTeX warning: pdflatex (file ./zadani.pdf): PDF inclusion: found PDF version 
+<1.7>, but at most version <1.5> allowed
+<zadani.pdf, id=142, page=1, 597.50829pt x 845.0471pt>
 File: zadani.pdf Graphic file (type pdf)
 <use zadani.pdf, page 1>
 Package pdftex.def Info: zadani.pdf , page1 used on input line 256.
@@ -798,7 +899,8 @@ Package pdftex.def Info: zadani.pdf , page1 used on input line 256.
 (pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
 [1
 
-{/usr/local/texlive/2019/texmf-var/fonts/map/pdftex/updmap/pdftex.map} </Users/jozefhruska/Development/School/slackify/resources/thesis/main/template-fig/VUT_symbol_barevne_CMYK_CZ.pdf>]
+{/usr/local/texlive/2019/texmf-var/fonts/map/pdftex/updmap/pdftex.map} <./templ
+ate-fig/VUT_symbol_barevne_CMYK_CZ.pdf>]
 File: zadani.pdf Graphic file (type pdf)
 <use zadani.pdf, page 1>
 Package pdftex.def Info: zadani.pdf , page1 used on input line 256.
@@ -811,11 +913,25 @@ File: zadani.pdf Graphic file (type pdf)
 <use zadani.pdf, page 1>
 Package pdftex.def Info: zadani.pdf , page1 used on input line 256.
 (pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
- [2 </Users/jozefhruska/Development/School/slackify/resources/thesis/main/zadani.pdf>] [3] [4]
+ [2 <./zadani.pdf>] [3] [4]
+(./xhrusk25-slack-api-headless-cms.toc<<ot1.cmap>><<oml.cmap>><<oms.cmap>><<omx
+.cmap>>
+LaTeX Font Info:    Try loading font information for U+msa on input line 4.
+ (/usr/local/texlive/2019/texmf-dist/tex/latex/amsfonts/umsa.fd
+File: umsa.fd 2013/01/14 v3.01 AMS symbols A
+)
+LaTeX Font Info:    Try loading font information for U+msb on input line 4.
+
+(/usr/local/texlive/2019/texmf-dist/tex/latex/amsfonts/umsb.fd
+File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+))
 \tf@toc=\write4
 \openout4 = `xhrusk25-slack-api-headless-cms.toc'.
 
- (/Users/jozefhruska/Development/School/slackify/resources/thesis/main/xhrusk25-slack-api-headless-cms-01-kapitoly-chapters.texpdfTeX warning (ext4): destination with the same identifier (name{page.1}) has been already used, duplicate ignored
+
+(./xhrusk25-slack-api-headless-cms-01-kapitoly-chapters.texpdfTeX warning (ext4
+): destination with the same identifier (name{page.1}) has been already used, d
+uplicate ignored
 <to be read again> 
                    \relax 
 l.3 \chapter
@@ -824,19 +940,8 @@ l.3 \chapter
 
 ]
 Kapitola 1.
-<<ot1.cmap>><<oml.cmap>><<oms.cmap>><<omx.cmap>>
-LaTeX Font Info:    Try loading font information for U+msa on input line 4.
- (/usr/local/texlive/2019/texmf-dist/tex/latex/amsfonts/umsa.fd
-File: umsa.fd 2013/01/14 v3.01 AMS symbols A
-)
-LaTeX Font Info:    Try loading font information for U+msb on input line 4.
- (/usr/local/texlive/2019/texmf-dist/tex/latex/amsfonts/umsb.fd
-File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-)
-
-LaTeX Warning: Reference `chapter:theory' on page 2 undefined on input line 9.
-
-pdfTeX warning (ext4): destination with the same identifier (name{page.2}) has been already used, duplicate ignored
+pdfTeX warning (ext4): destination with the same identifier (name{page.2}) has 
+been already used, duplicate ignored
 <to be read again> 
                    \relax 
 l.15 \chapter
@@ -845,80 +950,46 @@ l.15 \chapter
 ]
 Kapitola 2.
 
-LaTeX Warning: Reference `section:headless' on page 3 undefined on input line 17.
 
-
-LaTeX Warning: Reference `section:server_dev' on page 3 undefined on input line 17.
-
-
-LaTeX Warning: Reference `section:client_dev' on page 3 undefined on input line 17.
-
-
-LaTeX Warning: Reference `section:graphql' on page 3 undefined on input line 17.
-
-
-LaTeX Warning: Reference `section:slack_api' on page 3 undefined on input line 17.
-
-
-LaTeX Warning: Reference `section:graphql' on page 3 undefined on input line 21.
-
-
-
-pdfTeX warning: pdflatex (file /Users/jozefhruska/Development/School/slackify/resources/thesis/main/obrazky-figures/headless_cms_graph.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
-<obrazky-figures/headless_cms_graph.pdf, id=102, 321.2pt x 113.42375pt>
+pdfTeX warning: pdflatex (file ./obrazky-figures/headless_cms_graph.pdf): PDF i
+nclusion: found PDF version <1.7>, but at most version <1.5> allowed
+<obrazky-figures/headless_cms_graph.pdf, id=274, 321.2pt x 113.42375pt>
 File: obrazky-figures/headless_cms_graph.pdf Graphic file (type pdf)
 <use obrazky-figures/headless_cms_graph.pdf>
-Package pdftex.def Info: obrazky-figures/headless_cms_graph.pdf  used on input line 25.
+Package pdftex.def Info: obrazky-figures/headless_cms_graph.pdf  used on input 
+line 25.
 (pdftex.def)             Requested size: 321.19922pt x 113.42346pt.
 LaTeX Font Info:    Try loading font information for T1+lmtt on input line 29.
 (/usr/local/texlive/2019/texmf-dist/tex/latex/lm/t1lmtt.fd
 File: t1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
-)pdfTeX warning (ext4): destination with the same identifier (name{page.3}) has been already used, duplicate ignored
+)pdfTeX warning (ext4): destination with the same identifier (name{page.3}) has
+ been already used, duplicate ignored
 <to be read again> 
                    \relax 
 l.30 
       [3
 
- </Users/jozefhruska/Development/School/slackify/resources/thesis/main/obrazky-figures/headless_cms_graph.pdf>]
-
-LaTeX Warning: Citation `StrapiDocs' on page 4 undefined on input line 34.
-
-
+ <./obrazky-figures/headless_cms_graph.pdf>]
 Underfull \hbox (badness 10000) in paragraph at lines 36--37
 
  []
 
-
-LaTeX Warning: Reference `subsection:react' on page 4 undefined on input line 51.
-
-
-LaTeX Warning: Reference `subsection:react' on page 4 undefined on input line 51.
-
-
-LaTeX Warning: Citation `NetlifyDocs' on page 4 undefined on input line 51.
-
-pdfTeX warning (ext4): destination with the same identifier (name{page.4}) has been already used, duplicate ignored
+pdfTeX warning (ext4): destination with the same identifier (name{page.4}) has 
+been already used, duplicate ignored
 <to be read again> 
                    \relax 
 l.62 
       [4]
-
-LaTeX Warning: Citation `MDN' on page 5 undefined on input line 72.
-
-
 Underfull \hbox (badness 10000) in paragraph at lines 74--75
 
  []
 
 (/usr/local/texlive/2019/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2019/02/27 1.8b listings language file
-) (/usr/local/texlive/2019/texmf-dist/tex/latex/listings/lstmisc.sty
+)
+(/usr/local/texlive/2019/texmf-dist/tex/latex/listings/lstmisc.sty
 File: lstmisc.sty 2019/02/27 1.8b (Carsten Heinz)
 )
-
-LaTeX Warning: Citation `MDN' on page 5 undefined on input line 90.
-
-
 Underfull \hbox (badness 10000) in paragraph at lines 90--91
 
  []
@@ -933,34 +1004,17 @@ LaTeX Font Info:    Try loading font information for OMS+lmr on input line 96.
 File: omslmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    Try loading font information for OMS+lmsy on input line 96.
- (/usr/local/texlive/2019/texmf-dist/tex/latex/lm/omslmsy.fd
+
+
+(/usr/local/texlive/2019/texmf-dist/tex/latex/lm/omslmsy.fd
 File: omslmsy.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    Font shape `OMS/lmr/m/n' in size <10.95> not available
 (Font)              Font shape `OMS/lmsy/m/n' tried instead on input line 96.
 
-
-LaTeX Warning: Citation `MDN' on page 6 undefined on input line 96.
-
-
-LaTeX Warning: Citation `MDN' on page 6 undefined on input line 97.
-
-
-LaTeX Warning: Citation `MDN' on page 6 undefined on input line 98.
-
-
-LaTeX Warning: Citation `MDN' on page 6 undefined on input line 99.
-
-
-LaTeX Warning: Citation `MDN' on page 6 undefined on input line 103.
-
-
 Underfull \hbox (badness 10000) in paragraph at lines 103--104
 
  []
-
-
-LaTeX Warning: Citation `MDN' on page 6 undefined on input line 112.
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 112--113
@@ -968,45 +1022,14 @@ Underfull \hbox (badness 10000) in paragraph at lines 112--113
  []
 
 
-LaTeX Warning: Reference `subsection:nodejs' on page 6 undefined on input line 123.
-
-
-LaTeX Warning: Citation `MDN' on page 6 undefined on input line 123.
-
-
 Underfull \hbox (badness 10000) in paragraph at lines 123--124
 
  []
 
-
-LaTeX Warning: Citation `MDN' on page 6 undefined on input line 125.
-
 [6]
-
-LaTeX Warning: Reference `subsection:javascript' on page 7 undefined on input line 129.
-
-
-LaTeX Warning: Citation `TSWeb' on page 7 undefined on input line 129.
-
-
 Underfull \hbox (badness 10000) in paragraph at lines 129--130
 
  []
-
-
-LaTeX Warning: Citation `TSWeb' on page 7 undefined on input line 131.
-
-
-LaTeX Warning: Reference `subsection:nodejs' on page 7 undefined on input line 149.
-
-
-LaTeX Warning: Reference `subsubsection:components' on page 7 undefined on input line 153.
-
-
-LaTeX Warning: Citation `React' on page 7 undefined on input line 153.
-
-
-LaTeX Warning: Citation `React' on page 7 undefined on input line 156.
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 156--157
@@ -1014,25 +1037,9 @@ Underfull \hbox (badness 10000) in paragraph at lines 156--157
  []
 
 [7]
-
-LaTeX Warning: Citation `React' on page 8 undefined on input line 166.
-
-
 Underfull \hbox (badness 10000) in paragraph at lines 170--171
 
  []
-
-
-LaTeX Warning: Citation `React' on page 8 undefined on input line 172.
-
-
-LaTeX Warning: Citation `React' on page 8 undefined on input line 184.
-
-
-LaTeX Warning: Citation `React' on page 8 undefined on input line 188.
-
-
-LaTeX Warning: Citation `React' on page 8 undefined on input line 192.
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 192--193
@@ -1049,9 +1056,6 @@ Underfull \hbox (badness 10000) in paragraph at lines 204--205
 
  []
 
-
-LaTeX Warning: Citation `React' on page 8 undefined on input line 216.
-
 [8]
 Underfull \hbox (badness 10000) in paragraph at lines 219--220
 
@@ -1063,24 +1067,9 @@ Underfull \hbox (badness 10000) in paragraph at lines 221--222
  []
 
 
-LaTeX Warning: Citation `NextJS' on page 9 undefined on input line 223.
-
-
 Underfull \hbox (badness 10000) in paragraph at lines 223--224
 
  []
-
-
-LaTeX Warning: Citation `NextJS' on page 9 undefined on input line 227.
-
-
-LaTeX Warning: Citation `NextJS' on page 9 undefined on input line 228.
-
-
-LaTeX Warning: Citation `NextJS' on page 9 undefined on input line 229.
-
-
-LaTeX Warning: Citation `CamDict' on page 9 undefined on input line 235.
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 235--236
@@ -1088,48 +1077,14 @@ Underfull \hbox (badness 10000) in paragraph at lines 235--236
  []
 
 
-LaTeX Warning: Reference `subsection:javascript' on page 9 undefined on input line 237.
-
-
-LaTeX Warning: Reference `subsection:typescript' on page 9 undefined on input line 237.
-
-
-LaTeX Warning: Reference `subsection:http' on page 9 undefined on input line 237.
-
-
 Underfull \hbox (badness 10000) in paragraph at lines 241--242
 
  []
 
-
-LaTeX Warning: Citation `RFC_HTTP' on page 9 undefined on input line 243.
-
 [9]
-
-LaTeX Warning: Citation `MDN' on page 10 undefined on input line 255.
-
-
-LaTeX Warning: Citation `MDN' on page 10 undefined on input line 256.
-
-
-LaTeX Warning: Citation `MDN' on page 10 undefined on input line 257.
-
-
-LaTeX Warning: Citation `MDN' on page 10 undefined on input line 258.
-
-
-LaTeX Warning: Citation `MDN' on page 10 undefined on input line 259.
-
-
 Underfull \hbox (badness 10000) in paragraph at lines 262--263
 
  []
-
-
-LaTeX Warning: Citation `NodeJS' on page 10 undefined on input line 279.
-
-
-LaTeX Warning: Citation `NPM' on page 10 undefined on input line 282.
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 282--283
@@ -1137,16 +1092,6 @@ Underfull \hbox (badness 10000) in paragraph at lines 282--283
  []
 
 [10]
-
-LaTeX Warning: Citation `NPM' on page 11 undefined on input line 286.
-
-
-LaTeX Warning: Citation `NPM' on page 11 undefined on input line 287.
-
-
-LaTeX Warning: Citation `NPM' on page 11 undefined on input line 288.
-
-
 Underfull \hbox (badness 10000) in paragraph at lines 294--295
 
  []
@@ -1159,42 +1104,19 @@ Underfull \hbox (badness 10000) in paragraph at lines 296--297
 (/usr/local/texlive/2019/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2019/02/27 1.8b listings language file
 )
-
-LaTeX Warning: Citation `PostgreSQL' on page 11 undefined on input line 303.
-
-
-LaTeX Warning: Citation `Prisma' on page 11 undefined on input line 306.
-
-
 Underfull \hbox (badness 10000) in paragraph at lines 306--307
 
  []
 
 [11]
-
-LaTeX Warning: Citation `Prisma' on page 12 undefined on input line 316.
-
-
-LaTeX Warning: Citation `GraphQL' on page 12 undefined on input line 321.
-
-
 Underfull \hbox (badness 10000) in paragraph at lines 321--322
 
  []
 
 
-LaTeX Warning: Citation `GraphQL' on page 12 undefined on input line 323.
-
-
 Underfull \hbox (badness 10000) in paragraph at lines 323--324
 
  []
-
-
-LaTeX Warning: Citation `GraphQL' on page 12 undefined on input line 334.
-
-
-LaTeX Warning: Citation `GraphQL' on page 12 undefined on input line 338.
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 338--339
@@ -1207,15 +1129,9 @@ Underfull \hbox (badness 10000) in paragraph at lines 340--341
  []
 
 
-LaTeX Warning: Reference `lstlisting:graphql_schema' on page 12 undefined on input line 342.
-
-
 Underfull \hbox (badness 10000) in paragraph at lines 342--343
 
  []
-
-
-LaTeX Warning: Citation `GraphQL' on page 12 undefined on input line 350.
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 354--355
@@ -1223,71 +1139,25 @@ Underfull \hbox (badness 10000) in paragraph at lines 354--355
  []
 
 [12]
-
-LaTeX Warning: Citation `GraphQL' on page 13 undefined on input line 362.
-
-
 Underfull \hbox (badness 10000) in paragraph at lines 366--367
 
  []
-
-
-LaTeX Warning: Citation `Apollo' on page 13 undefined on input line 368.
-
-
-LaTeX Warning: Reference `subsection:apollo_client' on page 13 undefined on input line 375.
-
-
-LaTeX Warning: Citation `Apollo' on page 13 undefined on input line 375.
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 375--376
 
  []
 
-<obrazky-figures/apollo_server_diagram.pdf, id=317, 351.56343pt x 194.22563pt>
+<obrazky-figures/apollo_server_diagram.pdf, id=545, 351.56343pt x 194.22563pt>
 File: obrazky-figures/apollo_server_diagram.pdf Graphic file (type pdf)
 <use obrazky-figures/apollo_server_diagram.pdf>
-Package pdftex.def Info: obrazky-figures/apollo_server_diagram.pdf  used on input line 379.
+Package pdftex.def Info: obrazky-figures/apollo_server_diagram.pdf  used on inp
+ut line 379.
 (pdftex.def)             Requested size: 281.25111pt x 155.3807pt.
-
-LaTeX Warning: Citation `Apollo' on page 13 undefined on input line 380.
-
-[13 </Users/jozefhruska/Development/School/slackify/resources/thesis/main/obrazky-figures/apollo_server_diagram.pdf>]
-
-LaTeX Warning: Citation `SlackAPI' on page 14 undefined on input line 387.
-
-
+[13 <./obrazky-figures/apollo_server_diagram.pdf>]
 Underfull \hbox (badness 10000) in paragraph at lines 387--388
 
  []
-
-
-LaTeX Warning: Citation `SlackAPI' on page 14 undefined on input line 392.
-
-
-LaTeX Warning: Citation `SlackAPI' on page 14 undefined on input line 393.
-
-
-LaTeX Warning: Citation `SlackAPI' on page 14 undefined on input line 394.
-
-
-LaTeX Warning: Citation `SlackAPI' on page 14 undefined on input line 395.
-
-
-LaTeX Warning: Citation `SlackAPI' on page 14 undefined on input line 401.
-
-
-LaTeX Warning: Citation `SlackAPI' on page 14 undefined on input line 402.
-
-
-LaTeX Warning: Citation `SlackAPI' on page 14 undefined on input line 403.
-
-
-LaTeX Warning: Citation `SlackAPI' on page 14 undefined on input line 404.
-
-
-LaTeX Warning: Citation `SlackAPI' on page 14 undefined on input line 408.
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 408--409
@@ -1303,48 +1173,102 @@ Underfull \hbox (badness 10000) in paragraph at lines 443--444
 
 [15
 
-])
-No file xhrusk25-slack-api-headless-cms.bbl.
+]
+
+pdfTeX warning: pdflatex (file ./obrazky-figures/architecture.pdf): PDF inclusi
+on: found PDF version <1.7>, but at most version <1.5> allowed
+<obrazky-figures/architecture.pdf, id=603, 167.62625pt x 142.5325pt>
+File: obrazky-figures/architecture.pdf Graphic file (type pdf)
+<use obrazky-figures/architecture.pdf>
+Package pdftex.def Info: obrazky-figures/architecture.pdf  used on input line 4
+60.
+(pdftex.def)             Requested size: 234.67513pt x 199.54411pt.
+[16 <./obrazky-figures/architecture.pdf>]
+
+LaTeX Warning: Reference `subsection:collection' on page 17 undefined on input 
+line 470.
+
+
+
+pdfTeX warning: pdflatex (file ./obrazky-figures/author_user_case.pdf): PDF inc
+lusion: found PDF version <1.7>, but at most version <1.5> allowed
+<obrazky-figures/author_user_case.pdf, id=622, 243.91125pt x 77.28876pt>
+File: obrazky-figures/author_user_case.pdf Graphic file (type pdf)
+<use obrazky-figures/author_user_case.pdf>
+Package pdftex.def Info: obrazky-figures/author_user_case.pdf  used on input li
+ne 484.
+(pdftex.def)             Requested size: 341.4734pt x 108.2035pt.
+[17 <./obrazky-figures/author_user_case.pdf>]
+Overfull \hbox (7.49489pt too wide) in paragraph at lines 494--495
+[]\T1/lmtt/m/n/10.95 Publikova´ kolekciu/komponentu \T1/lmr/m/n/10.95 -- Pub-li
+-ko-vaná ko-lek-cia alebo kom-po-nenta je okam-
+ []
+
+[18]
+
+pdfTeX warning: pdflatex (file ./obrazky-figures/device_user_case.pdf): PDF inc
+lusion: found PDF version <1.7>, but at most version <1.5> allowed
+<obrazky-figures/device_user_case.pdf, id=646, 242.9075pt x 51.19125pt>
+File: obrazky-figures/device_user_case.pdf Graphic file (type pdf)
+<use obrazky-figures/device_user_case.pdf>
+Package pdftex.def Info: obrazky-figures/device_user_case.pdf  used on input li
+ne 504.
+(pdftex.def)             Requested size: 340.06816pt x 71.66724pt.
+) (./xhrusk25-slack-api-headless-cms.bbl [19 <./obrazky-figures/device_user_cas
+e.pdf>])
 \c@ttl@toc@chapters=\count335
-(/Users/jozefhruska/Development/School/slackify/resources/thesis/main/xhrusk25-slack-api-headless-cms-30-prilohy-appendices.tex)
+ (./xhrusk25-slack-api-headless-cms-30-prilohy-appendices.tex)
 \tf@ptc=\write5
 \openout5 = `xhrusk25-slack-api-headless-cms.ptc'.
 
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 381.
- [16]
+ [20
+
+]
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 381.
- (/Users/jozefhruska/Development/School/slackify/resources/thesis/main/xhrusk25-slack-api-headless-cms.aux)
+
+(./xhrusk25-slack-api-headless-cms.aux)
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 381.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 381.
+Package rerunfilecheck Info: File `xhrusk25-slack-api-headless-cms.out' has not
+ changed.
+(rerunfilecheck)             Checksum: 2D3DE27A0FDD10117514DCC87038AC6D;4281.
 
-
-Package rerunfilecheck Warning: File `xhrusk25-slack-api-headless-cms.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
-
-Package rerunfilecheck Info: Checksums for `xhrusk25-slack-api-headless-cms.out':
-(rerunfilecheck)             Before: <no file>
-(rerunfilecheck)             After:  C7DE9FE1123452AFD909E0DD5E98C549;3453.
 
 LaTeX Warning: There were undefined references.
 
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
  ) 
 Here is how much of TeX's memory you used:
- 26039 strings out of 492616
- 422680 string characters out of 6129482
- 734648 words of memory out of 5000000
- 29401 multiletter control sequences out of 15000+600000
- 643846 words of font info for 102 fonts, out of 8000000 for 9000
+ 26161 strings out of 492616
+ 423885 string characters out of 6129482
+ 736110 words of memory out of 5000000
+ 29472 multiletter control sequences out of 15000+600000
+ 651004 words of font info for 110 fonts, out of 8000000 for 9000
  1144 hyphenation exceptions out of 8191
- 48i,18n,65p,1449b,1971s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/local/texlive/2019/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}{/usr/local/texlive/2019/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}{/usr/local/texlive/2019/texmf-dist/fonts/enc/dvips/opensans/opensans-03.enc}{/usr/local/texlive/2019/texmf-dist/fonts/enc/dvips/opensans/opensans-02.enc}{/usr/local/texlive/2019/texmf-dist/fonts/enc/dvips/opensans/opensans-04.enc}{/usr/local/texlive/2019/texmf-dist/fonts/enc/dvips/opensans/opensans-01.enc}</usr/local/texlive/2019/texmf-dist/fonts/type1/public/opensans/OpenSans-Bold.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/lm/lmbx10.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/lm/lmbx12.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/lm/lmr10.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/lm/lmr6.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/lm/lmr8.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/lm/lmr9.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/lm/lmri10.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/lm/lmsy10.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/lm/lmtt10.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/lm/lmtt9.pfb>
-Output written on /Users/jozefhruska/Development/School/slackify/resources/thesis/main/xhrusk25-slack-api-headless-cms.pdf (20 pages, 731822 bytes).
+ 48i,18n,65p,1324b,1971s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/local/texlive/2019/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}{/usr/local/
+texlive/2019/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}{/usr/local/texlive/20
+19/texmf-dist/fonts/enc/dvips/opensans/opensans-03.enc}{/usr/local/texlive/2019
+/texmf-dist/fonts/enc/dvips/opensans/opensans-02.enc}{/usr/local/texlive/2019/t
+exmf-dist/fonts/enc/dvips/opensans/opensans-04.enc}{/usr/local/texlive/2019/tex
+mf-dist/fonts/enc/dvips/opensans/opensans-01.enc}</usr/local/texlive/2019/texmf
+-dist/fonts/type1/public/opensans/OpenSans-Bold.pfb></usr/local/texlive/2019/te
+xmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2019/tex
+mf-dist/fonts/type1/public/lm/lmbx10.pfb></usr/local/texlive/2019/texmf-dist/fo
+nts/type1/public/lm/lmbx12.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/
+public/lm/lmcsc10.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/lm
+/lmr10.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/lm/lmr6.pfb><
+/usr/local/texlive/2019/texmf-dist/fonts/type1/public/lm/lmr8.pfb></usr/local/t
+exlive/2019/texmf-dist/fonts/type1/public/lm/lmr9.pfb></usr/local/texlive/2019/
+texmf-dist/fonts/type1/public/lm/lmri10.pfb></usr/local/texlive/2019/texmf-dist
+/fonts/type1/public/lm/lmsy10.pfb></usr/local/texlive/2019/texmf-dist/fonts/typ
+e1/public/lm/lmtt10.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/
+lm/lmtt9.pfb>
+Output written on xhrusk25-slack-api-headless-cms.pdf (24 pages, 804817 bytes).
+
 PDF statistics:
- 456 PDF objects out of 1000 (max. 8388607)
- 369 compressed objects within 4 object streams
- 178 named destinations out of 1000 (max. 500000)
- 62 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 792 PDF objects out of 1000 (max. 8388607)
+ 689 compressed objects within 7 object streams
+ 207 named destinations out of 1000 (max. 500000)
+ 341 words of extra memory for PDF output out of 10000 (max. 10000000)
 
