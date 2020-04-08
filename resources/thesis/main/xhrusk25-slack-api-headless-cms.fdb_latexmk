@@ -1,15 +1,15 @@
 # Fdb version 3
-["bibtex xhrusk25-slack-api-headless-cms"] 1586181649 "xhrusk25-slack-api-headless-cms.aux" "xhrusk25-slack-api-headless-cms.bbl" "xhrusk25-slack-api-headless-cms" 1586181649
+["bibtex xhrusk25-slack-api-headless-cms"] 1586275573 "xhrusk25-slack-api-headless-cms.aux" "xhrusk25-slack-api-headless-cms.bbl" "xhrusk25-slack-api-headless-cms" 1586275573
   "./bib-styles/Pysny/skplain.bst" 1585563900 72336 9cac689f457c3e35a7e630617fccc9f3 ""
   "xhrusk25-slack-api-headless-cms-20-literatura-bibliography.bib" 1586106751 3572 e0bf4ce5b3392aee81355502416510d9 ""
-  "xhrusk25-slack-api-headless-cms.aux" 1586181649 10644 fd1f6aa67c60e895841276efe5baed5d "pdflatex"
+  "xhrusk25-slack-api-headless-cms.aux" 1586275572 11090 0c77cce57294a97d3cff38d6979fc9c6 "pdflatex"
   (generated)
   "xhrusk25-slack-api-headless-cms.blg"
   "xhrusk25-slack-api-headless-cms.bbl"
-["pdflatex"] 1586181648 "/Users/jozefhruska/Development/School/slackify/resources/thesis/main/xhrusk25-slack-api-headless-cms.tex" "/Users/jozefhruska/Development/School/slackify/resources/thesis/main/xhrusk25-slack-api-headless-cms.pdf" "xhrusk25-slack-api-headless-cms" 1586181648
-  "/Users/jozefhruska/Development/School/slackify/resources/thesis/main/xhrusk25-slack-api-headless-cms.aux" 1586181648 8 a94a2480d3289e625eea47cd1b285758 ""
+["pdflatex"] 1586275571 "/Users/jozefhruska/Development/School/slackify/resources/thesis/main/xhrusk25-slack-api-headless-cms.tex" "/Users/jozefhruska/Development/School/slackify/resources/thesis/main/xhrusk25-slack-api-headless-cms.pdf" "xhrusk25-slack-api-headless-cms" 1586275571
+  "/Users/jozefhruska/Development/School/slackify/resources/thesis/main/xhrusk25-slack-api-headless-cms.aux" 1586275571 8 a94a2480d3289e625eea47cd1b285758 ""
   "/Users/jozefhruska/Development/School/slackify/resources/thesis/main/xhrusk25-slack-api-headless-cms.tex" 1586096760 19710 f7125a1778f60a77eac5d5159b8c0ee1 ""
-  "/dev/null" 1586181649 0 d41d8cd98f00b204e9800998ecf8427e ""
+  "/dev/null" 1586275573 0 d41d8cd98f00b204e9800998ecf8427e ""
   "/usr/local/texlive/2019/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc" 1254269338 2375 baa924870cfb487815765f9094cf3728 ""
   "/usr/local/texlive/2019/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc" 1202520719 2840 216e6e45ad352e2456e1149f28885bee ""
   "/usr/local/texlive/2019/texmf-dist/fonts/enc/dvips/opensans/opensans-01.enc" 1322694030 3294 a5b3bfab503121e0ee00f4c03e6030bf ""
@@ -181,7 +181,7 @@
   "obrazky-figures/apollo_server_diagram.pdf" 1586101808 21807 2586018f4cc8b13f1062d2dba72e36a8 ""
   "obrazky-figures/headless_cms_graph.pdf" 1585924338 6935 8e1f550a13f6a4ff6f1f163aed640618 ""
   "template-fig/VUT_symbol_barevne_CMYK_CZ.pdf" 1584981660 309809 cf559eee790357af64f350838d9706c8 ""
-  "xhrusk25-slack-api-headless-cms-01-kapitoly-chapters.tex" 1586181646 31381 39b0ef1ecc2f7789c2f964130bdb3336 ""
+  "xhrusk25-slack-api-headless-cms-01-kapitoly-chapters.tex" 1586275568 34488 e52c3ea660f2620d39671cd38d5b8beb ""
   "xhrusk25-slack-api-headless-cms-30-prilohy-appendices.tex" 1586109416 369 21b1ce0f11174c43538571dcaa5bb3f4 ""
   "xhrusk25-slack-api-headless-cms.aux" 0 -1 0 "pdflatex"
   "xhrusk25-slack-api-headless-cms.bbl" 0 -1 0 "bibtex xhrusk25-slack-api-headless-cms"
@@ -189,11 +189,11 @@
   "xhrusk25-slack-api-headless-cms.tex" 1586096760 19710 f7125a1778f60a77eac5d5159b8c0ee1 ""
   "zadani.pdf" 1585898429 128602 a963b93b5c6159854ce98fa7beb3c725 ""
   (generated)
-  "/Users/jozefhruska/Development/School/slackify/resources/thesis/main/xhrusk25-slack-api-headless-cms.pdf"
-  "xhrusk25-slack-api-headless-cms.out"
-  "/Users/jozefhruska/Development/School/slackify/resources/thesis/main/xhrusk25-slack-api-headless-cms.log"
-  "xhrusk25-slack-api-headless-cms.log"
-  "xhrusk25-slack-api-headless-cms.aux"
   "xhrusk25-slack-api-headless-cms.toc"
+  "xhrusk25-slack-api-headless-cms.log"
+  "/Users/jozefhruska/Development/School/slackify/resources/thesis/main/xhrusk25-slack-api-headless-cms.log"
+  "/Users/jozefhruska/Development/School/slackify/resources/thesis/main/xhrusk25-slack-api-headless-cms.pdf"
+  "xhrusk25-slack-api-headless-cms.aux"
+  "xhrusk25-slack-api-headless-cms.out"
   "xhrusk25-slack-api-headless-cms.ptc"
   "xhrusk25-slack-api-headless-cms.pdf"

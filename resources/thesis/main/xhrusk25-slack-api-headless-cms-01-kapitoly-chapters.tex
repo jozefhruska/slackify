@@ -422,7 +422,7 @@ Framework pre tvorbu uživateľského rozhrania pre Slack aplikácie, ktorý pon
 \noindent Bloky sa vkladajú do lineárneho zoznamu nazvanom \emph{view}, ktorý je následne odoslaný na príslušnú časť API, aby bol spracovaný. Niektoré bloky podporujú formátovanie pomocou modifikovanej verzie jazyka \emph{markdown}.
 
 \chapter{Návrh riešenia}
-Kapitola popisuje jednotlivé etapy vzniku návrhu služby, ktorá je predmetom tejto práce. Výsledný návrh vznikol po nadobudnutí požadovaných znalostí a analýz požiadavkov kladených na výsledný produkt.
+Kapitola popisuje jednotlivé etapy vzniku návrhu služby, ktorá je predmetom tejto práce -- pod názvom \uv{\textbf{Slackify}}. Výsledný návrh vznikol po nadobudnutí požadovaných znalostí a analýz požiadavkov kladených na výsledný produkt.
 
 \section{Zadanie práce}
 Zadanie, ktorého celé znenie je priložené na \hyperlink{page.2}{strane 2}, popisuje výsledné riešenie práce ako \emph{headless} redakčný systém. Súhrn hlavných požiadaviek na systém je nasledovný:
@@ -451,3 +451,36 @@ Na začiatkoch navrhovania architektúry bola služba rozdelená do dvoch hlavn�
 	\item \texttt{service-public} -- Serverová GraphQL aplikácia poskytujúca prístup k obsahu redakčného systému koncovým užívateľom.
 	\item \texttt{database} -- Relačná databáza obsahujúca uživateľské dáta, nastavenia a obsah od koncových užívateľov.
 \end{itemize}
+
+\noindent Takáto architektúra sa oproti jednej veľkej backend službe ukázala ako výhodná z dvoch hlavných dôvodov. Prvým dôvodom je \emph{omnoho jednoduchšia údržba} viacerých menších služieb (napríklad udržovanie logickej súborovej štruktúry bolo pri jednej monolitickej službe obtiažne). Druhým významným dôvodom je možnosť jednotlivé služby \emph{verziovať a vydávať samostatne}, pretože fungujú nezávisle jedna na druhej.
+
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=1.4]{obrazky-figures/architecture}
+	\caption{Vizualizácia architektúry podľa návrhu.}
+\end{figure}
+
+Jednotlivé služby sú ešte rozdelené do dvoch skupín. \texttt{Frontend} a \texttt{service-public} sú služby dostupné pre verejnosť (\emph{public services}), \texttt{service-private} a \texttt{service-slack} dostupné pre verejnosť nie sú (\emph{private services}). 
+
+\section{Diagram prípadov použitia}
+Priložené diagramy prípadov použitia zobrazujú chovanie systému z pohľadu autora a zariadenia, ktoré sa snaží získať obsah z redakčného systému cez verejné aplikačné rozhranie \texttt{service-public} (charakterizované mobilným telefónom).
+
+\subsection{Autor}
+Po nainštalovaní aplikácie \textbf{Slackify} sa stáva každý člen pracovného prostredia s prístupom ku aplikácií \emph{Autorom}.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=1.4]{obrazky-figures/author_user_case}
+	\caption{Diagram prípadov použitia - \emph{Autor}}.
+\end{figure}
+
+\noindent \emph{Autor} môže v prostredí \textbf{Slackify} vykonávať nasledujúce akcie:
+
+\begin{itemize}
+	\item \texttt{Vytvoriť kolekciu/komponentu} -- Po zadaní a potvrdení vstupných údajov je nová kolekcia alebo komponenta pridaná do databázy. Po vytvorení majú východiskový stav \emph{nepublikovaná}.
+	\item \texttt{Upraviť kolekciu/komponentu} -- Kolekcie alebo komponety je možné upraviť v ľubovoľný čas. Jediná hodnota, ktorú nie je možné modifikovať je typ kolekcie alebo komponenty.
+	\item \texttt{Zmazať kolekciu/komponentu} -- Kolekcie alebo komponety je možné zmazať v ľubovoľný čas. Pri zmazaní kolekcie sa zmazú aj všetky komponenty k nej priradené.
+	\item \texttt{Publikovať kolekciu/komponentu} -- Publikovaná kolekcia alebo komponenta je okamžite dostupná verejne. \emph{Author} rovnako môže kolekcie alebo komponenty skryť.
+\end{itemize}
+
