@@ -1,16 +1,25 @@
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { Dispatch } from 'redux';
-import { NextPage } from 'next';
+import { NextPage, GetServerSideProps } from 'next';
 import { FiPlus } from 'react-icons/fi';
+import Router from 'next/router';
 
-import { Content, Navigation, PageHeader, Header } from '../../src/components/common/layout';
-import { withApollo } from '../../src/api';
-import { loadUserData } from '../../src/utils';
-import { User } from '../../src/types/generated/graphql';
+import {
+  Content,
+  Navigation,
+  PageHeader,
+  Header,
+  Sidebar,
+} from '../../src/components/common/layout';
+import withApollo, { createApolloClient } from '../../src/api';
+import { checkAuthentication } from '../../src/utils';
+import { User, GetUserQuery, GetUserQueryVariables } from '../../src/types/generated/graphql';
 import { StoreUser } from '../../src/actions/auth';
 import ListingPage from '../../src/components/components/listing/ListingPage/ListingPage';
 import { OpenCreateUpdateModal } from '../../src/actions/components';
+import { getAuthToken, removeAuthToken } from '../../src/cookies';
+import { GET_USER } from '../../src/api/query/auth';
 
 /* Props - <ComponentsPage />
 ============================================================================= */
@@ -31,6 +40,7 @@ const ComponentsPage: NextPage<Props> = ({ user }) => {
     <>
       <Header />
       <Navigation />
+      <Sidebar user={user} />
 
       <Content>
         <PageHeader
@@ -61,8 +71,39 @@ const ComponentsPage: NextPage<Props> = ({ user }) => {
   );
 };
 
-/* getInitialProps - <ComponentsPage />
+/* getServerSideProps - <ComponentsPage />
 ============================================================================= */
-ComponentsPage.getInitialProps = async (ctx) => loadUserData(ctx);
+export const getServerSideProps: GetServerSideProps<Props> = async (ctx) => {
+  const authToken = getAuthToken(ctx);
 
-export default withApollo()(ComponentsPage);
+  /* Check if user is authenticated */
+  checkAuthentication(ctx);
+
+  /* Create new instance of Apollo Client */
+  const apolloClient = createApolloClient(authToken);
+
+  /* Fetch user data */
+  const { data } = await apolloClient.query<GetUserQuery, GetUserQueryVariables>({
+    query: GET_USER,
+  });
+
+  /* Check if user data were returned */
+  if (!data?.getUser) {
+    removeAuthToken(ctx);
+
+    /* Redirect on server */
+    if (ctx?.req && ctx?.res) {
+      ctx?.res.writeHead(302, { Location: '/' });
+      ctx?.res.end();
+      return;
+    }
+
+    /* Redirect on client */
+    Router.push('/');
+    return;
+  }
+
+  return { props: { user: data?.getUser } };
+};
+
+export default withApollo(ComponentsPage);

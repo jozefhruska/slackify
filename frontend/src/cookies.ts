@@ -18,9 +18,9 @@ export function getAuthToken(): string;
  * Gets the Auth token cookie on server.
  * @param ctx Next JS Context
  */
-export function getAuthToken(ctx?: NextPageContext): string;
+export function getAuthToken(ctx?: Partial<NextPageContext>): string;
 
-export function getAuthToken(ctx?: NextPageContext) {
+export function getAuthToken(ctx?: Partial<NextPageContext>) {
   if (ctx === undefined) {
     return Cookies.get(AUTH_TOKEN_LOCATION);
   } else {
@@ -39,9 +39,9 @@ export function setAuthToken(token: string): void;
  * @param token Auth token
  * @param ctx Next JS Context
  */
-export function setAuthToken(token: string, ctx?: NextPageContext): void;
+export function setAuthToken(token: string, ctx?: Partial<NextPageContext>): void;
 
-export function setAuthToken(token: string, ctx?: NextPageContext) {
+export function setAuthToken(token: string, ctx?: Partial<NextPageContext>) {
   if (ctx === undefined) {
     return Cookies.set(AUTH_TOKEN_LOCATION, token);
   } else {
@@ -61,12 +61,14 @@ export function removeAuthToken(): void;
  * Removes the Auth token cookie on server.
  * @param ctx Next JS Context
  */
-export function removeAuthToken(ctx?: NextPageContext): void;
+export function removeAuthToken(ctx?: Partial<NextPageContext>): void;
 
-export function removeAuthToken(ctx?: NextPageContext) {
+export function removeAuthToken(ctx?: Partial<NextPageContext>) {
   if (ctx === undefined) {
     return Cookies.remove(AUTH_TOKEN_LOCATION);
   } else {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+    // @ts-ignore
     return destroyCookie(ctx, AUTH_TOKEN_LOCATION);
   }
 }

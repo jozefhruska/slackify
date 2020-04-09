@@ -1,15 +1,23 @@
 import React, { useEffect } from 'react';
-import { NextPage } from 'next';
+import { NextPage, GetServerSideProps } from 'next';
 import { Dispatch } from 'redux';
 import { useDispatch } from 'react-redux';
 
 import { Flex, Box } from '../src/components/common/layout/base';
-import { Block, Navigation, Content, Header, PageHeader } from '../src/components/common/layout';
+import {
+  Block,
+  Navigation,
+  Content,
+  Header,
+  PageHeader,
+  Sidebar,
+} from '../src/components/common/layout';
 import { Paragraph } from '../src/components/common/typography';
-import { withApollo } from '../src/api';
-import { loadUserData } from '../src/utils';
-import { User } from '../src/types/generated/graphql';
+import { User, GetUserQuery, GetUserQueryVariables } from '../src/types/generated/graphql';
 import { StoreUser } from '../src/actions/auth';
+import withApollo, { createApolloClient } from '../src/api';
+import { getAuthToken } from '../src/cookies';
+import { GET_USER } from '../src/api/query/auth';
 
 /* Props - <HomePage />
 ============================================================================= */
@@ -32,6 +40,7 @@ const HomePage: NextPage<Props> = ({ user }) => {
       <>
         <Header />
         <Navigation />
+        <Sidebar user={user} />
 
         <Content>
           <PageHeader heading="Dashboard" />
@@ -61,8 +70,20 @@ const HomePage: NextPage<Props> = ({ user }) => {
   );
 };
 
-/* getInitialProps - <HomePage />
+/* getServerSideProps - <HomePage />
 ============================================================================= */
-HomePage.getInitialProps = async (ctx) => loadUserData(ctx, false);
+export const getServerSideProps: GetServerSideProps<Props> = async (ctx) => {
+  const authToken = getAuthToken(ctx);
 
-export default withApollo()(HomePage);
+  /* Create new instance of Apollo Client */
+  const apolloClient = createApolloClient(authToken);
+
+  /* Fetch user data */
+  const { data } = await apolloClient.query<GetUserQuery, GetUserQueryVariables>({
+    query: GET_USER,
+  });
+
+  return { props: { user: data?.getUser } };
+};
+
+export default withApollo(HomePage);

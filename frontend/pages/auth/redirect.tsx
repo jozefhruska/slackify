@@ -5,7 +5,7 @@ import { useMutation } from '@apollo/client';
 import { useDispatch } from 'react-redux';
 import { Dispatch } from 'redux';
 
-import { withApollo } from '../../src/api';
+import withApollo from '../../src/api';
 import { Flex, Box } from '../../src/components/common/layout/base';
 import { Block } from '../../src/components/common/layout';
 import { Paragraph } from '../../src/components/common/typography';
@@ -28,31 +28,33 @@ const RedirectPage: NextPage = () => {
   const { query, push } = useRouter();
 
   useEffect(() => {
-    (async () => {
-      const code = query?.code as string;
+    const code = query?.code as string;
 
-      try {
-        const { data } = await signIn({
-          variables: {
-            code,
-          },
-        });
+    if (code) {
+      (async () => {
+        try {
+          const { data } = await signIn({
+            variables: {
+              code,
+            },
+          });
 
-        const authToken = data?.signIn?.authToken;
-        if (authToken && data?.signIn) {
-          /* Set auth token cookie */
-          setAuthToken(authToken);
+          const authToken = data?.signIn?.authToken;
+          if (authToken && data?.signIn) {
+            /* Set auth token cookie */
+            setAuthToken(authToken);
 
-          /* Store user into local state */
-          dispatch({ type: '[AUTH] STORE_USER', payload: { user: data?.signIn?.user } });
+            /* Store user into local state */
+            dispatch({ type: '[AUTH] STORE_USER', payload: { user: data?.signIn?.user } });
 
-          push('/');
+            push('/');
+          }
+        } catch (error) {
+          console.error(error);
         }
-      } catch (error) {
-        console.error(error);
-      }
-    })();
-  }, []);
+      })();
+    }
+  }, [query]);
 
   if (signInLoading) {
     return (
@@ -90,4 +92,4 @@ const RedirectPage: NextPage = () => {
   );
 };
 
-export default withApollo({ ssr: true })(RedirectPage);
+export default withApollo(RedirectPage);
