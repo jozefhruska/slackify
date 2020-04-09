@@ -4,9 +4,10 @@ export const ComponentsListingInput = inputObjectType({
   name: 'ComponentsListingInput',
   definition(t) {
     t.string('collectionId');
-    t.field('pagination', {
-      type: 'PaginationInput',
-    });
+    t.string('authorId'),
+      t.field('pagination', {
+        type: 'PaginationInput',
+      });
   },
 });
 
@@ -50,6 +51,7 @@ export const Component = objectType({
     t.model.published();
     t.model.author();
     t.model.team();
+    t.model.collection();
 
     t.model.plainTextData();
     t.model.articleData();

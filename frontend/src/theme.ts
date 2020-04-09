@@ -13,24 +13,14 @@ export const colors = {
     9: '#121212',
     10: '#000000',
   },
-
-  // TODO: Remove after refactoring
   info: '#0062ff',
   danger: '#fe4759',
   warning: '#ffc542',
   accent: '#a461d8',
-  base: {
-    10: '#ffffff',
-    20: '#ababab',
-    30: '#434343',
-    40: '#2c2c2c',
-    50: '#1c1c1c',
-    60: '#000000',
-  },
 } as const;
 
 export default {
-  breakpoints: ['450px', '576px', '768px', '992px', '1200px'],
+  breakpoints: ['48rem', '64rem', '85.375rem', '120rem', '160rem'],
   colors,
   space: {
     s0: '0',
@@ -53,11 +43,7 @@ export default {
     medium: '10px',
     large: '14px',
   },
-  shadows: {
-    box: {
-      small: (color = '#000000') => `0px 3px 14px -3px ${color.concat('4D')}`,
-      medium: (color = '#000000') => `0px 4px 20px -4px ${color.concat('4D')}`,
-      large: (color = '#000000') => `0px 5px 25px -10px ${color.concat('4D')}`,
-    },
+  fontSizes: {
+    normal: '1rem',
   },
 };

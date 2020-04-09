@@ -11,6 +11,7 @@ import ListingPage from '../../src/components/collections/listing/ListingPage/Li
 import { User } from '../../src/types/generated/graphql';
 import { StoreUser } from '../../src/actions/auth';
 import { OpenCreateUpdateModal } from '../../src/actions/collections';
+import Sidebar from '../../src/components/common/layout/Sidebar/Sidebar';
 
 /* Props - <CollectionsPage />
 ============================================================================= */
@@ -29,8 +30,9 @@ const CollectionsPage: NextPage<Props> = ({ user }) => {
 
   return (
     <>
-      <Header user={user} />
-      <Navigation user={user} />
+      <Header />
+      <Navigation />
+      <Sidebar user={user} />
 
       <Content>
         <PageHeader
@@ -64,6 +66,6 @@ const CollectionsPage: NextPage<Props> = ({ user }) => {
 
 /* getInitialProps - <CollectionsPage />
 ============================================================================= */
-CollectionsPage.getInitialProps = async ctx => loadUserData(ctx);
+CollectionsPage.getInitialProps = async (ctx) => loadUserData(ctx);
 
 export default withApollo()(CollectionsPage);

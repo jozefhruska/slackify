@@ -20,7 +20,7 @@ const Heading = styled.h1<SpaceProps & TypographyProps & ColorProps>(
 Heading.defaultProps = {
   mt: 0,
   mb: 's4',
-  color: 'base.10',
+  color: 'gray.0',
   letterSpacing: 1.2,
   fontWeight: 700,
 };

@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react';
 import { NextPage } from 'next';
+import { Dispatch } from 'redux';
+import { useDispatch } from 'react-redux';
 
 import { Flex, Box } from '../src/components/common/layout/base';
 import { Block, Navigation, Content, Header, PageHeader } from '../src/components/common/layout';
@@ -7,9 +9,7 @@ import { Paragraph } from '../src/components/common/typography';
 import { withApollo } from '../src/api';
 import { loadUserData } from '../src/utils';
 import { User } from '../src/types/generated/graphql';
-import { useDispatch } from 'react-redux';
 import { StoreUser } from '../src/actions/auth';
-import { Dispatch } from 'redux';
 
 /* Props - <HomePage />
 ============================================================================= */
@@ -21,6 +21,7 @@ type Props = {
 ============================================================================= */
 const HomePage: NextPage<Props> = ({ user }) => {
   const dispatch = useDispatch<Dispatch<StoreUser>>();
+  console.log(user);
 
   useEffect(() => {
     dispatch({ type: '[AUTH] STORE_USER', payload: { user } });
@@ -29,8 +30,8 @@ const HomePage: NextPage<Props> = ({ user }) => {
   if (user) {
     return (
       <>
-        <Header user={user} />
-        <Navigation user={user} />
+        <Header />
+        <Navigation />
 
         <Content>
           <PageHeader heading="Dashboard" />
@@ -62,6 +63,6 @@ const HomePage: NextPage<Props> = ({ user }) => {
 
 /* getInitialProps - <HomePage />
 ============================================================================= */
-HomePage.getInitialProps = async ctx => loadUserData(ctx, false);
+HomePage.getInitialProps = async (ctx) => loadUserData(ctx, false);
 
 export default withApollo()(HomePage);

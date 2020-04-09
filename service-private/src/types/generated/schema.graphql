@@ -251,6 +251,7 @@ input CollectionWhereUniqueInput {
 type Component {
   articleData: ArticleComponentData
   author: User!
+  collection: Collection!
   createdAt: DateTime!
   id: String!
   linkData: LinkComponentData
@@ -350,6 +351,7 @@ input ComponentScalarWhereInput {
 }
 
 input ComponentsListingInput {
+  authorId: String
   collectionId: String
   pagination: PaginationInput
 }

@@ -7,6 +7,7 @@ export const GlobalStyles = createGlobalStyle`
     font-family: 'Roboto', sans-serif;
     color: ${({ theme }) => theme.colors.gray[3]};
     background: ${({ theme }) => theme.colors.gray[10]};
+    font-size: ${({ theme }) => theme.fontSizes.normal};
   }
 
   svg {

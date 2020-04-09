@@ -16,6 +16,9 @@ export const components: FieldResolver<'Query', 'components'> = async (
       collection: {
         id: input?.collectionId,
       },
+      author: {
+        id: input?.authorId,
+      },
     },
     orderBy: {
       createdAt: 'desc',

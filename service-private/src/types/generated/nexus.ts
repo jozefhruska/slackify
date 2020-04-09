@@ -441,6 +441,7 @@ export interface NexusGenInputs {
     id?: string | null; // String
   }
   ComponentsListingInput: { // input type
+    authorId?: string | null; // String
     collectionId?: string | null; // String
     pagination?: NexusGenInputs['PaginationInput'] | null; // PaginationInput
   }
@@ -980,6 +981,7 @@ export interface NexusGenFieldTypes {
   Component: { // field return type
     articleData: NexusGenRootTypes['ArticleComponentData'] | null; // ArticleComponentData
     author: NexusGenRootTypes['User']; // User!
+    collection: NexusGenRootTypes['Collection']; // Collection!
     createdAt: any; // DateTime!
     id: string; // String!
     linkData: NexusGenRootTypes['LinkComponentData'] | null; // LinkComponentData

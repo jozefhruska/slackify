@@ -9,10 +9,14 @@ export const Wrapper = styled.header`
   left: 0;
   right: 0;
   z-index: 500;
-  height: 90px;
+  height: 5.5rem;
   padding: 0 ${({ theme }) => theme.space.s6};
   background: ${({ theme }) => theme.colors.gray[9]};
   border-bottom: 1px solid ${({ theme }) => theme.colors.gray[7]};
+
+  @media (min-width: ${({ theme }) => theme.breakpoints[2]}) {
+    padding: 0 ${({ theme }) => theme.space.s8};
+  }
 `;
 
 export const VersionBadge = styled.span`
@@ -57,5 +61,5 @@ export const UserArea = styled.div`
 export const Dummy = styled.div`
   display: block;
   width: 100%;
-  height: 90px;
+  height: 5.5rem;
 `;

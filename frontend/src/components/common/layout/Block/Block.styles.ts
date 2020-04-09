@@ -10,7 +10,7 @@ export const Wrapper = styled(Box)`
   display: flex;
   flex-direction: column;
   border-radius: ${({ theme }) => theme.radii.medium};
-  background: ${({ theme }) => theme.colors.base[40]};
+  background: ${({ theme }) => theme.colors.gray[7]};
 `;
 
 export const TitleBar = styled.div`

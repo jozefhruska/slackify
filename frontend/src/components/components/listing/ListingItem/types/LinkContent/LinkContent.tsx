@@ -40,6 +40,12 @@ const LinkContent: React.FC<Props> = ({ component }) => {
           </Grid>
         </Box>
 
+        <Paragraph>
+          <a href={component.linkData.url} target="_blank" rel="noopener noreferrer">
+            {component.linkData.url}
+          </a>
+        </Paragraph>
+
         {component.linkData?.text && <Paragraph>{component.linkData.text}</Paragraph>}
       </Box>
     </>

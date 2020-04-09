@@ -1,62 +1,57 @@
 import React from 'react';
-import { Dispatch } from 'redux';
-import { FiLogOut } from 'react-icons/fi';
+import { FiMenu, FiUser, FiArrowLeft, FiArrowRight } from 'react-icons/fi';
 
 import { Box } from '../base';
-import UserAvatar from './UserAvatar/UserAvatar';
-import { removeAuthToken } from '../../../../cookies';
-import { Paragraph } from '../../typography';
 import { Button } from '../../misc';
-import { useDispatch } from 'react-redux';
-import { SignOut } from '../../../../actions/auth';
-import { User } from '../../../../types/generated/graphql';
 
 import * as S from './Header.styles';
-
-/* Props - <Header />
-============================================================================= */
-type Props = {
-  user: User;
-};
+import { useDispatch, useSelector } from 'react-redux';
+import { Dispatch } from 'redux';
+import { OpenNavigation, CloseNavigation, OpenSidebar, CloseSidebar } from '../../../../actions/ui';
+import { selectIsNavigationOpen, selectIsSidebarOpen } from '../../../../selectors/ui';
 
 /* <Header />
 ============================================================================= */
-const Header: React.FC<Props> = ({ user }) => {
-  const dispatch = useDispatch<Dispatch<SignOut>>();
+const Header: React.FC = () => {
+  const isNavigationOpen = useSelector(selectIsNavigationOpen);
+  const isSidebarOpen = useSelector(selectIsSidebarOpen);
+  const dispatch = useDispatch<
+    Dispatch<OpenNavigation | CloseNavigation | OpenSidebar | CloseSidebar>
+  >();
 
   return (
     <>
       <S.Wrapper>
+        <Box display={['block', null, null, 'none']}>
+          <Button
+            icon={isNavigationOpen ? <FiArrowLeft /> : <FiMenu />}
+            onClick={() => {
+              if (isNavigationOpen) {
+                dispatch({ type: '[UI] CLOSE_NAVIGATION' });
+              } else {
+                dispatch({ type: '[UI] OPEN_NAVIGATION' });
+              }
+            }}
+          />
+        </Box>
+
         <S.Logo>
           Slackify
           <S.VersionBadge>PRE-ALPHA</S.VersionBadge>
         </S.Logo>
 
-        {user && (
-          <S.UserArea>
-            <UserAvatar />
-
-            <Box mx="s6">
-              <Paragraph mb="s1" fontWeight="bold" color="gray.0">
-                {user?.name}
-              </Paragraph>
-              <span>{user?.team?.name}</span>
-            </Box>
-
-            <Button
-              icon={<FiLogOut />}
-              onClick={() => {
-                /* Remove auth token from cookies */
-                removeAuthToken();
-
-                /* Remove user data from app state */
-                dispatch({ type: '[AUTH] SIGN_OUT' });
-              }}
-            >
-              Sign out
-            </Button>
-          </S.UserArea>
-        )}
+        <Box display={['block', null, null, null, null, 'none']}>
+          <Button
+            icon={isSidebarOpen ? <FiArrowRight /> : <FiUser />}
+            onClick={() => {
+              if (isSidebarOpen) {
+                dispatch({ type: '[UI] CLOSE_SIDEBAR' });
+              } else {
+                dispatch({ type: '[UI] OPEN_SIDEBAR' });
+              }
+            }}
+          />
+        </Box>
       </S.Wrapper>
 
       <S.Dummy />

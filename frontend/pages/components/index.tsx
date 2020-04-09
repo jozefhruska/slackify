@@ -29,8 +29,8 @@ const ComponentsPage: NextPage<Props> = ({ user }) => {
 
   return (
     <>
-      <Header user={user} />
-      <Navigation user={user} />
+      <Header />
+      <Navigation />
 
       <Content>
         <PageHeader
@@ -63,6 +63,6 @@ const ComponentsPage: NextPage<Props> = ({ user }) => {
 
 /* getInitialProps - <ComponentsPage />
 ============================================================================= */
-ComponentsPage.getInitialProps = async ctx => loadUserData(ctx);
+ComponentsPage.getInitialProps = async (ctx) => loadUserData(ctx);
 
 export default withApollo()(ComponentsPage);

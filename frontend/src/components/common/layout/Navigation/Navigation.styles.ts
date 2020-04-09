@@ -18,17 +18,21 @@ export const Wrapper = styled.nav<WrapperProps>`
   position: fixed;
   z-index: 400;
   width: 100%;
-  top: 90px;
+  top: 5.5rem;
   left: 0;
-  height: calc(100vh - 90px);
+  height: calc(100vh - 5.5rem);
   background: ${({ theme }) => theme.colors.gray[9]};
 
-  @media (min-width: ${({ theme }) => theme.breakpoints[1]}) {
-    max-width: 360px;
+  @media (min-width: ${({ theme }) => theme.breakpoints[0]}) {
+    max-width: 20rem;
+  }
+
+  @media (min-width: ${({ theme }) => theme.breakpoints[2]}) {
+    transform: none;
   }
 
   @media (min-width: ${({ theme }) => theme.breakpoints[4]}) {
-    transform: none;
+    max-width: 22rem;
   }
 `;
 

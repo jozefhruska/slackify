@@ -1,9 +1,22 @@
 import { gql } from '@apollo/client';
 
-export const ComponentsListingInput = gql`
+export const COMPONENTS_LISTING_INPUT = gql`
   input ComponentsListingInput {
     collectionId: String
     pagination: PaginationInput
+  }
+`;
+
+export const GET_RECENT_COMPONENTS = gql`
+  query GetRecentComponents($input: ComponentsListingInput) {
+    components(input: $input) {
+      id
+      type
+      updatedAt
+      collection {
+        name
+      }
+    }
   }
 `;
 
