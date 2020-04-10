@@ -9,7 +9,7 @@
     "clean": "rm -rf dist",
     "dev": "ts-node-dev --no-notify --respawn --transpileOnly src/index.ts",
     "build": "npm -s run clean && npm -s run generate && tsc",
-    "generate": "ts-node --transpile-only src/schema",
+    "generate": "NODE_ENV=development ts-node --transpile-only src/schema",
     "generate:watch": "ts-node-dev --no-notify --transpileOnly --respawn src/schema"
   },
   "dependencies": {
