@@ -74,7 +74,7 @@ const Sidebar: React.FC<Props> = ({ user }) => {
 
         <Box px="s6">
           <Heading as="h3" mb="s6">
-            Recent components
+            Recently updated components
           </Heading>
 
           <RecentComponents user={user} />
