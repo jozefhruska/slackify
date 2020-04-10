@@ -5,7 +5,7 @@
   "license": "No License",
   "private": true,
   "scripts": {
-    "start": "node dist/server",
+    "start": "node dist/index",
     "clean": "rm -rf dist",
     "dev": "ts-node-dev --no-notify --respawn --transpileOnly src/index.ts",
     "build": "npm -s run clean && npm -s run generate && tsc",

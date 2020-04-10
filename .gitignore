@@ -4,6 +4,10 @@
 # NPM
 node_modules/
 
-# Other
+# Misc
+dist/
+.env*
+
+# VSCode
 Slackify.code-workspace
 .vscode

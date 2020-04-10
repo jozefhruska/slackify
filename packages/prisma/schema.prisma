@@ -4,6 +4,11 @@ datasource db {
   enabled  = env("POSTGRES_URL")
 }
 
+generator cient_common {
+  provider = "prisma-client-js"
+  output   = "../../node_modules/@prisma/client"
+}
+
 generator cient_prisma {
   provider = "prisma-client-js"
 }

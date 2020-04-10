@@ -8,11 +8,14 @@ import * as otherTypes from './types';
 
 export const schema = makeSchema({
   types: { ...mutationTypes, ...queryTypes, ...otherTypes },
-  plugins: [nexusPrismaPlugin()],
+  plugins: [nexusPrismaPlugin({
+    shouldGenerateArtifacts: true,
+  })],
   outputs: {
     schema: path.join(__dirname, '../types/generated/schema.graphql'),
     typegen: path.join(__dirname, '../types/generated/nexus.ts'),
   },
+  shouldGenerateArtifacts: true,
   typegenAutoConfig: {
     contextType: 'Context.Context',
     sources: [
