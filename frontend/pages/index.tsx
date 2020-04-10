@@ -29,7 +29,6 @@ type Props = {
 ============================================================================= */
 const HomePage: NextPage<Props> = ({ user }) => {
   const dispatch = useDispatch<Dispatch<StoreUser>>();
-  console.log(user);
 
   useEffect(() => {
     dispatch({ type: '[AUTH] STORE_USER', payload: { user } });

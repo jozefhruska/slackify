@@ -1,15 +1,15 @@
 {
   "name": "slackify-service-slack",
-  "version": "0.0.1",
-  "description": "",
+  "version": "0.1.0",
+  "author": "Jozef Hruška (xhrusk25@vutbr.cz)",
+  "license": "No License",
+  "private": true,
   "scripts": {
     "start": "node dist/server",
     "clean": "rm -rf dist",
     "dev": "ts-node-dev --no-notify --respawn --transpileOnly src/index.ts",
     "build": "npm -s run clean && npm -s run generate && tsc"
   },
-  "author": "",
-  "license": "ISC",
   "dependencies": {
     "@prisma/client": "~2.0.0-preview024",
     "@slack/bolt": "~1.8.0",

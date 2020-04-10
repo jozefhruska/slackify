@@ -1,6 +1,8 @@
 {
   "name": "slackify-frontend",
   "version": "0.1.0",
+  "author": "Jozef Hruška (xhrusk25@vutbr.cz)",
+  "license": "No License",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -11,8 +13,6 @@
     "generate": "graphql-codegen --config codegen.yml",
     "generate:watch": "graphql-codegen --config codegen.yml --watch"
   },
-  "author": "Jozef Hruška",
-  "license": "UNLICENSED",
   "dependencies": {
     "@apollo/client": "~3.0.0-beta.43",
     "@apollo/react-ssr": "~4.0.0-beta.1",

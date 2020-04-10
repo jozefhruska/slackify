@@ -1,6 +1,9 @@
 {
   "name": "slackify-service-public",
   "version": "0.1.0",
+  "author": "Jozef Hruška (xhrusk25@vutbr.cz)",
+  "license": "No License",
+  "private": true,
   "scripts": {
     "start": "node dist/server",
     "clean": "rm -rf dist",
@@ -9,8 +12,6 @@
     "generate": "ts-node --transpile-only src/schema",
     "generate:watch": "ts-node-dev --no-notify --transpileOnly --respawn src/schema"
   },
-  "author": "Jozef Hruška (xhrusk25@vutbr.cz)",
-  "license": "ISC",
   "dependencies": {
     "@prisma/client": "~2.0.0-preview024",
     "apollo-server": "~2.12.0",
