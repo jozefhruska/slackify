@@ -5,7 +5,7 @@ export const Input = styled.input`
   min-height: 44px;
   padding: 0 ${({ theme }) => theme.space.s4};
   border-radius: ${({ theme }) => theme.radii.medium};
-  background: ${({ theme }) => theme.colors.gray[6]};
+  background: ${({ disabled, theme }) => (disabled ? theme.colors.gray[7] : theme.colors.gray[6])};
   box-sizing: border-box;
   outline: none;
   border: none;

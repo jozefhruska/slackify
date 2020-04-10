@@ -10,7 +10,7 @@ export const Select = styled.select`
   line-height: 44px;
   padding: 0 ${({ theme }) => theme.space.s4};
   border-radius: ${({ theme }) => theme.radii.medium};
-  background: ${({ theme }) => theme.colors.gray[6]};
+  background: ${({ disabled, theme }) => (disabled ? theme.colors.gray[7] : theme.colors.gray[6])};
   box-sizing: border-box;
   outline: none;
   border: none;
@@ -27,7 +27,8 @@ export const Select = styled.select`
   }
 `;
 
-export const IconWrapper = styled.span`
+export const IconWrapper = styled.span<{ disabled: boolean }>`
+  display: ${({ disabled }) => (disabled ? 'none' : 'block')};
   transform: translateY(-50%);
   position: absolute;
   top: 50%;

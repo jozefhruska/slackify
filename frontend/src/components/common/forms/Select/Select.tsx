@@ -9,12 +9,14 @@ type Props = SelectHTMLAttributes<HTMLSelectElement>;
 
 /* <Select />
 ============================================================================= */
-const Select: React.FC<Props> = ({ children, ...props }) => {
+const Select: React.FC<Props> = ({ disabled, children, ...props }) => {
   return (
     <S.Wrapper>
-      <S.Select {...props}>{children}</S.Select>
+      <S.Select disabled={disabled} {...props}>
+        {children}
+      </S.Select>
 
-      <S.IconWrapper>
+      <S.IconWrapper disabled={disabled}>
         <FiChevronDown />
       </S.IconWrapper>
     </S.Wrapper>
