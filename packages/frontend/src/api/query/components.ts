@@ -1,10 +1,28 @@
 import { gql } from '@apollo/client';
 
+import { ComponentDetail } from '../fragments/components';
+import { UserDetail } from '../fragments/auth';
+
 export const COMPONENTS_LISTING_INPUT = gql`
   input ComponentsListingInput {
     collectionId: String
     pagination: PaginationInput
   }
+`;
+
+export const GET_COMPONENT_DETAIL = gql`
+  query GetComponentDetail($where: ComponentWhereUniqueInput!) {
+    getUser {
+      ...UserDetail
+    }
+
+    component(where: $where) {
+      ...ComponentDetail
+    }
+  }
+
+  ${UserDetail}
+  ${ComponentDetail}
 `;
 
 export const GET_RECENT_COMPONENTS = gql`

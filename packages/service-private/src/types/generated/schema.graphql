@@ -668,6 +668,7 @@ input PlainTextComponentDataWhereUniqueInput {
 
 type Query {
   collections(input: CollectionsListingInput): [Collection!]!
+  component(where: ComponentWhereUniqueInput!): Component
   components(input: ComponentsListingInput): [Component!]!
   getUser: User
 }

@@ -33,5 +33,7 @@ export const Query = objectType({
       },
       resolve: components,
     });
+
+    t.crud.component();
   },
 });

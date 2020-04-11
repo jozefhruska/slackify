@@ -1011,6 +1011,7 @@ export interface NexusGenFieldTypes {
   }
   Query: { // field return type
     collections: NexusGenRootTypes['Collection'][]; // [Collection!]!
+    component: NexusGenRootTypes['Component'] | null; // Component
     components: NexusGenRootTypes['Component'][]; // [Component!]!
     getUser: NexusGenRootTypes['User'] | null; // User
   }
@@ -1077,6 +1078,9 @@ export interface NexusGenArgTypes {
   Query: {
     collections: { // args
       input?: NexusGenInputs['CollectionsListingInput'] | null; // CollectionsListingInput
+    }
+    component: { // args
+      where: NexusGenInputs['ComponentWhereUniqueInput']; // ComponentWhereUniqueInput!
     }
     components: { // args
       input?: NexusGenInputs['ComponentsListingInput'] | null; // ComponentsListingInput
