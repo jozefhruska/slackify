@@ -3,7 +3,7 @@ import { ApolloProvider, ApolloClient, InMemoryCache, HttpLink } from '@apollo/c
 import fetch from 'isomorphic-unfetch';
 import withApollo from 'next-with-apollo';
 
-import { API_URL } from '../config';
+import { SCHEMA_URL } from '../config';
 import { getAuthToken } from '../cookies';
 
 export type AppCache = {};
@@ -19,7 +19,7 @@ export const createApolloClient = (
   const client = new ApolloClient({
     ssrMode,
     link: new HttpLink({
-      uri: API_URL ?? 'http://localhost:5000',
+      uri: SCHEMA_URL,
       credentials: 'same-origin',
       headers: {
         ...(Boolean(authToken) && { Authorization: 'Bearer ' + authToken }),

@@ -1,7 +1,6 @@
 {
   "build": {
     "env": {
-      "API_URL": "@api_url",
       "SCHEMA_URL": "@schema_url"
     }
   }
