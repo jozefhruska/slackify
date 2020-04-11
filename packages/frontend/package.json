@@ -10,8 +10,8 @@
     "start": "next start",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
-    "generate": "graphql-codegen --config codegen.yml",
-    "generate:watch": "graphql-codegen --config codegen.yml --watch"
+    "generate": "graphql-codegen -r dotenv/config --config codegen.yml",
+    "generate:watch": "graphql-codegen -r dotenv/config --config codegen.yml --watch"
   },
   "dependencies": {
     "@apollo/client": "~3.0.0-beta.43",

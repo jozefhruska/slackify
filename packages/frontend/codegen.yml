@@ -1,7 +1,5 @@
 overwrite: true
-schema:
-  - 'https://slackify-service-private.herokuapp.com'
-  - './src/schema/index.ts'
+schema: ${SCHEMA_URL}
 documents: 'src/api/**/*.ts'
 generates:
   src/types/generated/graphql.tsx:

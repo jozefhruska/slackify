@@ -1,26 +1,12 @@
 datasource db {
   provider = "postgresql"
   url = "***"
-  enabled  = env("POSTGRES_URL")
+  enabled  = env("DATABASE_URL")
 }
 
-generator cient_prisma {
+generator cient_common {
   provider = "prisma-client-js"
-}
-
-generator cient_service_slack {
-  provider = "prisma-client-js"
-  output   = "../service-slack/node_modules/@prisma/client"
-}
-
-generator client_service_private {
-  provider = "prisma-client-js"
-  output   = "../service-private/node_modules/@prisma/client"
-}
-
-generator client_service_public {
-  provider = "prisma-client-js"
-  output   = "../service-public/node_modules/@prisma/client"
+  output   = "../../node_modules/@prisma/client"
 }
 
 model User {

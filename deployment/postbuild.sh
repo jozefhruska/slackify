@@ -18,7 +18,23 @@ if [ $EXIT_STATUS -ne 0 ]; then
   exit $EXIT_STATUS
 fi
 
-npx lerna run --scope $CURRENT_SERVICE build
+npx lerna run build --scope $CURRENT_SERVICE
+EXIT_STATUS=$?
+if [ $EXIT_STATUS -ne 0 ]; then
+  exit $EXIT_STATUS
+fi
+
+# Build "slackify-frontend"
+CURRENT_SERVICE="slackify-frontend"
+echo "[postbuild]: Building \"$CURRENT_SERVICE\""
+
+npx lerna run generate --scope $CURRENT_SERVICE
+EXIT_STATUS=$?
+if [ $EXIT_STATUS -ne 0 ]; then
+  exit $EXIT_STATUS
+fi
+
+npx lerna run build --scope $CURRENT_SERVICE
 EXIT_STATUS=$?
 if [ $EXIT_STATUS -ne 0 ]; then
   exit $EXIT_STATUS
