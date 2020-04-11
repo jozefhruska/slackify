@@ -1,6 +1,6 @@
 overwrite: true
 schema:
-  - 'http://localhost:5000'
+  - 'https://slackify-service-private.herokuapp.com'
   - './src/schema/index.ts'
 documents: 'src/api/**/*.ts'
 generates:

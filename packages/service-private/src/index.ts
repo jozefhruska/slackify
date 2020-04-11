@@ -20,6 +20,7 @@ export interface Context {
 /* Create Apollo Server instance */
 const server = new ApolloServer({
   schema: applyMiddleware(schema, permissions),
+  introspection: true,
   context: async ({ req }) => {
     let user;
     let authToken = req.headers.authorization;
