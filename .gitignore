@@ -11,3 +11,4 @@ dist/
 # VSCode
 Slackify.code-workspace
 .vscode
+.now

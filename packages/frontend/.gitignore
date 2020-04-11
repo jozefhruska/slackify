@@ -21,6 +21,7 @@ src/types/generated
 # misc
 .DS_Store
 .env*
+.now
 
 # debug
 npm-debug.log*
