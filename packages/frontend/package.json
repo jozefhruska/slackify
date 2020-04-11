@@ -11,7 +11,8 @@
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
     "generate": "graphql-codegen -r dotenv/config --config codegen.yml",
-    "generate:watch": "graphql-codegen -r dotenv/config --config codegen.yml --watch"
+    "generate:watch": "graphql-codegen -r dotenv/config --config codegen.yml --watch",
+    "ci": "cypress run"
   },
   "dependencies": {
     "@apollo/client": "~3.0.0-beta.43",
