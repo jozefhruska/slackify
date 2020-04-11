@@ -20,9 +20,6 @@ cache:
 install:
   - npm ci
 
-branches:
-  only:
-    - master
 matrix:
   include:
     - env: TARGET=frontend
