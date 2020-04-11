@@ -1,40 +1,29 @@
+# Check if service is selected
+if [[ -z "${SLACKIFY_SERVICE}" ]]; then
+  echo "[postbuild]: \"SLACKIFY_SERVICE\" is not defined."
+  exit 1
+fi
+
 # Generate prisma client
-CURRENT_SERVICE="slackify-prisma"
 echo "[postbuild]: Generating prisma client..."
 
-npx lerna run generate --scope $CURRENT_SERVICE
+npx lerna run generate --scope slackify-prisma
 EXIT_STATUS=$?
 if [ $EXIT_STATUS -ne 0 ]; then
   exit $EXIT_STATUS
 fi
 
-# Build "slackify-service-private"
-CURRENT_SERVICE="slackify-service-private"
-echo "[postbuild]: Building \"$CURRENT_SERVICE\""
 
-npx lerna run generate --scope $CURRENT_SERVICE
+# Build selected service
+echo "[postbuild]: Building \"$SLACKIFY_SERVICE\""
+
+npx lerna run generate --scope $SLACKIFY_SERVICE
 EXIT_STATUS=$?
 if [ $EXIT_STATUS -ne 0 ]; then
   exit $EXIT_STATUS
 fi
 
-npx lerna run build --scope $CURRENT_SERVICE
-EXIT_STATUS=$?
-if [ $EXIT_STATUS -ne 0 ]; then
-  exit $EXIT_STATUS
-fi
-
-# Build "slackify-frontend"
-CURRENT_SERVICE="slackify-frontend"
-echo "[postbuild]: Building \"$CURRENT_SERVICE\""
-
-npx lerna run generate --scope $CURRENT_SERVICE
-EXIT_STATUS=$?
-if [ $EXIT_STATUS -ne 0 ]; then
-  exit $EXIT_STATUS
-fi
-
-npx lerna run build --scope $CURRENT_SERVICE
+npx lerna run build --scope $SLACKIFY_SERVICE
 EXIT_STATUS=$?
 if [ $EXIT_STATUS -ne 0 ]; then
   exit $EXIT_STATUS
