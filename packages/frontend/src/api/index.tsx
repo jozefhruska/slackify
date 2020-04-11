@@ -15,8 +15,6 @@ export const createApolloClient = (
 ) => {
   const cache = new InMemoryCache().restore(initialState ?? {});
 
-  console.log(SCHEMA_URL);
-
   /* Create new Apollo Client instance */
   const client = new ApolloClient({
     ssrMode,
