@@ -82,7 +82,7 @@
     "prettier": "~2.0.4",
     "prettier-eslint": "~9.0.1",
     "react-docgen-typescript-loader": "~3.7.2",
-    "themeprovider-storybook": "~1.4.0",
+    "themeprovider-storybook": "~1.5.1",
     "ts-loader": "~6.2.2",
     "typescript": "~3.8.3"
   }
