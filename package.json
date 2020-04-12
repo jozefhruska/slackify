@@ -4,8 +4,7 @@
   "scripts": {
     "bootstrap": "lerna bootstrap --hoist",
     "version": "lerna version --conventional-commits --yes",
-    "postinstall": "npm run bootstrap",
-    "heroku-postbuild": "sh deployment/postbuild.sh"
+    "postinstall": "npm run bootstrap && sh scripts/build.sh"
   },
   "devDependencies": {
     "lerna": "^3.20.2"
