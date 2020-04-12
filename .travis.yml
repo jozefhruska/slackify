@@ -12,21 +12,16 @@ cache:
   npm: true
   directories:
     - ~/.npm
-    - ./node_modules
     - ~/.cache
-  override:
-    - npm ci
-    - npm run cy:verify
 
 install:
   - npm ci
 
-matrix:
-  include:
-    - env: TARGET=frontend
-    - env: TARGET=prisma
-    - env: TARGET=service-private
-    - env: TARGET=service-public
-    - env: TARGET=service-slack
+before_script:
+  - ./deployment/poshbuild.sh
+  - cd packages/service-private && npm start
 
-script: if .travis/build-condition.sh $TRAVIS_COMMIT_RANGE packages/$TARGET; then echo "$TARGET is being built" && cd $TARGET && npm install && npm run ci; else echo "$TARGET is NOT being built"; fi
+script:
+  - cd packages/frontend
+  - npm start
+  - npm run ci
