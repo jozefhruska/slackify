@@ -19,9 +19,9 @@ install:
 
 before_script:
   - SLACKIFY_SERVICE=slackify-service-private ./scripts/build.sh
-  - cd packages/service-private && npm start
+  - cd packages/service-private && npm start &
 
 script:
   - SLACKIFY_SERVICE=slackify-frontend ./scripts/build.sh
-  - cd packages/frontend && npm start
+  - cd packages/frontend && npm start &
   - npm run ci
