@@ -5,7 +5,8 @@ node_js:
 addons:
   chrome: stable
   apt:
-    packages: -libgconf-2-4
+    packages:
+      - libgconf-2-4
 
 cache:
   npm: true
@@ -28,4 +29,4 @@ matrix:
     - env: TARGET=service-public
     - env: TARGET=service-slack
 
-script: if .travis/build-condition.sh $TRAVIS_COMMIT_RANGE $TARGET; then echo "$TARGET is being built" && cd $TARGET && npm install && npm run ci; else echo "$TARGET is NOT being built"; fi
+script: if .travis/build-condition.sh $TRAVIS_COMMIT_RANGE packages/$TARGET; then echo "$TARGET is being built" && cd $TARGET && npm install && npm run ci; else echo "$TARGET is NOT being built"; fi
