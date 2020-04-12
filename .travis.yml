@@ -2,12 +2,26 @@ language: node_js
 node_js:
   - "node"
 
-matrix:
-  include:
-    - env: TARGET=frontend
-    - env: TARGET=prisma
-    - env: TARGET=service-private
-    - env: TARGET=service-public
-    - env: TARGET=service-slack
+addons:
+  chrome: stable
+  apt:
+    packages:
+      - libgconf-2-4
 
-script: if .travis/build-condition.sh $TRAVIS_COMMIT_RANGE $TARGET; then echo "$TARGET is being built" && cd $TARGET && npm install && npm run test; else echo "$TARGET is NOT being built"; fi
+cache:
+  npm: true
+  directories:
+    - ~/.npm
+    - ~/.cache
+
+install:
+  - npm ci
+
+before_script:
+  - SLACKIFY_SERVICE=slackify-service-private ./scripts/build.sh
+  - cd packages/service-private && npm start &
+
+script:
+  - SLACKIFY_SERVICE=slackify-frontend ./scripts/build.sh
+  - cd packages/frontend && npm start &
+  - cd packages/frontend && npm run cypress
