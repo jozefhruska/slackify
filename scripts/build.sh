@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # Check if service is selected
 if [[ -z "${SLACKIFY_SERVICE}" ]]; then
   echo "[postbuild]: \"SLACKIFY_SERVICE\" is not defined."
