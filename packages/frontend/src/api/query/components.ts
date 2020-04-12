@@ -32,6 +32,7 @@ export const GET_RECENT_COMPONENTS = gql`
       type
       updatedAt
       collection {
+        id
         name
       }
     }

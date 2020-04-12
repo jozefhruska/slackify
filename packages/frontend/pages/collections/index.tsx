@@ -67,7 +67,7 @@ const CollectionsPage: NextPage<Props> = ({ user }) => {
               });
             }}
           >
-            Add new collection
+            Create new collection
           </Button>
         </PageHeader>
 

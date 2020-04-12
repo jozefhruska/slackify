@@ -67,7 +67,7 @@ const ComponentsPage: NextPage<Props> = ({ user }) => {
               });
             }}
           >
-            Add new component
+            Create new component
           </Button>
         </PageHeader>
 

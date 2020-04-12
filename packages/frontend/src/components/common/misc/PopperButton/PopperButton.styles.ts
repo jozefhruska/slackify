@@ -1,38 +1,41 @@
 import styled, { css } from 'styled-components';
 import { PopperProps } from 'react-popper';
 
-const resolvePopperWrapperStyles = (placement: PopperProps['placement']) => {
+const resolveChildButtonWrapperStyles = (placement: PopperProps['placement']) => {
   switch (placement) {
     case 'left': {
       return css`
-        padding-right: ${({ theme }) => theme.space.s4};
+        margin-right: ${({ theme }) => theme.space.s3};
       `;
     }
 
     case 'right': {
       return css`
-        padding-left: ${({ theme }) => theme.space.s4};
+        margin-left: ${({ theme }) => theme.space.s3};
       `;
     }
 
     case 'bottom': {
       return css`
-        padding-top: ${({ theme }) => theme.space.s4};
+        margin-top: ${({ theme }) => theme.space.s3};
       `;
     }
 
     default:
     case 'top': {
       return css`
-        padding-bottom: ${({ theme }) => theme.space.s4};
+        margin-bottom: ${({ theme }) => theme.space.s3};
       `;
     }
   }
 };
 
 export const PopperWrapper = styled.div<{ 'data-placement': PopperProps['placement'] }>`
-  display: grid;
-  grid-gap: ${({ theme }) => theme.space.s3};
+  display: flex;
+  flex-direction: ${({ 'data-placement': placement }) =>
+    placement == 'left' || placement == 'right' ? 'row' : 'column'};
+`;
 
-  ${(props) => resolvePopperWrapperStyles(props?.['data-placement'])};
+export const ChildButtonWrapper = styled.div<{ 'data-placement': PopperProps['placement'] }>`
+  ${(props) => resolveChildButtonWrapperStyles(props?.['data-placement'])};
 `;

@@ -41,3 +41,24 @@ export const InCollectionComponentPreview = styled.a`
 export const InCollectionComponentPreviewInfo = styled.span`
   color: ${({ theme }) => theme.colors.gray[4]};
 `;
+
+export const QueryWrapper = styled.div`
+  position: relative;
+  padding: ${({ theme }) => theme.space.s6};
+  background: ${({ theme }) => theme.colors.gray[8]};
+  border-radius: ${({ theme }) => theme.radii.medium};
+  border: 1px solid ${({ theme }) => theme.colors.gray[3]};
+  color: ${({ theme }) => theme.colors.gray[0]};
+  overflow: hidden;
+
+  ::after {
+    content: 'Query';
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: ${({ theme }) => theme.space.s2} ${({ theme }) => theme.space.s4};
+    background: ${({ theme }) => theme.colors.gray[3]};
+    color: ${({ theme }) => theme.colors.gray[10]};
+    border-bottom-left-radius: ${({ theme }) => theme.radii.medium};
+  }
+`;

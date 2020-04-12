@@ -56,7 +56,7 @@ const Detail: React.FC<Props> = ({ component }) => {
           </div>
         </S.MetaWrapper>
 
-        <div>how to get</div>
+        <S.QueryWrapper>how to get</S.QueryWrapper>
       </Grid>
 
       <Grid gridTemplateColumns={[null, 'repeat(3, 1fr)']} gridGap="s6" mt="s6">
