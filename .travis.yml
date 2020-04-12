@@ -18,10 +18,10 @@ install:
   - npm ci
 
 before_script:
-  - ./deployment/postbuild.sh
+  - SLACKIFY_SERVICE=slackify-service-private ./scripts/build.sh
   - cd packages/service-private && npm start
 
 script:
-  - cd packages/frontend
-  - npm start
+  - SLACKIFY_SERVICE=slackify-frontend ./scripts/build.sh
+  - cd packages/frontend && npm start
   - npm run ci
