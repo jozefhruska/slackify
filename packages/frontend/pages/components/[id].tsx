@@ -1,7 +1,6 @@
 import React, { Dispatch, useEffect } from 'react';
 import { GetServerSideProps } from 'next';
 import { useDispatch } from 'react-redux';
-import { FiPlus, FiEdit } from 'react-icons/fi';
 
 import {
   GetComponentDetailQuery,
@@ -22,6 +21,9 @@ import {
 } from '../../src/components/common/layout';
 import { GET_COMPONENT_DETAIL } from '../../src/api/query/components';
 import Detail from '../../src/components/components/detail/Detail';
+import { Button } from '../../src/components/common/misc';
+import { FiTrash2, FiMoreVertical, FiEye, FiEdit, FiPlus } from 'react-icons/fi';
+import { Grid, Flex } from '../../src/components/common/layout/base';
 
 /* Local types
 ============================================================================= */
@@ -65,15 +67,23 @@ const ComponentDetailPage: React.FC<Props> = ({ user, component }) => {
               text: component.id,
             },
           ]}
-          primaryButton={{
-            icon: <FiPlus />,
-            text: 'Add new component',
-          }}
-          secondaryButton={{
-            icon: <FiEdit />,
-            text: 'Edit component',
-          }}
-        />
+        >
+          <Grid gridTemplateColumns={[null, 'auto auto']} gridGap="s4">
+            <Grid display={['grid', 'none']} gridTemplateColumns="repeat(3, 1fr)" gridGap="s4">
+              <Button icon={<FiEye />} />
+              <Button icon={<FiEdit />} variant="info" />
+              <Button icon={<FiPlus />} variant="brand" />
+            </Grid>
+
+            <Flex display={['none', 'flex']}>
+              <Button icon={<FiMoreVertical />} />
+            </Flex>
+
+            <Button icon={<FiTrash2 />} variant="danger">
+              Delete component
+            </Button>
+          </Grid>
+        </PageHeader>
 
         <Detail component={component} />
       </Content>

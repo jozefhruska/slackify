@@ -6,9 +6,9 @@ import { ComponentDetailFragment } from '../../../types/generated/graphql';
 import { Block } from '../../common/layout';
 import { Box } from '../../common/layout/base';
 import { Paragraph } from '../../common/typography';
+import { Alert } from '../../common/misc';
 
 import * as S from './Detail.styles';
-import { Alert } from '../../common/misc';
 
 /* Props - <InCollection />
 ============================================================================= */
@@ -52,7 +52,9 @@ const InCollection: React.FC<Props> = ({ component: displayedComponent }) => {
           ))}
         </>
       ) : (
-        <Alert>There are no other components in "{displayedComponent.collection.name}"</Alert>
+        <Alert>
+          There are no other components in &quot;{displayedComponent.collection.name}&quot;
+        </Alert>
       )}
     </Block>
   );
