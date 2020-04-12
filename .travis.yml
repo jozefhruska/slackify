@@ -24,4 +24,4 @@ before_script:
 script:
   - SLACKIFY_SERVICE=slackify-frontend ./scripts/build.sh
   - cd packages/frontend && npm start &
-  - npm run ci
+  - cd packages/frontend && npm run cypress
