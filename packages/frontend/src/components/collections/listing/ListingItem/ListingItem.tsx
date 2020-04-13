@@ -18,7 +18,7 @@ import { Grid, Box, Flex } from '../../../common/layout/base';
 import { Button, PopperButton } from '../../../common/misc';
 import { DELETE_ONE_COLLECTION, UPDATE_ONE_COLLECTION } from '../../../../api/mutation/collections';
 import { GET_COLLECTIONS_LISTING } from '../../../../api/query/collections';
-import { humanizeComponentType } from '../../../../utils';
+import { humanizeComponentType, getShortenedText } from '../../../../utils';
 import { OpenCreateUpdateModal } from '../../../../actions/collections';
 
 import * as S from './ListingItem.styles';
@@ -69,7 +69,9 @@ const ListingItem: React.FC<Props> = ({ collection }) => {
           </Grid>
         </Box>
 
-        {collection.description && <Paragraph>{collection.description}</Paragraph>}
+        {collection.description && (
+          <Paragraph>{getShortenedText(collection.description)}</Paragraph>
+        )}
       </Box>
 
       <Grid gridTemplateColumns="1fr 1fr" gridColumnGap="s4">

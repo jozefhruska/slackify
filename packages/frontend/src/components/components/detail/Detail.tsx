@@ -59,7 +59,11 @@ const Detail: React.FC<Props> = ({ component }) => {
         <S.QueryWrapper>how to get</S.QueryWrapper>
       </Grid>
 
-      <Grid gridTemplateColumns={[null, 'repeat(3, 1fr)']} gridGap="s6" mt="s6">
+      <Grid
+        gridTemplateColumns={[null, null, 'repeat(2, 1fr)', null, null, 'repeat(3, 1fr)']}
+        gridGap="s6"
+        mt="s6"
+      >
         <Fields component={component} />
 
         <div>stats</div>

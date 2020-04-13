@@ -25,6 +25,16 @@ export const MetaTitle = styled.span`
   color: ${({ theme }) => theme.colors.gray[4]};
 `;
 
+export const InCollectionWrapper = styled.div`
+  @media (min-width: ${({ theme }) => theme.breakpoints[1]}) {
+    grid-column: span 2;
+  }
+
+  @media (min-width: ${({ theme }) => theme.breakpoints[4]}) {
+    grid-column: auto;
+  }
+`;
+
 export const InCollectionComponentPreview = styled.a`
   display: flex;
   justify-content: space-between;
@@ -32,10 +42,6 @@ export const InCollectionComponentPreview = styled.a`
   padding: ${({ theme }) => theme.space.s4};
   background: ${({ theme }) => theme.colors.gray[9]};
   border-radius: ${({ theme }) => theme.radii.medium};
-
-  :not(:last-child) {
-    margin-bottom: ${({ theme }) => theme.space.s4};
-  }
 `;
 
 export const InCollectionComponentPreviewInfo = styled.span`

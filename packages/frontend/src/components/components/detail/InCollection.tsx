@@ -4,7 +4,7 @@ import moment from 'moment';
 
 import { ComponentDetailFragment } from '../../../types/generated/graphql';
 import { Block } from '../../common/layout';
-import { Box } from '../../common/layout/base';
+import { Box, Grid } from '../../common/layout/base';
 import { Paragraph } from '../../common/typography';
 import { Alert } from '../../common/misc';
 
@@ -29,34 +29,36 @@ const InCollection: React.FC<Props> = ({ component: displayedComponent }) => {
   );
 
   return (
-    <Block title={displayedComponent.collection.name}>
-      {Boolean(filteredComponents.length) ? (
-        <>
-          {filteredComponents.map((component) => (
-            <Link key={component.id} href="/components/[id]" as={`/components/${component.id}`}>
-              <S.InCollectionComponentPreview>
-                <Box>
-                  <Paragraph mb="s2" fontWeight="bold">
-                    {component.type}
-                  </Paragraph>
-                  <S.InCollectionComponentPreviewInfo>
-                    {displayedComponent.collection.name}
-                  </S.InCollectionComponentPreviewInfo>
-                </Box>
+    <S.InCollectionWrapper>
+      <Block title="Collection">
+        {Boolean(filteredComponents.length) ? (
+          <Grid gridTemplateColumns={[null, null, null, '1fr 1fr']} gridGap="s6">
+            {filteredComponents.map((component) => (
+              <Link key={component.id} href="/components/[id]" as={`/components/${component.id}`}>
+                <S.InCollectionComponentPreview>
+                  <Box>
+                    <Paragraph mb="s2" fontWeight="bold">
+                      {component.type}
+                    </Paragraph>
+                    <S.InCollectionComponentPreviewInfo>
+                      {displayedComponent.collection.name}
+                    </S.InCollectionComponentPreviewInfo>
+                  </Box>
 
-                <S.InCollectionComponentPreviewInfo>
-                  {moment(component.updatedAt).fromNow()}
-                </S.InCollectionComponentPreviewInfo>
-              </S.InCollectionComponentPreview>
-            </Link>
-          ))}
-        </>
-      ) : (
-        <Alert>
-          There are no other components in &quot;{displayedComponent.collection.name}&quot;
-        </Alert>
-      )}
-    </Block>
+                  <S.InCollectionComponentPreviewInfo>
+                    {moment(component.updatedAt).fromNow()}
+                  </S.InCollectionComponentPreviewInfo>
+                </S.InCollectionComponentPreview>
+              </Link>
+            ))}
+          </Grid>
+        ) : (
+          <Alert>
+            There are no other components in &quot;{displayedComponent.collection.name}&quot;
+          </Alert>
+        )}
+      </Block>
+    </S.InCollectionWrapper>
   );
 };
 

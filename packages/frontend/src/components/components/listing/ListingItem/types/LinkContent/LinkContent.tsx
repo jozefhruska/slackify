@@ -6,7 +6,7 @@ import {
 } from '../../../../../../types/generated/graphql';
 import { Box, Grid } from '../../../../../common/layout/base';
 import { Paragraph } from '../../../../../common/typography';
-import { humanizeComponentType } from '../../../../../../utils';
+import { humanizeComponentType, getShortenedText } from '../../../../../../utils';
 
 import * as S from '../../ListingItem.styles';
 
@@ -46,7 +46,9 @@ const LinkContent: React.FC<Props> = ({ component }) => {
           </a>
         </Paragraph>
 
-        {component.linkData?.text && <Paragraph>{component.linkData.text}</Paragraph>}
+        {component.linkData?.text && (
+          <Paragraph>{getShortenedText(component.linkData.text)}</Paragraph>
+        )}
       </Box>
     </>
   );
