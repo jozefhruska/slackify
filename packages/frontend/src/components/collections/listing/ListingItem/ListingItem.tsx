@@ -3,15 +3,16 @@ import { useDispatch } from 'react-redux';
 import moment from 'moment';
 import { FiMoreVertical, FiTrash2, FiEdit, FiEye, FiEyeOff } from 'react-icons/fi';
 import { useMutation } from '@apollo/client';
+import Link from 'next/link';
 
 import {
-  Collection,
   DeleteOneCollectionMutation,
   DeleteOneCollectionMutationVariables,
   GetCollectionsListingQuery,
   GetCollectionsListingQueryVariables,
   UpdateOneCollectionMutation,
   UpdateOneCollectionMutationVariables,
+  CollectionListingFragment,
 } from '../../../../types/generated/graphql';
 import { Heading, Paragraph } from '../../../common/typography';
 import { Grid, Box, Flex } from '../../../common/layout/base';
@@ -22,12 +23,11 @@ import { humanizeComponentType, getShortenedText } from '../../../../utils';
 import { OpenCreateUpdateModal } from '../../../../actions/collections';
 
 import * as S from './ListingItem.styles';
-import Link from 'next/link';
 
 /* Props - <ListingItem />
 ============================================================================= */
 type Props = {
-  collection: Omit<Collection, 'team' | 'components'>;
+  collection: CollectionListingFragment;
 };
 
 /* <ListingItem />
@@ -86,7 +86,7 @@ const ListingItem: React.FC<Props> = ({ collection }) => {
           </Link>
 
           <PopperButton
-            options={[
+            options={(closePopper) => [
               {
                 icon: collection.published ? <FiEye /> : <FiEyeOff />,
                 onClick: async () => {
@@ -116,6 +116,8 @@ const ListingItem: React.FC<Props> = ({ collection }) => {
                       },
                     },
                   });
+
+                  closePopper();
                 },
               },
               {
@@ -164,6 +166,8 @@ const ListingItem: React.FC<Props> = ({ collection }) => {
                         cache.gc();
                       },
                     });
+
+                    closePopper();
                   }
                 },
                 icon: <FiTrash2 />,

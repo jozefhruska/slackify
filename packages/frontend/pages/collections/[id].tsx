@@ -152,7 +152,7 @@ const CollectionDetailPage: React.FC<Props> = ({ id, user }) => {
             <Flex display={['none', 'flex']}>
               <PopperButton
                 placement="left"
-                options={[
+                options={(closePopper) => [
                   {
                     icon: data.collection.published ? <FiEye /> : <FiEyeOff />,
                     isLoading: updateLoading,
@@ -182,6 +182,8 @@ const CollectionDetailPage: React.FC<Props> = ({ id, user }) => {
                           },
                         },
                       });
+
+                      closePopper();
                     },
                   },
                   {
@@ -196,6 +198,8 @@ const CollectionDetailPage: React.FC<Props> = ({ id, user }) => {
                           },
                         },
                       });
+
+                      closePopper();
                     },
                   },
                 ]}

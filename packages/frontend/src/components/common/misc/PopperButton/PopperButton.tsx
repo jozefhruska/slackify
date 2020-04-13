@@ -8,7 +8,7 @@ import * as S from './PopperButton.styles';
 /* Props - <PopperButton />
 ============================================================================= */
 type Props = {
-  options: Array<{ text?: string } & ButtonProps>;
+  options: (close: () => void) => Array<{ text?: string } & ButtonProps>;
   children: (ref: React.Ref<HTMLButtonElement>, onClick: () => void) => React.ReactElement;
 } & Pick<PopperProps, 'placement'>;
 
@@ -24,6 +24,13 @@ const PopperButton: React.FC<Props> = ({ options, children, ...props }) => {
     setPopperVisible(!isPopperVisible);
   };
 
+  /**
+   * Handles closing of popper element.
+   */
+  const handleClose = () => {
+    setPopperVisible(false);
+  };
+
   return (
     <Manager>
       <Reference>{({ ref }) => children(ref, handleClick)}</Reference>
@@ -32,7 +39,7 @@ const PopperButton: React.FC<Props> = ({ options, children, ...props }) => {
         <Popper {...props}>
           {({ ref, style, placement }) => (
             <S.PopperWrapper ref={ref} style={style} data-placement={placement}>
-              {options?.map(({ text, ...buttonProps }, key) => (
+              {options(handleClose)?.map(({ text, ...buttonProps }, key) => (
                 <S.ChildButtonWrapper key={key} data-placement={placement}>
                   <Button {...buttonProps}>{text ? text : ''}</Button>
                 </S.ChildButtonWrapper>

@@ -151,7 +151,7 @@ const ComponentDetailPage: React.FC<Props> = ({ id, user }) => {
             <Flex display={['none', 'flex']}>
               <PopperButton
                 placement="left"
-                options={[
+                options={(closePopper) => [
                   {
                     icon: data.component.published ? <FiEye /> : <FiEyeOff />,
                     isLoading: updateLoading,
@@ -181,6 +181,8 @@ const ComponentDetailPage: React.FC<Props> = ({ id, user }) => {
                           },
                         },
                       });
+
+                      closePopper();
                     },
                   },
                   {
@@ -195,6 +197,8 @@ const ComponentDetailPage: React.FC<Props> = ({ id, user }) => {
                           },
                         },
                       });
+
+                      closePopper();
                     },
                   },
                 ]}
