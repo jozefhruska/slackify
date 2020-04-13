@@ -20,6 +20,7 @@ import { OpenCreateUpdateModal } from '../../../../actions/components';
 import { UPDATE_ONE_COMPONENT, DELETE_ONE_COMPONENT } from '../../../../api/mutation/components';
 
 import * as S from './ListingItem.styles';
+import Link from 'next/link';
 
 /* Props - <ListingItem />
 ============================================================================= */
@@ -58,7 +59,9 @@ const ListingItem: React.FC<Props> = ({ component }) => {
         </Flex>
 
         <Grid gridTemplateColumns="1fr auto" gridColumnGap="s4">
-          <Button variant="brand">View</Button>
+          <Link href="/components/[id]" as={`/components/${component.id}`}>
+            <Button variant="brand">View</Button>
+          </Link>
 
           <PopperButton
             options={[

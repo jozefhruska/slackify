@@ -20,6 +20,7 @@ import ListingPage from '../../src/components/components/listing/ListingPage/Lis
 import { OpenCreateUpdateModal } from '../../src/actions/components';
 import { getAuthToken, removeAuthToken } from '../../src/cookies';
 import { GET_USER } from '../../src/api/query/auth';
+import { Button } from '../../src/components/common/misc';
 
 /* Props - <ComponentsPage />
 ============================================================================= */
@@ -50,10 +51,12 @@ const ComponentsPage: NextPage<Props> = ({ user }) => {
               text: 'Components',
             },
           ]}
-          primaryButton={{
-            icon: <FiPlus />,
-            text: 'Add new component',
-            onClick: () =>
+        >
+          <Button
+            icon={<FiPlus />}
+            variant="brand"
+            width="100%"
+            onClick={() => {
               dispatch({
                 type: '[COMPONENTS] OPEN_CREATE_UPDATE_MODAL',
                 payload: {
@@ -61,9 +64,12 @@ const ComponentsPage: NextPage<Props> = ({ user }) => {
                     mode: 'create',
                   },
                 },
-              }),
-          }}
-        />
+              });
+            }}
+          >
+            Create new component
+          </Button>
+        </PageHeader>
 
         <ListingPage />
       </Content>

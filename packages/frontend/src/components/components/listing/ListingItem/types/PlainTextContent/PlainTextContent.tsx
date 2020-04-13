@@ -6,7 +6,7 @@ import {
 } from '../../../../../../types/generated/graphql';
 import { Box, Grid } from '../../../../../common/layout/base';
 import { Paragraph } from '../../../../../common/typography';
-import { humanizeComponentType } from '../../../../../../utils';
+import { humanizeComponentType, getShortenedText } from '../../../../../../utils';
 
 import * as S from '../../ListingItem.styles';
 
@@ -40,7 +40,7 @@ const PlainTextContent: React.FC<Props> = ({ component }) => {
           </Grid>
         </Box>
 
-        <Paragraph>{component.plainTextData?.text}</Paragraph>
+        <Paragraph>{getShortenedText(component.plainTextData?.text)}</Paragraph>
       </Box>
     </>
   );

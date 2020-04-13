@@ -20,6 +20,7 @@ import { OpenCreateUpdateModal } from '../../src/actions/collections';
 import { getAuthToken, removeAuthToken } from '../../src/cookies';
 import { GET_USER } from '../../src/api/query/auth';
 import { checkAuthentication } from '../../src/utils';
+import { Button } from '../../src/components/common/misc';
 
 /* Props - <CollectionsPage />
 ============================================================================= */
@@ -50,10 +51,12 @@ const CollectionsPage: NextPage<Props> = ({ user }) => {
               text: 'Collections',
             },
           ]}
-          primaryButton={{
-            icon: <FiPlus />,
-            text: 'Add new collection',
-            onClick: () => {
+        >
+          <Button
+            icon={<FiPlus />}
+            variant="brand"
+            width="100%"
+            onClick={() => {
               dispatch({
                 type: '[COLLECTIONS] OPEN_CREATE_UPDATE_MODAL',
                 payload: {
@@ -62,9 +65,11 @@ const CollectionsPage: NextPage<Props> = ({ user }) => {
                   },
                 },
               });
-            },
-          }}
-        />
+            }}
+          >
+            Create new collection
+          </Button>
+        </PageHeader>
 
         <ListingPage />
       </Content>

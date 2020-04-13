@@ -3,7 +3,7 @@ import React from 'react';
 import { ComponentType, Component } from '../../../../../../types/generated/graphql';
 import { Box, Grid } from '../../../../../common/layout/base';
 import { Paragraph, Heading } from '../../../../../common/typography';
-import { humanizeComponentType } from '../../../../../../utils';
+import { humanizeComponentType, getShortenedText } from '../../../../../../utils';
 
 import * as S from '../../ListingItem.styles';
 
@@ -41,7 +41,9 @@ const ArticleContent: React.FC<Props> = ({ component }) => {
           </Grid>
         </Box>
 
-        {component.articleData?.lead && <Paragraph>{component.articleData.lead}</Paragraph>}
+        {component.articleData?.lead && (
+          <Paragraph>{getShortenedText(component.articleData.lead)}</Paragraph>
+        )}
       </Box>
     </>
   );

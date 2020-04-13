@@ -1,12 +1,10 @@
 import React from 'react';
 import Link, { LinkProps } from 'next/link';
 
-import { Box, Flex, Grid } from '../base';
+import { Box, Flex } from '../base';
 import { Heading } from '../../typography';
 
 import * as S from './PageHeader.styles';
-import { Button } from '../../misc';
-import { ButtonProps } from '../../misc/Button/Button';
 
 /* Props - <PageHeader />
 ============================================================================= */
@@ -16,17 +14,11 @@ type Props = {
     text: string;
     link?: LinkProps;
   }>;
-  primaryButton?: {
-    text: string;
-  } & ButtonProps;
-  secondaryButton?: {
-    text: string;
-  } & ButtonProps;
 };
 
 /* <PageHeader />
 ============================================================================= */
-const PageHeader: React.FC<Props> = ({ heading, breadcrumbs, primaryButton, secondaryButton }) => {
+const PageHeader: React.FC<Props> = ({ heading, breadcrumbs, children }) => {
   return (
     <Box as="header" mb="s10">
       {breadcrumbs && (
@@ -57,30 +49,9 @@ const PageHeader: React.FC<Props> = ({ heading, breadcrumbs, primaryButton, seco
         justifyContent="space-between"
         mt={breadcrumbs ? 's6' : 0}
       >
-        <Flex alignItems="center">
-          <Heading mb={[primaryButton || secondaryButton ? 's6' : 0, 0]}>{heading}</Heading>
+        <Heading mb={[null, 0]}>{heading}</Heading>
 
-          <Box display={['none', 'block']} ml="s4">
-            {secondaryButton && <Button {...secondaryButton}>{secondaryButton.text}</Button>}
-          </Box>
-        </Flex>
-
-        <Box display={['none', 'block']}>
-          {primaryButton && (
-            <Button variant="brand" {...primaryButton}>
-              {primaryButton.text}
-            </Button>
-          )}
-        </Box>
-
-        <Grid display={['grid', 'none']} gridAutoColumns="1fr" gridGap="s4">
-          {secondaryButton && <Button {...secondaryButton}></Button>}
-          {primaryButton && (
-            <Button variant="brand" {...primaryButton}>
-              {!secondaryButton ? primaryButton.text : ''}
-            </Button>
-          )}
-        </Grid>
+        <Box ml={[0, 's4']}>{children}</Box>
       </Flex>
     </Box>
   );

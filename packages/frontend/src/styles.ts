@@ -8,6 +8,7 @@ export const GlobalStyles = createGlobalStyle`
     color: ${({ theme }) => theme.colors.gray[3]};
     background: ${({ theme }) => theme.colors.gray[10]};
     font-size: ${({ theme }) => theme.fontSizes.normal};
+    line-height: 1.5;
   }
 
   svg {

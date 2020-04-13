@@ -33,9 +33,9 @@ const PopperButton: React.FC<Props> = ({ options, children, ...props }) => {
           {({ ref, style, placement }) => (
             <S.PopperWrapper ref={ref} style={style} data-placement={placement}>
               {options?.map(({ text, ...buttonProps }, key) => (
-                <Button key={key} {...buttonProps}>
-                  {text ? text : ''}
-                </Button>
+                <S.ChildButtonWrapper key={key} data-placement={placement}>
+                  <Button {...buttonProps}>{text ? text : ''}</Button>
+                </S.ChildButtonWrapper>
               ))}
             </S.PopperWrapper>
           )}

@@ -60,3 +60,16 @@ export const checkAuthentication = (ctx: Partial<NextPageContext>, isPrivatePage
     return;
   }
 };
+
+/**
+ * Shortens a text if longer than threshold.
+ * @param desc Input text
+ * @param threshold Maximum length
+ */
+export const getShortenedText = (desc: string, threshold = 200): string => {
+  if (desc.length >= threshold) {
+    return desc.substr(0, threshold) + '...';
+  }
+
+  return desc;
+};

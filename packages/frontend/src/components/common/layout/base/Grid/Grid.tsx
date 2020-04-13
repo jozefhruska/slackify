@@ -1,15 +1,16 @@
 import styled from 'styled-components';
-import { GridProps, grid, flexbox, FlexboxProps } from 'styled-system';
+import { GridProps, grid, flexbox, FlexboxProps, compose } from 'styled-system';
 
 import { Box, BoxProps } from '..';
 
 /* <Grid />
 ============================================================================= */
-const Grid = styled(Box)<BoxProps & GridProps & FlexboxProps>`
-  display: grid;
+const Grid = styled(Box)<BoxProps & GridProps & FlexboxProps>(compose(grid, flexbox));
 
-  ${flexbox}
-  ${grid}
-`;
+/* Default props - <Grid />
+============================================================================= */
+Grid.defaultProps = {
+  display: 'grid',
+};
 
 export default Grid;
