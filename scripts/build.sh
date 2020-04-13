@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # Check if service is selected
 if [[ -z "${SLACKIFY_SERVICE}" ]]; then
   echo "[postbuild]: \"SLACKIFY_SERVICE\" is not defined."
@@ -14,7 +16,7 @@ if [ $EXIT_STATUS -ne 0 ]; then
 fi
 
 # Build "slackify-service-private"
-if [[ $SLACKIFY_SERVICE = "slackify-service-private" || $SLACKIFY_SERVICE = "all" ]]; then
+if [[ $SLACKIFY_SERVICE == "slackify-service-private" || $SLACKIFY_SERVICE == "all" ]]; then
   CURRENT_SERVICE="slackify-service-private"
   echo "[postbuild]: Building \"$CURRENT_SERVICE\""
 
@@ -32,7 +34,7 @@ if [[ $SLACKIFY_SERVICE = "slackify-service-private" || $SLACKIFY_SERVICE = "all
 fi
 
 # Build "slackify-frontend"
-if [[ $SLACKIFY_SERVICE = "slackify-frontend" || $SLACKIFY_SERVICE = "all" ]]; then
+if [[ $SLACKIFY_SERVICE == "slackify-frontend" || $SLACKIFY_SERVICE == "all" ]]; then
   CURRENT_SERVICE="slackify-frontend"
   echo "[postbuild]: Building \"$CURRENT_SERVICE\""
 
