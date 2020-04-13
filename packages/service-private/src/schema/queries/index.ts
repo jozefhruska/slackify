@@ -24,6 +24,8 @@ export const Query = objectType({
       resolve: collections,
     });
 
+    t.crud.collection();
+
     /* Components */
     t.field('components', {
       type: 'Component',

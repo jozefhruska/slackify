@@ -970,6 +970,7 @@ export interface NexusGenFieldTypes {
   Collection: { // field return type
     components: NexusGenRootTypes['Component'][]; // [Component!]!
     componentsCount: number; // Int!
+    createdAt: any; // DateTime!
     description: string | null; // String
     id: string; // String!
     name: string; // String!
@@ -1010,6 +1011,7 @@ export interface NexusGenFieldTypes {
     text: string; // String!
   }
   Query: { // field return type
+    collection: NexusGenRootTypes['Collection'] | null; // Collection
     collections: NexusGenRootTypes['Collection'][]; // [Collection!]!
     component: NexusGenRootTypes['Component'] | null; // Component
     components: NexusGenRootTypes['Component'][]; // [Component!]!
@@ -1076,6 +1078,9 @@ export interface NexusGenArgTypes {
     }
   }
   Query: {
+    collection: { // args
+      where: NexusGenInputs['CollectionWhereUniqueInput']; // CollectionWhereUniqueInput!
+    }
     collections: { // args
       input?: NexusGenInputs['CollectionsListingInput'] | null; // CollectionsListingInput
     }

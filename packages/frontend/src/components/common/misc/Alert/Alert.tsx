@@ -51,7 +51,7 @@ const Alert: React.FunctionComponent<AlertProps> = ({ type, children, ...props }
       <S.Icon type={type}>{getIconByType()}</S.Icon>
 
       <Flex flexDirection="column" ml="s6">
-        <Heading as="h4" mb="s2">
+        <Heading as="h3" mb="s1">
           {getTitleByType()}
         </Heading>
         {children}

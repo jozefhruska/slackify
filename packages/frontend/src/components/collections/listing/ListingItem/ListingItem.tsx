@@ -22,6 +22,7 @@ import { humanizeComponentType, getShortenedText } from '../../../../utils';
 import { OpenCreateUpdateModal } from '../../../../actions/collections';
 
 import * as S from './ListingItem.styles';
+import Link from 'next/link';
 
 /* Props - <ListingItem />
 ============================================================================= */
@@ -80,7 +81,9 @@ const ListingItem: React.FC<Props> = ({ collection }) => {
         </Flex>
 
         <Grid gridTemplateColumns="1fr auto" gridColumnGap="s4">
-          <Button variant="brand">View</Button>
+          <Link href="/collections/[id]" as={`/collections/${collection.id}`}>
+            <Button variant="brand">View</Button>
+          </Link>
 
           <PopperButton
             options={[

@@ -22,7 +22,7 @@ export type ButtonProps = {
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ variant, icon, isDisabled, isLoading, children, ...props }, ref) => {
     return (
-      <S.Main ref={ref} variant={variant} disabled={isDisabled} {...props}>
+      <S.Main ref={ref} variant={variant} disabled={isDisabled || isLoading} {...props}>
         {isLoading && (
           <S.LoadingOverlay variant={variant}>
             <ButtonLoader />
