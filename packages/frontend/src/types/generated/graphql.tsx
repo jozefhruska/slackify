@@ -83,6 +83,7 @@ export type Collection = {
   team: Team;
   components: Array<Component>;
   updatedAt: Scalars['DateTime'];
+  createdAt: Scalars['DateTime'];
   componentsCount: Scalars['Int'];
 };
 
@@ -730,23 +731,51 @@ export type Query = {
    __typename?: 'Query';
   getUser?: Maybe<User>;
   collections: Array<Collection>;
+  collection?: Maybe<Collection>;
   components: Array<Component>;
   component?: Maybe<Component>;
 };
 
 
 export type QueryCollectionsArgs = {
-  input?: Maybe<CollectionsListingInput>;
+  where?: Maybe<QueryCollectionsWhereInput>;
+  skip?: Maybe<Scalars['Int']>;
+  after?: Maybe<CollectionWhereUniqueInput>;
+  before?: Maybe<CollectionWhereUniqueInput>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+};
+
+
+export type QueryCollectionArgs = {
+  where: CollectionWhereUniqueInput;
 };
 
 
 export type QueryComponentsArgs = {
-  input?: Maybe<ComponentsListingInput>;
+  where?: Maybe<QueryComponentsWhereInput>;
+  skip?: Maybe<Scalars['Int']>;
+  after?: Maybe<ComponentWhereUniqueInput>;
+  before?: Maybe<ComponentWhereUniqueInput>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
 };
 
 
 export type QueryComponentArgs = {
   where: ComponentWhereUniqueInput;
+};
+
+export type QueryCollectionsWhereInput = {
+  id?: Maybe<StringFilter>;
+  team?: Maybe<TeamWhereInput>;
+};
+
+export type QueryComponentsWhereInput = {
+  id?: Maybe<StringFilter>;
+  collection?: Maybe<CollectionWhereInput>;
+  author?: Maybe<UserWhereInput>;
+  team?: Maybe<TeamWhereInput>;
 };
 
 export type SignInOutput = {
@@ -1093,6 +1122,20 @@ export type UserDetailFragment = (
   ) }
 );
 
+export type CollectionDetailFragment = (
+  { __typename?: 'Collection' }
+  & Pick<Collection, 'id' | 'name' | 'type' | 'published' | 'description' | 'componentsCount' | 'updatedAt' | 'createdAt'>
+  & { components: Array<(
+    { __typename?: 'Component' }
+    & ComponentPreviewFragment
+  )> }
+);
+
+export type CollectionListingFragment = (
+  { __typename?: 'Collection' }
+  & Pick<Collection, 'id' | 'name' | 'type' | 'published' | 'description' | 'componentsCount' | 'updatedAt'>
+);
+
 export type ComponentDetailFragment = (
   { __typename?: 'Component' }
   & Pick<Component, 'id' | 'type' | 'published' | 'updatedAt' | 'createdAt'>
@@ -1106,6 +1149,33 @@ export type ComponentDetailFragment = (
       { __typename?: 'Component' }
       & Pick<Component, 'id' | 'type' | 'updatedAt'>
     )> }
+  ), plainTextData?: Maybe<(
+    { __typename?: 'PlainTextComponentData' }
+    & Pick<PlainTextComponentData, 'id' | 'text'>
+  )>, articleData?: Maybe<(
+    { __typename?: 'ArticleComponentData' }
+    & Pick<ArticleComponentData, 'id' | 'title' | 'lead' | 'content'>
+  )>, linkData?: Maybe<(
+    { __typename?: 'LinkComponentData' }
+    & Pick<LinkComponentData, 'id' | 'url' | 'text'>
+  )> }
+);
+
+export type ComponentPreviewFragment = (
+  { __typename?: 'Component' }
+  & Pick<Component, 'id' | 'type' | 'updatedAt'>
+  & { collection: (
+    { __typename?: 'Collection' }
+    & Pick<Collection, 'id' | 'name'>
+  ) }
+);
+
+export type ComponentListingFragment = (
+  { __typename?: 'Component' }
+  & Pick<Component, 'id' | 'type' | 'published' | 'updatedAt' | 'createdAt'>
+  & { author: (
+    { __typename?: 'User' }
+    & Pick<User, 'id' | 'name'>
   ), plainTextData?: Maybe<(
     { __typename?: 'PlainTextComponentData' }
     & Pick<PlainTextComponentData, 'id' | 'text'>
@@ -1230,8 +1300,29 @@ export type GetUserQuery = (
   )> }
 );
 
+export type GetCollectionDetailQueryVariables = {
+  where: CollectionWhereUniqueInput;
+};
+
+
+export type GetCollectionDetailQuery = (
+  { __typename?: 'Query' }
+  & { getUser?: Maybe<(
+    { __typename?: 'User' }
+    & UserDetailFragment
+  )>, collection?: Maybe<(
+    { __typename?: 'Collection' }
+    & CollectionDetailFragment
+  )> }
+);
+
 export type GetCollectionsListingQueryVariables = {
-  input?: Maybe<CollectionsListingInput>;
+  where?: Maybe<QueryCollectionsWhereInput>;
+  skip?: Maybe<Scalars['Int']>;
+  after?: Maybe<CollectionWhereUniqueInput>;
+  before?: Maybe<CollectionWhereUniqueInput>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
 };
 
 
@@ -1239,7 +1330,7 @@ export type GetCollectionsListingQuery = (
   { __typename?: 'Query' }
   & { collections: Array<(
     { __typename?: 'Collection' }
-    & Pick<Collection, 'id' | 'name' | 'type' | 'published' | 'description' | 'componentsCount' | 'updatedAt'>
+    & CollectionListingFragment
   )> }
 );
 
@@ -1271,7 +1362,12 @@ export type GetComponentDetailQuery = (
 );
 
 export type GetRecentComponentsQueryVariables = {
-  input?: Maybe<ComponentsListingInput>;
+  where?: Maybe<QueryComponentsWhereInput>;
+  skip?: Maybe<Scalars['Int']>;
+  after?: Maybe<ComponentWhereUniqueInput>;
+  before?: Maybe<ComponentWhereUniqueInput>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
 };
 
 
@@ -1279,16 +1375,17 @@ export type GetRecentComponentsQuery = (
   { __typename?: 'Query' }
   & { components: Array<(
     { __typename?: 'Component' }
-    & Pick<Component, 'id' | 'type' | 'updatedAt'>
-    & { collection: (
-      { __typename?: 'Collection' }
-      & Pick<Collection, 'id' | 'name'>
-    ) }
+    & ComponentPreviewFragment
   )> }
 );
 
 export type GetComponentsListingQueryVariables = {
-  input?: Maybe<ComponentsListingInput>;
+  where?: Maybe<QueryComponentsWhereInput>;
+  skip?: Maybe<Scalars['Int']>;
+  after?: Maybe<ComponentWhereUniqueInput>;
+  before?: Maybe<ComponentWhereUniqueInput>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
 };
 
 
@@ -1296,20 +1393,7 @@ export type GetComponentsListingQuery = (
   { __typename?: 'Query' }
   & { components: Array<(
     { __typename?: 'Component' }
-    & Pick<Component, 'id' | 'type' | 'published' | 'updatedAt' | 'createdAt'>
-    & { author: (
-      { __typename?: 'User' }
-      & Pick<User, 'id' | 'name'>
-    ), plainTextData?: Maybe<(
-      { __typename?: 'PlainTextComponentData' }
-      & Pick<PlainTextComponentData, 'id' | 'text'>
-    )>, articleData?: Maybe<(
-      { __typename?: 'ArticleComponentData' }
-      & Pick<ArticleComponentData, 'id' | 'title' | 'lead' | 'content'>
-    )>, linkData?: Maybe<(
-      { __typename?: 'LinkComponentData' }
-      & Pick<LinkComponentData, 'id' | 'url' | 'text'>
-    )> }
+    & ComponentListingFragment
   )> }
 );
 
@@ -1333,6 +1417,43 @@ export const UserDetailFragmentDoc = gql`
   }
 }
     `;
+export const ComponentPreviewFragmentDoc = gql`
+    fragment ComponentPreview on Component {
+  id
+  type
+  updatedAt
+  collection {
+    id
+    name
+  }
+}
+    `;
+export const CollectionDetailFragmentDoc = gql`
+    fragment CollectionDetail on Collection {
+  id
+  name
+  type
+  published
+  description
+  components(first: 40) {
+    ...ComponentPreview
+  }
+  componentsCount
+  updatedAt
+  createdAt
+}
+    ${ComponentPreviewFragmentDoc}`;
+export const CollectionListingFragmentDoc = gql`
+    fragment CollectionListing on Collection {
+  id
+  name
+  type
+  published
+  description
+  componentsCount
+  updatedAt
+}
+    `;
 export const ComponentDetailFragmentDoc = gql`
     fragment ComponentDetail on Component {
   id
@@ -1350,6 +1471,34 @@ export const ComponentDetailFragmentDoc = gql`
       type
       updatedAt
     }
+  }
+  plainTextData {
+    id
+    text
+  }
+  articleData {
+    id
+    title
+    lead
+    content
+  }
+  linkData {
+    id
+    url
+    text
+  }
+  updatedAt
+  createdAt
+}
+    `;
+export const ComponentListingFragmentDoc = gql`
+    fragment ComponentListing on Component {
+  id
+  type
+  published
+  author {
+    id
+    name
   }
   plainTextData {
     id
@@ -1479,19 +1628,25 @@ export const GetUserDocument = gql`
 }
     ${UserDetailFragmentDoc}`;
 export type GetUserQueryResult = ApolloReactCommon.QueryResult<GetUserQuery, GetUserQueryVariables>;
-export const GetCollectionsListingDocument = gql`
-    query GetCollectionsListing($input: CollectionsListingInput) {
-  collections(input: $input) {
-    id
-    name
-    type
-    published
-    description
-    componentsCount
-    updatedAt
+export const GetCollectionDetailDocument = gql`
+    query GetCollectionDetail($where: CollectionWhereUniqueInput!) {
+  getUser {
+    ...UserDetail
+  }
+  collection(where: $where) {
+    ...CollectionDetail
   }
 }
-    `;
+    ${UserDetailFragmentDoc}
+${CollectionDetailFragmentDoc}`;
+export type GetCollectionDetailQueryResult = ApolloReactCommon.QueryResult<GetCollectionDetailQuery, GetCollectionDetailQueryVariables>;
+export const GetCollectionsListingDocument = gql`
+    query GetCollectionsListing($where: QueryCollectionsWhereInput, $skip: Int, $after: CollectionWhereUniqueInput, $before: CollectionWhereUniqueInput, $first: Int, $last: Int) {
+  collections(where: $where, skip: $skip, after: $after, before: $before, first: $first, last: $last) {
+    ...CollectionListing
+  }
+}
+    ${CollectionListingFragmentDoc}`;
 export type GetCollectionsListingQueryResult = ApolloReactCommon.QueryResult<GetCollectionsListingQuery, GetCollectionsListingQueryVariables>;
 export const GetCollectionsOptionsDocument = gql`
     query GetCollectionsOptions {
@@ -1516,47 +1671,18 @@ export const GetComponentDetailDocument = gql`
 ${ComponentDetailFragmentDoc}`;
 export type GetComponentDetailQueryResult = ApolloReactCommon.QueryResult<GetComponentDetailQuery, GetComponentDetailQueryVariables>;
 export const GetRecentComponentsDocument = gql`
-    query GetRecentComponents($input: ComponentsListingInput) {
-  components(input: $input) {
-    id
-    type
-    updatedAt
-    collection {
-      id
-      name
-    }
+    query GetRecentComponents($where: QueryComponentsWhereInput, $skip: Int, $after: ComponentWhereUniqueInput, $before: ComponentWhereUniqueInput, $first: Int, $last: Int) {
+  components(where: $where, skip: $skip, after: $after, before: $before, first: $first, last: $last) {
+    ...ComponentPreview
   }
 }
-    `;
+    ${ComponentPreviewFragmentDoc}`;
 export type GetRecentComponentsQueryResult = ApolloReactCommon.QueryResult<GetRecentComponentsQuery, GetRecentComponentsQueryVariables>;
 export const GetComponentsListingDocument = gql`
-    query GetComponentsListing($input: ComponentsListingInput) {
-  components(input: $input) {
-    id
-    type
-    published
-    author {
-      id
-      name
-    }
-    plainTextData {
-      id
-      text
-    }
-    articleData {
-      id
-      title
-      lead
-      content
-    }
-    linkData {
-      id
-      url
-      text
-    }
-    updatedAt
-    createdAt
+    query GetComponentsListing($where: QueryComponentsWhereInput, $skip: Int, $after: ComponentWhereUniqueInput, $before: ComponentWhereUniqueInput, $first: Int, $last: Int) {
+  components(where: $where, skip: $skip, after: $after, before: $before, first: $first, last: $last) {
+    ...ComponentListing
   }
 }
-    `;
+    ${ComponentListingFragmentDoc}`;
 export type GetComponentsListingQueryResult = ApolloReactCommon.QueryResult<GetComponentsListingQuery, GetComponentsListingQueryVariables>;
