@@ -20,12 +20,6 @@ if [[ $SLACKIFY_SERVICE == "slackify-service-private" || $SLACKIFY_SERVICE == "a
   CURRENT_SERVICE="slackify-service-private"
   echo "[postbuild]: Building \"$CURRENT_SERVICE\""
 
-  npx lerna run generate --scope $CURRENT_SERVICE
-  EXIT_STATUS=$?
-  if [ $EXIT_STATUS -ne 0 ]; then
-    exit $EXIT_STATUS
-  fi
-
   npx lerna run build --scope $CURRENT_SERVICE
   EXIT_STATUS=$?
   if [ $EXIT_STATUS -ne 0 ]; then
@@ -37,12 +31,6 @@ fi
 if [[ $SLACKIFY_SERVICE == "slackify-frontend" || $SLACKIFY_SERVICE == "all" ]]; then
   CURRENT_SERVICE="slackify-frontend"
   echo "[postbuild]: Building \"$CURRENT_SERVICE\""
-
-  npx lerna run generate --scope $CURRENT_SERVICE
-  EXIT_STATUS=$?
-  if [ $EXIT_STATUS -ne 0 ]; then
-    exit $EXIT_STATUS
-  fi
 
   npx lerna run build --scope $CURRENT_SERVICE
   EXIT_STATUS=$?
