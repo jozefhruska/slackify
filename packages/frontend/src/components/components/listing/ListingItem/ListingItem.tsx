@@ -4,14 +4,15 @@ import { FiEye, FiEyeOff, FiEdit, FiTrash2, FiMoreVertical } from 'react-icons/f
 import { useDispatch } from 'react-redux';
 import { Dispatch } from 'redux';
 import { useMutation } from '@apollo/client';
+import Link from 'next/link';
 
 import {
-  GetComponentsListingQuery,
   ComponentType,
   UpdateOneComponentMutationVariables,
   DeleteOneComponentMutation,
   DeleteOneComponentMutationVariables,
   UpdateOneComponentMutation,
+  ComponentListingFragment,
 } from '../../../../types/generated/graphql';
 import { PlainTextContent, ArticleContent, LinkContent } from './types';
 import { Grid, Flex } from '../../../common/layout/base';
@@ -20,12 +21,11 @@ import { OpenCreateUpdateModal } from '../../../../actions/components';
 import { UPDATE_ONE_COMPONENT, DELETE_ONE_COMPONENT } from '../../../../api/mutation/components';
 
 import * as S from './ListingItem.styles';
-import Link from 'next/link';
 
 /* Props - <ListingItem />
 ============================================================================= */
 type Props = {
-  component: GetComponentsListingQuery['components'][0];
+  component: ComponentListingFragment;
 };
 
 /* <ListingItem />
@@ -64,7 +64,7 @@ const ListingItem: React.FC<Props> = ({ component }) => {
           </Link>
 
           <PopperButton
-            options={[
+            options={(closePopper) => [
               {
                 icon: component.published ? <FiEye /> : <FiEyeOff />,
                 isLoading: updateLoading,
@@ -94,6 +94,8 @@ const ListingItem: React.FC<Props> = ({ component }) => {
                       },
                     },
                   });
+
+                  closePopper();
                 },
               },
               {
@@ -109,6 +111,8 @@ const ListingItem: React.FC<Props> = ({ component }) => {
                         },
                       },
                     });
+
+                    closePopper();
                   }
                 },
               },

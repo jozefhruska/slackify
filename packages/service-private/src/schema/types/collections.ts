@@ -20,17 +20,16 @@ export const Collection = objectType({
     t.model.team();
     t.model.components();
     t.model.updatedAt();
+    t.model.createdAt();
     t.int('componentsCount', {
       resolve: async ({ id }, _args, { prisma }) => {
-        const components = await prisma.component.findMany({
+        return prisma.component.count({
           where: {
             collection: {
               id,
             },
           },
         });
-
-        return components.length;
       },
     });
   },

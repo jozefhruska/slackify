@@ -3,15 +3,16 @@ import { useDispatch } from 'react-redux';
 import moment from 'moment';
 import { FiMoreVertical, FiTrash2, FiEdit, FiEye, FiEyeOff } from 'react-icons/fi';
 import { useMutation } from '@apollo/client';
+import Link from 'next/link';
 
 import {
-  Collection,
   DeleteOneCollectionMutation,
   DeleteOneCollectionMutationVariables,
   GetCollectionsListingQuery,
   GetCollectionsListingQueryVariables,
   UpdateOneCollectionMutation,
   UpdateOneCollectionMutationVariables,
+  CollectionListingFragment,
 } from '../../../../types/generated/graphql';
 import { Heading, Paragraph } from '../../../common/typography';
 import { Grid, Box, Flex } from '../../../common/layout/base';
@@ -26,7 +27,7 @@ import * as S from './ListingItem.styles';
 /* Props - <ListingItem />
 ============================================================================= */
 type Props = {
-  collection: Omit<Collection, 'team' | 'components'>;
+  collection: CollectionListingFragment;
 };
 
 /* <ListingItem />
@@ -80,10 +81,12 @@ const ListingItem: React.FC<Props> = ({ collection }) => {
         </Flex>
 
         <Grid gridTemplateColumns="1fr auto" gridColumnGap="s4">
-          <Button variant="brand">View</Button>
+          <Link href="/collections/[id]" as={`/collections/${collection.id}`}>
+            <Button variant="brand">View</Button>
+          </Link>
 
           <PopperButton
-            options={[
+            options={(closePopper) => [
               {
                 icon: collection.published ? <FiEye /> : <FiEyeOff />,
                 onClick: async () => {
@@ -113,6 +116,8 @@ const ListingItem: React.FC<Props> = ({ collection }) => {
                       },
                     },
                   });
+
+                  closePopper();
                 },
               },
               {
@@ -131,11 +136,7 @@ const ListingItem: React.FC<Props> = ({ collection }) => {
                         >({
                           query: GET_COLLECTIONS_LISTING,
                           variables: {
-                            input: {
-                              pagination: {
-                                first: 40,
-                              },
-                            },
+                            first: 40,
                           },
                         });
 
@@ -150,17 +151,15 @@ const ListingItem: React.FC<Props> = ({ collection }) => {
                             ),
                           },
                           variables: {
-                            input: {
-                              pagination: {
-                                first: 40,
-                              },
-                            },
+                            first: 40,
                           },
                         });
 
                         cache.gc();
                       },
                     });
+
+                    closePopper();
                   }
                 },
                 icon: <FiTrash2 />,

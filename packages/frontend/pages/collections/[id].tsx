@@ -1,34 +1,35 @@
-import React, { Dispatch, useEffect } from 'react';
-import { GetServerSideProps } from 'next';
+import React, { useEffect } from 'react';
+import { NormalizedCacheObject, useQuery, useMutation } from '@apollo/client';
+import { Dispatch } from 'redux';
 import { useDispatch } from 'react-redux';
-import { useMutation, useQuery, NormalizedCacheObject } from '@apollo/client';
-import { FiTrash2, FiMoreVertical, FiEye, FiEdit, FiPlus, FiEyeOff } from 'react-icons/fi';
+import { GetServerSideProps } from 'next';
+import { FiEye, FiEdit, FiPlus, FiTrash2, FiMoreVertical, FiEyeOff } from 'react-icons/fi';
 
 import {
-  GetComponentDetailQuery,
-  GetComponentDetailQueryVariables,
   UserDetailFragment,
-  UpdateOneComponentMutation,
-  UpdateOneComponentMutationVariables,
+  GetCollectionDetailQueryVariables,
+  GetCollectionDetailQuery,
+  UpdateOneCollectionMutation,
+  UpdateOneCollectionMutationVariables,
 } from '../../src/types/generated/graphql';
-import { checkAuthentication } from '../../src/utils';
-import { getAuthToken, removeAuthToken } from '../../src/cookies';
-import withApollo, { createApolloClient } from '../../src/api';
 import { StoreUser } from '../../src/actions/auth';
+import { OpenCreateUpdateModal } from '../../src/actions/collections';
+import { getAuthToken, removeAuthToken } from '../../src/cookies';
+import { checkAuthentication } from '../../src/utils';
+import withApollo, { createApolloClient } from '../../src/api';
+import { GET_COLLECTION_DETAIL } from '../../src/api/query/collections';
+import { PageLoader, Alert, Button, PopperButton } from '../../src/components/common/misc';
 import {
+  PageHeader,
   Header,
   Navigation,
   Sidebar,
-  PageHeader,
   Content,
 } from '../../src/components/common/layout';
-import { GET_COMPONENT_DETAIL } from '../../src/api/query/components';
-import { Button, PopperButton, PageLoader, Alert } from '../../src/components/common/misc';
+import CreateUpdateModal from '../../src/components/collections/CreateUpdateModal/CreateUpdateModal';
 import { Grid, Flex } from '../../src/components/common/layout/base';
-import { UPDATE_ONE_COMPONENT } from '../../src/api/mutation/components';
-import { OpenCreateUpdateModal } from '../../src/actions/components';
-import Detail from '../../src/components/components/detail/Detail';
-import CreateUpdateModal from '../../src/components/components/CreateUpdateModal/CreateUpdateModal';
+import { UPDATE_ONE_COLLECTION } from '../../src/api/mutation/collections';
+import Detail from '../../src/components/collections/detail/Detail';
 
 /* Local types
 ============================================================================= */
@@ -36,7 +37,7 @@ type Query = {
   id: string;
 };
 
-/* Props - <ComponentDetailPage />
+/* Props - <CollectionDetailPage />
 ============================================================================= */
 type Props = {
   id: string;
@@ -44,15 +45,15 @@ type Props = {
   apolloState: NormalizedCacheObject;
 };
 
-/* <ComponentDetailPage />
+/* <CollectionDetailPage />
 ============================================================================= */
-const ComponentDetailPage: React.FC<Props> = ({ id, user }) => {
+const CollectionDetailPage: React.FC<Props> = ({ id, user }) => {
   const dispatch = useDispatch<Dispatch<StoreUser | OpenCreateUpdateModal>>();
 
   const { data, loading: detailLoading } = useQuery<
-    GetComponentDetailQuery,
-    GetComponentDetailQueryVariables
-  >(GET_COMPONENT_DETAIL, {
+    GetCollectionDetailQuery,
+    GetCollectionDetailQueryVariables
+  >(GET_COLLECTION_DETAIL, {
     variables: {
       where: {
         id: id,
@@ -60,10 +61,10 @@ const ComponentDetailPage: React.FC<Props> = ({ id, user }) => {
     },
   });
 
-  const [updateComponent, { loading: updateLoading }] = useMutation<
-    UpdateOneComponentMutation,
-    UpdateOneComponentMutationVariables
-  >(UPDATE_ONE_COMPONENT);
+  const [updateCollection, { loading: updateLoading }] = useMutation<
+    UpdateOneCollectionMutation,
+    UpdateOneCollectionMutationVariables
+  >(UPDATE_ONE_COLLECTION);
 
   useEffect(() => {
     dispatch({ type: '[AUTH] STORE_USER', payload: { user } });
@@ -74,11 +75,11 @@ const ComponentDetailPage: React.FC<Props> = ({ id, user }) => {
       return <PageLoader />;
     }
 
-    if (!data?.component) {
+    if (!data?.collection) {
       return (
         <Alert type="danger">
-          Sorry, we were not able to get the requested component. This might be caused because of an
-          error or the requested component does not exist.
+          Sorry, we were not able to get the requested collection. This might be caused because of
+          an error or the requested collection does not exist.
         </Alert>
       );
     }
@@ -86,32 +87,32 @@ const ComponentDetailPage: React.FC<Props> = ({ id, user }) => {
     return (
       <>
         <PageHeader
-          heading="Component detail"
+          heading={data.collection.name}
           breadcrumbs={[
             {
-              text: 'Components',
+              text: 'Collections',
               link: {
-                href: '/components',
+                href: '/collections',
               },
             },
             {
-              text: data.component.id,
+              text: data.collection.name,
             },
           ]}
         >
           <Grid gridTemplateColumns={[null, 'auto auto']} gridGap="s4">
             <Grid display={['grid', 'none']} gridTemplateColumns="repeat(3, 1fr)" gridGap="s4">
               <Button
-                icon={data.component.published ? <FiEye /> : <FiEyeOff />}
+                icon={data.collection.published ? <FiEye /> : <FiEyeOff />}
                 isLoading={updateLoading}
                 onClick={async () => {
-                  await updateComponent({
+                  await updateCollection({
                     variables: {
                       data: {
-                        published: !data.component?.published,
+                        published: !data.collection?.published,
                       },
                       where: {
-                        id: data.component.id,
+                        id: data.collection.id,
                       },
                     },
                   });
@@ -122,11 +123,11 @@ const ComponentDetailPage: React.FC<Props> = ({ id, user }) => {
                 variant="info"
                 onClick={() => {
                   dispatch({
-                    type: '[COMPONENTS] OPEN_CREATE_UPDATE_MODAL',
+                    type: '[COLLECTIONS] OPEN_CREATE_UPDATE_MODAL',
                     payload: {
                       state: {
                         mode: 'update',
-                        component: data.component,
+                        collection: data.collection,
                       },
                     },
                   });
@@ -137,7 +138,7 @@ const ComponentDetailPage: React.FC<Props> = ({ id, user }) => {
                 variant="brand"
                 onClick={() => {
                   dispatch({
-                    type: '[COMPONENTS] OPEN_CREATE_UPDATE_MODAL',
+                    type: '[COLLECTIONS] OPEN_CREATE_UPDATE_MODAL',
                     payload: {
                       state: {
                         mode: 'create',
@@ -153,16 +154,16 @@ const ComponentDetailPage: React.FC<Props> = ({ id, user }) => {
                 placement="left"
                 options={(closePopper) => [
                   {
-                    icon: data.component.published ? <FiEye /> : <FiEyeOff />,
+                    icon: data.collection.published ? <FiEye /> : <FiEyeOff />,
                     isLoading: updateLoading,
                     onClick: async () => {
-                      await updateComponent({
+                      await updateCollection({
                         variables: {
                           data: {
-                            published: !data.component?.published,
+                            published: !data.collection?.published,
                           },
                           where: {
-                            id: data.component.id,
+                            id: data.collection.id,
                           },
                         },
                       });
@@ -173,11 +174,11 @@ const ComponentDetailPage: React.FC<Props> = ({ id, user }) => {
                     variant: 'info',
                     onClick: () => {
                       dispatch({
-                        type: '[COMPONENTS] OPEN_CREATE_UPDATE_MODAL',
+                        type: '[COLLECTIONS] OPEN_CREATE_UPDATE_MODAL',
                         payload: {
                           state: {
                             mode: 'update',
-                            component: data.component,
+                            collection: data.collection,
                           },
                         },
                       });
@@ -190,7 +191,7 @@ const ComponentDetailPage: React.FC<Props> = ({ id, user }) => {
                     variant: 'brand',
                     onClick: async () => {
                       dispatch({
-                        type: '[COMPONENTS] OPEN_CREATE_UPDATE_MODAL',
+                        type: '[COLLECTIONS] OPEN_CREATE_UPDATE_MODAL',
                         payload: {
                           state: {
                             mode: 'create',
@@ -208,12 +209,12 @@ const ComponentDetailPage: React.FC<Props> = ({ id, user }) => {
             </Flex>
 
             <Button icon={<FiTrash2 />} variant="danger">
-              Delete component
+              Delete collection
             </Button>
           </Grid>
         </PageHeader>
 
-        <Detail component={data.component} />
+        <Detail user={user} collection={data.collection} />
       </>
     );
   };
@@ -231,7 +232,7 @@ const ComponentDetailPage: React.FC<Props> = ({ id, user }) => {
   );
 };
 
-/* getServerSideProps - <ComponentDetailPage />
+/* getServerSideProps - <CollectionDetailPage />
 ============================================================================= */
 export const getServerSideProps: GetServerSideProps<Props, Query> = async (ctx) => {
   const authToken = getAuthToken(ctx);
@@ -242,12 +243,12 @@ export const getServerSideProps: GetServerSideProps<Props, Query> = async (ctx) 
   /* Create new instance of Apollo Client */
   const apolloClient = createApolloClient(authToken);
 
-  /* Fetch user and component data */
+  /* Fetch user and collection data */
   const { data } = await apolloClient.query<
-    GetComponentDetailQuery,
-    GetComponentDetailQueryVariables
+    GetCollectionDetailQuery,
+    GetCollectionDetailQueryVariables
   >({
-    query: GET_COMPONENT_DETAIL,
+    query: GET_COLLECTION_DETAIL,
     variables: {
       where: {
         id: ctx.params?.id,
@@ -269,7 +270,7 @@ export const getServerSideProps: GetServerSideProps<Props, Query> = async (ctx) 
 
   return {
     props: {
-      id: data.component?.id ?? null,
+      id: data.collection?.id ?? null,
       user: data.getUser,
       apolloState: {
         data: apolloClient.extract(),
@@ -278,4 +279,4 @@ export const getServerSideProps: GetServerSideProps<Props, Query> = async (ctx) 
   };
 };
 
-export default withApollo(ComponentDetailPage);
+export default withApollo(CollectionDetailPage);

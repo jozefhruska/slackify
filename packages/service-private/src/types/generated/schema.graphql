@@ -66,6 +66,7 @@ input BooleanFilter {
 type Collection {
   components(after: ComponentWhereUniqueInput, before: ComponentWhereUniqueInput, first: Int, last: Int, skip: Int): [Component!]!
   componentsCount: Int!
+  createdAt: DateTime!
   description: String
   id: String!
   name: String!
@@ -667,10 +668,23 @@ input PlainTextComponentDataWhereUniqueInput {
 }
 
 type Query {
-  collections(input: CollectionsListingInput): [Collection!]!
+  collection(where: CollectionWhereUniqueInput!): Collection
+  collections(after: CollectionWhereUniqueInput, before: CollectionWhereUniqueInput, first: Int, last: Int, skip: Int, where: QueryCollectionsWhereInput): [Collection!]!
   component(where: ComponentWhereUniqueInput!): Component
-  components(input: ComponentsListingInput): [Component!]!
+  components(after: ComponentWhereUniqueInput, before: ComponentWhereUniqueInput, first: Int, last: Int, skip: Int, where: QueryComponentsWhereInput): [Component!]!
   getUser: User
+}
+
+input QueryCollectionsWhereInput {
+  id: StringFilter
+  team: TeamWhereInput
+}
+
+input QueryComponentsWhereInput {
+  author: UserWhereInput
+  collection: CollectionWhereInput
+  id: StringFilter
+  team: TeamWhereInput
 }
 
 type SignInOutput {

@@ -1,6 +1,6 @@
 import { gql } from '@apollo/client';
 
-import { ComponentDetail } from '../fragments/components';
+import { ComponentDetail, ComponentPreview, ComponentListing } from '../fragments/components';
 import { UserDetail } from '../fragments/auth';
 
 export const COMPONENTS_LISTING_INPUT = gql`
@@ -26,46 +26,49 @@ export const GET_COMPONENT_DETAIL = gql`
 `;
 
 export const GET_RECENT_COMPONENTS = gql`
-  query GetRecentComponents($input: ComponentsListingInput) {
-    components(input: $input) {
-      id
-      type
-      updatedAt
-      collection {
-        id
-        name
-      }
+  query GetRecentComponents(
+    $where: QueryComponentsWhereInput
+    $skip: Int
+    $after: ComponentWhereUniqueInput
+    $before: ComponentWhereUniqueInput
+    $first: Int
+    $last: Int
+  ) {
+    components(
+      where: $where
+      skip: $skip
+      after: $after
+      before: $before
+      first: $first
+      last: $last
+    ) {
+      ...ComponentPreview
     }
   }
+
+  ${ComponentPreview}
 `;
 
 export const GET_COMPONENTS_LISTING = gql`
-  query GetComponentsListing($input: ComponentsListingInput) {
-    components(input: $input) {
-      id
-      type
-      published
-      author {
-        id
-        name
-      }
-      plainTextData {
-        id
-        text
-      }
-      articleData {
-        id
-        title
-        lead
-        content
-      }
-      linkData {
-        id
-        url
-        text
-      }
-      updatedAt
-      createdAt
+  query GetComponentsListing(
+    $where: QueryComponentsWhereInput
+    $skip: Int
+    $after: ComponentWhereUniqueInput
+    $before: ComponentWhereUniqueInput
+    $first: Int
+    $last: Int
+  ) {
+    components(
+      where: $where
+      skip: $skip
+      after: $after
+      before: $before
+      first: $first
+      last: $last
+    ) {
+      ...ComponentListing
     }
   }
+
+  ${ComponentListing}
 `;

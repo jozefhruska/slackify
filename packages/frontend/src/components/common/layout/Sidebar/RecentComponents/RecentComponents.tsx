@@ -29,12 +29,14 @@ const RecentComponents: React.FC<Props> = ({ user }) => {
     GetRecentComponentsQueryVariables
   >(GET_RECENT_COMPONENTS, {
     variables: {
-      input: {
-        authorId: user?.id,
-        pagination: {
-          first: 4,
+      where: {
+        author: {
+          id: {
+            equals: user?.id,
+          },
         },
       },
+      first: 4,
     },
   });
 
