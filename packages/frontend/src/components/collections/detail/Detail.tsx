@@ -1,21 +1,24 @@
 import React from 'react';
 import moment from 'moment';
 
-import { CollectionDetailFragment } from '../../../types/generated/graphql';
-import { Grid } from '../../common/layout/base';
+import { CollectionDetailFragment, User } from '../../../types/generated/graphql';
+import { Grid, Box } from '../../common/layout/base';
 import { humanizeComponentType } from '../../../utils';
+import ListingPage from '../../components/listing/ListingPage/ListingPage';
 
 import * as S from './Detail.styles';
+import { Heading } from '../../common/typography';
 
 /* Props - <Detail />
 ============================================================================= */
 type Props = {
+  user: User;
   collection: CollectionDetailFragment;
 };
 
 /* <Detail />
 ============================================================================= */
-const Detail: React.FC<Props> = ({ collection }) => {
+const Detail: React.FC<Props> = ({ user, collection }) => {
   return (
     <>
       <Grid gridTemplateColumns={[null, null, '2fr 1fr']} gridGap="s6">
@@ -53,6 +56,13 @@ const Detail: React.FC<Props> = ({ collection }) => {
 
         <S.QueryWrapper>how to get</S.QueryWrapper>
       </Grid>
+
+      <Box mt="s6">
+        <Heading as="h2" mb="s6">
+          Components
+        </Heading>
+        <ListingPage user={user} collectionId={collection.id} />
+      </Box>
     </>
   );
 };

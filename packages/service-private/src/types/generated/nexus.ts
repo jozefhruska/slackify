@@ -550,6 +550,16 @@ export interface NexusGenInputs {
   PlainTextComponentDataWhereUniqueInput: { // input type
     id?: string | null; // String
   }
+  QueryCollectionsWhereInput: { // input type
+    id?: NexusGenInputs['StringFilter'] | null; // StringFilter
+    team?: NexusGenInputs['TeamWhereInput'] | null; // TeamWhereInput
+  }
+  QueryComponentsWhereInput: { // input type
+    author?: NexusGenInputs['UserWhereInput'] | null; // UserWhereInput
+    collection?: NexusGenInputs['CollectionWhereInput'] | null; // CollectionWhereInput
+    id?: NexusGenInputs['StringFilter'] | null; // StringFilter
+    team?: NexusGenInputs['TeamWhereInput'] | null; // TeamWhereInput
+  }
   StringFilter: { // input type
     contains?: string | null; // String
     endsWith?: string | null; // String
@@ -922,6 +932,8 @@ export interface NexusGenAllTypes extends NexusGenRootTypes {
   PlainTextComponentDataUpsertWithoutComponentInput: NexusGenInputs['PlainTextComponentDataUpsertWithoutComponentInput'];
   PlainTextComponentDataWhereInput: NexusGenInputs['PlainTextComponentDataWhereInput'];
   PlainTextComponentDataWhereUniqueInput: NexusGenInputs['PlainTextComponentDataWhereUniqueInput'];
+  QueryCollectionsWhereInput: NexusGenInputs['QueryCollectionsWhereInput'];
+  QueryComponentsWhereInput: NexusGenInputs['QueryComponentsWhereInput'];
   StringFilter: NexusGenInputs['StringFilter'];
   TeamCreateOneWithoutCollectionsInput: NexusGenInputs['TeamCreateOneWithoutCollectionsInput'];
   TeamCreateOneWithoutComponentsInput: NexusGenInputs['TeamCreateOneWithoutComponentsInput'];
@@ -1082,13 +1094,23 @@ export interface NexusGenArgTypes {
       where: NexusGenInputs['CollectionWhereUniqueInput']; // CollectionWhereUniqueInput!
     }
     collections: { // args
-      input?: NexusGenInputs['CollectionsListingInput'] | null; // CollectionsListingInput
+      after?: NexusGenInputs['CollectionWhereUniqueInput'] | null; // CollectionWhereUniqueInput
+      before?: NexusGenInputs['CollectionWhereUniqueInput'] | null; // CollectionWhereUniqueInput
+      first?: number | null; // Int
+      last?: number | null; // Int
+      skip?: number | null; // Int
+      where?: NexusGenInputs['QueryCollectionsWhereInput'] | null; // QueryCollectionsWhereInput
     }
     component: { // args
       where: NexusGenInputs['ComponentWhereUniqueInput']; // ComponentWhereUniqueInput!
     }
     components: { // args
-      input?: NexusGenInputs['ComponentsListingInput'] | null; // ComponentsListingInput
+      after?: NexusGenInputs['ComponentWhereUniqueInput'] | null; // ComponentWhereUniqueInput
+      before?: NexusGenInputs['ComponentWhereUniqueInput'] | null; // ComponentWhereUniqueInput
+      first?: number | null; // Int
+      last?: number | null; // Int
+      skip?: number | null; // Int
+      where?: NexusGenInputs['QueryComponentsWhereInput'] | null; // QueryComponentsWhereInput
     }
   }
 }
@@ -1100,7 +1122,7 @@ export interface NexusGenInheritedFields {}
 
 export type NexusGenObjectNames = "ArticleComponentData" | "Collection" | "Component" | "LinkComponentData" | "Mutation" | "PlainTextComponentData" | "Query" | "SignInOutput" | "Team" | "User";
 
-export type NexusGenInputNames = "ArticleComponentDataCreateOneWithoutComponentInput" | "ArticleComponentDataCreateWithoutComponentInput" | "ArticleComponentDataUpdateOneWithoutComponentInput" | "ArticleComponentDataUpdateWithoutComponentDataInput" | "ArticleComponentDataUpsertWithoutComponentInput" | "ArticleComponentDataWhereInput" | "ArticleComponentDataWhereUniqueInput" | "BooleanFilter" | "CollectionCreateInput" | "CollectionCreateManyWithoutTeamInput" | "CollectionCreateOneWithoutComponentsInput" | "CollectionCreateWithoutComponentsInput" | "CollectionCreateWithoutTeamInput" | "CollectionFilter" | "CollectionScalarWhereInput" | "CollectionUpdateInput" | "CollectionUpdateManyDataInput" | "CollectionUpdateManyWithWhereNestedInput" | "CollectionUpdateManyWithoutTeamInput" | "CollectionUpdateOneRequiredWithoutComponentsInput" | "CollectionUpdateWithWhereUniqueWithoutTeamInput" | "CollectionUpdateWithoutComponentsDataInput" | "CollectionUpdateWithoutTeamDataInput" | "CollectionUpsertWithWhereUniqueWithoutTeamInput" | "CollectionUpsertWithoutComponentsInput" | "CollectionWhereInput" | "CollectionWhereUniqueInput" | "CollectionsListingInput" | "ComponentCreateInput" | "ComponentCreateManyWithoutAuthorInput" | "ComponentCreateManyWithoutCollectionInput" | "ComponentCreateManyWithoutTeamInput" | "ComponentCreateWithoutAuthorInput" | "ComponentCreateWithoutCollectionInput" | "ComponentCreateWithoutTeamInput" | "ComponentFilter" | "ComponentScalarWhereInput" | "ComponentUpdateInput" | "ComponentUpdateManyDataInput" | "ComponentUpdateManyWithWhereNestedInput" | "ComponentUpdateManyWithoutAuthorInput" | "ComponentUpdateManyWithoutCollectionInput" | "ComponentUpdateManyWithoutTeamInput" | "ComponentUpdateWithWhereUniqueWithoutAuthorInput" | "ComponentUpdateWithWhereUniqueWithoutCollectionInput" | "ComponentUpdateWithWhereUniqueWithoutTeamInput" | "ComponentUpdateWithoutAuthorDataInput" | "ComponentUpdateWithoutCollectionDataInput" | "ComponentUpdateWithoutTeamDataInput" | "ComponentUpsertWithWhereUniqueWithoutAuthorInput" | "ComponentUpsertWithWhereUniqueWithoutCollectionInput" | "ComponentUpsertWithWhereUniqueWithoutTeamInput" | "ComponentWhereInput" | "ComponentWhereUniqueInput" | "ComponentsListingInput" | "DateTimeFilter" | "LinkComponentDataCreateOneWithoutComponentInput" | "LinkComponentDataCreateWithoutComponentInput" | "LinkComponentDataUpdateOneWithoutComponentInput" | "LinkComponentDataUpdateWithoutComponentDataInput" | "LinkComponentDataUpsertWithoutComponentInput" | "LinkComponentDataWhereInput" | "LinkComponentDataWhereUniqueInput" | "NullableStringFilter" | "PaginationInput" | "PlainTextComponentDataCreateOneWithoutComponentInput" | "PlainTextComponentDataCreateWithoutComponentInput" | "PlainTextComponentDataUpdateOneWithoutComponentInput" | "PlainTextComponentDataUpdateWithoutComponentDataInput" | "PlainTextComponentDataUpsertWithoutComponentInput" | "PlainTextComponentDataWhereInput" | "PlainTextComponentDataWhereUniqueInput" | "StringFilter" | "TeamCreateOneWithoutCollectionsInput" | "TeamCreateOneWithoutComponentsInput" | "TeamCreateOneWithoutUsersInput" | "TeamCreateWithoutCollectionsInput" | "TeamCreateWithoutComponentsInput" | "TeamCreateWithoutUsersInput" | "TeamUpdateOneRequiredWithoutCollectionsInput" | "TeamUpdateOneRequiredWithoutComponentsInput" | "TeamUpdateOneRequiredWithoutUsersInput" | "TeamUpdateWithoutCollectionsDataInput" | "TeamUpdateWithoutComponentsDataInput" | "TeamUpdateWithoutUsersDataInput" | "TeamUpsertWithoutCollectionsInput" | "TeamUpsertWithoutComponentsInput" | "TeamUpsertWithoutUsersInput" | "TeamWhereInput" | "TeamWhereUniqueInput" | "UserCreateManyWithoutTeamInput" | "UserCreateOneWithoutComponentsInput" | "UserCreateWithoutComponentsInput" | "UserCreateWithoutTeamInput" | "UserFilter" | "UserScalarWhereInput" | "UserUpdateManyDataInput" | "UserUpdateManyWithWhereNestedInput" | "UserUpdateManyWithoutTeamInput" | "UserUpdateOneRequiredWithoutComponentsInput" | "UserUpdateWithWhereUniqueWithoutTeamInput" | "UserUpdateWithoutComponentsDataInput" | "UserUpdateWithoutTeamDataInput" | "UserUpsertWithWhereUniqueWithoutTeamInput" | "UserUpsertWithoutComponentsInput" | "UserWhereInput" | "UserWhereUniqueInput";
+export type NexusGenInputNames = "ArticleComponentDataCreateOneWithoutComponentInput" | "ArticleComponentDataCreateWithoutComponentInput" | "ArticleComponentDataUpdateOneWithoutComponentInput" | "ArticleComponentDataUpdateWithoutComponentDataInput" | "ArticleComponentDataUpsertWithoutComponentInput" | "ArticleComponentDataWhereInput" | "ArticleComponentDataWhereUniqueInput" | "BooleanFilter" | "CollectionCreateInput" | "CollectionCreateManyWithoutTeamInput" | "CollectionCreateOneWithoutComponentsInput" | "CollectionCreateWithoutComponentsInput" | "CollectionCreateWithoutTeamInput" | "CollectionFilter" | "CollectionScalarWhereInput" | "CollectionUpdateInput" | "CollectionUpdateManyDataInput" | "CollectionUpdateManyWithWhereNestedInput" | "CollectionUpdateManyWithoutTeamInput" | "CollectionUpdateOneRequiredWithoutComponentsInput" | "CollectionUpdateWithWhereUniqueWithoutTeamInput" | "CollectionUpdateWithoutComponentsDataInput" | "CollectionUpdateWithoutTeamDataInput" | "CollectionUpsertWithWhereUniqueWithoutTeamInput" | "CollectionUpsertWithoutComponentsInput" | "CollectionWhereInput" | "CollectionWhereUniqueInput" | "CollectionsListingInput" | "ComponentCreateInput" | "ComponentCreateManyWithoutAuthorInput" | "ComponentCreateManyWithoutCollectionInput" | "ComponentCreateManyWithoutTeamInput" | "ComponentCreateWithoutAuthorInput" | "ComponentCreateWithoutCollectionInput" | "ComponentCreateWithoutTeamInput" | "ComponentFilter" | "ComponentScalarWhereInput" | "ComponentUpdateInput" | "ComponentUpdateManyDataInput" | "ComponentUpdateManyWithWhereNestedInput" | "ComponentUpdateManyWithoutAuthorInput" | "ComponentUpdateManyWithoutCollectionInput" | "ComponentUpdateManyWithoutTeamInput" | "ComponentUpdateWithWhereUniqueWithoutAuthorInput" | "ComponentUpdateWithWhereUniqueWithoutCollectionInput" | "ComponentUpdateWithWhereUniqueWithoutTeamInput" | "ComponentUpdateWithoutAuthorDataInput" | "ComponentUpdateWithoutCollectionDataInput" | "ComponentUpdateWithoutTeamDataInput" | "ComponentUpsertWithWhereUniqueWithoutAuthorInput" | "ComponentUpsertWithWhereUniqueWithoutCollectionInput" | "ComponentUpsertWithWhereUniqueWithoutTeamInput" | "ComponentWhereInput" | "ComponentWhereUniqueInput" | "ComponentsListingInput" | "DateTimeFilter" | "LinkComponentDataCreateOneWithoutComponentInput" | "LinkComponentDataCreateWithoutComponentInput" | "LinkComponentDataUpdateOneWithoutComponentInput" | "LinkComponentDataUpdateWithoutComponentDataInput" | "LinkComponentDataUpsertWithoutComponentInput" | "LinkComponentDataWhereInput" | "LinkComponentDataWhereUniqueInput" | "NullableStringFilter" | "PaginationInput" | "PlainTextComponentDataCreateOneWithoutComponentInput" | "PlainTextComponentDataCreateWithoutComponentInput" | "PlainTextComponentDataUpdateOneWithoutComponentInput" | "PlainTextComponentDataUpdateWithoutComponentDataInput" | "PlainTextComponentDataUpsertWithoutComponentInput" | "PlainTextComponentDataWhereInput" | "PlainTextComponentDataWhereUniqueInput" | "QueryCollectionsWhereInput" | "QueryComponentsWhereInput" | "StringFilter" | "TeamCreateOneWithoutCollectionsInput" | "TeamCreateOneWithoutComponentsInput" | "TeamCreateOneWithoutUsersInput" | "TeamCreateWithoutCollectionsInput" | "TeamCreateWithoutComponentsInput" | "TeamCreateWithoutUsersInput" | "TeamUpdateOneRequiredWithoutCollectionsInput" | "TeamUpdateOneRequiredWithoutComponentsInput" | "TeamUpdateOneRequiredWithoutUsersInput" | "TeamUpdateWithoutCollectionsDataInput" | "TeamUpdateWithoutComponentsDataInput" | "TeamUpdateWithoutUsersDataInput" | "TeamUpsertWithoutCollectionsInput" | "TeamUpsertWithoutComponentsInput" | "TeamUpsertWithoutUsersInput" | "TeamWhereInput" | "TeamWhereUniqueInput" | "UserCreateManyWithoutTeamInput" | "UserCreateOneWithoutComponentsInput" | "UserCreateWithoutComponentsInput" | "UserCreateWithoutTeamInput" | "UserFilter" | "UserScalarWhereInput" | "UserUpdateManyDataInput" | "UserUpdateManyWithWhereNestedInput" | "UserUpdateManyWithoutTeamInput" | "UserUpdateOneRequiredWithoutComponentsInput" | "UserUpdateWithWhereUniqueWithoutTeamInput" | "UserUpdateWithoutComponentsDataInput" | "UserUpdateWithoutTeamDataInput" | "UserUpsertWithWhereUniqueWithoutTeamInput" | "UserUpsertWithoutComponentsInput" | "UserWhereInput" | "UserWhereUniqueInput";
 
 export type NexusGenEnumNames = "ComponentType";
 

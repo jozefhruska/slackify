@@ -71,7 +71,7 @@ const CollectionsPage: NextPage<Props> = ({ user }) => {
           </Button>
         </PageHeader>
 
-        <ListingPage />
+        <ListingPage user={user} />
       </Content>
     </>
   );

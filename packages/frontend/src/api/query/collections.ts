@@ -25,8 +25,22 @@ export const GET_COLLECTION_DETAIL = gql`
 `;
 
 export const GET_COLLECTIONS_LISTING = gql`
-  query GetCollectionsListing($input: CollectionsListingInput) {
-    collections(input: $input) {
+  query GetCollectionsListing(
+    $where: QueryCollectionsWhereInput
+    $skip: Int
+    $after: CollectionWhereUniqueInput
+    $before: CollectionWhereUniqueInput
+    $first: Int
+    $last: Int
+  ) {
+    collections(
+      where: $where
+      skip: $skip
+      after: $after
+      before: $before
+      first: $first
+      last: $last
+    ) {
       ...CollectionListing
     }
   }

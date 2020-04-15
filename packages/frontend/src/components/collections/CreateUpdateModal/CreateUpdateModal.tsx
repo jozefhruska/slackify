@@ -88,11 +88,7 @@ const CreateUpdateModal: React.FC = () => {
                   >({
                     query: GET_COLLECTIONS_LISTING,
                     variables: {
-                      input: {
-                        pagination: {
-                          first: 40,
-                        },
-                      },
+                      first: 40,
                     },
                   });
 
@@ -103,11 +99,7 @@ const CreateUpdateModal: React.FC = () => {
                         collections: collections.concat([createOneCollection]),
                       },
                       variables: {
-                        input: {
-                          pagination: {
-                            first: 40,
-                          },
-                        },
+                        first: 40,
                       },
                     }
                   );

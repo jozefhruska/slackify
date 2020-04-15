@@ -669,10 +669,22 @@ input PlainTextComponentDataWhereUniqueInput {
 
 type Query {
   collection(where: CollectionWhereUniqueInput!): Collection
-  collections(input: CollectionsListingInput): [Collection!]!
+  collections(after: CollectionWhereUniqueInput, before: CollectionWhereUniqueInput, first: Int, last: Int, skip: Int, where: QueryCollectionsWhereInput): [Collection!]!
   component(where: ComponentWhereUniqueInput!): Component
-  components(input: ComponentsListingInput): [Component!]!
+  components(after: ComponentWhereUniqueInput, before: ComponentWhereUniqueInput, first: Int, last: Int, skip: Int, where: QueryComponentsWhereInput): [Component!]!
   getUser: User
+}
+
+input QueryCollectionsWhereInput {
+  id: StringFilter
+  team: TeamWhereInput
+}
+
+input QueryComponentsWhereInput {
+  author: UserWhereInput
+  collection: CollectionWhereInput
+  id: StringFilter
+  team: TeamWhereInput
 }
 
 type SignInOutput {

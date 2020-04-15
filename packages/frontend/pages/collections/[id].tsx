@@ -214,7 +214,7 @@ const CollectionDetailPage: React.FC<Props> = ({ id, user }) => {
           </Grid>
         </PageHeader>
 
-        <Detail collection={data.collection} />
+        <Detail user={user} collection={data.collection} />
       </>
     );
   };

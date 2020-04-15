@@ -6,6 +6,7 @@ import Listing from '../../../common/layout/Listing/Listing';
 import {
   GetComponentsListingQuery,
   GetComponentsListingQueryVariables,
+  User,
 } from '../../../../types/generated/graphql';
 import { PageLoader, ListingLoader } from '../../../common/misc';
 import { Flex } from '../../../common/layout/base';
@@ -13,19 +14,34 @@ import { GET_COMPONENTS_LISTING } from '../../../../api/query/components';
 import CreateUpdateModal from '../../CreateUpdateModal/CreateUpdateModal';
 import ListingItem from '../ListingItem/ListingItem';
 
+/* Props - <ListingPage />
+============================================================================= */
+type Props = {
+  user: User;
+  collectionId?: string;
+};
+
 /* <ListingPage />
 ============================================================================= */
-const ListingPage: React.FC = () => {
+const ListingPage: React.FC<Props> = ({ user, collectionId }) => {
   const { data, error, loading, fetchMore } = useQuery<
     GetComponentsListingQuery,
     GetComponentsListingQueryVariables
   >(GET_COMPONENTS_LISTING, {
     variables: {
-      input: {
-        pagination: {
-          first: 40,
+      where: {
+        team: {
+          id: {
+            equals: user?.team.id,
+          },
+        },
+        collection: {
+          id: {
+            equals: collectionId,
+          },
         },
       },
+      first: 40,
     },
   });
 
@@ -38,12 +54,20 @@ const ListingPage: React.FC = () => {
       try {
         fetchMore({
           variables: {
-            input: {
-              pagination: {
-                skip: data?.components?.length,
-                first: 20,
+            where: {
+              team: {
+                id: {
+                  equals: user?.team.id,
+                },
+              },
+              collection: {
+                id: {
+                  equals: collectionId,
+                },
               },
             },
+            skip: data.components.length,
+            first: 40,
           },
           updateQuery: (prev, { fetchMoreResult }) => {
             if (!fetchMoreResult) {

@@ -7,25 +7,35 @@ import { GET_COLLECTIONS_LISTING } from '../../../../api/query/collections';
 import {
   GetCollectionsListingQueryVariables,
   GetCollectionsListingQuery,
+  User,
 } from '../../../../types/generated/graphql';
 import { PageLoader, ListingLoader } from '../../../common/misc';
 import ListingItem from '../ListingItem/ListingItem';
 import { Flex } from '../../../common/layout/base';
 import CreateUpdateModal from '../../CreateUpdateModal/CreateUpdateModal';
 
+/* Props - <ListingPage />
+============================================================================= */
+type Props = {
+  user: User;
+};
+
 /* <ListingPage />
 ============================================================================= */
-const ListingPage: React.FC = () => {
+const ListingPage: React.FC<Props> = ({ user }) => {
   const { data, error, loading, fetchMore } = useQuery<
     GetCollectionsListingQuery,
     GetCollectionsListingQueryVariables
   >(GET_COLLECTIONS_LISTING, {
     variables: {
-      input: {
-        pagination: {
-          first: 40,
+      where: {
+        team: {
+          id: {
+            equals: user?.team?.id,
+          },
         },
       },
+      first: 40,
     },
   });
 
@@ -38,12 +48,8 @@ const ListingPage: React.FC = () => {
       try {
         fetchMore({
           variables: {
-            input: {
-              pagination: {
-                skip: data?.collections?.length,
-                first: 20,
-              },
-            },
+            skip: data?.collections?.length,
+            first: 20,
           },
           updateQuery: (prev, { fetchMoreResult }) => {
             if (!fetchMoreResult) {

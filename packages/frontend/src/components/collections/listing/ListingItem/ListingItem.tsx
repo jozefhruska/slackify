@@ -136,11 +136,7 @@ const ListingItem: React.FC<Props> = ({ collection }) => {
                         >({
                           query: GET_COLLECTIONS_LISTING,
                           variables: {
-                            input: {
-                              pagination: {
-                                first: 40,
-                              },
-                            },
+                            first: 40,
                           },
                         });
 
@@ -155,11 +151,7 @@ const ListingItem: React.FC<Props> = ({ collection }) => {
                             ),
                           },
                           variables: {
-                            input: {
-                              pagination: {
-                                first: 40,
-                              },
-                            },
+                            first: 40,
                           },
                         });
 
