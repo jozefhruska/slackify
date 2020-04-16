@@ -1,0 +1,1 @@
+web: cd packages/service-public && npm start

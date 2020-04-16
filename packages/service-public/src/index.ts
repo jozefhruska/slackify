@@ -1,7 +1,10 @@
 import { ApolloServer, AuthenticationError } from 'apollo-server';
+import { applyMiddleware } from 'graphql-middleware';
 import { PrismaClient, Team } from '@prisma/client';
 
 import { schema } from './schema';
+import { collectionsMiddleware } from './middleware';
+import { permissions } from './permissions';
 import { PORT } from './config';
 
 /* Create Prisma Client instance */
@@ -10,22 +13,22 @@ const prisma = new PrismaClient();
 export interface Context {
   prisma: PrismaClient;
   team: Team;
+  authToken: string;
 }
+
+/* Apply GraphQL middleware */
+const schemaWithMiddleware = applyMiddleware(schema, permissions, collectionsMiddleware);
 
 /* Create Apollo Server instance */
 const server = new ApolloServer({
-  schema,
+  schema: schemaWithMiddleware,
+  playground: true,
   context: async ({ req }) => {
     let authToken = req.headers.authorization;
 
     /* Check if Authorization header is present */
     if (!authToken) {
       throw new AuthenticationError('Authorization header missing.');
-    }
-
-    /* Check if Authorization header is in correct format */
-    if (!authToken.match(/Bearer\s[A-Fa-f0-9]{64}/)) {
-      throw new AuthenticationError('Authorization header wrong format.');
     }
 
     /* Cut 'Bearer ' */
@@ -37,12 +40,7 @@ const server = new ApolloServer({
       },
     });
 
-    /* Check if user was found */
-    if (!team) {
-      throw new AuthenticationError("Auth token doesn't belong to any team.");
-    }
-
-    return { prisma, team };
+    return { prisma, team, authToken };
   },
 });
 
