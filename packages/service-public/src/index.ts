@@ -1,7 +1,9 @@
 import { ApolloServer, AuthenticationError } from 'apollo-server';
+import { applyMiddleware } from 'graphql-middleware';
 import { PrismaClient, Team } from '@prisma/client';
 
 import { schema } from './schema';
+import { collectionsMiddleware } from './middleware';
 import { PORT } from './config';
 
 /* Create Prisma Client instance */
@@ -12,9 +14,13 @@ export interface Context {
   team: Team;
 }
 
+/* Apply GraphQL middleware */
+const schemaWithMiddleware = applyMiddleware(schema, collectionsMiddleware);
+
 /* Create Apollo Server instance */
 const server = new ApolloServer({
-  schema,
+  schema: schemaWithMiddleware,
+  playground: true,
   context: async ({ req }) => {
     let authToken = req.headers.authorization;
 
