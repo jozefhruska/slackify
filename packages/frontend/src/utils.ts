@@ -1,7 +1,7 @@
 import { NextPageContext } from 'next';
 import Router from 'next/router';
 
-import { ComponentType } from './types/generated/graphql';
+import { ComponentType, Component } from './types/generated/graphql';
 import { getAuthToken } from './cookies';
 
 /**
@@ -72,4 +72,67 @@ export const getShortenedText = (desc: string, threshold = 200): string => {
   }
 
   return desc;
+};
+
+export const getComponentQueryExample = (component: Pick<Component, 'id' | 'type'>) => {
+  switch (component.type) {
+    case ComponentType.PlainText: {
+      return [
+        'query {',
+        `  component(where: { id: "${component.id}" }) {`,
+        '    id',
+        '    ... # Any common component properties',
+        '    data {',
+        '      __typename # You can use "__typename" to determine data type',
+        '      ... on PlainTextComponentData {',
+        '        text',
+        '      }',
+        '    }',
+        '  }',
+        '}',
+      ].join('\n');
+    }
+
+    case ComponentType.Article: {
+      return [
+        'query {',
+        `  component(where: { id: "${component.id}" }) {`,
+        '    id',
+        '    ... # Any common component properties',
+        '    data {',
+        '      __typename # You can use "__typename" to determine data type',
+        '      ... on ArticleComponentData {',
+        '        title',
+        '        lead',
+        '        content',
+        '      }',
+        '    }',
+        '  }',
+        '}',
+      ].join('\n');
+    }
+
+    case ComponentType.Link: {
+      return [
+        'query {',
+        `  component(where: { id: "${component.id}" }) {`,
+        '    id',
+        '    ... # Any common component properties',
+        '    data {',
+        '      __typename # You can use "__typename" to determine data type',
+        '      ... on LinkComponentData {',
+        '        title',
+        '        lead',
+        '        content',
+        '      }',
+        '    }',
+        '  }',
+        '}',
+      ].join('\n');
+    }
+
+    default: {
+      return '';
+    }
+  }
 };

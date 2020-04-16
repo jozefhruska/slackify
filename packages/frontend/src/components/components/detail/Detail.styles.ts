@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import Clipboard from 'react-clipboard.js';
 
 export const MetaWrapper = styled.div`
   display: grid;
@@ -48,6 +49,39 @@ export const InCollectionComponentPreviewInfo = styled.span`
   color: ${({ theme }) => theme.colors.gray[4]};
 `;
 
+export const QueryLabelBar = styled.div`
+  display: flex;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  right: 0;
+`;
+
+export const QueryLabel = styled.span`
+  display: block;
+  width: 9rem;
+  padding: ${({ theme }) => theme.space.s2} 0;
+  background: ${({ theme }) => theme.colors.gray[3]};
+  color: ${({ theme }) => theme.colors.gray[10]};
+  border-bottom-left-radius: ${({ theme }) => theme.radii.medium};
+  text-align: center;
+`;
+
+export const QueryCopyButton = styled(Clipboard)`
+  cursor: pointer;
+  transition: color 0.2s ease-out;
+  margin-right: ${({ theme }) => theme.space.s2};
+  appearance: none;
+  background: none;
+  border: none;
+  color: ${({ theme }) => theme.colors.gray[3]};
+  outline: none;
+
+  :hover {
+    color: ${({ theme }) => theme.colors.gray[0]};
+  }
+`;
+
 export const QueryWrapper = styled.div`
   position: relative;
   padding: ${({ theme }) => theme.space.s6};
@@ -57,14 +91,12 @@ export const QueryWrapper = styled.div`
   color: ${({ theme }) => theme.colors.gray[0]};
   overflow: hidden;
 
-  ::after {
-    content: 'Query';
-    position: absolute;
-    top: 0;
-    right: 0;
-    padding: ${({ theme }) => theme.space.s2} ${({ theme }) => theme.space.s4};
-    background: ${({ theme }) => theme.colors.gray[3]};
-    color: ${({ theme }) => theme.colors.gray[10]};
-    border-bottom-left-radius: ${({ theme }) => theme.radii.medium};
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  pre {
+    margin: 0;
+    white-space: pre-wrap;
   }
 `;
