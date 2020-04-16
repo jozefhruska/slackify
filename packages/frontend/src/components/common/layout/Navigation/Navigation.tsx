@@ -1,22 +1,11 @@
 import React from 'react';
 import Link from 'next/link';
-import {
-  FiFolder,
-  FiUsers,
-  FiPieChart,
-  FiSettings,
-  FiArrowLeft,
-  FiGrid,
-  FiTag,
-} from 'react-icons/fi';
-import { Dispatch } from 'redux';
-import { useSelector, useDispatch } from 'react-redux';
+import { FiFolder, FiUsers, FiPieChart, FiSettings, FiGrid, FiTag } from 'react-icons/fi';
+import { useSelector } from 'react-redux';
 
 import { Box } from '../base';
-import { Button } from '../../misc';
 import ActiveLink from '../../misc/ActiveLink/ActiveLink';
 import { selectIsNavigationOpen } from '../../../../selectors/ui';
-import { CloseNavigation } from '../../../../actions/ui';
 
 import * as S from './Navigation.styles';
 
@@ -24,7 +13,6 @@ import * as S from './Navigation.styles';
 ============================================================================= */
 const Navigation: React.FC = () => {
   const isOpen = useSelector(selectIsNavigationOpen);
-  const dispatch = useDispatch<Dispatch<CloseNavigation>>();
 
   return (
     <>
@@ -125,18 +113,6 @@ const Navigation: React.FC = () => {
               </ActiveLink>
             </S.NavItem>
           </S.NavList>
-        </Box>
-
-        <Box display={['block', null, null, 'none']} p="s6">
-          <Button
-            onClick={() => {
-              dispatch({ type: '[UI] CLOSE_NAVIGATION' });
-            }}
-            icon={<FiArrowLeft />}
-            width="100%"
-          >
-            Hide menu
-          </Button>
         </Box>
       </S.Wrapper>
     </>

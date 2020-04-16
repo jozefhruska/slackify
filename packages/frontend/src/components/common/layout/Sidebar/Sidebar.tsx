@@ -1,14 +1,12 @@
 import React from 'react';
 import { Dispatch } from 'redux';
 import { useSelector, useDispatch } from 'react-redux';
-import { FiArrowRight, FiLogOut } from 'react-icons/fi';
+import { FiLogOut } from 'react-icons/fi';
 import Link from 'next/link';
 
 import { User } from '../../../../types/generated/graphql';
 import { selectIsSidebarOpen } from '../../../../selectors/ui';
-import { CloseSidebar } from '../../../../actions/ui';
 import { Box, Flex } from '../base';
-import { Button } from '../../misc';
 import { Heading } from '../../typography';
 import UserAvatar from './UserAvatar/UserAvatar';
 import RecentComponents from './RecentComponents/RecentComponents';
@@ -27,7 +25,7 @@ type Props = {
 ============================================================================= */
 const Sidebar: React.FC<Props> = ({ user }) => {
   const isOpen = useSelector(selectIsSidebarOpen);
-  const dispatch = useDispatch<Dispatch<CloseSidebar | SignOut>>();
+  const dispatch = useDispatch<Dispatch<SignOut>>();
 
   if (!user) {
     return null;
@@ -79,18 +77,6 @@ const Sidebar: React.FC<Props> = ({ user }) => {
 
           <RecentComponents user={user} />
         </Box>
-      </Box>
-
-      <Box display={['block', null, null, null, 'none']} p="s6">
-        <Button
-          onClick={() => {
-            dispatch({ type: '[UI] CLOSE_SIDEBAR' });
-          }}
-          icon={<FiArrowRight />}
-          width="100%"
-        >
-          Hide sidebar
-        </Button>
       </Box>
     </S.Wrapper>
   );
