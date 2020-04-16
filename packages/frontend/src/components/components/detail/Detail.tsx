@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import moment from 'moment';
 import Link from 'next/link';
+import Highlight, { defaultProps } from 'prism-react-renderer';
+import { FiCopy, FiCheck } from 'react-icons/fi';
 
 import { ComponentDetailFragment } from '../../../types/generated/graphql';
 import { Grid } from '../../common/layout/base';
-import { humanizeComponentType } from '../../../utils';
+import { humanizeComponentType, getComponentQueryExample } from '../../../utils';
 import Fields from './Fields';
 import InCollection from './InCollection';
 
@@ -19,6 +21,10 @@ type Props = {
 /* <Detail />
 ============================================================================= */
 const Detail: React.FC<Props> = ({ component }) => {
+  const [isCopySuccessful, setCopySuccessful] = useState(false);
+
+  const queryCode = getComponentQueryExample(component);
+
   return (
     <>
       <Grid gridTemplateColumns={[null, null, '2fr 1fr']} gridGap="s6">
@@ -56,7 +62,7 @@ const Detail: React.FC<Props> = ({ component }) => {
           </div>
         </S.MetaWrapper>
 
-        <S.QueryWrapper>how to get</S.QueryWrapper>
+        <div>stats</div>
       </Grid>
 
       <Grid
@@ -66,7 +72,39 @@ const Detail: React.FC<Props> = ({ component }) => {
       >
         <Fields component={component} />
 
-        <div>stats</div>
+        <S.QueryWrapper>
+          <S.QueryLabelBar>
+            <S.QueryCopyButton
+              data-clipboard-text={queryCode}
+              onSuccess={() => {
+                setCopySuccessful(true);
+
+                setTimeout(() => {
+                  setCopySuccessful(false);
+                }, 1500);
+              }}
+            >
+              {isCopySuccessful ? <FiCheck /> : <FiCopy />}
+            </S.QueryCopyButton>
+            <S.QueryLabel>{isCopySuccessful ? 'Copied...' : 'Query example'}</S.QueryLabel>
+          </S.QueryLabelBar>
+
+          <Highlight {...defaultProps} code={queryCode} language="graphql">
+            {({ className, tokens, getLineProps, getTokenProps }) => (
+              <pre className={className}>
+                {tokens.map((line, i) => (
+                  // eslint-disable-next-line react/jsx-key
+                  <div {...getLineProps({ line, key: i })}>
+                    {line.map((token, key) => (
+                      // eslint-disable-next-line react/jsx-key
+                      <span {...getTokenProps({ token, key })} />
+                    ))}
+                  </div>
+                ))}
+              </pre>
+            )}
+          </Highlight>
+        </S.QueryWrapper>
 
         <InCollection component={component} />
       </Grid>

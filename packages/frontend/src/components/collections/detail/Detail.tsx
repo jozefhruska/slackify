@@ -1,13 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import moment from 'moment';
+import Highlight, { defaultProps } from 'prism-react-renderer';
+import { FiCheck, FiCopy } from 'react-icons/fi';
 
 import { CollectionDetailFragment, User } from '../../../types/generated/graphql';
 import { Grid, Box } from '../../common/layout/base';
 import { humanizeComponentType } from '../../../utils';
 import ListingPage from '../../components/listing/ListingPage/ListingPage';
+import { Heading } from '../../common/typography';
 
 import * as S from './Detail.styles';
-import { Heading } from '../../common/typography';
 
 /* Props - <Detail />
 ============================================================================= */
@@ -19,9 +21,20 @@ type Props = {
 /* <Detail />
 ============================================================================= */
 const Detail: React.FC<Props> = ({ user, collection }) => {
+  const [isCopySuccessful, setCopySuccessful] = useState(false);
+
+  const queryCode = [
+    'query {',
+    `  collection(where: { id: "${collection.id}" }) {`,
+    '    id',
+    '    ... # Any collection properties',
+    '  }',
+    '}',
+  ].join('\n');
+
   return (
     <>
-      <Grid gridTemplateColumns={[null, null, '2fr 1fr']} gridGap="s6">
+      <Grid gridTemplateColumns={[null, null, null, '6fr 4fr']} gridGap="s6">
         <S.MetaWrapper>
           <div>
             <S.MetaTitle>ID:</S.MetaTitle>
@@ -54,7 +67,39 @@ const Detail: React.FC<Props> = ({ user, collection }) => {
           </div>
         </S.MetaWrapper>
 
-        <S.QueryWrapper>how to get</S.QueryWrapper>
+        <S.QueryWrapper>
+          <S.QueryLabelBar>
+            <S.QueryCopyButton
+              data-clipboard-text={queryCode}
+              onSuccess={() => {
+                setCopySuccessful(true);
+
+                setTimeout(() => {
+                  setCopySuccessful(false);
+                }, 1500);
+              }}
+            >
+              {isCopySuccessful ? <FiCheck /> : <FiCopy />}
+            </S.QueryCopyButton>
+            <S.QueryLabel>{isCopySuccessful ? 'Copied...' : 'Query example'}</S.QueryLabel>
+          </S.QueryLabelBar>
+
+          <Highlight {...defaultProps} code={queryCode} language="graphql">
+            {({ className, tokens, getLineProps, getTokenProps }) => (
+              <pre className={className}>
+                {tokens.map((line, i) => (
+                  // eslint-disable-next-line react/jsx-key
+                  <div {...getLineProps({ line, key: i })}>
+                    {line.map((token, key) => (
+                      // eslint-disable-next-line react/jsx-key
+                      <span {...getTokenProps({ token, key })} />
+                    ))}
+                  </div>
+                ))}
+              </pre>
+            )}
+          </Highlight>
+        </S.QueryWrapper>
       </Grid>
 
       <Box mt="s6">

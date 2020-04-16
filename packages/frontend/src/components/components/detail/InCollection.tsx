@@ -54,7 +54,7 @@ const InCollection: React.FC<Props> = ({ component: displayedComponent }) => {
           </Grid>
         ) : (
           <Alert>
-            There are no other components in &quot;{displayedComponent.collection.name}&quot;
+            There are no other components in &quot;{displayedComponent.collection.name}&quot;.
           </Alert>
         )}
       </Block>
