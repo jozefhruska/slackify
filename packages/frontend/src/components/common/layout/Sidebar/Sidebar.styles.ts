@@ -17,6 +17,7 @@ export const Wrapper = styled.nav<WrapperProps>`
   right: 0;
   height: calc(100vh - 5.5rem);
   background: ${({ theme }) => theme.colors.gray[9]};
+  overflow-y: auto;
 
   @media (min-width: ${({ theme }) => theme.breakpoints[0]}) {
     width: 26rem;

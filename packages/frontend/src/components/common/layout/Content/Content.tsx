@@ -5,7 +5,7 @@ import styled from 'styled-components';
 const Content = styled.main`
   display: flex;
   flex-direction: column;
-  padding: ${({ theme }) => theme.space.s6};
+  padding: ${({ theme }) => theme.space.s4};
 
   @media (min-width: ${({ theme }) => theme.breakpoints[2]}) {
     padding: ${({ theme }) => theme.space.s8};

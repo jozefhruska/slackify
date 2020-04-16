@@ -10,7 +10,7 @@ export const Wrapper = styled.header`
   right: 0;
   z-index: 500;
   height: 5.5rem;
-  padding: 0 ${({ theme }) => theme.space.s6};
+  padding: 0 ${({ theme }) => theme.space.s4};
   background: ${({ theme }) => theme.colors.gray[9]};
   border-bottom: 1px solid ${({ theme }) => theme.colors.gray[7]};
 
@@ -20,13 +20,18 @@ export const Wrapper = styled.header`
 `;
 
 export const VersionBadge = styled.span`
-  transition: color 0.2s ease-out;
-  padding: ${({ theme }) => theme.space.s1} ${({ theme }) => theme.space.s2};
-  margin-left: ${({ theme }) => theme.space.s4};
-  font-size: 0.7rem;
-  text-transform: uppercase;
-  background: ${({ theme }) => theme.colors.brand};
-  border-radius: ${({ theme }) => theme.radii.small};
+  display: none;
+
+  @media (min-width: ${({ theme }) => theme.breakpoints[0]}) {
+    display: block;
+    transition: color 0.2s ease-out;
+    padding: ${({ theme }) => theme.space.s1} ${({ theme }) => theme.space.s2};
+    margin-left: ${({ theme }) => theme.space.s4};
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    background: ${({ theme }) => theme.colors.brand};
+    border-radius: ${({ theme }) => theme.radii.small};
+  }
 `;
 
 export const Logo = styled.a`

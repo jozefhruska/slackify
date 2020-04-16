@@ -22,6 +22,7 @@ export const Wrapper = styled.nav<WrapperProps>`
   left: 0;
   height: calc(100vh - 5.5rem);
   background: ${({ theme }) => theme.colors.gray[9]};
+  overflow-y: auto;
 
   @media (min-width: ${({ theme }) => theme.breakpoints[0]}) {
     max-width: 20rem;
@@ -40,7 +41,7 @@ export const NavList = styled.ul`
   display: flex;
   flex-direction: column;
   margin: 0;
-  padding: 0 ${({ theme }) => theme.space.s6};
+  padding: 0 ${({ theme }) => theme.space.s4};
   list-style: none;
 
   :first-child {
