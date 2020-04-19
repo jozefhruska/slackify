@@ -80,7 +80,7 @@ const Navigation: React.FC = () => {
             </S.NavItem>
 
             <S.NavItem>
-              <ActiveLink href="/users">
+              <ActiveLink href="/statistics">
                 {(isActive) => (
                   <Link href="/users" passHref>
                     <S.NavLink isActive={isActive}>
