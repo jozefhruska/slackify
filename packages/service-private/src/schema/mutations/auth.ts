@@ -17,7 +17,7 @@ export const signIn: FieldResolver<'Mutation', 'signIn'> = async (_, { code }, {
         code,
       },
     })
-    .then(res => res.data)
+    .then((res) => res.data)
     .catch(() => {
       throw new Error('Slack authorization failed (unable to fetch auth token).');
     });

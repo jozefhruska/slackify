@@ -4,7 +4,7 @@ require('dotenv').config();
 ============================================================================= */
 export const SLACK_BOT_TOKEN = process?.env?.SLACK_BOT_TOKEN as string;
 if (!SLACK_BOT_TOKEN) {
-  console.error(new Error('Environment variable "SLACK_BOT_ACCESS_TOKEN" is not defined.'));
+  console.error(new Error('Environment variable "SLACK_BOT_TOKEN" is not defined.'));
   process.exit(1);
 }
 
@@ -16,4 +16,4 @@ if (!SLACK_SIGNING_SECRET) {
 
 /* Common
 ============================================================================= */
-export const PORT = process?.env?.PORT;
+export const PORT = process?.env?.PORT ?? 4000;

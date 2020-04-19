@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/ban-ts-ignore */
 import { Middleware, SlackActionMiddlewareArgs, BlockButtonAction } from '@slack/bolt';
 
 import { prisma } from '../prisma';
@@ -6,47 +5,49 @@ import { app } from '..';
 import { SLACK_BOT_TOKEN } from '../config';
 import { compose_manage_collections_view } from '../utils/views';
 
+/**
+ * Deletes a collection and updates the delete collection modal view on "delete_collection" action.
+ */
 const delete_collection: Middleware<SlackActionMiddlewareArgs<BlockButtonAction>> = async ({
   action,
   body,
   ack,
 }) => {
   const collectionId = action?.value;
+  const viewId = body?.view?.id;
 
-  /* Check if collection ID is defined */
-  if (collectionId == undefined) {
-    console.error('[delete_collection] - Collection ID is undefined.');
-    return;
+  /* Check if collection and view IDs are defined */
+  if (!collectionId || !viewId) {
+    throw '[actions/delete_collection] Collection or view IDs are not defined.';
   }
 
-  /* Acknowledge Slack action */
-  ack();
-
-  /* Delete collection */
   try {
+    /* Acknowledge Slack action */
+    await ack();
+
+    /* Delete collection */
     await prisma.collection.delete({
       where: {
         id: collectionId,
       },
     });
-  } catch (error) {
-    console.error(error);
-  }
 
-  /* Update modal view */
-  try {
+    /* Compose modal view */
     const view = await compose_manage_collections_view(body?.team.id);
 
-    if (view) {
-      await app.client.views.update({
-        token: SLACK_BOT_TOKEN,
-        //@ts-ignore
-        view_id: body?.view?.id,
-        view,
-      });
+    /* Check if view was successfully composed */
+    if (!view) {
+      throw new Error('[actions/delete_collection]: Unable to compose view.');
     }
+
+    /* Update modal view */
+    await app.client.views.update({
+      token: SLACK_BOT_TOKEN,
+      view_id: viewId,
+      view,
+    });
   } catch (error) {
-    console.error(error.data.response_metadata);
+    console.error(error);
   }
 };
 

@@ -4,31 +4,40 @@ import { compose_app_home_view } from '../views/app_home';
 import { app } from '..';
 
 /**
- * Handles selection of collection on app home.
+ * Updates the app home view with selected collection on "app_home_collection_select" action.
  */
 const app_home_collection_select: Middleware<SlackActionMiddlewareArgs<
   BlockStaticSelectAction
 >> = async ({ body, action, ack }) => {
-  ack();
-
-  const selectedCollection = action.selected_option;
-
   try {
-    if (body?.user?.team_id) {
-      const view = await compose_app_home_view(body?.user?.team_id, selectedCollection.value);
+    /* Acknowledge action */
+    await ack();
 
-      if (view) {
-        /* Publish app home view */
-        await app.client.views.publish({
-          user_id: body.user.id,
-          view,
-        });
-      } else {
-        throw new Error("Unable to compose 'app home' view.");
-      }
-    } else {
-      throw new Error('Team ID is not defined.');
+    /* Extract selected collection, user and team IDs */
+    const selectedCollection = action.selected_option;
+    const userId = body?.user?.id;
+    const teamId = body?.team?.id;
+
+    /* Check if selected collection, user and team IDs are defined */
+    if (!selectedCollection || !userId || !teamId) {
+      throw new Error(
+        '[actions/app_home_collection_select]: Selected collection, user or team IDs are not defined.'
+      );
     }
+
+    /* Compose view */
+    const view = await compose_app_home_view(teamId, selectedCollection.value);
+
+    /* Check if view was successfully composed */
+    if (!view) {
+      throw new Error('[actions/app_home_collection_select]: Unable to compose view.');
+    }
+
+    /* Publish app home view */
+    await app.client.views.publish({
+      user_id: userId,
+      view,
+    });
   } catch (error) {
     console.error(error);
   }

@@ -5,51 +5,50 @@ import { compose_app_home_view } from '../views/app_home';
 import { app } from '..';
 
 /**
- * Handles component publish event.
+ * Marks a component as published on "component_hide" action.
  */
 const component_publish: Middleware<SlackActionMiddlewareArgs<BlockButtonAction>> = async ({
   action,
   body,
   ack,
 }) => {
-  ack();
-
-  const componentId = action.value;
-  const userId = body.user.id;
-  const teamId = body.team.id;
-
   try {
-    const component = await prisma.component.findOne({
+    /* Acknowledge action */
+    await ack();
+
+    /* Extract component, user and view IDs */
+    const componentId = action?.value;
+    const userId = body?.user?.id;
+    const teamId = body?.team?.id;
+
+    /* Check if component, user and view IDs are defined */
+    if (!componentId || !userId || !teamId) {
+      throw new Error('[actions/component_publish]: Component, user or view IDs are not defined.');
+    }
+
+    /* Update component data */
+    await prisma.component.update({
       where: {
         id: componentId,
       },
+      data: {
+        published: true,
+      },
     });
 
-    if (component) {
-      /* Mark component as published */
-      await prisma.component.update({
-        where: {
-          id: componentId,
-        },
-        data: {
-          published: true,
-        },
-      });
+    /* Compose app home view */
+    const appHomeView = await compose_app_home_view(teamId);
 
-      const appHomeView = await compose_app_home_view(teamId);
-
-      if (appHomeView) {
-        /* Publish app home view */
-        await app.client.views.publish({
-          user_id: userId,
-          view: appHomeView,
-        });
-      } else {
-        throw new Error("Unable to compose 'app home' view.");
-      }
-    } else {
-      throw new Error(`Unable to find a component with id '${componentId}'`);
+    /* Check if view was successfully composed */
+    if (!appHomeView) {
+      throw new Error('[actions/component_publish]: Unable to compose view.');
     }
+
+    /* Publish app home view */
+    await app.client.views.publish({
+      user_id: userId,
+      view: appHomeView,
+    });
   } catch (error) {
     console.error(error);
   }
