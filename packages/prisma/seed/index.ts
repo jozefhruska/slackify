@@ -8,7 +8,7 @@ export const prisma = new PrismaClient();
 
 teams(prisma)
   .then(async () => {
-    // await users(prisma);
+    await users(prisma);
     await collections(prisma);
   })
   .then(() => process.exit(0));
