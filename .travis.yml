@@ -2,6 +2,9 @@ language: node_js
 node_js:
   - "node"
 
+services:
+  - postgresql
+
 addons:
   chrome: stable
   apt:
@@ -18,10 +21,13 @@ install:
   - npm ci
 
 before_script:
+  - psql -c 'create database travis_ci_test;' -U postgres
   - SLACKIFY_SERVICE=slackify-service-private ./scripts/build.sh
-  - cd packages/service-private && npm start &
+  - npx lerna run migrate:up --scope slackify-prisma
+  - npx lerna run seed --scope slackify-prisma
+  - npx lerna run start --scope slackify-service-private &
 
 script:
   - SLACKIFY_SERVICE=slackify-frontend ./scripts/build.sh
-  - cd packages/frontend && npm start &
-  - cd packages/frontend && npm run cypress
+  - npx lerna run start --scope slackify-frontend &
+  - npx lerna run cypress --scope slackify-frontend
