@@ -35,36 +35,41 @@ type SubmissionState = {
 };
 
 /**
- * Handles the submission event of create new collection modal.
+ * Creates new collection and updates the app home view on "create_new_collection_submission" view submit action.
  */
 const create_new_collection_submission: Middleware<SlackViewMiddlewareArgs<
   ViewSubmitAction
 >> = async ({ view, body, ack }) => {
-  const teamId = body?.user?.team_id;
-
-  /* Extract field values */
-  const values = (view?.state as SubmissionState).values;
-  const name = values?.name?.name.value;
-  const description = values?.description?.description.value;
-  const type = values?.type?.type?.selected_option.value;
-
-  /* Check if there is a collection with the same handle amd team ID */
   try {
-    const teamCollections = await prisma.collection.findMany({
+    /* Extract user and team IDs */
+    const userId = body?.user?.id;
+    const teamId = body?.team?.id;
+
+    /* Check if user and team IDs are defined */
+    if (!userId || !teamId) {
+      throw new Error(
+        '[view_submission/create_new_collection_submission]: User or team IDs are not defined.'
+      );
+    }
+
+    /* Extract field values */
+    const values = (view?.state as SubmissionState).values;
+    const name = values?.name?.name.value;
+    const description = values?.description?.description.value;
+    const type = values?.type?.type?.selected_option.value;
+
+    /* Check if there is a collection with the same name and team ID */
+    const teamCollections = await prisma.collection.count({
       where: {
+        name,
         team: {
           id: teamId,
         },
       },
-      select: {
-        name: true,
-      },
     });
 
-    const duplicateCollection = teamCollections.find(({ name: catName }) => catName === name);
-
-    if (duplicateCollection) {
-      ack({
+    if (teamCollections) {
+      await ack({
         response_action: 'errors',
         errors: {
           name: 'There is already a collection with this name in your workspace.',
@@ -73,14 +78,10 @@ const create_new_collection_submission: Middleware<SlackViewMiddlewareArgs<
 
       return;
     }
-  } catch (error) {
-    console.error(error);
-  }
 
-  /* Acknowledge Slack action */
-  ack();
+    /* Acknowledge Slack action */
+    await ack();
 
-  try {
     /* Create new collection */
     const collection = await prisma.collection.create({
       data: {
@@ -93,24 +94,26 @@ const create_new_collection_submission: Middleware<SlackViewMiddlewareArgs<
           },
         },
       },
+      select: {
+        id: true,
+      },
     });
 
-    /* Update app home view */
-    if (teamId) {
-      const view = await compose_app_home_view(teamId, collection.id);
+    /* Compose app home view */
+    const appHomeView = await compose_app_home_view(teamId, collection.id);
 
-      if (view) {
-        /* Publish app home view */
-        await app.client.views.publish({
-          user_id: body.user.id,
-          view,
-        });
-      } else {
-        throw new Error("Unable to compose 'app home' view.");
-      }
-    } else {
-      throw new Error('Team ID is not defined.');
+    /* Check if view was successfully composed */
+    if (!appHomeView) {
+      throw new Error(
+        '[view_submission/create_new_collection_submission]: Unable to compose view.'
+      );
     }
+
+    /* Publish app home view */
+    await app.client.views.publish({
+      user_id: userId,
+      view: appHomeView,
+    });
   } catch (error) {
     console.error(error);
   }
