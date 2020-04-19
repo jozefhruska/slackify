@@ -1,62 +1,51 @@
 import React, { useEffect } from 'react';
-import { NextPage } from 'next';
-import { useRouter } from 'next/router';
-import { useMutation } from '@apollo/client';
-import { useDispatch } from 'react-redux';
-import { Dispatch } from 'redux';
+import { NextPage, GetServerSideProps } from 'next';
 
-import withApollo from '../../src/api';
+import withApollo, { createApolloClient } from '../../src/api';
 import { Flex, Box } from '../../src/components/common/layout/base';
 import { Block } from '../../src/components/common/layout';
 import { Paragraph } from '../../src/components/common/typography';
-import { Loader } from '../../src/components/common/misc';
 import { SIGN_IN } from '../../src/api/mutation/auth';
-import { setAuthToken } from '../../src/cookies';
-import { SignInMutation, SignInMutationVariables } from '../../src/types/generated/graphql';
+import { getAuthToken, setAuthToken } from '../../src/cookies';
+import {
+  SignInMutation,
+  SignInMutationVariables,
+  GetUserQuery,
+  GetUserQueryVariables,
+} from '../../src/types/generated/graphql';
+import { GET_USER } from '../../src/api/query/auth';
+import { Loader } from '../../src/components/common/misc';
+import { useRouter } from 'next/router';
+import { useDispatch } from 'react-redux';
+import { Dispatch } from 'redux';
 import { StoreUser } from '../../src/actions/auth';
+
+/* Props - <RedirectPage />
+============================================================================= */
+type Props = {
+  data: SignInMutation;
+  errorMessage: string;
+};
 
 /* <RedirectPage />
 ============================================================================= */
-const RedirectPage: NextPage = () => {
-  const [signIn, { loading: signInLoading, error: signInError }] = useMutation<
-    SignInMutation,
-    SignInMutationVariables
-  >(SIGN_IN);
-
+const RedirectPage: NextPage<Props> = ({ data, errorMessage }) => {
+  const { push } = useRouter();
   const dispatch = useDispatch<Dispatch<StoreUser>>();
 
-  const { query, push } = useRouter();
-
   useEffect(() => {
-    const code = query?.code as string;
+    if (data?.signIn) {
+      /* Set auth token cookie */
+      setAuthToken(data.signIn?.authToken);
 
-    if (code) {
-      (async () => {
-        try {
-          const { data } = await signIn({
-            variables: {
-              code,
-            },
-          });
+      /* Store user into local state */
+      dispatch({ type: '[AUTH] STORE_USER', payload: { user: data.signIn?.user } });
 
-          const authToken = data?.signIn?.authToken;
-          if (authToken && data?.signIn) {
-            /* Set auth token cookie */
-            setAuthToken(authToken);
-
-            /* Store user into local state */
-            dispatch({ type: '[AUTH] STORE_USER', payload: { user: data?.signIn?.user } });
-
-            push('/');
-          }
-        } catch (error) {
-          console.error(error);
-        }
-      })();
+      push('/');
     }
-  }, [query]);
+  }, [data]);
 
-  if (signInLoading) {
+  if (!data && !errorMessage) {
     return (
       <Flex alignItems="center" justifyContent="center" mx="auto" minHeight="100vh" padding="s2">
         <Block>
@@ -69,12 +58,12 @@ const RedirectPage: NextPage = () => {
     );
   }
 
-  if (signInError) {
+  if (errorMessage) {
     return (
       <Flex alignItems="center" justifyContent="center" mx="auto" minHeight="100vh" padding="s2">
         <Block>
           <Box textAlign="center">
-            <Paragraph mb={0}>{signInError.message}</Paragraph>
+            <Paragraph mb={0}>{errorMessage}</Paragraph>
           </Box>
         </Block>
       </Flex>
@@ -90,6 +79,45 @@ const RedirectPage: NextPage = () => {
       </Block>
     </Flex>
   );
+};
+
+/* getServerSideProps - <RedirectPage />
+============================================================================= */
+export const getServerSideProps: GetServerSideProps<Props> = async (ctx) => {
+  const authToken = getAuthToken(ctx);
+
+  /* Create new instance of Apollo Client */
+  const apolloClient = createApolloClient(authToken);
+
+  /* Fetch user data */
+  const { data: userData } = await apolloClient.query<GetUserQuery, GetUserQueryVariables>({
+    query: GET_USER,
+  });
+
+  /* Check if user data were returned */
+  if (userData?.getUser) {
+    ctx?.res.writeHead(302, { Location: '/' });
+    ctx?.res.end();
+    return;
+  }
+
+  let data = null;
+  let errorMessage = null;
+  await apolloClient
+    .mutate<SignInMutation, SignInMutationVariables>({
+      mutation: SIGN_IN,
+      variables: {
+        code: ctx?.query?.code as string,
+      },
+    })
+    .then(({ data: signInData }) => {
+      data = signInData;
+    })
+    .catch(({ message }) => {
+      errorMessage = message;
+    });
+
+  return { props: { data, errorMessage } };
 };
 
 export default withApollo(RedirectPage);

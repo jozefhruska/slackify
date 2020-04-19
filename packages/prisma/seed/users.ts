@@ -7,9 +7,9 @@ export default async (prisma: PrismaClient) => {
     await prisma.user.create({
       data: {
         id: 'UP9A3CFM0',
-        name: 'team-name',
-        email: 'email@email.com',
-        accessToken: 'test',
+        name: 'Jozef Hruška',
+        accessToken: 'xoxp-791343423090-791343423714-895832957265-733aadb1b12cc2a793bc4ae330221063',
+        email: 'jo.hruska27@gmail.com',
         team: {
           connect: {
             id: 'TP9A3CF2N',
