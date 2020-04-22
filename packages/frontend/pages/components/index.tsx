@@ -3,7 +3,6 @@ import { useDispatch } from 'react-redux';
 import { Dispatch } from 'redux';
 import { NextPage, GetServerSideProps } from 'next';
 import { FiPlus } from 'react-icons/fi';
-import Router from 'next/router';
 
 import {
   Content,
@@ -97,15 +96,9 @@ export const getServerSideProps: GetServerSideProps<Props> = async (ctx) => {
   if (!data?.getUser) {
     removeAuthToken(ctx);
 
-    /* Redirect on server */
-    if (ctx?.req && ctx?.res) {
-      ctx?.res.writeHead(302, { Location: '/' });
-      ctx?.res.end();
-      return;
-    }
-
-    /* Redirect on client */
-    Router.push('/');
+    /* Redirect */
+    ctx?.res.writeHead(302, { Location: '/' });
+    ctx?.res.end();
     return;
   }
 

@@ -1,6 +1,5 @@
 import React, { Dispatch, useEffect } from 'react';
 import { GetServerSideProps } from 'next';
-import Router from 'next/router';
 import { useDispatch } from 'react-redux';
 
 import { Header, Navigation, Sidebar, PageHeader, Content } from '../src/components/common/layout';
@@ -11,6 +10,7 @@ import withApollo, { createApolloClient } from '../src/api';
 import { GET_USER } from '../src/api/query/auth';
 import { StoreUser } from '../src/actions/auth';
 import { OpenCreateUpdateModal } from '../src/actions/collections';
+import { ListingPage } from '../src/components/users/listing';
 
 /* Props - <UsersPage />
 ============================================================================= */
@@ -42,6 +42,8 @@ const UsersPage: React.FC<Props> = ({ user }) => {
             },
           ]}
         />
+
+        <ListingPage user={user} />
       </Content>
     </>
   );
@@ -67,15 +69,9 @@ export const getServerSideProps: GetServerSideProps<Props> = async (ctx) => {
   if (!data?.getUser) {
     removeAuthToken(ctx);
 
-    /* Redirect on server */
-    if (ctx?.req && ctx?.res) {
-      ctx?.res.writeHead(302, { Location: '/' });
-      ctx?.res.end();
-      return;
-    }
-
-    /* Redirect on client */
-    Router.push('/');
+    /* Redirect */
+    ctx?.res.writeHead(302, { Location: '/' });
+    ctx?.res.end();
     return;
   }
 

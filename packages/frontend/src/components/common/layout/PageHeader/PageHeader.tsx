@@ -19,6 +19,8 @@ type Props = {
 /* <PageHeader />
 ============================================================================= */
 const PageHeader: React.FC<Props> = ({ heading, breadcrumbs, children }) => {
+  const haveChildren = React.Children.count(children);
+
   return (
     <Box as="header" mb="s10">
       {breadcrumbs && (
@@ -49,9 +51,9 @@ const PageHeader: React.FC<Props> = ({ heading, breadcrumbs, children }) => {
         justifyContent="space-between"
         mt={breadcrumbs ? 's6' : 0}
       >
-        <Heading mb={[null, 0]}>{heading}</Heading>
+        <Heading mb={haveChildren ? [null, 0] : 0}>{heading}</Heading>
 
-        <Box ml={[0, 's4']}>{children}</Box>
+        {Boolean(haveChildren) && <Box ml={[0, 's4']}>{children}</Box>}
       </Flex>
     </Box>
   );

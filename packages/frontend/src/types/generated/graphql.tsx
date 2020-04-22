@@ -734,6 +734,7 @@ export type Query = {
   collection?: Maybe<Collection>;
   components: Array<Component>;
   component?: Maybe<Component>;
+  users: Array<User>;
 };
 
 
@@ -766,6 +767,16 @@ export type QueryComponentArgs = {
   where: ComponentWhereUniqueInput;
 };
 
+
+export type QueryUsersArgs = {
+  where?: Maybe<QueryUsersWhereInput>;
+  skip?: Maybe<Scalars['Int']>;
+  after?: Maybe<UserWhereUniqueInput>;
+  before?: Maybe<UserWhereUniqueInput>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+};
+
 export type QueryCollectionsWhereInput = {
   id?: Maybe<StringFilter>;
   team?: Maybe<TeamWhereInput>;
@@ -775,6 +786,10 @@ export type QueryComponentsWhereInput = {
   id?: Maybe<StringFilter>;
   collection?: Maybe<CollectionWhereInput>;
   author?: Maybe<UserWhereInput>;
+  team?: Maybe<TeamWhereInput>;
+};
+
+export type QueryUsersWhereInput = {
   team?: Maybe<TeamWhereInput>;
 };
 
@@ -1115,11 +1130,16 @@ export type UserWhereUniqueInput = {
 
 export type UserDetailFragment = (
   { __typename?: 'User' }
-  & Pick<User, 'id' | 'name' | 'email' | 'accessToken' | 'image_24' | 'image_32' | 'image_48' | 'image_72' | 'image_192' | 'image_512'>
+  & Pick<User, 'id' | 'name' | 'email' | 'accessToken' | 'image_72'>
   & { team: (
     { __typename?: 'Team' }
     & Pick<Team, 'id' | 'name' | 'domain' | 'accessToken'>
   ) }
+);
+
+export type UserPreviewFragment = (
+  { __typename?: 'User' }
+  & Pick<User, 'id' | 'name' | 'image_72'>
 );
 
 export type CollectionDetailFragment = (
@@ -1300,6 +1320,24 @@ export type GetUserQuery = (
   )> }
 );
 
+export type GetUsersListingQueryVariables = {
+  where?: Maybe<QueryUsersWhereInput>;
+  skip?: Maybe<Scalars['Int']>;
+  after?: Maybe<UserWhereUniqueInput>;
+  before?: Maybe<UserWhereUniqueInput>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+};
+
+
+export type GetUsersListingQuery = (
+  { __typename?: 'Query' }
+  & { users: Array<(
+    { __typename?: 'User' }
+    & UserPreviewFragment
+  )> }
+);
+
 export type GetCollectionDetailQueryVariables = {
   where: CollectionWhereUniqueInput;
 };
@@ -1403,18 +1441,20 @@ export const UserDetailFragmentDoc = gql`
   name
   email
   accessToken
-  image_24
-  image_32
-  image_48
   image_72
-  image_192
-  image_512
   team {
     id
     name
     domain
     accessToken
   }
+}
+    `;
+export const UserPreviewFragmentDoc = gql`
+    fragment UserPreview on User {
+  id
+  name
+  image_72
 }
     `;
 export const ComponentPreviewFragmentDoc = gql`
@@ -1628,6 +1668,14 @@ export const GetUserDocument = gql`
 }
     ${UserDetailFragmentDoc}`;
 export type GetUserQueryResult = ApolloReactCommon.QueryResult<GetUserQuery, GetUserQueryVariables>;
+export const GetUsersListingDocument = gql`
+    query GetUsersListing($where: QueryUsersWhereInput, $skip: Int, $after: UserWhereUniqueInput, $before: UserWhereUniqueInput, $first: Int, $last: Int) {
+  users(where: $where, skip: $skip, after: $after, before: $before, first: $first, last: $last) {
+    ...UserPreview
+  }
+}
+    ${UserPreviewFragmentDoc}`;
+export type GetUsersListingQueryResult = ApolloReactCommon.QueryResult<GetUsersListingQuery, GetUsersListingQueryVariables>;
 export const GetCollectionDetailDocument = gql`
     query GetCollectionDetail($where: CollectionWhereUniqueInput!) {
   getUser {

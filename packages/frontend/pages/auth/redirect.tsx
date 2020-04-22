@@ -1,5 +1,8 @@
 import React, { useEffect } from 'react';
 import { NextPage, GetServerSideProps } from 'next';
+import { useRouter } from 'next/router';
+import { useDispatch } from 'react-redux';
+import { Dispatch } from 'redux';
 
 import withApollo, { createApolloClient } from '../../src/api';
 import { Flex, Box } from '../../src/components/common/layout/base';
@@ -15,9 +18,6 @@ import {
 } from '../../src/types/generated/graphql';
 import { GET_USER } from '../../src/api/query/auth';
 import { Loader } from '../../src/components/common/misc';
-import { useRouter } from 'next/router';
-import { useDispatch } from 'react-redux';
-import { Dispatch } from 'redux';
 import { StoreUser } from '../../src/actions/auth';
 
 /* Props - <RedirectPage />
@@ -30,8 +30,9 @@ type Props = {
 /* <RedirectPage />
 ============================================================================= */
 const RedirectPage: NextPage<Props> = ({ data, errorMessage }) => {
-  const { push } = useRouter();
   const dispatch = useDispatch<Dispatch<StoreUser>>();
+
+  const { push } = useRouter();
 
   useEffect(() => {
     if (data?.signIn) {
