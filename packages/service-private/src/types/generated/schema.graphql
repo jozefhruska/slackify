@@ -673,6 +673,7 @@ type Query {
   component(where: ComponentWhereUniqueInput!): Component
   components(after: ComponentWhereUniqueInput, before: ComponentWhereUniqueInput, first: Int, last: Int, skip: Int, where: QueryComponentsWhereInput): [Component!]!
   getUser: User
+  users(after: UserWhereUniqueInput, before: UserWhereUniqueInput, first: Int, last: Int, skip: Int, where: QueryUsersWhereInput): [User!]!
 }
 
 input QueryCollectionsWhereInput {
@@ -684,6 +685,10 @@ input QueryComponentsWhereInput {
   author: UserWhereInput
   collection: CollectionWhereInput
   id: StringFilter
+  team: TeamWhereInput
+}
+
+input QueryUsersWhereInput {
   team: TeamWhereInput
 }
 

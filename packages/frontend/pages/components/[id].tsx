@@ -260,11 +260,9 @@ export const getServerSideProps: GetServerSideProps<Props, Query> = async (ctx) 
     removeAuthToken(ctx);
 
     /* Redirect */
-    if (ctx?.req && ctx?.res) {
-      ctx?.res.writeHead(302, { Location: '/' });
-      ctx?.res.end();
-      return;
-    }
+    ctx?.res.writeHead(302, { Location: '/' });
+    ctx?.res.end();
+    return;
   }
 
   return {

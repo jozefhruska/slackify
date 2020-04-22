@@ -7,7 +7,7 @@ import * as S from './UserAvatar.styles';
 /* Props - <UserAvatar />
 ============================================================================= */
 type Props = {
-  user: User;
+  user: Pick<User, 'name' | 'image_72'>;
 };
 
 /* <UserAvatar />
@@ -30,7 +30,11 @@ const UserAvatar: React.FC<Props> = ({ user }) => {
     );
   }
 
-  return <S.Wrapper>{name.substring(0, 2).toUpperCase()}</S.Wrapper>;
+  return (
+    <S.BorderRing>
+      <S.Wrapper>{name.substring(0, 2).toUpperCase()}</S.Wrapper>
+    </S.BorderRing>
+  );
 };
 
 export default UserAvatar;

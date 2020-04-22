@@ -1,7 +1,6 @@
-import { objectType } from 'nexus';
+import { queryType } from 'nexus';
 
-export const Query = objectType({
-  name: 'Query',
+export const Query = queryType({
   definition(t) {
     /* Auth */
     t.field('getUser', {
@@ -30,5 +29,12 @@ export const Query = objectType({
     });
 
     t.crud.component();
+
+    /* Users */
+    t.crud.users({
+      filtering: {
+        team: true,
+      },
+    });
   },
 });

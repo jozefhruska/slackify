@@ -6,17 +6,20 @@ export const UserDetail = gql`
     name
     email
     accessToken
-    image_24
-    image_32
-    image_48
     image_72
-    image_192
-    image_512
     team {
       id
       name
       domain
       accessToken
     }
+  }
+`;
+
+export const UserPreview = gql`
+  fragment UserPreview on User {
+    id
+    name
+    image_72
   }
 `;
