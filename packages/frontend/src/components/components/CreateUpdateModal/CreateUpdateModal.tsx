@@ -10,6 +10,7 @@ import { Box, Flex } from '../../common/layout/base';
 import {
   GetCollectionsOptionsQuery,
   GetCollectionsOptionsQueryVariables,
+  Collection,
 } from '../../../types/generated/graphql';
 import { Label, Select } from '../../common/forms';
 import { PlainTextForm, ArticleForm, LinkForm } from './forms';
@@ -17,9 +18,15 @@ import { GET_COLLECTIONS_OPTIONS } from '../../../api/query/collections';
 
 import * as S from './CreateUpdateModal.styles';
 
+/* Props - <ModalContent />
+============================================================================= */
+type ModalContentProps = {
+  collectionId?: Collection['id'];
+};
+
 /* <ModalContent />
 ============================================================================= */
-const ModalContent: React.FC = () => {
+const ModalContent: React.FC<ModalContentProps> = ({ collectionId }) => {
   const state = useSelector(selectCreateUpdateModalState);
   const dispatch = useDispatch<Dispatch<OpenCreateUpdateModal>>();
 
@@ -76,16 +83,22 @@ const ModalContent: React.FC = () => {
         </>
       )}
 
-      <PlainTextForm />
-      <ArticleForm />
-      <LinkForm />
+      <PlainTextForm collectionId={collectionId} />
+      <ArticleForm collectionId={collectionId} />
+      <LinkForm collectionId={collectionId} />
     </>
   );
 };
 
+/* Props - <CreateUpdateModal />
+============================================================================= */
+type CreateUpdateModalProps = {
+  collectionId?: Collection['id'];
+};
+
 /* <CreateUpdateModal />
 ============================================================================= */
-const CreateUpdateModal: React.FC = () => {
+const CreateUpdateModal: React.FC<CreateUpdateModalProps> = ({ collectionId }) => {
   const state = useSelector(selectCreateUpdateModalState);
   const dispatch = useDispatch<Dispatch<CloseCreateUpdateModal>>();
 
@@ -100,7 +113,7 @@ const CreateUpdateModal: React.FC = () => {
       title={`${state.mode === 'create' ? 'Create new' : 'Update'} component`}
     >
       <Box width={['100%', null, '500px']}>
-        <ModalContent />
+        <ModalContent collectionId={collectionId} />
       </Box>
     </Modal>
   );

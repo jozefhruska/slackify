@@ -82,12 +82,19 @@ const CreateUpdateModal: React.FC = () => {
                   },
                 },
                 update: (cache, { data: { createOneCollection } }) => {
-                  const { collections: collections } = cache.readQuery<
+                  const { collections } = cache.readQuery<
                     GetCollectionsListingQuery,
                     GetCollectionsListingQueryVariables
                   >({
                     query: GET_COLLECTIONS_LISTING,
                     variables: {
+                      where: {
+                        team: {
+                          id: {
+                            equals: user?.team?.id,
+                          },
+                        },
+                      },
                       first: 40,
                     },
                   });
@@ -96,9 +103,16 @@ const CreateUpdateModal: React.FC = () => {
                     {
                       query: GET_COLLECTIONS_LISTING,
                       data: {
-                        collections: collections.concat([createOneCollection]),
+                        collections: collections.concat(createOneCollection),
                       },
                       variables: {
+                        where: {
+                          team: {
+                            id: {
+                              equals: user?.team?.id,
+                            },
+                          },
+                        },
                         first: 40,
                       },
                     }

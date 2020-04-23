@@ -10,6 +10,9 @@ import {
   CreateOneComponentMutationVariables,
   UpdateOneComponentMutation,
   UpdateOneComponentMutationVariables,
+  GetComponentsListingQuery,
+  GetComponentsListingQueryVariables,
+  Collection,
 } from '../../../../../types/generated/graphql';
 import { Box, Grid } from '../../../../common/layout/base';
 import { Label, Textarea, Input } from '../../../../common/forms';
@@ -18,6 +21,7 @@ import { CloseCreateUpdateModal } from '../../../../../actions/components';
 import { selectCreateUpdateModalState } from '../../../../../selectors/components';
 import { CREATE_ONE_COMPONENT, UPDATE_ONE_COMPONENT } from '../../../../../api/mutation/components';
 import { selectUser } from '../../../../../selectors/auth';
+import { GET_COMPONENTS_LISTING } from '../../../../../api/query/components';
 
 /* Local types
 ============================================================================= */
@@ -27,9 +31,15 @@ type FormValues = {
   content: string;
 };
 
+/* Props - <ArticleForm />
+============================================================================= */
+type Props = {
+  collectionId?: Collection['id'];
+};
+
 /* <ArticleForm />
 ============================================================================= */
-const ArticleForm: React.FC = () => {
+const ArticleForm: React.FC<Props> = ({ collectionId }) => {
   const state = useSelector(selectCreateUpdateModalState);
   const user = useSelector(selectUser);
   const dispatch = useDispatch<Dispatch<CloseCreateUpdateModal>>();
@@ -100,6 +110,55 @@ const ArticleForm: React.FC = () => {
                   },
                 },
               },
+            },
+            update: (cache, { data: { createOneComponent } }) => {
+              const { components: components } = cache.readQuery<
+                GetComponentsListingQuery,
+                GetComponentsListingQueryVariables
+              >({
+                query: GET_COMPONENTS_LISTING,
+                variables: {
+                  where: {
+                    team: {
+                      id: {
+                        equals: user?.team.id,
+                      },
+                    },
+                    collection: {
+                      id: {
+                        equals: collectionId,
+                      },
+                    },
+                  },
+                  first: 40,
+                },
+              });
+
+              const updatedComponents = components.concat(createOneComponent);
+
+              cache.writeQuery<GetComponentsListingQuery, GetComponentsListingQueryVariables>({
+                query: GET_COMPONENTS_LISTING,
+                data: {
+                  components: updatedComponents,
+                },
+                variables: {
+                  where: {
+                    team: {
+                      id: {
+                        equals: user?.team.id,
+                      },
+                    },
+                    collection: {
+                      id: {
+                        equals: collectionId,
+                      },
+                    },
+                  },
+                  first: 40,
+                },
+              });
+
+              cache.gc();
             },
           }).then(() => {
             dispatch({ type: '[COMPONENTS] CLOSE_CREATE_UPDATE_MODAL' });

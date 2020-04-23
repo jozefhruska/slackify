@@ -1,24 +1,24 @@
 import { gql } from '@apollo/client';
-import { ComponentDetail } from '../fragments/components';
+import { ComponentListing } from '../fragments/components';
 
 export const CREATE_ONE_COMPONENT = gql`
   mutation CreateOneComponent($data: ComponentCreateInput!) {
     createOneComponent(data: $data) {
-      ...ComponentDetail
+      ...ComponentListing
     }
   }
 
-  ${ComponentDetail}
+  ${ComponentListing}
 `;
 
 export const UPDATE_ONE_COMPONENT = gql`
   mutation UpdateOneComponent($data: ComponentUpdateInput!, $where: ComponentWhereUniqueInput!) {
     updateOneComponent(data: $data, where: $where) {
-      ...ComponentDetail
+      ...ComponentListing
     }
   }
 
-  ${ComponentDetail}
+  ${ComponentListing}
 `;
 
 export const DELETE_ONE_COMPONENT = gql`

@@ -103,7 +103,7 @@ const ListingPage: React.FC<Props> = ({ user, collectionId }) => {
       <>
         <Listing>
           {data.components?.map((component) => (
-            <ListingItem key={component?.id} component={component} />
+            <ListingItem key={component?.id} component={component} collectionId={collectionId} />
           ))}
         </Listing>
 
@@ -124,7 +124,7 @@ const ListingPage: React.FC<Props> = ({ user, collectionId }) => {
           </Flex>
         )}
 
-        <CreateUpdateModal />
+        <CreateUpdateModal collectionId={collectionId} />
       </>
     );
   }

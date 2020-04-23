@@ -777,8 +777,61 @@
     {
       "tag": "CreateField",
       "model": "Component",
+      "field": "plainTextDataId",
+      "type": "String",
+      "arity": "Optional"
+    },
+    {
+      "tag": "CreateField",
+      "model": "Component",
       "field": "plainTextData",
       "type": "PlainTextComponentData",
+      "arity": "Optional"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "Component",
+          "field": "plainTextData"
+        },
+        "directive": "relation"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "Component",
+          "field": "plainTextData"
+        },
+        "directive": "relation"
+      },
+      "argument": "fields",
+      "value": "[plainTextDataId]"
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "Component",
+          "field": "plainTextData"
+        },
+        "directive": "relation"
+      },
+      "argument": "references",
+      "value": "[id]"
+    },
+    {
+      "tag": "CreateField",
+      "model": "Component",
+      "field": "articleDataId",
+      "type": "String",
       "arity": "Optional"
     },
     {
@@ -789,11 +842,96 @@
       "arity": "Optional"
     },
     {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "Component",
+          "field": "articleData"
+        },
+        "directive": "relation"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "Component",
+          "field": "articleData"
+        },
+        "directive": "relation"
+      },
+      "argument": "fields",
+      "value": "[articleDataId]"
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "Component",
+          "field": "articleData"
+        },
+        "directive": "relation"
+      },
+      "argument": "references",
+      "value": "[id]"
+    },
+    {
+      "tag": "CreateField",
+      "model": "Component",
+      "field": "linkDataId",
+      "type": "String",
+      "arity": "Optional"
+    },
+    {
       "tag": "CreateField",
       "model": "Component",
       "field": "linkData",
       "type": "LinkComponentData",
       "arity": "Optional"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "Component",
+          "field": "linkData"
+        },
+        "directive": "relation"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "Component",
+          "field": "linkData"
+        },
+        "directive": "relation"
+      },
+      "argument": "fields",
+      "value": "[linkDataId]"
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "Component",
+          "field": "linkData"
+        },
+        "directive": "relation"
+      },
+      "argument": "references",
+      "value": "[id]"
     },
     {
       "tag": "CreateField",
@@ -900,59 +1038,6 @@
       "arity": "Required"
     },
     {
-      "tag": "CreateField",
-      "model": "PlainTextComponentData",
-      "field": "component",
-      "type": "Component",
-      "arity": "Required"
-    },
-    {
-      "tag": "CreateDirective",
-      "location": {
-        "path": {
-          "tag": "Field",
-          "model": "PlainTextComponentData",
-          "field": "component"
-        },
-        "directive": "relation"
-      }
-    },
-    {
-      "tag": "CreateArgument",
-      "location": {
-        "tag": "Directive",
-        "path": {
-          "tag": "Field",
-          "model": "PlainTextComponentData",
-          "field": "component"
-        },
-        "directive": "relation"
-      },
-      "argument": "fields",
-      "value": "[componentId]"
-    },
-    {
-      "tag": "CreateArgument",
-      "location": {
-        "tag": "Directive",
-        "path": {
-          "tag": "Field",
-          "model": "PlainTextComponentData",
-          "field": "component"
-        },
-        "directive": "relation"
-      },
-      "argument": "references",
-      "value": "[id]"
-    },
-    {
-      "tag": "CreateField",
-      "model": "PlainTextComponentData",
-      "field": "componentId",
-      "type": "String",
-      "arity": "Required"
-    },
-    {
       "tag": "CreateModel",
       "model": "ArticleComponentData"
     },
@@ -1021,59 +1106,6 @@
       "arity": "Required"
     },
     {
-      "tag": "CreateField",
-      "model": "ArticleComponentData",
-      "field": "component",
-      "type": "Component",
-      "arity": "Required"
-    },
-    {
-      "tag": "CreateDirective",
-      "location": {
-        "path": {
-          "tag": "Field",
-          "model": "ArticleComponentData",
-          "field": "component"
-        },
-        "directive": "relation"
-      }
-    },
-    {
-      "tag": "CreateArgument",
-      "location": {
-        "tag": "Directive",
-        "path": {
-          "tag": "Field",
-          "model": "ArticleComponentData",
-          "field": "component"
-        },
-        "directive": "relation"
-      },
-      "argument": "fields",
-      "value": "[componentId]"
-    },
-    {
-      "tag": "CreateArgument",
-      "location": {
-        "tag": "Directive",
-        "path": {
-          "tag": "Field",
-          "model": "ArticleComponentData",
-          "field": "component"
-        },
-        "directive": "relation"
-      },
-      "argument": "references",
-      "value": "[id]"
-    },
-    {
-      "tag": "CreateField",
-      "model": "ArticleComponentData",
-      "field": "componentId",
-      "type": "String",
-      "arity": "Required"
-    },
-    {
       "tag": "CreateModel",
       "model": "LinkComponentData"
     },
@@ -1131,59 +1163,6 @@
       "tag": "CreateField",
       "model": "LinkComponentData",
       "field": "url",
-      "type": "String",
-      "arity": "Required"
-    },
-    {
-      "tag": "CreateField",
-      "model": "LinkComponentData",
-      "field": "component",
-      "type": "Component",
-      "arity": "Required"
-    },
-    {
-      "tag": "CreateDirective",
-      "location": {
-        "path": {
-          "tag": "Field",
-          "model": "LinkComponentData",
-          "field": "component"
-        },
-        "directive": "relation"
-      }
-    },
-    {
-      "tag": "CreateArgument",
-      "location": {
-        "tag": "Directive",
-        "path": {
-          "tag": "Field",
-          "model": "LinkComponentData",
-          "field": "component"
-        },
-        "directive": "relation"
-      },
-      "argument": "fields",
-      "value": "[componentId]"
-    },
-    {
-      "tag": "CreateArgument",
-      "location": {
-        "tag": "Directive",
-        "path": {
-          "tag": "Field",
-          "model": "LinkComponentData",
-          "field": "component"
-        },
-        "directive": "relation"
-      },
-      "argument": "references",
-      "value": "[id]"
-    },
-    {
-      "tag": "CreateField",
-      "model": "LinkComponentData",
-      "field": "componentId",
       "type": "String",
       "arity": "Required"
     }
