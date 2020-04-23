@@ -57,11 +57,10 @@ export type ArticleComponentDataWhereInput = {
   title?: Maybe<StringFilter>;
   lead?: Maybe<NullableStringFilter>;
   content?: Maybe<StringFilter>;
-  componentId?: Maybe<StringFilter>;
+  component?: Maybe<ComponentFilter>;
   AND?: Maybe<Array<ArticleComponentDataWhereInput>>;
   OR?: Maybe<Array<ArticleComponentDataWhereInput>>;
   NOT?: Maybe<Array<ArticleComponentDataWhereInput>>;
-  component?: Maybe<ComponentWhereInput>;
 };
 
 export type ArticleComponentDataWhereUniqueInput = {
@@ -365,6 +364,9 @@ export type ComponentScalarWhereInput = {
   collectionId?: Maybe<StringFilter>;
   authorId?: Maybe<StringFilter>;
   teamId?: Maybe<StringFilter>;
+  plainTextDataId?: Maybe<NullableStringFilter>;
+  articleDataId?: Maybe<NullableStringFilter>;
+  linkDataId?: Maybe<NullableStringFilter>;
   createdAt?: Maybe<DateTimeFilter>;
   updatedAt?: Maybe<DateTimeFilter>;
   AND?: Maybe<Array<ComponentScalarWhereInput>>;
@@ -526,6 +528,9 @@ export type ComponentWhereInput = {
   collectionId?: Maybe<StringFilter>;
   authorId?: Maybe<StringFilter>;
   teamId?: Maybe<StringFilter>;
+  plainTextDataId?: Maybe<NullableStringFilter>;
+  articleDataId?: Maybe<NullableStringFilter>;
+  linkDataId?: Maybe<NullableStringFilter>;
   createdAt?: Maybe<DateTimeFilter>;
   updatedAt?: Maybe<DateTimeFilter>;
   AND?: Maybe<Array<ComponentWhereInput>>;
@@ -597,11 +602,10 @@ export type LinkComponentDataWhereInput = {
   id?: Maybe<StringFilter>;
   text?: Maybe<NullableStringFilter>;
   url?: Maybe<StringFilter>;
-  componentId?: Maybe<StringFilter>;
+  component?: Maybe<ComponentFilter>;
   AND?: Maybe<Array<LinkComponentDataWhereInput>>;
   OR?: Maybe<Array<LinkComponentDataWhereInput>>;
   NOT?: Maybe<Array<LinkComponentDataWhereInput>>;
-  component?: Maybe<ComponentWhereInput>;
 };
 
 export type LinkComponentDataWhereUniqueInput = {
@@ -613,7 +617,7 @@ export type Mutation = {
   signIn?: Maybe<SignInOutput>;
   createOneCollection: Collection;
   updateOneCollection?: Maybe<Collection>;
-  deleteOneCollection?: Maybe<Collection>;
+  deleteOneCollection: Collection;
   createOneComponent: Component;
   updateOneComponent?: Maybe<Component>;
   deleteOneComponent?: Maybe<Component>;
@@ -637,7 +641,7 @@ export type MutationUpdateOneCollectionArgs = {
 
 
 export type MutationDeleteOneCollectionArgs = {
-  where: CollectionWhereUniqueInput;
+  where?: Maybe<CollectionWhereUniqueInput>;
 };
 
 
@@ -716,11 +720,10 @@ export type PlainTextComponentDataUpsertWithoutComponentInput = {
 export type PlainTextComponentDataWhereInput = {
   id?: Maybe<StringFilter>;
   text?: Maybe<StringFilter>;
-  componentId?: Maybe<StringFilter>;
+  component?: Maybe<ComponentFilter>;
   AND?: Maybe<Array<PlainTextComponentDataWhereInput>>;
   OR?: Maybe<Array<PlainTextComponentDataWhereInput>>;
   NOT?: Maybe<Array<PlainTextComponentDataWhereInput>>;
-  component?: Maybe<ComponentWhereInput>;
 };
 
 export type PlainTextComponentDataWhereUniqueInput = {
@@ -1238,7 +1241,7 @@ export type CreateOneCollectionMutation = (
   { __typename?: 'Mutation' }
   & { createOneCollection: (
     { __typename?: 'Collection' }
-    & Pick<Collection, 'id' | 'name' | 'type' | 'published' | 'description' | 'componentsCount' | 'updatedAt'>
+    & CollectionListingFragment
   ) }
 );
 
@@ -1252,7 +1255,7 @@ export type UpdateOneCollectionMutation = (
   { __typename?: 'Mutation' }
   & { updateOneCollection?: Maybe<(
     { __typename?: 'Collection' }
-    & Pick<Collection, 'id' | 'name' | 'type' | 'published' | 'description' | 'componentsCount' | 'updatedAt'>
+    & CollectionListingFragment
   )> }
 );
 
@@ -1263,10 +1266,10 @@ export type DeleteOneCollectionMutationVariables = {
 
 export type DeleteOneCollectionMutation = (
   { __typename?: 'Mutation' }
-  & { deleteOneCollection?: Maybe<(
+  & { deleteOneCollection: (
     { __typename?: 'Collection' }
-    & Pick<Collection, 'id' | 'name'>
-  )> }
+    & CollectionListingFragment
+  ) }
 );
 
 export type CreateOneComponentMutationVariables = {
@@ -1278,7 +1281,7 @@ export type CreateOneComponentMutation = (
   { __typename?: 'Mutation' }
   & { createOneComponent: (
     { __typename?: 'Component' }
-    & ComponentDetailFragment
+    & ComponentListingFragment
   ) }
 );
 
@@ -1292,7 +1295,7 @@ export type UpdateOneComponentMutation = (
   { __typename?: 'Mutation' }
   & { updateOneComponent?: Maybe<(
     { __typename?: 'Component' }
-    & ComponentDetailFragment
+    & ComponentListingFragment
   )> }
 );
 
@@ -1590,63 +1593,50 @@ export type SignInMutationOptions = ApolloReactCommon.BaseMutationOptions<SignIn
 export const CreateOneCollectionDocument = gql`
     mutation CreateOneCollection($data: CollectionCreateInput!) {
   createOneCollection(data: $data) {
-    id
-    name
-    type
-    published
-    description
-    componentsCount
-    updatedAt
+    ...CollectionListing
   }
 }
-    `;
+    ${CollectionListingFragmentDoc}`;
 export type CreateOneCollectionMutationFn = ApolloReactCommon.MutationFunction<CreateOneCollectionMutation, CreateOneCollectionMutationVariables>;
 export type CreateOneCollectionMutationResult = ApolloReactCommon.MutationResult<CreateOneCollectionMutation>;
 export type CreateOneCollectionMutationOptions = ApolloReactCommon.BaseMutationOptions<CreateOneCollectionMutation, CreateOneCollectionMutationVariables>;
 export const UpdateOneCollectionDocument = gql`
     mutation UpdateOneCollection($data: CollectionUpdateInput!, $where: CollectionWhereUniqueInput!) {
   updateOneCollection(data: $data, where: $where) {
-    id
-    name
-    type
-    published
-    description
-    componentsCount
-    updatedAt
+    ...CollectionListing
   }
 }
-    `;
+    ${CollectionListingFragmentDoc}`;
 export type UpdateOneCollectionMutationFn = ApolloReactCommon.MutationFunction<UpdateOneCollectionMutation, UpdateOneCollectionMutationVariables>;
 export type UpdateOneCollectionMutationResult = ApolloReactCommon.MutationResult<UpdateOneCollectionMutation>;
 export type UpdateOneCollectionMutationOptions = ApolloReactCommon.BaseMutationOptions<UpdateOneCollectionMutation, UpdateOneCollectionMutationVariables>;
 export const DeleteOneCollectionDocument = gql`
     mutation DeleteOneCollection($where: CollectionWhereUniqueInput!) {
   deleteOneCollection(where: $where) {
-    id
-    name
+    ...CollectionListing
   }
 }
-    `;
+    ${CollectionListingFragmentDoc}`;
 export type DeleteOneCollectionMutationFn = ApolloReactCommon.MutationFunction<DeleteOneCollectionMutation, DeleteOneCollectionMutationVariables>;
 export type DeleteOneCollectionMutationResult = ApolloReactCommon.MutationResult<DeleteOneCollectionMutation>;
 export type DeleteOneCollectionMutationOptions = ApolloReactCommon.BaseMutationOptions<DeleteOneCollectionMutation, DeleteOneCollectionMutationVariables>;
 export const CreateOneComponentDocument = gql`
     mutation CreateOneComponent($data: ComponentCreateInput!) {
   createOneComponent(data: $data) {
-    ...ComponentDetail
+    ...ComponentListing
   }
 }
-    ${ComponentDetailFragmentDoc}`;
+    ${ComponentListingFragmentDoc}`;
 export type CreateOneComponentMutationFn = ApolloReactCommon.MutationFunction<CreateOneComponentMutation, CreateOneComponentMutationVariables>;
 export type CreateOneComponentMutationResult = ApolloReactCommon.MutationResult<CreateOneComponentMutation>;
 export type CreateOneComponentMutationOptions = ApolloReactCommon.BaseMutationOptions<CreateOneComponentMutation, CreateOneComponentMutationVariables>;
 export const UpdateOneComponentDocument = gql`
     mutation UpdateOneComponent($data: ComponentUpdateInput!, $where: ComponentWhereUniqueInput!) {
   updateOneComponent(data: $data, where: $where) {
-    ...ComponentDetail
+    ...ComponentListing
   }
 }
-    ${ComponentDetailFragmentDoc}`;
+    ${ComponentListingFragmentDoc}`;
 export type UpdateOneComponentMutationFn = ApolloReactCommon.MutationFunction<UpdateOneComponentMutation, UpdateOneComponentMutationVariables>;
 export type UpdateOneComponentMutationResult = ApolloReactCommon.MutationResult<UpdateOneComponentMutation>;
 export type UpdateOneComponentMutationOptions = ApolloReactCommon.BaseMutationOptions<UpdateOneComponentMutation, UpdateOneComponentMutationVariables>;

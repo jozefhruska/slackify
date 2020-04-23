@@ -44,8 +44,7 @@ input ArticleComponentDataUpsertWithoutComponentInput {
 
 input ArticleComponentDataWhereInput {
   AND: [ArticleComponentDataWhereInput!]
-  component: ComponentWhereInput
-  componentId: StringFilter
+  component: ComponentFilter
   content: StringFilter
   id: StringFilter
   lead: NullableStringFilter
@@ -339,12 +338,15 @@ input ComponentFilter {
 
 input ComponentScalarWhereInput {
   AND: [ComponentScalarWhereInput!]
+  articleDataId: NullableStringFilter
   authorId: StringFilter
   collectionId: StringFilter
   createdAt: DateTimeFilter
   id: StringFilter
+  linkDataId: NullableStringFilter
   NOT: [ComponentScalarWhereInput!]
   OR: [ComponentScalarWhereInput!]
+  plainTextDataId: NullableStringFilter
   published: BooleanFilter
   teamId: StringFilter
   type: ComponentType
@@ -501,6 +503,7 @@ input ComponentUpsertWithWhereUniqueWithoutTeamInput {
 input ComponentWhereInput {
   AND: [ComponentWhereInput!]
   articleData: ArticleComponentDataWhereInput
+  articleDataId: NullableStringFilter
   author: UserWhereInput
   authorId: StringFilter
   collection: CollectionWhereInput
@@ -508,9 +511,11 @@ input ComponentWhereInput {
   createdAt: DateTimeFilter
   id: StringFilter
   linkData: LinkComponentDataWhereInput
+  linkDataId: NullableStringFilter
   NOT: [ComponentWhereInput!]
   OR: [ComponentWhereInput!]
   plainTextData: PlainTextComponentDataWhereInput
+  plainTextDataId: NullableStringFilter
   published: BooleanFilter
   team: TeamWhereInput
   teamId: StringFilter
@@ -574,8 +579,7 @@ input LinkComponentDataUpsertWithoutComponentInput {
 
 input LinkComponentDataWhereInput {
   AND: [LinkComponentDataWhereInput!]
-  component: ComponentWhereInput
-  componentId: StringFilter
+  component: ComponentFilter
   id: StringFilter
   NOT: [LinkComponentDataWhereInput!]
   OR: [LinkComponentDataWhereInput!]
@@ -590,7 +594,7 @@ input LinkComponentDataWhereUniqueInput {
 type Mutation {
   createOneCollection(data: CollectionCreateInput!): Collection!
   createOneComponent(data: ComponentCreateInput!): Component!
-  deleteOneCollection(where: CollectionWhereUniqueInput!): Collection
+  deleteOneCollection(where: CollectionWhereUniqueInput): Collection!
   deleteOneComponent(where: ComponentWhereUniqueInput!): Component
   signIn(code: String!): SignInOutput
   updateOneCollection(data: CollectionUpdateInput!, where: CollectionWhereUniqueInput!): Collection
@@ -655,8 +659,7 @@ input PlainTextComponentDataUpsertWithoutComponentInput {
 
 input PlainTextComponentDataWhereInput {
   AND: [PlainTextComponentDataWhereInput!]
-  component: ComponentWhereInput
-  componentId: StringFilter
+  component: ComponentFilter
   id: StringFilter
   NOT: [PlainTextComponentDataWhereInput!]
   OR: [PlainTextComponentDataWhereInput!]

@@ -1,5 +1,5 @@
 import React, { Dispatch } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import moment from 'moment';
 import { FiMoreVertical, FiTrash2, FiEdit, FiEye, FiEyeOff } from 'react-icons/fi';
 import { useMutation } from '@apollo/client';
@@ -21,6 +21,7 @@ import { DELETE_ONE_COLLECTION, UPDATE_ONE_COLLECTION } from '../../../../api/mu
 import { GET_COLLECTIONS_LISTING } from '../../../../api/query/collections';
 import { humanizeComponentType, getShortenedText } from '../../../../utils';
 import { OpenCreateUpdateModal } from '../../../../actions/collections';
+import { selectUser } from '../../../../selectors/auth';
 
 import * as S from './ListingItem.styles';
 
@@ -33,6 +34,7 @@ type Props = {
 /* <ListingItem />
 ============================================================================= */
 const ListingItem: React.FC<Props> = ({ collection }) => {
+  const user = useSelector(selectUser);
   const dispatch = useDispatch<Dispatch<OpenCreateUpdateModal>>();
 
   const [deleteCollection, { loading: deleteLoading }] = useMutation<
@@ -122,7 +124,11 @@ const ListingItem: React.FC<Props> = ({ collection }) => {
               },
               {
                 onClick: async () => {
-                  if (confirm(`Are you sure you want do delete "${collection.name}"?`)) {
+                  if (
+                    confirm(
+                      `Are you sure you want do delete "${collection.name}" and all components assigned to this collection?`
+                    )
+                  ) {
                     await deleteCollection({
                       variables: {
                         where: {
@@ -136,6 +142,13 @@ const ListingItem: React.FC<Props> = ({ collection }) => {
                         >({
                           query: GET_COLLECTIONS_LISTING,
                           variables: {
+                            where: {
+                              team: {
+                                id: {
+                                  equals: user?.team?.id,
+                                },
+                              },
+                            },
                             first: 40,
                           },
                         });
@@ -151,6 +164,13 @@ const ListingItem: React.FC<Props> = ({ collection }) => {
                             ),
                           },
                           variables: {
+                            where: {
+                              team: {
+                                id: {
+                                  equals: user?.team?.id,
+                                },
+                              },
+                            },
                             first: 40,
                           },
                         });

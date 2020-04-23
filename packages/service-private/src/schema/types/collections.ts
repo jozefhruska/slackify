@@ -15,6 +15,7 @@ export const Collection = objectType({
     t.model.id();
     t.model.name();
     t.model.type();
+    t.model.state();
     t.model.published();
     t.model.description();
     t.model.team();

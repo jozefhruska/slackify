@@ -50,8 +50,7 @@ export interface NexusGenInputs {
   }
   ArticleComponentDataWhereInput: { // input type
     AND?: NexusGenInputs['ArticleComponentDataWhereInput'][] | null; // [ArticleComponentDataWhereInput!]
-    component?: NexusGenInputs['ComponentWhereInput'] | null; // ComponentWhereInput
-    componentId?: NexusGenInputs['StringFilter'] | null; // StringFilter
+    component?: NexusGenInputs['ComponentFilter'] | null; // ComponentFilter
     content?: NexusGenInputs['StringFilter'] | null; // StringFilter
     id?: NexusGenInputs['StringFilter'] | null; // StringFilter
     lead?: NexusGenInputs['NullableStringFilter'] | null; // NullableStringFilter
@@ -287,12 +286,15 @@ export interface NexusGenInputs {
   }
   ComponentScalarWhereInput: { // input type
     AND?: NexusGenInputs['ComponentScalarWhereInput'][] | null; // [ComponentScalarWhereInput!]
+    articleDataId?: NexusGenInputs['NullableStringFilter'] | null; // NullableStringFilter
     authorId?: NexusGenInputs['StringFilter'] | null; // StringFilter
     collectionId?: NexusGenInputs['StringFilter'] | null; // StringFilter
     createdAt?: NexusGenInputs['DateTimeFilter'] | null; // DateTimeFilter
     id?: NexusGenInputs['StringFilter'] | null; // StringFilter
+    linkDataId?: NexusGenInputs['NullableStringFilter'] | null; // NullableStringFilter
     NOT?: NexusGenInputs['ComponentScalarWhereInput'][] | null; // [ComponentScalarWhereInput!]
     OR?: NexusGenInputs['ComponentScalarWhereInput'][] | null; // [ComponentScalarWhereInput!]
+    plainTextDataId?: NexusGenInputs['NullableStringFilter'] | null; // NullableStringFilter
     published?: NexusGenInputs['BooleanFilter'] | null; // BooleanFilter
     teamId?: NexusGenInputs['StringFilter'] | null; // StringFilter
     type?: NexusGenEnums['ComponentType'] | null; // ComponentType
@@ -421,6 +423,7 @@ export interface NexusGenInputs {
   ComponentWhereInput: { // input type
     AND?: NexusGenInputs['ComponentWhereInput'][] | null; // [ComponentWhereInput!]
     articleData?: NexusGenInputs['ArticleComponentDataWhereInput'] | null; // ArticleComponentDataWhereInput
+    articleDataId?: NexusGenInputs['NullableStringFilter'] | null; // NullableStringFilter
     author?: NexusGenInputs['UserWhereInput'] | null; // UserWhereInput
     authorId?: NexusGenInputs['StringFilter'] | null; // StringFilter
     collection?: NexusGenInputs['CollectionWhereInput'] | null; // CollectionWhereInput
@@ -428,9 +431,11 @@ export interface NexusGenInputs {
     createdAt?: NexusGenInputs['DateTimeFilter'] | null; // DateTimeFilter
     id?: NexusGenInputs['StringFilter'] | null; // StringFilter
     linkData?: NexusGenInputs['LinkComponentDataWhereInput'] | null; // LinkComponentDataWhereInput
+    linkDataId?: NexusGenInputs['NullableStringFilter'] | null; // NullableStringFilter
     NOT?: NexusGenInputs['ComponentWhereInput'][] | null; // [ComponentWhereInput!]
     OR?: NexusGenInputs['ComponentWhereInput'][] | null; // [ComponentWhereInput!]
     plainTextData?: NexusGenInputs['PlainTextComponentDataWhereInput'] | null; // PlainTextComponentDataWhereInput
+    plainTextDataId?: NexusGenInputs['NullableStringFilter'] | null; // NullableStringFilter
     published?: NexusGenInputs['BooleanFilter'] | null; // BooleanFilter
     team?: NexusGenInputs['TeamWhereInput'] | null; // TeamWhereInput
     teamId?: NexusGenInputs['StringFilter'] | null; // StringFilter
@@ -483,8 +488,7 @@ export interface NexusGenInputs {
   }
   LinkComponentDataWhereInput: { // input type
     AND?: NexusGenInputs['LinkComponentDataWhereInput'][] | null; // [LinkComponentDataWhereInput!]
-    component?: NexusGenInputs['ComponentWhereInput'] | null; // ComponentWhereInput
-    componentId?: NexusGenInputs['StringFilter'] | null; // StringFilter
+    component?: NexusGenInputs['ComponentFilter'] | null; // ComponentFilter
     id?: NexusGenInputs['StringFilter'] | null; // StringFilter
     NOT?: NexusGenInputs['LinkComponentDataWhereInput'][] | null; // [LinkComponentDataWhereInput!]
     OR?: NexusGenInputs['LinkComponentDataWhereInput'][] | null; // [LinkComponentDataWhereInput!]
@@ -540,8 +544,7 @@ export interface NexusGenInputs {
   }
   PlainTextComponentDataWhereInput: { // input type
     AND?: NexusGenInputs['PlainTextComponentDataWhereInput'][] | null; // [PlainTextComponentDataWhereInput!]
-    component?: NexusGenInputs['ComponentWhereInput'] | null; // ComponentWhereInput
-    componentId?: NexusGenInputs['StringFilter'] | null; // StringFilter
+    component?: NexusGenInputs['ComponentFilter'] | null; // ComponentFilter
     id?: NexusGenInputs['StringFilter'] | null; // StringFilter
     NOT?: NexusGenInputs['PlainTextComponentDataWhereInput'][] | null; // [PlainTextComponentDataWhereInput!]
     OR?: NexusGenInputs['PlainTextComponentDataWhereInput'][] | null; // [PlainTextComponentDataWhereInput!]
@@ -1016,7 +1019,7 @@ export interface NexusGenFieldTypes {
   Mutation: { // field return type
     createOneCollection: NexusGenRootTypes['Collection']; // Collection!
     createOneComponent: NexusGenRootTypes['Component']; // Component!
-    deleteOneCollection: NexusGenRootTypes['Collection'] | null; // Collection
+    deleteOneCollection: NexusGenRootTypes['Collection']; // Collection!
     deleteOneComponent: NexusGenRootTypes['Component'] | null; // Component
     signIn: NexusGenRootTypes['SignInOutput'] | null; // SignInOutput
     updateOneCollection: NexusGenRootTypes['Collection'] | null; // Collection
@@ -1077,7 +1080,7 @@ export interface NexusGenArgTypes {
       data: NexusGenInputs['ComponentCreateInput']; // ComponentCreateInput!
     }
     deleteOneCollection: { // args
-      where: NexusGenInputs['CollectionWhereUniqueInput']; // CollectionWhereUniqueInput!
+      where?: NexusGenInputs['CollectionWhereUniqueInput'] | null; // CollectionWhereUniqueInput
     }
     deleteOneComponent: { // args
       where: NexusGenInputs['ComponentWhereUniqueInput']; // ComponentWhereUniqueInput!

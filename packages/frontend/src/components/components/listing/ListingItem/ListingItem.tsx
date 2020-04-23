@@ -1,7 +1,7 @@
 import React from 'react';
 import moment from 'moment';
 import { FiEye, FiEyeOff, FiEdit, FiTrash2, FiMoreVertical } from 'react-icons/fi';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Dispatch } from 'redux';
 import { useMutation } from '@apollo/client';
 import Link from 'next/link';
@@ -13,12 +13,17 @@ import {
   DeleteOneComponentMutationVariables,
   UpdateOneComponentMutation,
   ComponentListingFragment,
+  GetComponentsListingQuery,
+  GetComponentsListingQueryVariables,
+  Collection,
 } from '../../../../types/generated/graphql';
 import { PlainTextContent, ArticleContent, LinkContent } from './types';
 import { Grid, Flex } from '../../../common/layout/base';
 import { Button, PopperButton } from '../../../common/misc';
 import { OpenCreateUpdateModal } from '../../../../actions/components';
 import { UPDATE_ONE_COMPONENT, DELETE_ONE_COMPONENT } from '../../../../api/mutation/components';
+import { GET_COMPONENTS_LISTING } from '../../../../api/query/components';
+import { selectUser } from '../../../../selectors/auth';
 
 import * as S from './ListingItem.styles';
 
@@ -26,17 +31,67 @@ import * as S from './ListingItem.styles';
 ============================================================================= */
 type Props = {
   component: ComponentListingFragment;
+  collectionId?: Collection['id'];
 };
 
 /* <ListingItem />
 ============================================================================= */
-const ListingItem: React.FC<Props> = ({ component }) => {
+const ListingItem: React.FC<Props> = ({ component, collectionId }) => {
+  const user = useSelector(selectUser);
   const dispatch = useDispatch<Dispatch<OpenCreateUpdateModal>>();
 
   const [deleteComponent, { loading: deleteLoading }] = useMutation<
     DeleteOneComponentMutation,
     DeleteOneComponentMutationVariables
-  >(DELETE_ONE_COMPONENT);
+  >(DELETE_ONE_COMPONENT, {
+    update: (cache, { data: { deleteOneComponent } }) => {
+      const { components: components } = cache.readQuery<
+        GetComponentsListingQuery,
+        GetComponentsListingQueryVariables
+      >({
+        query: GET_COMPONENTS_LISTING,
+        variables: {
+          where: {
+            team: {
+              id: {
+                equals: user?.team.id,
+              },
+            },
+            collection: {
+              id: {
+                equals: collectionId,
+              },
+            },
+          },
+          first: 40,
+        },
+      });
+
+      cache.writeQuery<GetComponentsListingQuery, GetComponentsListingQueryVariables>({
+        query: GET_COMPONENTS_LISTING,
+        data: {
+          components: components.filter((component) => component.id !== deleteOneComponent?.id),
+        },
+        variables: {
+          where: {
+            team: {
+              id: {
+                equals: user?.team.id,
+              },
+            },
+            collection: {
+              id: {
+                equals: collectionId,
+              },
+            },
+          },
+          first: 40,
+        },
+      });
+
+      cache.gc();
+    },
+  });
 
   const [updateComponent, { loading: updateLoading }] = useMutation<
     UpdateOneComponentMutation,

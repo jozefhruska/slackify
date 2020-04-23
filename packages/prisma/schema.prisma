@@ -49,44 +49,41 @@ model Team {
 }
 
 model Component {
-  id            String                  @default(cuid()) @id
-  type          ComponentType           @default(PLAIN_TEXT)
-  published     Boolean                 @default(false)
-  collection    Collection              @relation(fields: [collectionId], references: [id])
-  collectionId  String
-  author        User                    @relation(fields: [authorId], references: [id])
-  authorId      String
-  team          Team                    @relation(fields: [teamId], references: [id])
-  teamId        String
-  plainTextData PlainTextComponentData?
-  articleData   ArticleComponentData?
-  linkData      LinkComponentData?
-  createdAt     DateTime                @default(now())
-  updatedAt     DateTime                @updatedAt
+  id              String                  @default(cuid()) @id
+  type            ComponentType           @default(PLAIN_TEXT)
+  published       Boolean                 @default(false)
+  collection      Collection              @relation(fields: [collectionId], references: [id])
+  collectionId    String
+  author          User                    @relation(fields: [authorId], references: [id])
+  authorId        String
+  team            Team                    @relation(fields: [teamId], references: [id])
+  teamId          String
+  plainTextDataId String?
+  plainTextData   PlainTextComponentData? @relation(fields: [plainTextDataId], references: [id])
+  articleDataId   String?
+  articleData     ArticleComponentData?   @relation(fields: [articleDataId], references: [id])
+  linkDataId      String?
+  linkData        LinkComponentData?      @relation(fields: [linkDataId], references: [id])
+  createdAt       DateTime                @default(now())
+  updatedAt       DateTime                @updatedAt
 }
 
 model PlainTextComponentData {
-  id          String    @default(cuid()) @id
-  text        String
-  component   Component @relation(fields: [componentId], references: [id])
-  componentId String
+  id   String @default(cuid()) @id
+  text String
 }
 
 model ArticleComponentData {
-  id          String    @default(cuid()) @id
-  title       String
-  lead        String?
-  content     String
-  component   Component @relation(fields: [componentId], references: [id])
-  componentId String
+  id      String  @default(cuid()) @id
+  title   String
+  lead    String?
+  content String
 }
 
 model LinkComponentData {
-  id          String    @default(cuid()) @id
-  text        String?
-  url         String
-  component   Component @relation(fields: [componentId], references: [id])
-  componentId String
+  id   String  @default(cuid()) @id
+  text String?
+  url  String
 }
 
 enum ComponentType {

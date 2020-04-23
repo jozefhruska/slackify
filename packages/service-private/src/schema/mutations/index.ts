@@ -1,6 +1,7 @@
 import { objectType, stringArg } from 'nexus';
 
 import { signIn } from './auth';
+import { deleteOneCollection } from './collections';
 
 export const Mutation = objectType({
   name: 'Mutation',
@@ -20,7 +21,13 @@ export const Mutation = objectType({
     /* Collections */
     t.crud.createOneCollection();
     t.crud.updateOneCollection();
-    t.crud.deleteOneCollection();
+    t.field('deleteOneCollection', {
+      type: 'Collection',
+      args: {
+        where: 'CollectionWhereUniqueInput',
+      },
+      resolve: deleteOneCollection,
+    });
 
     /* Components - Main */
     t.crud.createOneComponent();
