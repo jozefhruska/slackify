@@ -1,4 +1,4 @@
-import { objectType, stringArg } from 'nexus';
+import { objectType, stringArg, arg } from 'nexus';
 
 import { signIn } from './auth';
 import { deleteOneCollection } from './collections';
@@ -24,7 +24,10 @@ export const Mutation = objectType({
     t.field('deleteOneCollection', {
       type: 'Collection',
       args: {
-        where: 'CollectionWhereUniqueInput',
+        where: arg({
+          type: 'CollectionWhereUniqueInput',
+          required: true,
+        }),
       },
       resolve: deleteOneCollection,
     });

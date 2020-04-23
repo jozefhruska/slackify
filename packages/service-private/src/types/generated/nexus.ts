@@ -1080,7 +1080,7 @@ export interface NexusGenArgTypes {
       data: NexusGenInputs['ComponentCreateInput']; // ComponentCreateInput!
     }
     deleteOneCollection: { // args
-      where?: NexusGenInputs['CollectionWhereUniqueInput'] | null; // CollectionWhereUniqueInput
+      where: NexusGenInputs['CollectionWhereUniqueInput']; // CollectionWhereUniqueInput!
     }
     deleteOneComponent: { // args
       where: NexusGenInputs['ComponentWhereUniqueInput']; // ComponentWhereUniqueInput!

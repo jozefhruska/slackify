@@ -594,7 +594,7 @@ input LinkComponentDataWhereUniqueInput {
 type Mutation {
   createOneCollection(data: CollectionCreateInput!): Collection!
   createOneComponent(data: ComponentCreateInput!): Component!
-  deleteOneCollection(where: CollectionWhereUniqueInput): Collection!
+  deleteOneCollection(where: CollectionWhereUniqueInput!): Collection!
   deleteOneComponent(where: ComponentWhereUniqueInput!): Component
   signIn(code: String!): SignInOutput
   updateOneCollection(data: CollectionUpdateInput!, where: CollectionWhereUniqueInput!): Collection
