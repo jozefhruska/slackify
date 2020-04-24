@@ -37,7 +37,7 @@ const component_hide: Middleware<SlackActionMiddlewareArgs<BlockButtonAction>> =
     });
 
     /* Compose app home view */
-    const appHomeView = await compose_app_home_view(teamId);
+    const appHomeView = await compose_app_home_view(teamId, userId);
 
     /* Check if view was successfully composed */
     if (!appHomeView) {

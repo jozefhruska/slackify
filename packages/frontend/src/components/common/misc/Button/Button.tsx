@@ -12,7 +12,6 @@ import * as S from './Button.styles';
 export type ButtonProps = {
   variant?: keyof typeof theme.colors;
   icon?: ReactNode;
-  isDisabled?: boolean;
   isLoading?: boolean;
 } & ButtonHTMLAttributes<HTMLButtonElement> &
   WidthProps;
@@ -20,9 +19,9 @@ export type ButtonProps = {
 /* <Button />
 ============================================================================= */
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ variant, icon, isDisabled, isLoading, children, ...props }, ref) => {
+  ({ variant, icon, disabled, isLoading, children, ...props }, ref) => {
     return (
-      <S.Main ref={ref} variant={variant} disabled={isDisabled || isLoading} {...props}>
+      <S.Main ref={ref} variant={variant} disabled={disabled || isLoading} {...props}>
         {isLoading && (
           <S.LoadingOverlay variant={variant}>
             <ButtonLoader />
@@ -45,7 +44,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 Button.displayName = 'Button';
 Button.defaultProps = {
   type: 'button',
-  isDisabled: false,
+  disabled: false,
   isLoading: false,
 };
 

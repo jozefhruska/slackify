@@ -18,8 +18,9 @@ import { StoreUser } from '../../src/actions/auth';
 import ListingPage from '../../src/components/components/listing/ListingPage/ListingPage';
 import { OpenCreateUpdateModal } from '../../src/actions/components';
 import { getAuthToken, removeAuthToken } from '../../src/cookies';
-import { GET_USER } from '../../src/api/query/auth';
+import { GET_USER } from '../../src/api/query/users';
 import { Button } from '../../src/components/common/misc';
+import { canCreateComponents } from '../../src/utils/users';
 
 /* Props - <ComponentsPage />
 ============================================================================= */
@@ -53,6 +54,7 @@ const ComponentsPage: NextPage<Props> = ({ user }) => {
         >
           <Button
             icon={<FiPlus />}
+            disabled={!canCreateComponents(user?.role)}
             variant="brand"
             width="100%"
             onClick={() => {

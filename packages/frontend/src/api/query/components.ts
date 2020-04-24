@@ -1,7 +1,7 @@
 import { gql } from '@apollo/client';
 
 import { ComponentDetail, ComponentPreview, ComponentListing } from '../fragments/components';
-import { UserDetail } from '../fragments/auth';
+import { UserDetail } from '../fragments/users';
 
 export const COMPONENTS_LISTING_INPUT = gql`
   input ComponentsListingInput {

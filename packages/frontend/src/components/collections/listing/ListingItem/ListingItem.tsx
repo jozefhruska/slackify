@@ -22,6 +22,7 @@ import { GET_COLLECTIONS_LISTING } from '../../../../api/query/collections';
 import { humanizeComponentType, getShortenedText } from '../../../../utils';
 import { OpenCreateUpdateModal } from '../../../../actions/collections';
 import { selectUser } from '../../../../selectors/auth';
+import { canManageCollections, canCreateCollections } from '../../../../utils/users';
 
 import * as S from './ListingItem.styles';
 
@@ -104,9 +105,11 @@ const ListingItem: React.FC<Props> = ({ collection }) => {
                   });
                 },
                 isLoading: updateLoading,
+                disabled: !canManageCollections(user?.role),
               },
               {
                 icon: <FiEdit />,
+                disabled: !canCreateCollections(user?.role),
                 variant: 'info',
                 onClick: () => {
                   dispatch({
@@ -184,11 +187,19 @@ const ListingItem: React.FC<Props> = ({ collection }) => {
                 },
                 icon: <FiTrash2 />,
                 isLoading: deleteLoading,
+                disabled: !canManageCollections(user?.role),
                 variant: 'danger',
               },
             ]}
           >
-            {(ref, onClick) => <Button ref={ref} onClick={onClick} icon={<FiMoreVertical />} />}
+            {(ref, onClick) => (
+              <Button
+                ref={ref}
+                onClick={onClick}
+                icon={<FiMoreVertical />}
+                disabled={!canCreateCollections(user?.role)}
+              />
+            )}
           </PopperButton>
         </Grid>
       </Grid>

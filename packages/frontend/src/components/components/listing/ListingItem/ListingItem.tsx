@@ -26,6 +26,7 @@ import { GET_COMPONENTS_LISTING } from '../../../../api/query/components';
 import { selectUser } from '../../../../selectors/auth';
 
 import * as S from './ListingItem.styles';
+import { canManageComponents, canCreateComponents } from '../../../../utils/users';
 
 /* Props - <ListingItem />
 ============================================================================= */
@@ -123,6 +124,7 @@ const ListingItem: React.FC<Props> = ({ component, collectionId }) => {
               {
                 icon: component.published ? <FiEye /> : <FiEyeOff />,
                 isLoading: updateLoading,
+                disabled: !canManageComponents(user?.role),
                 onClick: async () => {
                   await updateComponent({
                     variables: {
@@ -138,6 +140,7 @@ const ListingItem: React.FC<Props> = ({ component, collectionId }) => {
               },
               {
                 icon: <FiEdit />,
+                disabled: !canCreateComponents(user?.role),
                 variant: 'info',
                 onClick: () => {
                   dispatch({
@@ -156,6 +159,7 @@ const ListingItem: React.FC<Props> = ({ component, collectionId }) => {
               {
                 icon: <FiTrash2 />,
                 isLoading: deleteLoading,
+                disabled: !canManageComponents(user?.role),
                 variant: 'danger',
                 onClick: async () => {
                   if (confirm('Are you sure you want do delete this component?')) {
@@ -173,7 +177,14 @@ const ListingItem: React.FC<Props> = ({ component, collectionId }) => {
               },
             ]}
           >
-            {(ref, onClick) => <Button ref={ref} onClick={onClick} icon={<FiMoreVertical />} />}
+            {(ref, onClick) => (
+              <Button
+                ref={ref}
+                onClick={onClick}
+                icon={<FiMoreVertical />}
+                disabled={!canCreateComponents(user?.role)}
+              />
+            )}
           </PopperButton>
         </Grid>
       </Grid>

@@ -614,6 +614,7 @@ export type LinkComponentDataWhereUniqueInput = {
 
 export type Mutation = {
    __typename?: 'Mutation';
+  updateOneUser?: Maybe<User>;
   signIn?: Maybe<SignInOutput>;
   createOneCollection: Collection;
   updateOneCollection?: Maybe<Collection>;
@@ -621,6 +622,12 @@ export type Mutation = {
   createOneComponent: Component;
   updateOneComponent?: Maybe<Component>;
   deleteOneComponent?: Maybe<Component>;
+};
+
+
+export type MutationUpdateOneUserArgs = {
+  data: UserUpdateInput;
+  where: UserWhereUniqueInput;
 };
 
 
@@ -641,7 +648,7 @@ export type MutationUpdateOneCollectionArgs = {
 
 
 export type MutationDeleteOneCollectionArgs = {
-  where?: Maybe<CollectionWhereUniqueInput>;
+  where: CollectionWhereUniqueInput;
 };
 
 
@@ -953,6 +960,7 @@ export type User = {
   id: Scalars['String'];
   name: Scalars['String'];
   email: Scalars['String'];
+  role: UserRole;
   accessToken: Scalars['String'];
   image_24?: Maybe<Scalars['String']>;
   image_32?: Maybe<Scalars['String']>;
@@ -977,6 +985,7 @@ export type UserCreateWithoutComponentsInput = {
   id: Scalars['String'];
   email: Scalars['String'];
   name: Scalars['String'];
+  role?: Maybe<UserRole>;
   accessToken: Scalars['String'];
   image_24?: Maybe<Scalars['String']>;
   image_32?: Maybe<Scalars['String']>;
@@ -991,6 +1000,7 @@ export type UserCreateWithoutTeamInput = {
   id: Scalars['String'];
   email: Scalars['String'];
   name: Scalars['String'];
+  role?: Maybe<UserRole>;
   accessToken: Scalars['String'];
   image_24?: Maybe<Scalars['String']>;
   image_32?: Maybe<Scalars['String']>;
@@ -1007,10 +1017,18 @@ export type UserFilter = {
   none?: Maybe<UserWhereInput>;
 };
 
+export enum UserRole {
+  Owner = 'OWNER',
+  Editor = 'EDITOR',
+  Author = 'AUTHOR',
+  Viewer = 'VIEWER'
+}
+
 export type UserScalarWhereInput = {
   id?: Maybe<StringFilter>;
   email?: Maybe<StringFilter>;
   name?: Maybe<StringFilter>;
+  role?: Maybe<UserRole>;
   accessToken?: Maybe<StringFilter>;
   image_24?: Maybe<NullableStringFilter>;
   image_32?: Maybe<NullableStringFilter>;
@@ -1025,10 +1043,27 @@ export type UserScalarWhereInput = {
   NOT?: Maybe<Array<UserScalarWhereInput>>;
 };
 
+export type UserUpdateInput = {
+  id?: Maybe<Scalars['String']>;
+  email?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  role?: Maybe<UserRole>;
+  accessToken?: Maybe<Scalars['String']>;
+  image_24?: Maybe<Scalars['String']>;
+  image_32?: Maybe<Scalars['String']>;
+  image_48?: Maybe<Scalars['String']>;
+  image_72?: Maybe<Scalars['String']>;
+  image_192?: Maybe<Scalars['String']>;
+  image_512?: Maybe<Scalars['String']>;
+  team?: Maybe<TeamUpdateOneRequiredWithoutUsersInput>;
+  components?: Maybe<ComponentUpdateManyWithoutAuthorInput>;
+};
+
 export type UserUpdateManyDataInput = {
   id?: Maybe<Scalars['String']>;
   email?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
+  role?: Maybe<UserRole>;
   accessToken?: Maybe<Scalars['String']>;
   image_24?: Maybe<Scalars['String']>;
   image_32?: Maybe<Scalars['String']>;
@@ -1066,6 +1101,7 @@ export type UserUpdateWithoutComponentsDataInput = {
   id?: Maybe<Scalars['String']>;
   email?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
+  role?: Maybe<UserRole>;
   accessToken?: Maybe<Scalars['String']>;
   image_24?: Maybe<Scalars['String']>;
   image_32?: Maybe<Scalars['String']>;
@@ -1080,6 +1116,7 @@ export type UserUpdateWithoutTeamDataInput = {
   id?: Maybe<Scalars['String']>;
   email?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
+  role?: Maybe<UserRole>;
   accessToken?: Maybe<Scalars['String']>;
   image_24?: Maybe<Scalars['String']>;
   image_32?: Maybe<Scalars['String']>;
@@ -1110,6 +1147,7 @@ export type UserWhereInput = {
   id?: Maybe<StringFilter>;
   email?: Maybe<StringFilter>;
   name?: Maybe<StringFilter>;
+  role?: Maybe<UserRole>;
   accessToken?: Maybe<StringFilter>;
   image_24?: Maybe<NullableStringFilter>;
   image_32?: Maybe<NullableStringFilter>;
@@ -1130,20 +1168,6 @@ export type UserWhereUniqueInput = {
   email?: Maybe<Scalars['String']>;
   accessToken?: Maybe<Scalars['String']>;
 };
-
-export type UserDetailFragment = (
-  { __typename?: 'User' }
-  & Pick<User, 'id' | 'name' | 'email' | 'accessToken' | 'image_72'>
-  & { team: (
-    { __typename?: 'Team' }
-    & Pick<Team, 'id' | 'name' | 'domain' | 'accessToken'>
-  ) }
-);
-
-export type UserPreviewFragment = (
-  { __typename?: 'User' }
-  & Pick<User, 'id' | 'name' | 'image_72'>
-);
 
 export type CollectionDetailFragment = (
   { __typename?: 'Collection' }
@@ -1211,25 +1235,18 @@ export type ComponentListingFragment = (
   )> }
 );
 
-export type SignInMutationVariables = {
-  code: Scalars['String'];
-};
+export type UserDetailFragment = (
+  { __typename?: 'User' }
+  & Pick<User, 'id' | 'name' | 'email' | 'role' | 'accessToken' | 'image_72'>
+  & { team: (
+    { __typename?: 'Team' }
+    & Pick<Team, 'id' | 'name' | 'domain' | 'accessToken'>
+  ) }
+);
 
-
-export type SignInMutation = (
-  { __typename?: 'Mutation' }
-  & { signIn?: Maybe<(
-    { __typename?: 'SignInOutput' }
-    & Pick<SignInOutput, 'authToken'>
-    & { user: (
-      { __typename?: 'User' }
-      & Pick<User, 'id' | 'name' | 'email' | 'accessToken' | 'image_24' | 'image_32' | 'image_48' | 'image_72' | 'image_192' | 'image_512'>
-      & { team: (
-        { __typename?: 'Team' }
-        & Pick<Team, 'id' | 'name' | 'domain' | 'accessToken'>
-      ) }
-    ) }
-  )> }
+export type UserPreviewFragment = (
+  { __typename?: 'User' }
+  & Pick<User, 'id' | 'name' | 'role' | 'image_72'>
 );
 
 export type CreateOneCollectionMutationVariables = {
@@ -1312,30 +1329,32 @@ export type DeleteOneComponentMutation = (
   )> }
 );
 
-export type GetUserQueryVariables = {};
-
-
-export type GetUserQuery = (
-  { __typename?: 'Query' }
-  & { getUser?: Maybe<(
-    { __typename?: 'User' }
-    & UserDetailFragment
-  )> }
-);
-
-export type GetUsersListingQueryVariables = {
-  where?: Maybe<QueryUsersWhereInput>;
-  skip?: Maybe<Scalars['Int']>;
-  after?: Maybe<UserWhereUniqueInput>;
-  before?: Maybe<UserWhereUniqueInput>;
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
+export type SignInMutationVariables = {
+  code: Scalars['String'];
 };
 
 
-export type GetUsersListingQuery = (
-  { __typename?: 'Query' }
-  & { users: Array<(
+export type SignInMutation = (
+  { __typename?: 'Mutation' }
+  & { signIn?: Maybe<(
+    { __typename?: 'SignInOutput' }
+    & Pick<SignInOutput, 'authToken'>
+    & { user: (
+      { __typename?: 'User' }
+      & UserDetailFragment
+    ) }
+  )> }
+);
+
+export type UpdateOneUserMutationVariables = {
+  data: UserUpdateInput;
+  where: UserWhereUniqueInput;
+};
+
+
+export type UpdateOneUserMutation = (
+  { __typename?: 'Mutation' }
+  & { updateOneUser?: Maybe<(
     { __typename?: 'User' }
     & UserPreviewFragment
   )> }
@@ -1438,28 +1457,35 @@ export type GetComponentsListingQuery = (
   )> }
 );
 
-export const UserDetailFragmentDoc = gql`
-    fragment UserDetail on User {
-  id
-  name
-  email
-  accessToken
-  image_72
-  team {
-    id
-    name
-    domain
-    accessToken
-  }
-}
-    `;
-export const UserPreviewFragmentDoc = gql`
-    fragment UserPreview on User {
-  id
-  name
-  image_72
-}
-    `;
+export type GetUserQueryVariables = {};
+
+
+export type GetUserQuery = (
+  { __typename?: 'Query' }
+  & { getUser?: Maybe<(
+    { __typename?: 'User' }
+    & UserDetailFragment
+  )> }
+);
+
+export type GetUsersListingQueryVariables = {
+  where?: Maybe<QueryUsersWhereInput>;
+  skip?: Maybe<Scalars['Int']>;
+  after?: Maybe<UserWhereUniqueInput>;
+  before?: Maybe<UserWhereUniqueInput>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+};
+
+
+export type GetUsersListingQuery = (
+  { __typename?: 'Query' }
+  & { users: Array<(
+    { __typename?: 'User' }
+    & UserPreviewFragment
+  )> }
+);
+
 export const ComponentPreviewFragmentDoc = gql`
     fragment ComponentPreview on Component {
   id
@@ -1562,34 +1588,30 @@ export const ComponentListingFragmentDoc = gql`
   createdAt
 }
     `;
-export const SignInDocument = gql`
-    mutation SignIn($code: String!) {
-  signIn(code: $code) {
-    authToken
-    user {
-      id
-      name
-      email
-      accessToken
-      image_24
-      image_32
-      image_48
-      image_72
-      image_192
-      image_512
-      team {
-        id
-        name
-        domain
-        accessToken
-      }
-    }
+export const UserDetailFragmentDoc = gql`
+    fragment UserDetail on User {
+  id
+  name
+  email
+  role
+  accessToken
+  image_72
+  team {
+    id
+    name
+    domain
+    accessToken
   }
 }
     `;
-export type SignInMutationFn = ApolloReactCommon.MutationFunction<SignInMutation, SignInMutationVariables>;
-export type SignInMutationResult = ApolloReactCommon.MutationResult<SignInMutation>;
-export type SignInMutationOptions = ApolloReactCommon.BaseMutationOptions<SignInMutation, SignInMutationVariables>;
+export const UserPreviewFragmentDoc = gql`
+    fragment UserPreview on User {
+  id
+  name
+  role
+  image_72
+}
+    `;
 export const CreateOneCollectionDocument = gql`
     mutation CreateOneCollection($data: CollectionCreateInput!) {
   createOneCollection(data: $data) {
@@ -1650,22 +1672,29 @@ export const DeleteOneComponentDocument = gql`
 export type DeleteOneComponentMutationFn = ApolloReactCommon.MutationFunction<DeleteOneComponentMutation, DeleteOneComponentMutationVariables>;
 export type DeleteOneComponentMutationResult = ApolloReactCommon.MutationResult<DeleteOneComponentMutation>;
 export type DeleteOneComponentMutationOptions = ApolloReactCommon.BaseMutationOptions<DeleteOneComponentMutation, DeleteOneComponentMutationVariables>;
-export const GetUserDocument = gql`
-    query GetUser {
-  getUser {
-    ...UserDetail
+export const SignInDocument = gql`
+    mutation SignIn($code: String!) {
+  signIn(code: $code) {
+    authToken
+    user {
+      ...UserDetail
+    }
   }
 }
     ${UserDetailFragmentDoc}`;
-export type GetUserQueryResult = ApolloReactCommon.QueryResult<GetUserQuery, GetUserQueryVariables>;
-export const GetUsersListingDocument = gql`
-    query GetUsersListing($where: QueryUsersWhereInput, $skip: Int, $after: UserWhereUniqueInput, $before: UserWhereUniqueInput, $first: Int, $last: Int) {
-  users(where: $where, skip: $skip, after: $after, before: $before, first: $first, last: $last) {
+export type SignInMutationFn = ApolloReactCommon.MutationFunction<SignInMutation, SignInMutationVariables>;
+export type SignInMutationResult = ApolloReactCommon.MutationResult<SignInMutation>;
+export type SignInMutationOptions = ApolloReactCommon.BaseMutationOptions<SignInMutation, SignInMutationVariables>;
+export const UpdateOneUserDocument = gql`
+    mutation UpdateOneUser($data: UserUpdateInput!, $where: UserWhereUniqueInput!) {
+  updateOneUser(data: $data, where: $where) {
     ...UserPreview
   }
 }
     ${UserPreviewFragmentDoc}`;
-export type GetUsersListingQueryResult = ApolloReactCommon.QueryResult<GetUsersListingQuery, GetUsersListingQueryVariables>;
+export type UpdateOneUserMutationFn = ApolloReactCommon.MutationFunction<UpdateOneUserMutation, UpdateOneUserMutationVariables>;
+export type UpdateOneUserMutationResult = ApolloReactCommon.MutationResult<UpdateOneUserMutation>;
+export type UpdateOneUserMutationOptions = ApolloReactCommon.BaseMutationOptions<UpdateOneUserMutation, UpdateOneUserMutationVariables>;
 export const GetCollectionDetailDocument = gql`
     query GetCollectionDetail($where: CollectionWhereUniqueInput!) {
   getUser {
@@ -1724,3 +1753,19 @@ export const GetComponentsListingDocument = gql`
 }
     ${ComponentListingFragmentDoc}`;
 export type GetComponentsListingQueryResult = ApolloReactCommon.QueryResult<GetComponentsListingQuery, GetComponentsListingQueryVariables>;
+export const GetUserDocument = gql`
+    query GetUser {
+  getUser {
+    ...UserDetail
+  }
+}
+    ${UserDetailFragmentDoc}`;
+export type GetUserQueryResult = ApolloReactCommon.QueryResult<GetUserQuery, GetUserQueryVariables>;
+export const GetUsersListingDocument = gql`
+    query GetUsersListing($where: QueryUsersWhereInput, $skip: Int, $after: UserWhereUniqueInput, $before: UserWhereUniqueInput, $first: Int, $last: Int) {
+  users(where: $where, skip: $skip, after: $after, before: $before, first: $first, last: $last) {
+    ...UserPreview
+  }
+}
+    ${UserPreviewFragmentDoc}`;
+export type GetUsersListingQueryResult = ApolloReactCommon.QueryResult<GetUsersListingQuery, GetUsersListingQueryVariables>;

@@ -1,6 +1,6 @@
 import { gql } from '@apollo/client';
 
-import { UserDetail } from '../fragments/auth';
+import { UserDetail } from '../fragments/users';
 import { CollectionDetail, CollectionListing } from '../fragments/collections';
 
 export const CollectionsListingInput = gql`

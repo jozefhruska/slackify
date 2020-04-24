@@ -1,6 +1,6 @@
 import { gql } from '@apollo/client';
 
-import { UserDetail, UserPreview } from '../fragments/auth';
+import { UserDetail, UserPreview } from '../fragments/users';
 
 export const GET_USER = gql`
   query GetUser {

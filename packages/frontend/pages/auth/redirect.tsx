@@ -4,11 +4,11 @@ import { useRouter } from 'next/router';
 import { useDispatch } from 'react-redux';
 import { Dispatch } from 'redux';
 
-import withApollo, { createApolloClient } from '../../src/api';
+import { createApolloClient } from '../../src/api';
 import { Flex, Box } from '../../src/components/common/layout/base';
 import { Block } from '../../src/components/common/layout';
 import { Paragraph } from '../../src/components/common/typography';
-import { SIGN_IN } from '../../src/api/mutation/auth';
+import { SIGN_IN } from '../../src/api/mutation/users';
 import { getAuthToken, setAuthToken } from '../../src/cookies';
 import {
   SignInMutation,
@@ -16,7 +16,7 @@ import {
   GetUserQuery,
   GetUserQueryVariables,
 } from '../../src/types/generated/graphql';
-import { GET_USER } from '../../src/api/query/auth';
+import { GET_USER } from '../../src/api/query/users';
 import { Loader } from '../../src/components/common/misc';
 import { StoreUser } from '../../src/actions/auth';
 
@@ -121,4 +121,4 @@ export const getServerSideProps: GetServerSideProps<Props> = async (ctx) => {
   return { props: { data, errorMessage } };
 };
 
-export default withApollo(RedirectPage);
+export default RedirectPage;

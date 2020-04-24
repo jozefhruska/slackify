@@ -7,7 +7,7 @@ import {
   GetUsersListingQuery,
   GetUsersListingQueryVariables,
 } from '../../../../types/generated/graphql';
-import { GET_USERS_LISTING } from '../../../../api/query/auth';
+import { GET_USERS_LISTING } from '../../../../api/query/users';
 import { ListingItem } from '../';
 import { Alert, PageLoader, ListingLoader } from '../../../common/misc';
 import { Flex } from '../../../common/layout/base';

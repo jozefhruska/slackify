@@ -202,7 +202,7 @@ const create_new_component_submission: Middleware<SlackViewMiddlewareArgs<
     }
 
     /* Compose app home view */
-    const appHomeView = await compose_app_home_view(teamId, collection.id);
+    const appHomeView = await compose_app_home_view(teamId, userId, collection.id);
 
     /* Check if view was successfully composed */
     if (!appHomeView) {

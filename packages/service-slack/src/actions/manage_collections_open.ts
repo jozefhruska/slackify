@@ -15,8 +15,16 @@ const manage_collections_open: Middleware<SlackActionMiddlewareArgs<BlockButtonA
     /* Acknowledge Slack action */
     await ack();
 
+    /* Extract user ID */
+    const userId = body?.user?.id;
+
+    /* Check if user ID is defined */
+    if (!userId) {
+      throw new Error('[actions/manage_collections_open]: User ID is not defined.');
+    }
+
     /* Compose modal view */
-    const view = await compose_manage_collections_view(body?.team.id);
+    const view = await compose_manage_collections_view(body?.team.id, userId);
 
     /* Check if view was successfully composed */
     if (!view) {
