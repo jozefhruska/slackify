@@ -17,9 +17,10 @@ import { User, GetUserQuery, GetUserQueryVariables } from '../../src/types/gener
 import { StoreUser } from '../../src/actions/auth';
 import { OpenCreateUpdateModal } from '../../src/actions/collections';
 import { getAuthToken, removeAuthToken } from '../../src/cookies';
-import { GET_USER } from '../../src/api/query/auth';
+import { GET_USER } from '../../src/api/query/users';
 import { checkAuthentication } from '../../src/utils';
 import { Button } from '../../src/components/common/misc';
+import { canCreateCollections } from '../../src/utils/users';
 
 /* Props - <CollectionsPage />
 ============================================================================= */
@@ -55,6 +56,7 @@ const CollectionsPage: NextPage<Props> = ({ user }) => {
             icon={<FiPlus />}
             variant="brand"
             width="100%"
+            disabled={!canCreateCollections(user.role)}
             onClick={() => {
               dispatch({
                 type: '[COLLECTIONS] OPEN_CREATE_UPDATE_MODAL',

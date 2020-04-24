@@ -17,7 +17,7 @@ import { User, GetUserQuery, GetUserQueryVariables } from '../src/types/generate
 import { StoreUser } from '../src/actions/auth';
 import withApollo, { createApolloClient } from '../src/api';
 import { getAuthToken } from '../src/cookies';
-import { GET_USER } from '../src/api/query/auth';
+import { GET_USER } from '../src/api/query/users';
 
 /* Props - <HomePage />
 ============================================================================= */

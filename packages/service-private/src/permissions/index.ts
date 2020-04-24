@@ -7,16 +7,32 @@ import { NODE_ENV } from '../config';
 export const permissions = shield<unknown, Context>(
   {
     Query: {
+      /* Users */
+      users: isAuthenticated,
+      getUser: isAuthenticated,
+
+      /* Collections */
       collections: isAuthenticated,
+      collection: isAuthenticated,
+
+      /* Components */
+      components: isAuthenticated,
+      component: isAuthenticated,
     },
     Mutation: {
-      /* Auth */
-      signIn: not(isAuthenticated, 'Request is available to non-authenticated users.'),
+      /* Users */
+      updateOneUser: isAuthenticated,
+      signIn: not(isAuthenticated, 'Request is only available to non-authenticated users.'),
 
       /* Collections */
       createOneCollection: isAuthenticated,
       updateOneCollection: and(isAuthenticated, canManageCollection),
       deleteOneCollection: and(isAuthenticated, canManageCollection),
+
+      /* Components */
+      createOneComponent: isAuthenticated,
+      updateOneComponent: isAuthenticated,
+      deleteOneComponent: isAuthenticated,
     },
   },
   {

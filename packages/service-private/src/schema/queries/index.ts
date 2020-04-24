@@ -2,13 +2,20 @@ import { queryType } from 'nexus';
 
 export const Query = queryType({
   definition(t) {
-    /* Auth */
+    /* Users */
+    t.crud.users({
+      filtering: {
+        team: true,
+      },
+    });
+
     t.field('getUser', {
       type: 'User',
       nullable: true,
       resolve: (_parent, _args, { user }) => user,
     });
 
+    /* Collections */
     t.crud.collections({
       filtering: {
         id: true,
@@ -29,12 +36,5 @@ export const Query = queryType({
     });
 
     t.crud.component();
-
-    /* Users */
-    t.crud.users({
-      filtering: {
-        team: true,
-      },
-    });
   },
 });

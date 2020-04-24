@@ -5,6 +5,7 @@ export const UserDetail = gql`
     id
     name
     email
+    role
     accessToken
     image_72
     team {
@@ -20,6 +21,7 @@ export const UserPreview = gql`
   fragment UserPreview on User {
     id
     name
+    role
     image_72
   }
 `;

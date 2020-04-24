@@ -6,7 +6,8 @@ import { deleteOneCollection } from './collections';
 export const Mutation = objectType({
   name: 'Mutation',
   definition(t) {
-    /* Auth */
+    /* Users */
+    t.crud.updateOneUser();
     t.field('signIn', {
       type: 'SignInOutput',
       nullable: true,

@@ -7,7 +7,7 @@ import { User, GetUserQuery, GetUserQueryVariables } from '../src/types/generate
 import { getAuthToken, removeAuthToken } from '../src/cookies';
 import { checkAuthentication } from '../src/utils';
 import withApollo, { createApolloClient } from '../src/api';
-import { GET_USER } from '../src/api/query/auth';
+import { GET_USER } from '../src/api/query/users';
 import { StoreUser } from '../src/actions/auth';
 import { OpenCreateUpdateModal } from '../src/actions/collections';
 import { ListingPage } from '../src/components/users/listing';

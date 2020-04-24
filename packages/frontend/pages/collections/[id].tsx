@@ -30,6 +30,7 @@ import CreateUpdateModal from '../../src/components/collections/CreateUpdateModa
 import { Grid, Flex } from '../../src/components/common/layout/base';
 import { UPDATE_ONE_COLLECTION } from '../../src/api/mutation/collections';
 import Detail from '../../src/components/collections/detail/Detail';
+import { canCreateCollections, canManageCollections } from '../../src/utils/users';
 
 /* Local types
 ============================================================================= */
@@ -104,6 +105,7 @@ const CollectionDetailPage: React.FC<Props> = ({ id, user }) => {
             <Grid display={['grid', 'none']} gridTemplateColumns="repeat(3, 1fr)" gridGap="s4">
               <Button
                 icon={data.collection.published ? <FiEye /> : <FiEyeOff />}
+                disabled={!canManageCollections(user?.role)}
                 isLoading={updateLoading}
                 onClick={async () => {
                   await updateCollection({
@@ -120,6 +122,7 @@ const CollectionDetailPage: React.FC<Props> = ({ id, user }) => {
               />
               <Button
                 icon={<FiEdit />}
+                disabled={!canCreateCollections(user?.role)}
                 variant="info"
                 onClick={() => {
                   dispatch({
@@ -135,6 +138,7 @@ const CollectionDetailPage: React.FC<Props> = ({ id, user }) => {
               />
               <Button
                 icon={<FiPlus />}
+                disabled={!canCreateCollections(user?.role)}
                 variant="brand"
                 onClick={() => {
                   dispatch({
@@ -155,6 +159,7 @@ const CollectionDetailPage: React.FC<Props> = ({ id, user }) => {
                 options={(closePopper) => [
                   {
                     icon: data.collection.published ? <FiEye /> : <FiEyeOff />,
+                    disabled: !canManageCollections(user?.role),
                     isLoading: updateLoading,
                     onClick: async () => {
                       await updateCollection({
@@ -172,6 +177,7 @@ const CollectionDetailPage: React.FC<Props> = ({ id, user }) => {
                   {
                     icon: <FiEdit />,
                     variant: 'info',
+                    disabled: !canCreateCollections(user?.role),
                     onClick: () => {
                       dispatch({
                         type: '[COLLECTIONS] OPEN_CREATE_UPDATE_MODAL',
@@ -189,6 +195,7 @@ const CollectionDetailPage: React.FC<Props> = ({ id, user }) => {
                   {
                     icon: <FiPlus />,
                     variant: 'brand',
+                    disabled: !canCreateCollections(user?.role),
                     onClick: async () => {
                       dispatch({
                         type: '[COLLECTIONS] OPEN_CREATE_UPDATE_MODAL',
@@ -204,11 +211,22 @@ const CollectionDetailPage: React.FC<Props> = ({ id, user }) => {
                   },
                 ]}
               >
-                {(ref, onClick) => <Button ref={ref} onClick={onClick} icon={<FiMoreVertical />} />}
+                {(ref, onClick) => (
+                  <Button
+                    ref={ref}
+                    onClick={onClick}
+                    icon={<FiMoreVertical />}
+                    disabled={!canCreateCollections(user?.role)}
+                  />
+                )}
               </PopperButton>
             </Flex>
 
-            <Button icon={<FiTrash2 />} variant="danger">
+            <Button
+              icon={<FiTrash2 />}
+              disabled={!canManageCollections(user?.role)}
+              variant="danger"
+            >
               Delete collection
             </Button>
           </Grid>

@@ -599,6 +599,7 @@ type Mutation {
   signIn(code: String!): SignInOutput
   updateOneCollection(data: CollectionUpdateInput!, where: CollectionWhereUniqueInput!): Collection
   updateOneComponent(data: ComponentUpdateInput!, where: ComponentWhereUniqueInput!): Component
+  updateOneUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
 }
 
 input NullableStringFilter {
@@ -856,6 +857,7 @@ type User {
   image_512: String
   image_72: String
   name: String!
+  role: UserRole!
   team: Team!
 }
 
@@ -880,6 +882,7 @@ input UserCreateWithoutComponentsInput {
   image_512: String
   image_72: String
   name: String!
+  role: UserRole
   team: TeamCreateOneWithoutUsersInput!
 }
 
@@ -895,12 +898,20 @@ input UserCreateWithoutTeamInput {
   image_512: String
   image_72: String
   name: String!
+  role: UserRole
 }
 
 input UserFilter {
   every: UserWhereInput
   none: UserWhereInput
   some: UserWhereInput
+}
+
+enum UserRole {
+  AUTHOR
+  EDITOR
+  OWNER
+  VIEWER
 }
 
 input UserScalarWhereInput {
@@ -918,7 +929,24 @@ input UserScalarWhereInput {
   name: StringFilter
   NOT: [UserScalarWhereInput!]
   OR: [UserScalarWhereInput!]
+  role: UserRole
   teamId: StringFilter
+}
+
+input UserUpdateInput {
+  accessToken: String
+  components: ComponentUpdateManyWithoutAuthorInput
+  email: String
+  id: String
+  image_192: String
+  image_24: String
+  image_32: String
+  image_48: String
+  image_512: String
+  image_72: String
+  name: String
+  role: UserRole
+  team: TeamUpdateOneRequiredWithoutUsersInput
 }
 
 input UserUpdateManyDataInput {
@@ -932,6 +960,7 @@ input UserUpdateManyDataInput {
   image_512: String
   image_72: String
   name: String
+  role: UserRole
 }
 
 input UserUpdateManyWithoutTeamInput {
@@ -969,6 +998,7 @@ input UserUpdateWithoutComponentsDataInput {
   image_512: String
   image_72: String
   name: String
+  role: UserRole
   team: TeamUpdateOneRequiredWithoutUsersInput
 }
 
@@ -984,6 +1014,7 @@ input UserUpdateWithoutTeamDataInput {
   image_512: String
   image_72: String
   name: String
+  role: UserRole
 }
 
 input UserUpdateWithWhereUniqueWithoutTeamInput {
@@ -1017,6 +1048,7 @@ input UserWhereInput {
   name: StringFilter
   NOT: [UserWhereInput!]
   OR: [UserWhereInput!]
+  role: UserRole
   team: TeamWhereInput
   teamId: StringFilter
 }

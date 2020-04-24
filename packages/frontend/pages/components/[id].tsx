@@ -29,6 +29,7 @@ import { UPDATE_ONE_COMPONENT } from '../../src/api/mutation/components';
 import { OpenCreateUpdateModal } from '../../src/actions/components';
 import Detail from '../../src/components/components/detail/Detail';
 import CreateUpdateModal from '../../src/components/components/CreateUpdateModal/CreateUpdateModal';
+import { canManageComponents, canCreateComponents } from '../../src/utils/users';
 
 /* Local types
 ============================================================================= */
@@ -103,6 +104,7 @@ const ComponentDetailPage: React.FC<Props> = ({ id, user }) => {
             <Grid display={['grid', 'none']} gridTemplateColumns="repeat(3, 1fr)" gridGap="s4">
               <Button
                 icon={data.component.published ? <FiEye /> : <FiEyeOff />}
+                disabled={!canManageComponents(user?.role)}
                 isLoading={updateLoading}
                 onClick={async () => {
                   await updateComponent({
@@ -119,6 +121,7 @@ const ComponentDetailPage: React.FC<Props> = ({ id, user }) => {
               />
               <Button
                 icon={<FiEdit />}
+                disabled={!canCreateComponents(user?.role)}
                 variant="info"
                 onClick={() => {
                   dispatch({
@@ -134,6 +137,7 @@ const ComponentDetailPage: React.FC<Props> = ({ id, user }) => {
               />
               <Button
                 icon={<FiPlus />}
+                disabled={!canCreateComponents(user?.role)}
                 variant="brand"
                 onClick={() => {
                   dispatch({
@@ -154,6 +158,7 @@ const ComponentDetailPage: React.FC<Props> = ({ id, user }) => {
                 options={(closePopper) => [
                   {
                     icon: data.component.published ? <FiEye /> : <FiEyeOff />,
+                    disabled: !canManageComponents(user?.role),
                     isLoading: updateLoading,
                     onClick: async () => {
                       await updateComponent({
@@ -170,6 +175,7 @@ const ComponentDetailPage: React.FC<Props> = ({ id, user }) => {
                   },
                   {
                     icon: <FiEdit />,
+                    disabled: !canCreateComponents(user?.role),
                     variant: 'info',
                     onClick: () => {
                       dispatch({
@@ -187,6 +193,7 @@ const ComponentDetailPage: React.FC<Props> = ({ id, user }) => {
                   },
                   {
                     icon: <FiPlus />,
+                    disabled: !canCreateComponents(user?.role),
                     variant: 'brand',
                     onClick: async () => {
                       dispatch({
@@ -203,11 +210,22 @@ const ComponentDetailPage: React.FC<Props> = ({ id, user }) => {
                   },
                 ]}
               >
-                {(ref, onClick) => <Button ref={ref} onClick={onClick} icon={<FiMoreVertical />} />}
+                {(ref, onClick) => (
+                  <Button
+                    ref={ref}
+                    onClick={onClick}
+                    icon={<FiMoreVertical />}
+                    disabled={!canCreateComponents(user?.role)}
+                  />
+                )}
               </PopperButton>
             </Flex>
 
-            <Button icon={<FiTrash2 />} variant="danger">
+            <Button
+              icon={<FiTrash2 />}
+              variant="danger"
+              disabled={!canManageComponents(user?.role)}
+            >
               Delete component
             </Button>
           </Grid>

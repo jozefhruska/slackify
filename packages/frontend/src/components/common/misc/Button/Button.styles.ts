@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { width } from 'styled-system';
 
 import { ButtonProps } from './Button';
@@ -43,12 +43,21 @@ export const Main = styled.button<ButtonProps>`
   background: ${({ theme, variant }) => (variant ? theme.colors[variant] : theme.colors.gray[6])};
   color: ${({ theme }) => theme.colors.gray[0]};
   overflow: hidden;
+  cursor: pointer;
 
   ${width}
 
+  ${({ disabled }) =>
+    disabled &&
+    css`
+      cursor: not-allowed;
+      ${HoverOverlay} {
+        opacity: 1;
+      }
+    `};
+
   &:focus,
   &:hover {
-    cursor: pointer;
     outline: none;
 
     ${HoverOverlay} {
