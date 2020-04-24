@@ -9,7 +9,6 @@ export const permissions = shield<unknown, Context>(
     Query: {
       /* Users */
       users: isAuthenticated,
-      getUser: isAuthenticated,
 
       /* Collections */
       collections: isAuthenticated,

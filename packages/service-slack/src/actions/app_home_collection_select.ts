@@ -26,7 +26,7 @@ const app_home_collection_select: Middleware<SlackActionMiddlewareArgs<
     }
 
     /* Compose view */
-    const view = await compose_app_home_view(teamId, selectedCollection.value);
+    const view = await compose_app_home_view(teamId, userId, selectedCollection.value);
 
     /* Check if view was successfully composed */
     if (!view) {

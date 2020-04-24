@@ -1,9 +1,46 @@
-/* eslint-disable @typescript-eslint/ban-ts-ignore */
-import { Option, View, Button } from '@slack/web-api';
+import { Option, View, Button, ActionsBlock } from '@slack/web-api';
 
 import { prisma } from '../prisma';
 import { AppHomeComponentPreview } from '../types';
 import { BLOCK_DIVIDER, BLOCK_TEXT } from '../constants/views';
+import {
+  canCreateCollections,
+  canManageCollections,
+  canManageComponents,
+  canCreateComponents,
+} from '../utils/users';
+
+/**
+ * Composes app home view for user without account on Slackify.
+ */
+export const compose_app_home_sign_up_view = (): View => ({
+  type: 'home',
+  blocks: [
+    {
+      type: 'section',
+      text: {
+        type: 'mrkdwn',
+        text:
+          "*It seems like your account isn't connected with Slackify.*\n You can sign in with you Slack account by clicking on the button below.",
+      },
+    },
+    {
+      type: 'actions',
+      elements: [
+        {
+          type: 'button',
+          text: {
+            type: 'plain_text',
+            text: '🌍 \tConnect with Slackify',
+            emoji: true,
+          },
+          style: 'primary',
+          url: 'https://slackify.now.sh/',
+        },
+      ],
+    },
+  ],
+});
 
 /**
  * Composes header of app home view.
@@ -80,9 +117,30 @@ const compose_app_home_header = (collectionId?: string): View => {
  */
 export const compose_app_home_view = async (
   teamId: string,
+  userId: string,
   initialCollectionId?: string
 ): Promise<View | undefined> => {
   try {
+    /* Check if user ID is defined */
+    if (!userId) {
+      throw new Error('[views/app_home]: User ID is not defined.');
+    }
+
+    /* Check if user's Slack account is connected with Slackify */
+    const user = await prisma.user.findOne({
+      where: {
+        id: userId,
+      },
+      select: {
+        id: true,
+        role: true,
+      },
+    });
+
+    if (!user) {
+      return compose_app_home_sign_up_view();
+    }
+
     /* Get workspace collections */
     const collections = await prisma.collection.findMany({
       where: {
@@ -129,7 +187,7 @@ export const compose_app_home_view = async (
 
     /* Find initial option */
     const initialCollection = collectionList.find(
-      collection => collection.value === initialCollectionId
+      (collection) => collection.value === initialCollectionId
     );
 
     const activeCollection = initialCollection ?? collectionList[0];
@@ -161,47 +219,45 @@ export const compose_app_home_view = async (
       },
     });
 
-    const componentPreviews: AppHomeComponentPreview[] = components.map(component => {
-      switch (component.type) {
-        case 'PLAIN_TEXT': {
-          const data = component.plainTextData;
+    const componentPreviews = components.map(
+      (component): AppHomeComponentPreview => {
+        switch (component.type) {
+          case 'PLAIN_TEXT': {
+            const data = component.plainTextData;
 
-          return {
-            id: component.id,
-            //@ts-ignore
-            text: data.text,
-            author: component.author.name,
-            published: component.published,
-          };
-        }
+            return {
+              id: component.id,
+              text: data?.text ?? 'Error: Unable to compose preview.',
+              author: component.author.name,
+              published: component.published,
+            };
+          }
 
-        case 'ARTICLE': {
-          const data = component.articleData;
+          case 'ARTICLE': {
+            const data = component.articleData;
 
-          return {
-            id: component.id,
-            //@ts-ignore
-            title: data?.title,
-            //@ts-ignore
-            text: data.lead,
-            author: component.author.name,
-            published: component.published,
-          };
-        }
+            return {
+              id: component.id,
+              title: data?.title ?? '',
+              text: data?.lead ?? 'Error: Unable to compose preview.',
+              author: component.author.name,
+              published: component.published,
+            };
+          }
 
-        case 'LINK': {
-          const data = component.linkData;
+          case 'LINK': {
+            const data = component.linkData;
 
-          return {
-            id: component.id,
-            //@ts-ignore
-            text: data.url,
-            author: component.author.name,
-            published: component.published,
-          };
+            return {
+              id: component.id,
+              text: data?.url ?? 'Error: Unable to compose preview.',
+              author: component.author.name,
+              published: component.published,
+            };
+          }
         }
       }
-    });
+    );
 
     /* Set message as default */
     let componentList = [BLOCK_DIVIDER, BLOCK_TEXT('No components here 🤷‍♂️')];
@@ -229,58 +285,41 @@ export const compose_app_home_view = async (
           },
         ];
 
-        if (published) {
-          result.push({
-            type: 'actions',
-            elements: [
-              {
-                type: 'button',
-                action_id: 'component_hide',
-                text: {
-                  type: 'plain_text',
-                  text: '👀 \tHide',
-                  emoji: true,
-                },
-                style: 'danger',
-                value: id,
-              },
-              {
-                type: 'button',
-                text: {
-                  type: 'plain_text',
-                  text: '\tEdit',
-                  emoji: true,
-                },
-                value: 'details',
-              },
-            ],
+        /* Compose component actions */
+        const actions: ActionsBlock = {
+          type: 'actions',
+          elements: [],
+        };
+
+        if (canManageComponents(user.role)) {
+          actions.elements.push({
+            type: 'button',
+            action_id: published ? 'component_hide' : 'component_publish',
+            text: {
+              type: 'plain_text',
+              text: published ? '👀 \tHide' : '👀 \tPublish',
+              emoji: true,
+            },
+            style: published ? 'danger' : 'primary',
+            value: id,
           });
-        } else {
-          result.push({
-            type: 'actions',
-            elements: [
-              {
-                type: 'button',
-                action_id: 'component_publish',
-                text: {
-                  type: 'plain_text',
-                  text: '👀 \tPublish',
-                  emoji: true,
-                },
-                style: 'primary',
-                value: id,
-              },
-              {
-                type: 'button',
-                text: {
-                  type: 'plain_text',
-                  text: '\tEdit',
-                  emoji: true,
-                },
-                value: 'details',
-              },
-            ],
+        }
+
+        if (canCreateComponents(user.role)) {
+          actions.elements.push({
+            type: 'button',
+            text: {
+              type: 'plain_text',
+              text: '\tEdit',
+              emoji: true,
+            },
+            value: 'details',
           });
+        }
+
+        /* Push actions into result view if it contains at least one child element */
+        if (actions.elements.length) {
+          result.push(actions);
         }
 
         return result;
@@ -288,7 +327,9 @@ export const compose_app_home_view = async (
     }
 
     /* Compose view header */
-    const header = compose_app_home_header(activeCollection.value);
+    const header = canCreateCollections(user?.role)
+      ? compose_app_home_header(activeCollection.value)
+      : ({ type: 'home', blocks: [] } as View);
 
     return {
       ...header,

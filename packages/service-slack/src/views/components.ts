@@ -21,7 +21,9 @@ export const compose_create_new_component_modal = async (
     });
 
     /* Render content based on collection type */
-    const activeCollection = collections.find(collection => collection.id === initialCollectionId);
+    const activeCollection = collections.find(
+      (collection) => collection.id === initialCollectionId
+    );
 
     let content: View['blocks'] = [];
     switch (activeCollection?.type) {
@@ -151,7 +153,7 @@ export const compose_create_new_component_modal = async (
 
     /* Find active collection in list of options */
     const activeCollectionOption = collectionList.find(
-      collection => collection.value === initialCollectionId
+      (collection) => collection.value === initialCollectionId
     );
 
     return {

@@ -11,8 +11,16 @@ const app_home_opened: Middleware<SlackEventMiddlewareArgs<'app_home_opened'>> =
   body,
 }) => {
   try {
+    /* Extract user ID */
+    const userId = event?.user;
+
+    /* Check if user ID is defined */
+    if (!userId) {
+      throw new Error('[events/app_home_opened]: User ID is not defined.');
+    }
+
     /* Compose view */
-    const view = await compose_app_home_view(body.team_id);
+    const view = await compose_app_home_view(body.team_id, userId);
 
     /* Check if view was successfully composed */
     if (!view) {
@@ -21,7 +29,7 @@ const app_home_opened: Middleware<SlackEventMiddlewareArgs<'app_home_opened'>> =
 
     /* Publish app home view */
     await app.client.views.publish({
-      user_id: event?.user,
+      user_id: userId,
       view,
     });
   } catch (error) {

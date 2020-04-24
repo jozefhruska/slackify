@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import { useDispatch } from 'react-redux';
 import { Dispatch } from 'redux';
 
-import withApollo, { createApolloClient } from '../../src/api';
+import { createApolloClient } from '../../src/api';
 import { Flex, Box } from '../../src/components/common/layout/base';
 import { Block } from '../../src/components/common/layout';
 import { Paragraph } from '../../src/components/common/typography';
@@ -121,4 +121,4 @@ export const getServerSideProps: GetServerSideProps<Props> = async (ctx) => {
   return { props: { data, errorMessage } };
 };
 
-export default withApollo(RedirectPage);
+export default RedirectPage;

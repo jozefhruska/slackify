@@ -17,6 +17,10 @@ export const Select = styled.select`
   color: ${({ theme }) => theme.colors.gray[2]};
   appearance: none;
 
+  :disabled {
+    cursor: not-allowed;
+  }
+
   :focus {
     box-shadow: 0 0 0 2px ${({ theme }) => theme.colors.brand};
   }
