@@ -1,6 +1,6 @@
 This is BibTeX, Version 0.99d (TeX Live 2019)
 Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
-The top-level auxiliary file: /Users/jozefhruska/Development/School/slackify/resources/thesis/main/.texpadtmp/xhrusk25-slack-api-headless-cms.aux
+The top-level auxiliary file: /Users/jozefhruska/Development/School/BP/slackify/resources/thesis/main/.texpadtmp/xhrusk25-slack-api-headless-cms.aux
 The style file: ../bib-styles/Pysny/skplain.bst
 Reallocated singl_function (elt_size=4) to 100 items from 50.
 Reallocated singl_function (elt_size=4) to 100 items from 50.
@@ -47,7 +47,7 @@ Warning--empty year in NextJS
 Warning--empty year and revised in NextJS
 You've used 15 entries,
             3946 wiz_defined-function locations,
-            897 strings with 6897 characters,
+            897 strings with 6903 characters,
 and the built_in function-call counts, 6244 in all, are:
 = -- 479
 > -- 176
