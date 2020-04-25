@@ -1,48 +1,50 @@
 \babel@toc {slovak}{}
-\contentsline {chapter}{\numberline {1}\IeC {\'U}vod}{2}{chapter.1}% 
-\contentsline {chapter}{\numberline {2}Teoretick\IeC {\'a} \IeC {\v c}as\IeC {\v t}}{3}{chapter.2}% 
-\contentsline {section}{\numberline {2.1}Redak\IeC {\v c}n\IeC {\'e} syst\IeC {\'e}my s~otvoren\IeC {\'y}m aplika\IeC {\v c}n\IeC {\'y}m rozhran\IeC {\'\i }m}{3}{section.2.1}% 
-\contentsline {subsection}{\numberline {2.1.1}Strapi}{4}{subsection.2.1.1}% 
-\contentsline {subsection}{\numberline {2.1.2}Netlify CMS}{4}{subsection.2.1.2}% 
-\contentsline {section}{\numberline {2.2}V\IeC {\'y}voj klientsk\IeC {\'y}ch aplik\IeC {\'a}cii}{4}{section.2.2}% 
-\contentsline {subsection}{\numberline {2.2.1}User Experience (UX)}{5}{subsection.2.2.1}% 
-\contentsline {subsubsection}{Porozumenie potreb\IeC {\'a}m u\IeC {\v z}\IeC {\'\i }vate\IeC {\v l}a}{5}{section*.3}% 
-\contentsline {subsubsection}{Pou\IeC {\v z}ite\IeC {\v l}nos\IeC {\v t}}{5}{section*.4}% 
-\contentsline {subsection}{\numberline {2.2.2}HTML}{5}{subsection.2.2.2}% 
-\contentsline {subsubsection}{Elementy}{5}{section*.5}% 
-\contentsline {subsection}{\numberline {2.2.3}CSS}{6}{subsection.2.2.3}% 
-\contentsline {subsection}{\numberline {2.2.4}JavaScript}{6}{subsection.2.2.4}% 
-\contentsline {subsection}{\numberline {2.2.5}TypeScript}{7}{subsection.2.2.5}% 
-\contentsline {subsection}{\numberline {2.2.6}React}{7}{subsection.2.2.6}% 
-\contentsline {subsubsection}{JSX}{7}{section*.6}% 
-\contentsline {subsubsection}{Komponenty}{8}{section*.7}% 
-\contentsline {subsection}{\numberline {2.2.7}Next.js}{9}{subsection.2.2.7}% 
-\contentsline {section}{\numberline {2.3}V\IeC {\'y}voj serverov\IeC {\'y}ch aplik\IeC {\'a}cii}{9}{section.2.3}% 
-\contentsline {subsection}{\numberline {2.3.1}HTTP}{9}{subsection.2.3.1}% 
-\contentsline {subsubsection}{Terminol\IeC {\'o}gia}{10}{section*.8}% 
-\contentsline {subsubsection}{Met\IeC {\'o}dy}{10}{section*.9}% 
-\contentsline {subsection}{\numberline {2.3.2}Node.js}{10}{subsection.2.3.2}% 
-\contentsline {subsubsection}{Node Package Manager - NPM}{11}{section*.10}% 
-\contentsline {subsection}{\numberline {2.3.3}Rela\IeC {\v c}n\IeC {\'e} datab\IeC {\'a}zy}{11}{subsection.2.3.3}% 
-\contentsline {subsubsection}{PostgreSQL}{11}{section*.11}% 
-\contentsline {subsubsection}{Prisma}{11}{section*.12}% 
-\contentsline {section}{\numberline {2.4}GraphQL}{12}{section.2.4}% 
-\contentsline {subsection}{\numberline {2.4.1}Apollo Client}{13}{subsection.2.4.1}% 
-\contentsline {subsection}{\numberline {2.4.2}Apollo Server}{13}{subsection.2.4.2}% 
-\contentsline {section}{\numberline {2.5}Slack API}{14}{section.2.5}% 
-\contentsline {subsection}{\numberline {2.5.1}Block Kit}{14}{subsection.2.5.1}% 
-\contentsline {chapter}{\numberline {3}N\IeC {\'a}vrh rie\IeC {\v s}enia}{15}{chapter.3}% 
-\contentsline {section}{\numberline {3.1}Zadanie pr\IeC {\'a}ce}{15}{section.3.1}% 
-\contentsline {subsection}{\numberline {3.1.1}Odch\IeC {\'y}lky n\IeC {\'a}vrhu od p\IeC {\^o}vodn\IeC {\'e}ho zadania}{15}{subsection.3.1.1}% 
-\contentsline {section}{\numberline {3.2}N\IeC {\'a}vrh architekt\IeC {\'u}ry}{15}{section.3.2}% 
-\contentsline {section}{\numberline {3.3}D\IeC {\'a}tov\IeC {\'e} typy}{17}{section.3.3}% 
-\contentsline {subsection}{\numberline {3.3.1}Component}{17}{subsection.3.3.1}% 
-\contentsline {subsubsection}{Typ \quotedblbase \texttt {Plain Text}\textquotedblleft }{17}{section*.13}% 
-\contentsline {subsubsection}{Typ \quotedblbase \texttt {Article}\textquotedblleft }{17}{section*.14}% 
-\contentsline {subsubsection}{Typ \quotedblbase \texttt {Link}\textquotedblleft }{17}{section*.15}% 
-\contentsline {subsection}{\numberline {3.3.2}Collection}{17}{subsection.3.3.2}% 
-\contentsline {section}{\numberline {3.4}Diagram pr\IeC {\'\i }padov pou\IeC {\v z}itia}{17}{section.3.4}% 
-\contentsline {subsection}{\numberline {3.4.1}Autor}{17}{subsection.3.4.1}% 
-\contentsline {subsection}{\numberline {3.4.2}Zariadenie}{18}{subsection.3.4.2}% 
-\contentsline {chapter}{Literat\IeC {\'u}ra}{19}{chapter*.16}% 
+\contentsline {chapter}{\numberline {1}\IeC {\'U}vod}{3}{chapter.1}% 
+\contentsline {chapter}{\numberline {2}V\IeC {\'y}voj klientsk\IeC {\'y}ch aplik\IeC {\'a}cii}{4}{chapter.2}% 
+\contentsline {section}{\numberline {2.1}User experience (UX)}{4}{section.2.1}% 
+\contentsline {subsection}{\numberline {2.1.1}Porozumenie potreb\IeC {\'a}m u\IeC {\v z}\IeC {\'\i }vate\IeC {\v l}a}{4}{subsection.2.1.1}% 
+\contentsline {subsection}{\numberline {2.1.2}Pr\IeC {\'\i }stupnos\IeC {\v t} (Accessibility)}{4}{subsection.2.1.2}% 
+\contentsline {section}{\numberline {2.2}HTML}{5}{section.2.2}% 
+\contentsline {subsection}{\numberline {2.2.1}Elementy}{5}{subsection.2.2.1}% 
+\contentsline {section}{\numberline {2.3}CSS}{5}{section.2.3}% 
+\contentsline {section}{\numberline {2.4}JavaScript}{6}{section.2.4}% 
+\contentsline {section}{\numberline {2.5}TypeScript}{6}{section.2.5}% 
+\contentsline {section}{\numberline {2.6}React}{7}{section.2.6}% 
+\contentsline {subsection}{\numberline {2.6.1}JSX}{7}{subsection.2.6.1}% 
+\contentsline {subsection}{\numberline {2.6.2}Komponenty}{8}{subsection.2.6.2}% 
+\contentsline {section}{\numberline {2.7}Next.js}{8}{section.2.7}% 
+\contentsline {chapter}{\numberline {3}V\IeC {\'y}voj serverov\IeC {\'y}ch aplik\IeC {\'a}cii}{10}{chapter.3}% 
+\contentsline {section}{\numberline {3.1}HTTP}{10}{section.3.1}% 
+\contentsline {subsection}{\numberline {3.1.1}Terminol\IeC {\'o}gia}{10}{subsection.3.1.1}% 
+\contentsline {subsection}{\numberline {3.1.2}Met\IeC {\'o}dy}{11}{subsection.3.1.2}% 
+\contentsline {section}{\numberline {3.2}Node.js}{11}{section.3.2}% 
+\contentsline {subsection}{\numberline {3.2.1}Node Package Manager - NPM}{11}{subsection.3.2.1}% 
+\contentsline {section}{\numberline {3.3}Rela\IeC {\v c}n\IeC {\'e} datab\IeC {\'a}zy}{12}{section.3.3}% 
+\contentsline {subsection}{\numberline {3.3.1}PostgreSQL}{12}{subsection.3.3.1}% 
+\contentsline {subsection}{\numberline {3.3.2}Prisma}{12}{subsection.3.3.2}% 
+\contentsline {section}{\numberline {3.4}GraphQL}{12}{section.3.4}% 
+\contentsline {subsection}{\numberline {3.4.1}Apollo Client}{14}{subsection.3.4.1}% 
+\contentsline {subsection}{\numberline {3.4.2}Apollo Server}{14}{subsection.3.4.2}% 
+\contentsline {section}{\numberline {3.5}Slack API}{14}{section.3.5}% 
+\contentsline {subsection}{\numberline {3.5.1}Block Kit}{15}{subsection.3.5.1}% 
+\contentsline {chapter}{\numberline {4}Headless CMS}{16}{chapter.4}% 
+\contentsline {section}{\numberline {4.1}Strapi}{17}{section.4.1}% 
+\contentsline {section}{\numberline {4.2}Netlify CMS}{17}{section.4.2}% 
+\contentsline {chapter}{\numberline {5}N\IeC {\'a}vrh rie\IeC {\v s}enia}{18}{chapter.5}% 
+\contentsline {section}{\numberline {5.1}Zadanie pr\IeC {\'a}ce}{18}{section.5.1}% 
+\contentsline {subsection}{\numberline {5.1.1}Odch\IeC {\'y}lky n\IeC {\'a}vrhu od p\IeC {\^o}vodn\IeC {\'e}ho zadania}{18}{subsection.5.1.1}% 
+\contentsline {section}{\numberline {5.2}N\IeC {\'a}vrh architekt\IeC {\'u}ry}{19}{section.5.2}% 
+\contentsline {section}{\numberline {5.3}D\IeC {\'a}tov\IeC {\'e} typy}{20}{section.5.3}% 
+\contentsline {subsection}{\numberline {5.3.1}Component}{20}{subsection.5.3.1}% 
+\contentsline {subsubsection}{Typ \quotedblbase \texttt {Plain Text}\textquotedblleft }{20}{section*.3}% 
+\contentsline {subsubsection}{Typ \quotedblbase \texttt {Article}\textquotedblleft }{20}{section*.4}% 
+\contentsline {subsubsection}{Typ \quotedblbase \texttt {Link}\textquotedblleft }{20}{section*.5}% 
+\contentsline {subsection}{\numberline {5.3.2}Collection}{20}{subsection.5.3.2}% 
+\contentsline {section}{\numberline {5.4}Diagram pr\IeC {\'\i }padov pou\IeC {\v z}itia}{20}{section.5.4}% 
+\contentsline {subsection}{\numberline {5.4.1}Viewer}{20}{subsection.5.4.1}% 
+\contentsline {subsection}{\numberline {5.4.2}Author}{21}{subsection.5.4.2}% 
+\contentsline {subsection}{\numberline {5.4.3}Editor}{22}{subsection.5.4.3}% 
+\contentsline {subsection}{\numberline {5.4.4}Owner}{22}{subsection.5.4.4}% 
+\contentsline {subsection}{\numberline {5.4.5}Zariadenie}{23}{subsection.5.4.5}% 
+\contentsline {chapter}{Literat\IeC {\'u}ra}{24}{chapter*.6}% 
 \contentsfinish 
