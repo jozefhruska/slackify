@@ -22,10 +22,10 @@
 \contentsline {section}{\numberline {3.3}Rela\IeC {\v c}n\IeC {\'e} datab\IeC {\'a}zy}{12}{section.3.3}% 
 \contentsline {subsection}{\numberline {3.3.1}PostgreSQL}{12}{subsection.3.3.1}% 
 \contentsline {subsection}{\numberline {3.3.2}Prisma}{12}{subsection.3.3.2}% 
-\contentsline {section}{\numberline {3.4}GraphQL}{12}{section.3.4}% 
+\contentsline {section}{\numberline {3.4}GraphQL}{13}{section.3.4}% 
 \contentsline {subsection}{\numberline {3.4.1}Apollo Client}{14}{subsection.3.4.1}% 
 \contentsline {subsection}{\numberline {3.4.2}Apollo Server}{14}{subsection.3.4.2}% 
-\contentsline {section}{\numberline {3.5}Slack API}{14}{section.3.5}% 
+\contentsline {section}{\numberline {3.5}Slack API}{15}{section.3.5}% 
 \contentsline {subsection}{\numberline {3.5.1}Block Kit}{15}{subsection.3.5.1}% 
 \contentsline {chapter}{\numberline {4}Headless CMS}{16}{chapter.4}% 
 \contentsline {section}{\numberline {4.1}Strapi}{17}{section.4.1}% 
@@ -46,5 +46,15 @@
 \contentsline {subsection}{\numberline {5.4.3}Editor}{22}{subsection.5.4.3}% 
 \contentsline {subsection}{\numberline {5.4.4}Owner}{22}{subsection.5.4.4}% 
 \contentsline {subsection}{\numberline {5.4.5}Zariadenie}{23}{subsection.5.4.5}% 
-\contentsline {chapter}{Literat\IeC {\'u}ra}{24}{chapter*.6}% 
+\contentsline {chapter}{\numberline {6}Implement\IeC {\'a}cia datab\IeC {\'a}zovej vrstvy}{24}{chapter.6}% 
+\contentsline {section}{\numberline {6.1}Sch\IeC {\'e}ma}{24}{section.6.1}% 
+\contentsline {section}{\numberline {6.2}D\IeC {\'a}tov\IeC {\'e} modely}{25}{section.6.2}% 
+\contentsline {subsection}{\numberline {6.2.1}Model \texttt {Collection}}{25}{subsection.6.2.1}% 
+\contentsline {subsection}{\numberline {6.2.2}Model \texttt {Component}}{25}{subsection.6.2.2}% 
+\contentsline {subsubsection}{V\IeC {\'y}\IeC {\v c}tov\IeC {\'y} typ \texttt {ComponentType}}{26}{section*.6}% 
+\contentsline {subsection}{\numberline {6.2.3}Model \texttt {User}}{27}{subsection.6.2.3}% 
+\contentsline {subsubsection}{V\IeC {\'y}\IeC {\v c}tov\IeC {\'y} typ \texttt {UserRole}}{27}{section*.7}% 
+\contentsline {subsection}{\numberline {6.2.4}Model \texttt {Team}}{28}{subsection.6.2.4}% 
+\contentsline {section}{\numberline {6.3}Automaticky generovan\IeC {\'y} datab\IeC {\'a}zov\IeC {\'y} klient}{28}{section.6.3}% 
+\contentsline {chapter}{Literat\IeC {\'u}ra}{29}{chapter*.8}% 
 \contentsfinish 
