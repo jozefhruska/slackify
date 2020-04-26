@@ -283,6 +283,8 @@ Prisma je open-source \emph{sada nástrojov pre správu databázy}. Nahradzuje t
 	})
 \end{lstlisting}
 
+\noindent Vďaka sade nástrojov \texttt{prisma} nie je nutné pristupovať k databáze priamo pomocou SQL dotazov, ale je možné využiť API automaticky generovaného klienta.
+
 % GraphQL
 \section{GraphQL}
 \label{theory:graphql}
@@ -580,3 +582,214 @@ Obsah zo Slackify je možné získať z~verejného API (služba \texttt{service-
 	\includegraphics[scale=0.9]{obrazky-figures/device_use_case}
 	\caption{Diagram prípadov použitia -- \emph{Zariadenie}.}
 \end{figure}
+
+% Implementácia databázovej vrstvy
+%---------------------------------------------------------------------------
+\chapter{Implementácia databázovej vrstvy}
+Služby \texttt{service-private}, \texttt{service-public} a \texttt{service-slack} zdieľajú jednu spoločnú databázovú vrstvu. Pre zostavenie databázy a prístup k nej je využitá sada nástrojov \texttt{prisma}, bližšie popísaná v sekcií \ref{theory:databases}.
+
+% Schéma
+\section{Schéma}
+Sada nástrojov \texttt{prisma} vyžaduje hlavný konfiguračný súbor pomocou ktorého sa dokáže pripojiť k databáze, obvykle nazvaný \texttt{schema.prisma}. Tento súbor obsahuje tri hlavné časti:
+
+\begin{itemize}
+	\item \texttt{datasource} -- Špecifikuje typ zdroja dát (databázy) a údaje potrebné k nadviazaniu úspešného pripojenia.
+	\item \texttt{generator} -- Nastavenia databázového klienta, ktorý je automaticky generovaný podľa dátového modelu.
+	\item \texttt{model} -- Jednotlivé dátové modely, bližšie popísané v sekcií \ref{}.
+\end{itemize}
+
+\noindent Pomocou tohto konfiguračného súboru dokáže \texttt{prisma} zostaviť databázu a automaticky vygenerovať databázového klienta. \\
+
+% TODO: Add language definition for prisma files
+\begin{lstlisting}[label={impl:code:prisma_schema}, caption=Špecifikácia \texttt{datasource} a \texttt{generator} v konfiguračnom súbore \texttt{prisma}.]
+	datasource db {
+		provider = "postgresql"
+		url      = env("DATABASE_URL")
+		enabled  = env("DATABASE_URL")
+	}
+
+	generator cient_common {
+		provider = "prisma-client-js"
+		output   = "../../node_modules/@prisma/client"
+	}
+\end{lstlisting}
+
+\bigskip
+
+\noindent Vo výpise \ref{impl:code:prisma_schema} je ukázaná časť konfiguračného súboru v použitého v Slackify. Definuje PostgreSQL databázu ako typ zdroja dát (\texttt{datasource}) a špecifikuje URL pre pripojenie pomocou environmentálnej premennej \texttt{DATABASE\_URL}. Parameter \uv{\emph{enabled}} hovorí, že daný zdroj dát je povolený, ak je premenná \texttt{DATABASE\_URL} definovaná.
+
+% Dátové modely
+\section{Dátové modely}
+Dátové modely definované v konfiguračnom súbore \texttt{prisma} reprezentujú entity využívané v aplikácií. Sada nástrojov \texttt{prisma} tieto modely automaticky mapuje do jednotlivých tabuliek v databáze. \\
+
+\noindent Slackify obsahuje dva hlavné modely \texttt{Collection} a \texttt{Component} reprezentujúce dáta uložené v redakčnom systéme a modely \texttt{User} a \texttt{Team} slúžiacie pre uchovávanie informácií o užívateľoch a tímoch \emph{prepojených s aplikáciou Slack}.
+
+\subsection{Model \texttt{Collection}}
+Dátový model \texttt{Collection} (kolekcia) slúžiaci ako zoznam pre jednotlivé komponenty. Sú to homogénne zoznamy, ktoré môžu obsahovať iba komponenty jednoho typu.\\
+
+\begin{lstlisting}[caption=Dátový model \texttt{Collection} v konfiguračnom súbore \texttt{prisma}.]
+	model Collection {
+		id          String        @default(cuid()) @id
+		name        String
+		type        ComponentType
+		published   Boolean       @default(false)
+		description String?
+		team        Team          @relation(...)
+		teamId      String
+		components  Component[]
+		createdAt   DateTime      @default(now())
+		updatedAt   DateTime      @updatedAt
+	}
+\end{lstlisting}
+
+\bigskip
+
+\noindent Popis niektorých významých položiek obsiahutých v dátovom modeli:
+
+\begin{itemize}
+	\item \texttt{type} -- Určuje jediný typ komponenty, ktorý je možné vložiť do danej kolekcie. Typ komponenty je bližšie popísaný v sekcií \ref{impl:model:component}.
+	\item \texttt{team} -- Relácia s dátovým modelom \texttt{Team} ku ktorému je kolekcia priradená. Každá kolekcia musí byť priradená k práve jednej entite modelu \texttt{Team}.
+	\item \texttt{components} -- Relácia 1~:~$n$ všetkých komponent priradených ku kolekcií. Každá kolekcia môže mať 0 až $\infty$ priradených komponent.
+\end{itemize}
+
+\subsection{Model \texttt{Component}}
+\label{impl:model:component}
+Dátový model \texttt{Component} (komponent) reprezentujúci malú časť obsahu v Slackify. Každá komponenta \emph{musí mať zvolený typ}, ktorý určuje vnútornú štruktúru dát uložených v komponente. \\
+
+\begin{lstlisting}[caption=Dátový model \texttt{Component} v konfiguračnom súbore \texttt{prisma}.]
+	model Component {
+		id              String                  @default(cuid()) @id
+		type            ComponentType           @default(PLAIN_TEXT)
+		published       Boolean                 @default(false)
+		collection      Collection              @relation(...)
+		collectionId    String
+		author          User                    @relation(...)
+		authorId        String
+		team            Team                    @relation(...)
+		teamId          String
+		plainTextDataId String?
+		plainTextData   PlainTextComponentData? @relation(...)
+		articleDataId   String?
+		articleData     ArticleComponentData?   @relation(...)
+		linkDataId      String?
+		linkData        LinkComponentData?      @relation(...)
+		createdAt       DateTime                @default(now())
+		updatedAt       DateTime                @updatedAt
+	}
+\end{lstlisting}
+
+\bigskip
+
+\noindent Popis niektorých významých položiek obsiahutých v dátovom modeli:
+
+\begin{itemize}
+	\item \texttt{type} -- Typ komponenty nadobúdajúci jednu z hodnôt výčtového typu \texttt{ComponentType}.
+	\item \texttt{collection} -- Relácia s dátovým modelom \texttt{Collection}. Každá komponenta musí byť priradená k práve jednej kolekcií.
+	\item \texttt{author} -- Relácia s dátovým modelom \texttt{Author}. Každá komponenta musí byť priradená k právej jednomu autorovi.
+	\item \texttt{team} -- Relácia s dátovým modelom \texttt{Team}. Každá komponenta musí byť priradená k práve jednomu tímu.
+\end{itemize}
+
+\noindent Hodnota položky \texttt{type} určuje práve jednu z položiek \texttt{plainTextData}, \texttt{articleData} alebo \texttt{linkData} ako povinnú. Tieto položky ukazujú na rôzne špecifické dátové modely, ktoré reprezentujú obsah daných komponent. Napríklad ak položka \texttt{type} má hodnotu \texttt{LINK}, položka \texttt{linkData} \emph{musí} byť reláciou na dátový model \texttt{LinkComponentData}, ktorý obsahuje povinné pole URL a nepovinné pole text. \\
+
+\begin{lstlisting}[caption=Dátový model \texttt{LinkComponentData} v konfiguračnom súbore \texttt{prisma}.]
+	model LinkComponentData {
+		id   String  @default(cuid()) @id
+		text String?
+		url  String
+	}
+\end{lstlisting}
+
+\subsubsection{Výčtový typ \texttt{ComponentType}}
+Výčtový typ (enum), ktorý môže nadobúdať jednu z hodnôt \texttt{PLAIN\_TEXT}, \texttt{ARTICLE} alebo \texttt{LINK}. \\
+
+\begin{lstlisting}[caption=Výčtový typ \texttt{ComponentType} v konfiguračnom súbore \texttt{prisma}.]
+	enum ComponentType {
+		PLAIN_TEXT
+		ARTICLE
+		LINK
+	}
+\end{lstlisting}
+
+\subsection{Model \texttt{User}}
+Dátový model \texttt{User} (užívateľ) reprezentujúci informácie o uživateľskom účte prepojenom s aplikáciou Slack. \\
+
+\begin{lstlisting}[caption=Dátový model \texttt{User} v konfiguračnom súbore \texttt{prisma}.]
+	model User {
+		id          String      @id
+		email       String      @unique
+		name        String
+		role        UserRole    @default(VIEWER)
+		accessToken String      @unique
+		image_24    String?
+		image_32    String?
+		image_48    String?
+		image_72    String?
+		image_192   String?
+		image_512   String?
+		team        Team        @relation(fields: [teamId], references: [id])
+		teamId      String
+		components  Component[]
+	}
+\end{lstlisting}
+
+\bigskip
+
+\noindent Popis niektorých významých položiek obsiahutých v dátovom modeli:
+
+\begin{itemize}
+	\item \texttt{id} -- Jedinečný identifikátor užívateľa, prevzatý z autentifikačnej API aplikácie Slack.
+	\item \texttt{role} -- Užívateľská rola nadobúdajúca jednu z hodnôt výčtového typu \texttt{UserRole}. Určuje právomoci užívateľa, inicializuje sa s hodnotou \texttt{VIEWER}.
+	\item \texttt{team} -- Relácia s dátovým modelom \texttt{Team}. Každý užívateľ musí byť priradený k práve jednomu tímu.
+	\item \texttt{components} -- Relácia 1~:~$n$ všetkých komponent, ktorým je uživateľ autorom. Každý užívateľ môže byť autorom 0 až $\infty$ komponentov.
+\end{itemize}
+
+\subsubsection{Výčtový typ \texttt{UserRole}}
+Výčtový typ (enum), ktorý môže nadobúdať jednu z hodnôt \texttt{VIEWER}, \texttt{AUTHOR}, \texttt{EDITOR} alebo \texttt{OWNER}. \\
+
+\begin{lstlisting}[caption=Výčtový typ \texttt{UserRole} v konfiguračnom súbore \texttt{prisma}.]
+	enum UserRole {
+		OWNER
+		EDITOR
+		AUTHOR
+		VIEWER
+	}
+\end{lstlisting}
+
+\subsection{Model \texttt{Team}}
+Dátový model \texttt{Team} (tím) reprezentujúci informácie o tíme (pracovnom prostredí, workspace) v aplikácií Slack. \\
+
+\begin{lstlisting}[caption=Dátový model \texttt{Team} v konfiguračnom súbore \texttt{prisma}.]
+	model Team {
+		id          String       @id
+		name        String
+		domain      String       @unique
+		accessToken String       @unique
+		collections Collection[]
+		users       User[]
+		components  Component[]
+	}
+\end{lstlisting}
+
+\bigskip
+
+\noindent Popis niektorých významých položiek obsiahutých v dátovom modeli:
+
+\begin{itemize}
+	\item \texttt{id} -- Jedinečný identifikátor tímu, prevzatý z autentifikačnej API aplikácie Slack.
+	\item \texttt{accessToken} -- Generovaný prístupový kód, ktorý je nutné využiť pre získanie obsahu z redakčného systému cez verejnú api (službu \texttt{service-public}). 
+	\item \texttt{collections} -- Relácia 1~:~$n$ všetkých kolekcií, ktoré sú vytvorené pod daným tímom. Každý tím môže mať priradených 0 až $\infty$ kolekcií.
+	\item \texttt{users} -- Relácia 1~:~$n$ všetkých užívateľov, ktorí sú členmi daného tímu. Každý tím môže mať 0 až $\infty$ užívateľov.
+	\item \texttt{components} -- Relácia 1~:~$n$ všetkých komponent, ktoré sú vytvorené pod daným tímom. Každý tím môže mať priradených 0 až $\infty$ komponent.
+\end{itemize}
+
+% Automaticky generovaný databázový klient
+\section{Automaticky generovaný databázový klient}
+Pomocou konfiguračného súboru \texttt{prisma} automaticky zostrojí striktne typovaného databázové klienta, ktorý dokáže zostavovať dotazy pre databázu. Pomocou tohto klienta je možné vytvárať, čítať, modifikovať, či mazať dáta v databáze. \\
+
+\noindent Databázový klient je generovaný do zložky \texttt{node\_modules}, odkiaľ je možné ho importovať ako z modulu \texttt{@prisma/client}. \\
+
+\begin{lstlisting}[caption=Príklad vytvorenia instancie databázového klienta v Slackify.]
+	import { PrismaClient } from "@prisma/client";
+
+	export const prisma = new PrismaClient();
+\end{lstlisting}
