@@ -56,6 +56,13 @@
 \contentsline {subsubsection}{V\IeC {\'y}\IeC {\v c}tov\IeC {\'y} typ \texttt {UserRole}}{27}{section*.7}% 
 \contentsline {subsection}{\numberline {6.2.4}Model \texttt {Team}}{28}{subsection.6.2.4}% 
 \contentsline {section}{\numberline {6.3}Automaticky generovan\IeC {\'y} datab\IeC {\'a}zov\IeC {\'y} klient}{28}{section.6.3}% 
-\contentsline {chapter}{Literat\IeC {\'u}ra}{29}{chapter*.8}% 
+\contentsline {chapter}{\numberline {7}Implement\IeC {\'a}cia webovej konzoly}{29}{chapter.7}% 
+\contentsline {section}{\numberline {7.1}Prihl\IeC {\'a}senie}{29}{section.7.1}% 
+\contentsline {section}{\numberline {7.2}Spr\IeC {\'a}va kolekci\IeC {\'\i }}{30}{section.7.2}% 
+\contentsline {subsection}{\numberline {7.2.1}Vytvorenie a \IeC {\'u}prava kolekcie}{30}{subsection.7.2.1}% 
+\contentsline {section}{\numberline {7.3}Spr\IeC {\'a}va komponentov}{31}{section.7.3}% 
+\contentsline {subsection}{\numberline {7.3.1}Vytvorenie a \IeC {\'u}prava komponentov}{32}{subsection.7.3.1}% 
+\contentsline {section}{\numberline {7.4}Zmena role u\IeC {\v z}\IeC {\'\i }vate\IeC {\v l}a}{32}{section.7.4}% 
+\contentsline {chapter}{Literat\IeC {\'u}ra}{33}{chapter*.8}% 
 \ttl@starttoc {chapters@1}
 \contentsfinish 

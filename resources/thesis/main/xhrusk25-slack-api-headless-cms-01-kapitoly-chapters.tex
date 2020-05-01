@@ -793,3 +793,85 @@ Pomocou konfiguračného súboru \texttt{prisma} automaticky zostrojí striktne 
 
 	export const prisma = new PrismaClient();
 \end{lstlisting}
+
+\chapter{Implementácia webovej konzoly}
+Webová konzola slúži pre komplexnejšiu správu obsahu v Slackify redakčnom systéme. Samotné uživateľské rozhranie je implementované pomocou JavaScriptovej knižnice React a frameworku Next.js, ktorý zabezpečuje vykresľovanie (render) na strane servera.
+
+% Prihlásenie
+\section{Prihlásenie}
+Slackify nemá vlastný proces vytvorenia užívateľského účtu, naopak všetky \emph{dáta o užívateľoch preberá z aplikácie Slack} pomocou protokolu OAuth 2.0. \\
+
+\noindent Proces príhlásenia užívateľa do Slackify cez aplikáciu Slack je následovný:
+
+\begin{enumerate}
+	\item Užívateľ, ktorý sa chce prihlásiť do Slackify je po kliknutí na tlačidlo \uv{Sign in with Slack} presmerovaný na autorizačnú stránku aplikácie Slack.
+	\item Užívateľ vyplní svoje prihlasovacie údaje pre účet v tom pracovnom prostredí, \emph{ktoré má nainštalovanú aplikáciu Slackify}.
+	\item Po úspešnom prihlásení užívateľ \emph{povolí Slackify prístup k užívateľským údajom} a je následne presmerovaný na stránku vo webovej konzole Slackify \texttt{/auth/redirect} s URL parametrom \textit{code}.
+	\item Slackify odošle hodnotu URL parametra \textit{code} na OAuth API aplikácie Slack a očakáva odpoveď s \emph{autorizačným kódom pre daného užívateľa} a informáciach o ňom.
+	\item Autorizačný token je následne možné využiť pre opätovné získanie informácií o užívateľovi alebo k vykonávaniu akcií za užívateľa.
+\end{enumerate}
+
+\noindent Po úspešnom obdržaní autorizačného tokena a užívateľských dát systém skontroluje, či už daný užívateľ v databáze existuje. V prípade, že užívateľ neexistuje, je záznam o ňom pridaný do databázy. V prípade, že už existuje, informácie o ňom sú len aktualizované. \\
+
+\noindent Vygenerovaný JWT\footnote{JWT -- JSON Web Token} so základnými informáciami o užívateľovi je uložený do cookies prehliadača. Pri návšteve každej stránky prebieha kontrola, či uložený JWT nie je expirovaný.
+
+% Správa kolekcií
+\section{Správa kolekcií}
+Hlavnou súčasťou správy kolekcií je zoznam všetkých kolekcií, ktoré boli vytvorené v tíme aktuálne prihláseného užívateľa. Na tejto stránke je možné kolekcie vytvoriť, upraviť alebo zmazať, ak má užívateľ na tieto akcie dostatočné práva.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.085]{obrazky-figures/screenshot_collections}
+	\caption{Stránka správy kolekcií vo webovej konzole.}
+\end{figure}
+
+\noindent Pri úvodnom načítaní stránky je odoslaná GraphQL požiadavka (query) \texttt{collections()}, ktorá získa prvých 40 kolekcií zo služby \texttt{service-private}. Ak chce užívateľ zobraziť viac kolekcií, musí zísť na koniec zoznamu. Na jeho konci sa nachádza element, ktorý ak je viditeľný v okne prehliadača odošle znova požiadavku \texttt{collections()}, ale tentoraz s priloženými parametrami \texttt{skip} a \texttt{first} (význam parametrov bližšie popísaný v sekcií \ref{?}). Získané položky sú pridané na koniec zoznamu a takto je vytvorený mechanizmus tzv. \uv{nekonečného scrollovania} (infinite scrolling).
+% TODO: Add a ref for query collections() section
+
+\subsection{Vytvorenie a úprava kolekcie}
+Vytvorenie novej kolekcie alebo úprava už existujúcej je možná pomocou dialógového okna, ktoré je dostupné na stránkach zoznamu a detailu kolekcií. Objekt uložený v globálnom stave aplikácie pod názvom \texttt{createUpdateModal} uchováva kontext dialógového okna, ktorý sa obsahuje položky:
+
+\begin{itemize}
+	\item \texttt{mode} -- Mód zobrazenia, môže nadobudnúť hodnoty \uv{create} alebo \uv{update}.
+	\item \texttt{collection} -- V prípade, že mód zobrazenia má hodnotu \uv{update}, očakáva sa, že hodnota tejto položky obsahuje objekt popisujúci upravovanú kolekciu.
+\end{itemize}
+
+\noindent Po potvrdení formulára vytvorenia alebo úpravy kolekcie je na službu \texttt{service-private} odoslaná mutácia \texttt{createOneCollection()}, resp. \texttt{updateOneCollection()} s dátami z formulára. Ak bola mutácia úspešná, v odpovedi od služby \texttt{service-private} by sa mali nachádzať dáta novej, resp. aktualizovanej kolekcie. Tieto dáta sú následne použité pre aktualizovanie cache webovej aplikácie.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.085]{obrazky-figures/screenshot_collection_create}
+	\caption{Dialógové okno pre vytvorenie a úpravu kolekcií.}
+\end{figure}
+
+% Správa komponentov
+\section{Správa komponentov}
+Podobne ako u kolekcií je hlavnou súčasťou správy komponentov zoznam všetkých komponentov, ktoré boli vytvorené v tíme aktuálne prihláseného užívateľa. Podmienkou vytvorenia nového komponentu je už \emph{aspoň jedna existujúca kolekcia}, ku ktorej môže byť daný komponent priradený. Na tejto stránke je možné okrem vytvorenia nového komponentu aj upraviť alebo zmazať už existujúce komponenty.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.085]{obrazky-figures/screenshot_components}
+	\caption{Stránka správy komponentov vo webovej konzole.}
+\end{figure}
+
+\noindent Rovnako ako pri zozname kolekcií je pri úvodnom načítaní odoslaná požiadavka pre získanie z ktorých sa zoznam zostaví. Pre komponenty je táto požiadavka pomenovaná \texttt{components()}. Zoznam komponentov takisto podporuje aj infinite scrolling mechanizmus.
+
+\subsection{Vytvorenie a úprava komponentov}
+Rovnaký princíp ako pri tvorbe a úprave kolekcií. Jedná sa o dialógové okno, ktoré svoj kontext uchováva v globálnom stave aplikácie, avšak mierne pozmenený:
+
+\begin{itemize}
+	\item \texttt{mode} -- Mód zobrazenia, rovnako ako u kolekcií môže nadobudnúť hodnoty \uv{create} alebo \uv{update}.
+	\item \texttt{collection} -- Obsahuje informácie o aktuálne zvolenej kolekcií pri tvorbe nového komponentu. Typ kolekcie určuje typ k \emph{nej priradených komponent}, a preto je táto kolekcia využitá pre zobrazenie relevantného formulára pre konkrétny typ komponentov.
+	\item \texttt{component} -- V prípade, že mód zobrazenia má hodnotu \uv{update}, očakáva sa, že hodnota tejto položky obsahuje objekt poposijúci upravovaný komponent.
+\end{itemize}
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.085]{obrazky-figures/screenshot_component_update}
+	\caption{Dialógové okno pre vytvorenie a úpravu komponentov.}
+\end{figure}
+
+\noindent Po povrdení formulára je pre vytvorenie nového komponentu alebo úpravu už existujúceho odoslaná mutácia \texttt{createOneComponent()}, resp. \texttt{updateOneComponent()} na službu \texttt{service-private}.
+
+\section{Zmena role užívateľa}
+Každý užívateľ môže navštíviť stránku so zoznamom všetkých užívateľov tímu, ktorého je členom. V prípade, že má aktuálne prihlásený užívateľ rolu \uv{Owner}, môže navyše meniť role ostatných užívateľov v rámci tímu. U každého užívateľa v zozname sa nachádza HTML element \texttt{<Select />}, ktorý ukazuje aktuálnu rolu daného užívateľa. Pri zmene na inú hodnotu tento element odošle mutáciu \texttt{updateOneUser()} so zvolenou hodnotou na službu \texttt{service-private}, ktorá aktualizuje rolu daného užívateľa.
