@@ -96,7 +96,7 @@ TypeScript je obvykle vhodné skompilovať do natívneho JavaScriptu pre zachova
 	}
 \end{lstlisting}
 
-\bigskip
+\medskip
 
 \noindent Využitie programovacieho jazyka TypeScript nie je limitované pre vývoj klientských aplikácii. Rovnako ako pri JavaScripte sa jedná o~univerzálny programovací jazyk, ktorý je vďaka nástrojom ako Node.js [\ref{subsection:nodejs}] možné využiť napríklad aj na tvorbu serverových aplikácií.
 
@@ -118,13 +118,11 @@ Syntaktické rozšírenie JavaScriptu inšpirované značkovacími jazykmi, avš
 	);
 \end{lstlisting}
 
-\bigskip
+\medskip
 
 \noindent Atribúty JSX tagov môžu prijímať textové reťazce (\texttt{<div className='block'>}) alebo JavaScriptové výrazy (\texttt{<img src=\{item.image\} />}), ktoré sa neskôr vyhodnotia. \\
 
-\noindent Elementy JSX sú kompilované do volaní \texttt{React.createElement()}, ktoré vrátia obyčajné JavaScriptové objekty nazvané \uv{React elementy}. \cite{React}
-
-\bigskip
+\noindent Elementy JSX sú kompilované do volaní \texttt{React.createElement()}, ktoré vrátia obyčajné JavaScriptové objekty nazvané \uv{React elementy}. \cite{React} \\
 
 \begin{lstlisting}[language=TypeScript, caption=Príklad jednoduchého React elementu po kompilácií. \cite{React}]
 	const element = {
@@ -136,7 +134,7 @@ Syntaktické rozšírenie JavaScriptu inšpirované značkovacími jazykmi, avš
 	};
 \end{lstlisting}
 
-\bigskip
+\medskip
 
 \noindent Tieto objekty slúžia Reactu ako \uv{popis} pre zobrazenie. Využíva ich pre zostavenie a urdržovanie aktuálnosti DOM\footnote{DOM -- document object model}. \cite{React}
 
@@ -152,7 +150,7 @@ Komponenty umožňujú vývojárovi rozdeliť uživateľské rozhranie do samost
 	}
 \end{lstlisting}
 
-\bigskip
+\medskip
 
 \noindent Avšak pre definíciu komponenty možeme použiť aj ES6 triedu: \\
 
@@ -164,7 +162,7 @@ Komponenty umožňujú vývojárovi rozdeliť uživateľské rozhranie do samost
 	}
 \end{lstlisting}
 
-\bigskip
+\medskip
 
 \blockquote[Dokumentácia React \cite{React}]{Konceptuálne sú komponenty ako obyčajné JavaScriptové funkcie. Prijímajú vstupy nazývané \emph{props} a vracajú React elementy popisujúce zobrazenie na obrazovke.}
 
@@ -303,7 +301,7 @@ Dotazovací (query) jazyk pre API a runtime na strane servera pre vykonávanie d
 	}
 \end{lstlisting}
 
-\bigskip
+\medskip
 
 \noindent Po spustení GraphQL služby (typicky URL adresa dostupná cez HTTPS) očakáva GraphQL dotazy, ktoré spracováva a vyhodnocuje. Obdržané dotazy najskôr skontroluje, či požadujú iba typy a polia, ktoré sú definované. V~prípade, že sú dotazy v~poriadku, Graphql spustí požadované resolvery a vracia výsledok. \cite{GraphQL} \\
 
@@ -312,14 +310,14 @@ Dotazovací (query) jazyk pre API a runtime na strane servera pre vykonávanie d
 \noindent Pre ukážku, \emph{query} dotaz na GraphQL službu so schémou ukázanou vo výpise \ref{lstlisting:graphql_schema}: \\
 
 \begin{lstlisting}[caption=Príklad \emph{query} dotazu na GraphQL službu. \cite{GraphQL}]
-	{
+	query {
 		me {
 			name
 		}
 	}
 \end{lstlisting}
 
-\bigskip
+\medskip
 
 \ldots by po spracovaní GraphQL službou mohol vrátiť JSON\footnote{JSON - javascript object notation} objekt: \\
 
@@ -335,8 +333,6 @@ Dotazovací (query) jazyk pre API a runtime na strane servera pre vykonávanie d
 Implementácia GraphQL špecifikácie pre klientské aplikácie. Apollo Client je priamo prepojený s~knižnicou React a poskytuje nástroje umožňujúce rýchly vývoj webových aplikácií, ktoré získavajú dáta z~GraphQL služby. \\
 
 \blockquote[Dokumentácia Apollo GraphQL \cite{Apollo}]{Apollo Client je knižnica umožňujúca plnohodnotnú správu stavu dát v~JavaScriptových aplikáciach. Umožňuje vývojárovi len napísať požadovaný GraphQL dotaz a Apollo Client sa už postará o~získanie, uloženie dát do cache a obnovenie uživateľského rozhrania. Využívanie knižnice Apollo Client vedie vývojára ku správnej štruktúre kódu.}
-
-\bigskip
 
 \noindent Apollo GraphQL umožňuje využiť svoju cache aj pre ukladanie lokálneho stavu aplikácie. Vďaka tomu sa pre danú aplikáciu stáva jediným zdrojom dát.
 
@@ -387,7 +383,7 @@ Framework pre tvorbu uživateľského rozhrania pre Slack aplikácie, ktorý pon
 	},
 \end{lstlisting}
 
-\bigskip
+\medskip
 
 \noindent Bloky sa vkladajú do lineárneho zoznamu nazvanom \emph{view}, ktorý je následne odoslaný na príslušnú časť API, aby bol spracovaný. Niektoré bloky podporujú formátovanie pomocou modifikovanej verzie jazyka \emph{markdown}.
 
@@ -421,7 +417,7 @@ Najpopulárnejší Headless redakčný systém. Disponuje administračným panel
 	GET "http://localhost:1337/restaurants/count" // Odpoved: 1
 \end{lstlisting}
 
-\bigskip
+\medskip
 
 \noindent Pre použitie Strapi je nutné systém spustiť na vlastnej infraštruktúre, pripojiť k~predom vytvorenej relačnej databáze a celý systém nakonfigurovať.
 
@@ -465,10 +461,10 @@ Na začiatkoch navrhovania architektúry bola služba rozdelená do dvoch hlavn�
 \noindent Aj keď v~prvopočiatkoch tvorby návrhu sa táto architekúra zdala ako vyhovujúca, neskôr sa ukázalo ako lepšia možnosť nasledujúce rozdelenie do štyroch menších služieb:
 
 \begin{itemize}
-	\item \texttt{frontend} -- Webová aplikácia poskytujúca prístup k~obsahu a nastaveniam headless redakčného systému. Táto časť zostala nezmenená.
+	\item \texttt{frontend} -- Webová konzola poskytujúca prístup k~obsahu a nastaveniam headless redakčného systému. Táto časť zostala nezmenená.
 	\item \texttt{service-slack} -- Serverová aplikácia zodpovedná za komunikáciu so Slack API. Udalosti a akcie prichádzajúce zo Slack aplikácie smerujú na túto službu, kde sú spracované a vyhodnotené.
-	\item \texttt{service-private} -- Serverová GraphQL aplikácia poskytujúca logiku a prístup k~dátam \uv{frontend} službe.
-	\item \texttt{service-public} -- Serverová GraphQL aplikácia poskytujúca prístup k~obsahu redakčného systému koncovým užívateľom.
+	\item \texttt{service-private} -- Serverová GraphQL aplikácia poskytujúca logiku a prístup k~dátam webovej konzole (\texttt{frontend} službe).
+	\item \texttt{service-public} -- Serverová GraphQL aplikácia poskytujúca prístup k~obsahu redakčného systému (verejné API headless redakčného systému).
 	\item \texttt{database} -- Relačná databáza obsahujúca uživateľské dáta, nastavenia a obsah od koncových užívateľov.
 \end{itemize}
 
@@ -614,7 +610,7 @@ Sada nástrojov \texttt{prisma} vyžaduje hlavný konfiguračný súbor pomocou 
 	}
 \end{lstlisting}
 
-\bigskip
+\medskip
 
 \noindent Vo výpise \ref{impl:code:prisma_schema} je ukázaná časť konfiguračného súboru v použitého v Slackify. Definuje PostgreSQL databázu ako typ zdroja dát (\texttt{datasource}) a špecifikuje URL pre pripojenie pomocou environmentálnej premennej \texttt{DATABASE\_URL}. Parameter \uv{\emph{enabled}} hovorí, že daný zdroj dát je povolený, ak je premenná \texttt{DATABASE\_URL} definovaná.
 
@@ -642,7 +638,7 @@ Dátový model \texttt{Collection} (kolekcia) slúžiaci ako zoznam pre jednotli
 	}
 \end{lstlisting}
 
-\bigskip
+\medskip
 
 \noindent Popis niektorých významých položiek obsiahutých v dátovom modeli:
 
@@ -678,7 +674,7 @@ Dátový model \texttt{Component} (komponent) reprezentujúci malú časť obsah
 	}
 \end{lstlisting}
 
-\bigskip
+\medskip
 
 \noindent Popis niektorých významých položiek obsiahutých v dátovom modeli:
 
@@ -732,7 +728,7 @@ Dátový model \texttt{User} (užívateľ) reprezentujúci informácie o uživat
 	}
 \end{lstlisting}
 
-\bigskip
+\medskip
 
 \noindent Popis niektorých významých položiek obsiahutých v dátovom modeli:
 
@@ -770,7 +766,7 @@ Dátový model \texttt{Team} (tím) reprezentujúci informácie o tíme (pracovn
 	}
 \end{lstlisting}
 
-\bigskip
+\medskip
 
 \noindent Popis niektorých významých položiek obsiahutých v dátovom modeli:
 
@@ -794,8 +790,144 @@ Pomocou konfiguračného súboru \texttt{prisma} automaticky zostrojí striktne 
 	export const prisma = new PrismaClient();
 \end{lstlisting}
 
+
+
+% Implementácia GraphQL služieb
+%---------------------------------------------------------------------------
+\chapter{Implementácia GraphQL služieb}
+Ako bolo vysvetlené v sekcií \ref{design:architecture} o návrhu architektúry, redakčný systém Slackify disponuje dvomi GraphQL službami -- skrytou \texttt{service-private} a verejnou \texttt{service-public}. Obe GraphQL služby sú implementované pomocou balíčka Apollo Server.
+
+% Schéma
+\section{Schéma}
+GraphQL schémy oboch služieb sú implementované pomocou balíčka \texttt{Nexus Schema}, ktorý umožňuje vytvoriť GraphQL schému v jazyku JavaScript namiesto SDL\footnote{SDL -- Schema Definition Language} definovanom v GraphQL špecifikácií. Vďaka tomu je možné budovať schému \uv{code-first} a silno typovanú. \\
+
+\begin{lstlisting}[caption=Časť GraphQL schémy služby \texttt{service-private}., label={impl:code:schema}]
+	export const Query = queryType({
+		definition(t) {
+			/* Users */
+			t.crud.users({
+				filtering: {
+					team: true,
+				},
+			});
+		}
+	});
+\end{lstlisting}
+
+\noindent Balíček \texttt{Nexus Schema} disponuje aj pluginom, ktorý ho dokáže prepojiť s \texttt{prisma} klientom. Toto prepojenie rozširuje triedu \texttt{t} (prvý parameter v bloku \texttt{definition()}) o dve položky:
+
+\begin{itemize}
+	\item \texttt{t.model} -- Mapovanie položiek databázových modelov na GraphQL typy.
+	\item \texttt{t.crud} -- Databázové operácie automaticky generované pre každý databázový model. Operácie podporujú stránkovanie, filtrovanie alebo zoraďovanie výsledkov. Vo výpise \ref{impl:code:schema} je znázornená operácia na získanie listu všetkých užívateľov s možnosťou filtrácie podľa tímu.
+\end{itemize}
+
+\noindent Plugin pre prepojenie schémy s \texttt{prisma} klientom však nepodporuje kontrolu autorizácie užívateľa, tá je riešená použitím \uv{middleware} funkcií.
+
+% Autorizácia
+\section{Autorizácia}
+Každá požiadavka a mutácia (s výnimkou mutácie \texttt{signIn()} služby \texttt{service-private}) musí obsahovať HTTP hlavičku s názvom \texttt{Authorization}. Obe GraphQL služby však vyžadujú rozdieľne hodnoty tejto hlavičky, bližšie popísané v sekciách \ref{impl:service-private} a \ref{impl:service-public}.
+
+\subsection{GraphQL Shield}
+Skrytá aj verejná GraphQL služba pre kontrolu prístupu využíva aj middleware \texttt{GraphQL Shield}, ktorý umožňuje vytvoriť \uv{pravidlá} pre prístup ku konkrétnym požiadavkám alebo mutáciam. \\
+
+\begin{lstlisting}[caption={Pravidlo \texttt{GraphQL Shield} kontrolujúce či je užívateľ autentifikovaný.}, label={impl:code:rule}]
+	export const isAuthenticated = rule({ cache: 'contextual' })(
+		async (_parent, _args, { user }: Context) => {
+			return user !== undefined;
+		}
+	);
+\end{lstlisting}
+
+\medskip
+
+\noindent Podobné pravidlá ako vo výpise \ref{impl:code:rule} sú využité pre kontrolu prístupu v celej GraphQL schéme. Ak niektorá z podmienok pravidla nie je splnená, dané pravidlo obvykle vráti instanciu typu \texttt{Error} so špecifickou správou, ktorá je zaslaná späť do webovej konzoly. Ak sú však splnené \emph{všetky podmienky}, pravidlo vracia boolean hodnotu \texttt{true} a riadenie je prenechané príslušnej GraphQL \texttt{resolver} funkcií.
+
+% Skrytá služba service-private
+\section{Skrytá služba \texttt{service-private}}
+\label{impl:service-private}
+Skrytá GraphQL služba (\texttt{service-private}) poskytuje prístup k dátam pre webové konzolu (službu \texttt{frontend}, ktorej implementácia je popísaná v sekcií \ref{impl:frontend}). Schéma tejto služby je tvorená prevažne CRUD operáciami nad databázovými modelmi \texttt{Collection} a \texttt{Component}.
+
+\subsection{Autorizácia}
+HTTP hlavička \texttt{Authorization} požiadavky alebo mutácie obsahuje JWT konkrétneho užívateľa. Tento token obsahuje okrem iných informácií o užívateľovi aj jeho ID. Vďaka tomu je možné pred vykonaním každej operácie získať všetky dostupné informácie o užívateľovi a jeho tíme, ktoré sú následne dostupné v kontexte každej GraphQL \texttt{resolver} funkcií. Ak nebolo možné nájsť užívateľa s daným ID, dáta o ňom a jeho tíme majú v GraphQL \texttt{resolver} funkcií hodnotu \texttt{undefined}.
+
+% Verejná služba service-public
+\section{Verejná služba \texttt{service-public}}
+\label{impl:service-public}
+Verejná GraphQL služba (\texttt{service-public}) slúži ako hlavné aplikačné rozhranie pre headless redakčný systém Slackify. Tento GraphQL server umožňuje vývojárom využívajúcim Slackify vo svojich implementáciach jednoducho získať obsah z redakčného systému.
+
+\subsection{Autorizácia}
+Po prepojení tímu v aplikácií Slack s redakčným systémom Slackify je tomuto tímu vygenerovaný \emph{unikátny autorizačný token}. Tento token je následne očakávaný v HTTP hlavičke \texttt{Authorization} každej požiadavky smerujúcej na službu \texttt{service-public}. V prípade, že autorizačný token chýba alebo je nesprávny, služba požiadavku zahodí a odpovie chybovou správou vysvetlujúcou zlyhanie. 
+
+\subsection{Zjednodušený typ \texttt{Component}}
+Databázový model \texttt{Component} slúži na uchovávanie metadát o komponente. Samotný obsah komponenty sa nachádza v oddelených databázových modeloch s ktorými je daný komponent v relácií (viac viz \ref{impl:model:component}). Takýto princíp ukladania dát umožňuje jednoduchú modifikáciu typov komponent a ich obsahu, no nie je optimálny pre vývojárov, ktorí implementujú Slackify do svojich projektov. \\
+
+\begin{lstlisting}[caption={Príklad získania obsahu komponentu pred optimalizáciou.}]
+	query {
+		component(...) {
+			id
+			type // ??
+			plainTextData
+			articleData
+			linkData
+			...
+		}
+	}
+\end{lstlisting}
+
+\medskip
+
+\noindent Vývojár musí totiž vopred poznať typ komponentu a podľa toho si vyžiadať z GraphQL servera konkrétnu reláciu s obsahom komponentu. Väčši problém však nastane v prípade, že vývojár vopred nepozná typ komponentu, ktorý žiada od GraphQL servera. V takejto situácií je nutné vyžiadať relácie s obsahmi pre \emph{všetky typy komponentov} a po obdržaní dát pristúpiť k správnemu obsahu podľa typu. \\
+
+\begin{lstlisting}[caption={Definícia union typu pre dáta komponenty.}, label={impl:service-public:union}]
+	export const ComponentData = unionType({
+		name: 'ComponentData',
+		definition(t) {
+			t.members('PlainTextComponentData', 'ArticleComponentData', 'LinkComponentData');
+			t.resolveType((data) => {
+				// ...
+			});
+		},
+	});
+\end{lstlisting}
+
+\medskip
+
+\noindent Z tohto dôvodu dôvodu služba \texttt{service-public} disponuje upraveným typom \texttt{Component}, ktorý má špeciálne pole \texttt{data} typu \texttt{union} (viz výpis \ref{impl:service-public:union}). Toto pole združuje relácie s obsahom pre všetky typy komponentov. Ak si vývojár vyžiada toto pole, získa obsah komponentu bez ohľadu na to, akého je typu.
+
+% Implementácia Slack aplikácie
+%---------------------------------------------------------------------------
+\chapter{Implementácia Slack aplikácie}
+Služba \texttt{service-slack} je Slack aplikácia umožňujúca \emph{plnohodnotnú správu obsahu} v redakčnom systéme Slackify. Jedná sa o HTTP server implementovaný pomocu balíčka Bolt od spoločnosti Slack, ktorý reaguje na udalosti (events) a akcie (actions) prichádzajúce zo Slack API.
+
+% Domovská stránka
+\section{Domovská stránka}
+Každá Slack aplikácia má k dispozícií jednu stránku, ktorej obsah môže prispôsobiť danému užívateľovi. Táto stránka má názov \uv{App Home} a v Slackify slúži ako jediné miesto, kde môže užívateľ spravovať obsah redakčného systému. Pri každej návšteve tejto stránky užívateľom Slack API odošle udalosť \texttt{app\_home\_opened} na službu \texttt{slackify-slack}. Po obrdžaní udalosti služba vygeneruje rohranie pre daného užvateľa a odošle ho späť na Slack API, ktoré sa postará aby bolo správne zobrazené užívateľovi v aplikácií. Rozhranie domovskej stránky je \emph{perzistentné}. \\
+
+% TODO: Add app home screenshot
+
+\noindent Na domovskej stránke sa na chádza hlavička so všetkými akciami, ktoré môže užívateľ v redakčnom systéme vykonávať (ak užívateľ nemá dostatočné práva, akcie sú skryté). Pod touto hlavičkou sa nachádza zoznam komponent. Zoznam zobrazuje komponenty priradené k zvolenej kolekcií pomocou elementu \texttt{Select} v záhlaví zoznamu. Ak nie je zvolená žiadna kolekcia, zobrazuje komponenty priradené k prvej dostupnej kolekcií. \\
+
+\begin{lstlisting}[caption={Funkcia zodpovedná za generovanie rozhrania domovskej stránky.}]
+	async function compose_app_home_view(
+		teamId: string,
+		userId: string,
+		initialCollectionId?: string
+	): Promise<View | undefined>
+\end{lstlisting}
+
+\medskip
+
+\noindent Domovská stránka je aktualizovaná po akciách užívateľa. Ak užívateľ vytvorí, odstráni alebo upraví kolekciu alebo komponent, rozhranie domovskej stránky musí byť aktualizované s novými zmenami.
+
+% Dialógové okná
+\section{Dialógové okná}
+Dialógové okná v Slack aplikácií slúžia pre zobrazovanie informácií, ktoré sa nenachádzajú na domovskej stránke (napríklad zoznam kategórií) alebo pre získanie dát od užívateľa pomocou formulárov (napríklad vytvorenie novej kolekcie).
+
+% Implementácia webovej konzoly
+%---------------------------------------------------------------------------
 \chapter{Implementácia webovej konzoly}
-Webová konzola slúži pre komplexnejšiu správu obsahu v Slackify redakčnom systéme. Samotné uživateľské rozhranie je implementované pomocou JavaScriptovej knižnice React a frameworku Next.js, ktorý zabezpečuje vykresľovanie (render) na strane servera.
+\label{impl:frontend}
+Webová konzola (služba \texttt{frontend}) slúži pre komplexnejšiu správu obsahu v Slackify redakčnom systéme. Samotné uživateľské rozhranie je implementované pomocou JavaScriptovej knižnice React a frameworku Next.js, ktorý zabezpečuje vykresľovanie (render) na strane servera.
 
 % Prihlásenie
 \section{Prihlásenie}
@@ -813,7 +945,7 @@ Slackify nemá vlastný proces vytvorenia užívateľského účtu, naopak všet
 
 \noindent Po úspešnom obdržaní autorizačného tokena a užívateľských dát systém skontroluje, či už daný užívateľ v databáze existuje. V prípade, že užívateľ neexistuje, je záznam o ňom pridaný do databázy. V prípade, že už existuje, informácie o ňom sú len aktualizované. \\
 
-\noindent Vygenerovaný JWT\footnote{JWT -- JSON Web Token} so základnými informáciami o užívateľovi je uložený do cookies prehliadača. Pri návšteve každej stránky prebieha kontrola, či uložený JWT nie je expirovaný.
+\noindent Vygenerovaný JWT\footnote{JWT -- JSON Web Token} so základnými informáciami o užívateľovi je uložený do cookies prehliadača. Pri návšteve každej stránky prebieha kontrola, či uložený JWT nie je expirovaný. Napríklad pravidlo 
 
 % Správa kolekcií
 \section{Správa kolekcií}
@@ -873,5 +1005,6 @@ Rovnaký princíp ako pri tvorbe a úprave kolekcií. Jedná sa o dialógové ok
 
 \noindent Po povrdení formulára je pre vytvorenie nového komponentu alebo úpravu už existujúceho odoslaná mutácia \texttt{createOneComponent()}, resp. \texttt{updateOneComponent()} na službu \texttt{service-private}.
 
+% Zmena role užívateľa
 \section{Zmena role užívateľa}
 Každý užívateľ môže navštíviť stránku so zoznamom všetkých užívateľov tímu, ktorého je členom. V prípade, že má aktuálne prihlásený užívateľ rolu \uv{Owner}, môže navyše meniť role ostatných užívateľov v rámci tímu. U každého užívateľa v zozname sa nachádza HTML element \texttt{<Select />}, ktorý ukazuje aktuálnu rolu daného užívateľa. Pri zmene na inú hodnotu tento element odošle mutáciu \texttt{updateOneUser()} so zvolenou hodnotou na službu \texttt{service-private}, ktorá aktualizuje rolu daného užívateľa.
