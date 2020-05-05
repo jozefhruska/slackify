@@ -31,8 +31,6 @@ const manage_collections_open: Middleware<SlackActionMiddlewareArgs<BlockButtonA
       throw new Error('[actions/manage_collections_open]: Unable to compose view.');
     }
 
-    console.log('>>>>>', view.blocks.length);
-
     /* Open modal */
     await app.client.views.open({
       token: SLACK_BOT_TOKEN,
