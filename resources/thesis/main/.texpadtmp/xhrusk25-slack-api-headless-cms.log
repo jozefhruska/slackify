@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2020.3.2)  3 MAY 2020 18:14
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2020.3.2)  4 MAY 2020 22:08
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -751,7 +751,7 @@ File: t1qhv.fd 2009/09/25 v1.2 font definition file for T1/qhv
 \@sirkartext=\skip84
 \@vyskaobr=\skip85
 \@sirkaobr=\skip86
-<template-fig/VUT_symbol_barevne_CMYK_CZ.pdf, id=294, 167.13641pt x 165.87971pt>
+<template-fig/VUT_symbol_barevne_CMYK_CZ.pdf, id=298, 167.13641pt x 165.87971pt>
 File: template-fig/VUT_symbol_barevne_CMYK_CZ.pdf Graphic file (type pdf)
 <use template-fig/VUT_symbol_barevne_CMYK_CZ.pdf>
 Package pdftex.def Info: template-fig/VUT_symbol_barevne_CMYK_CZ.pdf  used on input line 258.
@@ -771,7 +771,7 @@ LaTeX Font Info:    Font shape `T1/fos/bx/n' in size <10> not available
 
 
 pdfTeX warning: /Library/TeX/texbin/pdflatex (file ./zadani.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
-<zadani.pdf, id=296, 597.50829pt x 845.0471pt>
+<zadani.pdf, id=300, 597.50829pt x 845.0471pt>
 File: zadani.pdf Graphic file (type pdf)
 <use zadani.pdf>
 Package pdftex.def Info: zadani.pdf  used on input line 258.
@@ -789,7 +789,7 @@ pdfTeX warning: /Library/TeX/texbin/pdflatex (file ./zadani.pdf): PDF inclusion:
 
 
 pdfTeX warning: /Library/TeX/texbin/pdflatex (file ./zadani.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
-<zadani.pdf, id=299, page=1, 597.50829pt x 845.0471pt>
+<zadani.pdf, id=303, page=1, 597.50829pt x 845.0471pt>
 File: zadani.pdf Graphic file (type pdf)
 <use zadani.pdf, page 1>
 Package pdftex.def Info: zadani.pdf , page1 used on input line 258.
@@ -1021,7 +1021,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 340--341
 
  []
 
-<obrazky-figures/apollo_server_diagram.pdf, id=674, 351.56343pt x 194.22563pt>
+<obrazky-figures/apollo_server_diagram.pdf, id=679, 351.56343pt x 194.22563pt>
 File: obrazky-figures/apollo_server_diagram.pdf Graphic file (type pdf)
 <use obrazky-figures/apollo_server_diagram.pdf>
 Package pdftex.def Info: obrazky-figures/apollo_server_diagram.pdf  used on input line 344.
@@ -1041,7 +1041,7 @@ Kapitola 4.
 
 
 pdfTeX warning: /Library/TeX/texbin/pdflatex (file ./obrazky-figures/headless_cms_graph.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
-<obrazky-figures/headless_cms_graph.pdf, id=721, 321.2pt x 113.42375pt>
+<obrazky-figures/headless_cms_graph.pdf, id=726, 321.2pt x 113.42375pt>
 File: obrazky-figures/headless_cms_graph.pdf Graphic file (type pdf)
 <use obrazky-figures/headless_cms_graph.pdf>
 Package pdftex.def Info: obrazky-figures/headless_cms_graph.pdf  used on input line 398.
@@ -1075,7 +1075,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 459--460
 ]
 
 pdfTeX warning: /Library/TeX/texbin/pdflatex (file ./obrazky-figures/architecture.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
-<obrazky-figures/architecture.pdf, id=781, 167.62625pt x 142.5325pt>
+<obrazky-figures/architecture.pdf, id=786, 167.62625pt x 142.5325pt>
 File: obrazky-figures/architecture.pdf Graphic file (type pdf)
 <use obrazky-figures/architecture.pdf>
 Package pdftex.def Info: obrazky-figures/architecture.pdf  used on input line 476.
@@ -1091,7 +1091,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 509--510
 [20]
 
 pdfTeX warning: /Library/TeX/texbin/pdflatex (file ./obrazky-figures/viewer_use_case.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
-<obrazky-figures/viewer_use_case.pdf, id=810, 335.2525pt x 139.52126pt>
+<obrazky-figures/viewer_use_case.pdf, id=815, 335.2525pt x 139.52126pt>
 File: obrazky-figures/viewer_use_case.pdf Graphic file (type pdf)
 <use obrazky-figures/viewer_use_case.pdf>
 Package pdftex.def Info: obrazky-figures/viewer_use_case.pdf  used on input line 520.
@@ -1099,20 +1099,20 @@ Package pdftex.def Info: obrazky-figures/viewer_use_case.pdf  used on input line
 
 
 pdfTeX warning: /Library/TeX/texbin/pdflatex (file ./obrazky-figures/author_use_case.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
-<obrazky-figures/author_use_case.pdf, id=811, 335.2525pt x 139.52126pt>
+<obrazky-figures/author_use_case.pdf, id=816, 335.2525pt x 139.52126pt>
 File: obrazky-figures/author_use_case.pdf Graphic file (type pdf)
 <use obrazky-figures/author_use_case.pdf>
 Package pdftex.def Info: obrazky-figures/author_use_case.pdf  used on input line 534.
 (pdftex.def)             Requested size: 301.72446pt x 125.56795pt.
 [21 <./obrazky-figures/viewer_use_case.pdf> <./obrazky-figures/author_use_case.pdf>]
-Overfull \hbox (7.49489pt too wide) in paragraph at lines 543--544
-[]\T1/lmtt/m/n/10.95 Publikova´ kolekciu/komponentu \T1/lmr/m/n/10.95 -- Pub-li-ko-vaná ko-lek-cia alebo kom-po-nenta je okam-
+Overfull \hbox (2.0199pt too wide) in paragraph at lines 543--544
+[]\T1/lmtt/m/n/10.95 Publikova´ kolekciu/komponentu \T1/lmr/m/n/10.95 -- Pub-li-ko-vaná ko-lek-cia alebo kom-po-nent je okam-
  []
 
 
 
 pdfTeX warning: /Library/TeX/texbin/pdflatex (file ./obrazky-figures/editor_use_case.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
-<obrazky-figures/editor_use_case.pdf, id=842, 335.2525pt x 175.65625pt>
+<obrazky-figures/editor_use_case.pdf, id=847, 335.2525pt x 175.65625pt>
 File: obrazky-figures/editor_use_case.pdf Graphic file (type pdf)
 <use obrazky-figures/editor_use_case.pdf>
 Package pdftex.def Info: obrazky-figures/editor_use_case.pdf  used on input line 548.
@@ -1120,7 +1120,7 @@ Package pdftex.def Info: obrazky-figures/editor_use_case.pdf  used on input line
 
 
 pdfTeX warning: /Library/TeX/texbin/pdflatex (file ./obrazky-figures/owner_use_case.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
-<obrazky-figures/owner_use_case.pdf, id=843, 335.2525pt x 174.6525pt>
+<obrazky-figures/owner_use_case.pdf, id=848, 335.2525pt x 174.6525pt>
 File: obrazky-figures/owner_use_case.pdf Graphic file (type pdf)
 <use obrazky-figures/owner_use_case.pdf>
 Package pdftex.def Info: obrazky-figures/owner_use_case.pdf  used on input line 561.
@@ -1133,7 +1133,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 566--567
 [22 <./obrazky-figures/editor_use_case.pdf> <./obrazky-figures/owner_use_case.pdf>]
 
 pdfTeX warning: /Library/TeX/texbin/pdflatex (file ./obrazky-figures/device_use_case.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
-<obrazky-figures/device_use_case.pdf, id=883, 335.2525pt x 80.3pt>
+<obrazky-figures/device_use_case.pdf, id=888, 335.2525pt x 80.3pt>
 File: obrazky-figures/device_use_case.pdf Graphic file (type pdf)
 <use obrazky-figures/device_use_case.pdf>
 Package pdftex.def Info: obrazky-figures/device_use_case.pdf  used on input line 578.
@@ -1169,8 +1169,8 @@ Underfull \hbox (badness 10000) in paragraph at lines 653--654
  []
 
 [25]
-Overfull \hbox (2.3424pt too wide) in paragraph at lines 682--683
-[]\T1/lmtt/m/n/10.95 type \T1/lmr/m/n/10.95 -- Typ kom-po-nenty na-do-bú-da-júci jednu z hod-nôt vý-£to-vého typu \T1/lmtt/m/n/10.95 ComponentType\T1/lmr/m/n/10.95 . 
+Overfull \hbox (2.95044pt too wide) in paragraph at lines 682--683
+[]\T1/lmtt/m/n/10.95 type \T1/lmr/m/n/10.95 -- Typ kom-po-nentu na-do-bú-da-júci jednu z hod-nôt vý-£to-vého typu \T1/lmtt/m/n/10.95 ComponentType\T1/lmr/m/n/10.95 . 
  []
 
 
@@ -1260,7 +1260,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 946--947
 
  []
 
-<obrazky-figures/screenshot_collections.png, id=1112, 3597.44pt x 2248.4pt>
+<obrazky-figures/screenshot_collections.png, id=1117, 3597.44pt x 2248.4pt>
 File: obrazky-figures/screenshot_collections.png Graphic file (type png)
 <use obrazky-figures/screenshot_collections.png>
 Package pdftex.def Info: obrazky-figures/screenshot_collections.png  used on input line 956.
@@ -1271,7 +1271,7 @@ Package pdftex.def Info: obrazky-figures/screenshot_collections.png  used on inp
 
 LaTeX Warning: Reference `?' on page 35 undefined on input line 960.
 
-<obrazky-figures/screenshot_collection_create.png, id=1124, 3597.44pt x 2248.4pt>
+<obrazky-figures/screenshot_collection_create.png, id=1129, 3597.44pt x 2248.4pt>
 File: obrazky-figures/screenshot_collection_create.png Graphic file (type png)
 <use obrazky-figures/screenshot_collection_create.png>
 Package pdftex.def Info: obrazky-figures/screenshot_collection_create.png  used on input line 975.
@@ -1280,7 +1280,7 @@ Package pdftex.def Info: obrazky-figures/screenshot_collection_create.png  used 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 [35 <./obrazky-figures/screenshot_collections.png>]
-<obrazky-figures/screenshot_components.png, id=1132, 3597.44pt x 2248.4pt>
+<obrazky-figures/screenshot_components.png, id=1137, 3597.44pt x 2248.4pt>
 File: obrazky-figures/screenshot_components.png Graphic file (type png)
 <use obrazky-figures/screenshot_components.png>
 Package pdftex.def Info: obrazky-figures/screenshot_components.png  used on input line 985.
@@ -1291,19 +1291,23 @@ Overfull \hbox (4.7011pt too wide) in paragraph at lines 989--990
  []
 
 [36 <./obrazky-figures/screenshot_collection_create.png> <./obrazky-figures/screenshot_components.png>]
-<obrazky-figures/screenshot_component_update.png, id=1141, 3597.44pt x 2248.4pt>
+<obrazky-figures/screenshot_component_update.png, id=1146, 3597.44pt x 2248.4pt>
 File: obrazky-figures/screenshot_component_update.png Graphic file (type png)
 <use obrazky-figures/screenshot_component_update.png>
 Package pdftex.def Info: obrazky-figures/screenshot_component_update.png  used on input line 1002.
 (pdftex.def)             Requested size: 305.8058pt x 191.12863pt.
-) (/Users/jozefhruska/Development/School/BP/slackify/resources/thesis/main/.texpadtmp/xhrusk25-slack-api-headless-cms.bbl [37 <./obrazky-figures/screenshot_component_update.png>])
+ [37 <./obrazky-figures/screenshot_component_update.png>]
+Kapitola 10.
+) (/Users/jozefhruska/Development/School/BP/slackify/resources/thesis/main/.texpadtmp/xhrusk25-slack-api-headless-cms.bbl [38
+
+])
 \c@ttl@toc@chapters=\count335
  (./xhrusk25-slack-api-headless-cms-30-prilohy-appendices.tex)
 \tf@ptc=\write5
 \openout5 = `xhrusk25-slack-api-headless-cms.ptc'.
 
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 383.
- [38
+ [39
 
 ]
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 383.
@@ -1311,25 +1315,25 @@ Package atveryend Info: Empty hook `AfterLastShipout' on input line 383.
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 383.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 383.
 Package rerunfilecheck Info: File `xhrusk25-slack-api-headless-cms.out' has not changed.
-(rerunfilecheck)             Checksum: 3AEB76818CF03D92DF7B3BC102978427;9193.
+(rerunfilecheck)             Checksum: <no file>.
 
 
 LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 26110 strings out of 492616
- 426161 string characters out of 6129482
+ 26113 strings out of 492616
+ 426190 string characters out of 6129482
  595894 words of memory out of 5000000
- 29231 multiletter control sequences out of 15000+600000
+ 29232 multiletter control sequences out of 15000+600000
  651958 words of font info for 113 fonts, out of 8000000 for 9000
  1144 hyphenation exceptions out of 8191
  48i,18n,65p,897b,1927s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2019/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}{/usr/local/texlive/2019/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}{/usr/local/texlive/2019/texmf-dist/fonts/enc/dvips/opensans/opensans-03.enc}{/usr/local/texlive/2019/texmf-dist/fonts/enc/dvips/opensans/opensans-02.enc}{/usr/local/texlive/2019/texmf-dist/fonts/enc/dvips/opensans/opensans-04.enc}{/usr/local/texlive/2019/texmf-dist/fonts/enc/dvips/opensans/opensans-01.enc}</usr/local/texlive/2019/texmf-dist/fonts/type1/public/opensans/OpenSans-Bold.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/lm/lmbx10.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/lm/lmbx12.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/lm/lmcsc10.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/lm/lmr10.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/lm/lmr6.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/lm/lmr8.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/lm/lmr9.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/lm/lmri10.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/lm/lmsy10.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/lm/lmtk10.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/lm/lmtt10.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/lm/lmtt9.pfb>
-Output written on /Users/jozefhruska/Development/School/BP/slackify/resources/thesis/main/.texpadtmp/xhrusk25-slack-api-headless-cms.pdf (42 pages, 1592640 bytes).
+Output written on /Users/jozefhruska/Development/School/BP/slackify/resources/thesis/main/.texpadtmp/xhrusk25-slack-api-headless-cms.pdf (43 pages, 1593327 bytes).
 PDF statistics:
- 1310 PDF objects out of 1440 (max. 8388607)
- 1168 compressed objects within 12 object streams
- 392 named destinations out of 1000 (max. 500000)
- 688 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1320 PDF objects out of 1440 (max. 8388607)
+ 1177 compressed objects within 12 object streams
+ 394 named destinations out of 1000 (max. 500000)
+ 696 words of extra memory for PDF output out of 10000 (max. 10000000)
 
