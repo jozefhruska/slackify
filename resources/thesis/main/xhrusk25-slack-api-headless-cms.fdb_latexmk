@@ -1,15 +1,15 @@
 # Fdb version 3
-["bibtex xhrusk25-slack-api-headless-cms"] 1587907662 "xhrusk25-slack-api-headless-cms.aux" "xhrusk25-slack-api-headless-cms.bbl" "xhrusk25-slack-api-headless-cms" 1587907662
+["bibtex xhrusk25-slack-api-headless-cms"] 0 "xhrusk25-slack-api-headless-cms.aux" "xhrusk25-slack-api-headless-cms.bbl" "xhrusk25-slack-api-headless-cms" 0
   "./bib-styles/Pysny/skplain.bst" 1585563900 72336 9cac689f457c3e35a7e630617fccc9f3 ""
   "xhrusk25-slack-api-headless-cms-20-literatura-bibliography.bib" 1586106751 3572 e0bf4ce5b3392aee81355502416510d9 ""
-  "xhrusk25-slack-api-headless-cms.aux" 1587907662 14282 41b8fecccb7cbc7daf09e6741e1b2d05 "pdflatex"
+  "xhrusk25-slack-api-headless-cms.aux" 0 -1 0 "pdflatex"
   (generated)
   "xhrusk25-slack-api-headless-cms.bbl"
   "xhrusk25-slack-api-headless-cms.blg"
-["pdflatex"] 1587907661 "/Users/jozefhruska/Development/School/BP/slackify/resources/thesis/main/xhrusk25-slack-api-headless-cms.tex" "/Users/jozefhruska/Development/School/BP/slackify/resources/thesis/main/xhrusk25-slack-api-headless-cms.pdf" "xhrusk25-slack-api-headless-cms" 1587907661
-  "/Users/jozefhruska/Development/School/BP/slackify/resources/thesis/main/xhrusk25-slack-api-headless-cms.aux" 1587907661 8 a94a2480d3289e625eea47cd1b285758 ""
+["pdflatex"] 1588493864 "/Users/jozefhruska/Development/School/BP/slackify/resources/thesis/main/xhrusk25-slack-api-headless-cms.tex" "/Users/jozefhruska/Development/School/BP/slackify/resources/thesis/main/xhrusk25-slack-api-headless-cms.pdf" "xhrusk25-slack-api-headless-cms" 1588493864
+  "/Users/jozefhruska/Development/School/BP/slackify/resources/thesis/main/xhrusk25-slack-api-headless-cms.aux" 1588493864 8 a94a2480d3289e625eea47cd1b285758 ""
   "/Users/jozefhruska/Development/School/BP/slackify/resources/thesis/main/xhrusk25-slack-api-headless-cms.tex" 1587805659 19760 381424891675a3e47b307aadb5ea6a42 ""
-  "/dev/null" 1587907661 0 d41d8cd98f00b204e9800998ecf8427e ""
+  "/dev/null" 1588493867 0 d41d8cd98f00b204e9800998ecf8427e ""
   "/usr/local/texlive/2019/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc" 1254269338 2375 baa924870cfb487815765f9094cf3728 ""
   "/usr/local/texlive/2019/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc" 1202520719 2840 216e6e45ad352e2456e1149f28885bee ""
   "/usr/local/texlive/2019/texmf-dist/fonts/enc/dvips/opensans/opensans-01.enc" 1322694030 3294 a5b3bfab503121e0ee00f4c03e6030bf ""
@@ -61,6 +61,7 @@
   "/usr/local/texlive/2019/texmf-dist/fonts/tfm/public/opensans/OpenSans-Regular-t1.tfm" 1314397505 13452 7762e5e39e65060a7d5228041e0e4418 ""
   "/usr/local/texlive/2019/texmf-dist/fonts/tfm/public/tex-gyre/ec-qhvr.tfm" 1204998285 12084 374c5b7e91efcc10472ab8e61f66d36b ""
   "/usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb" 1248133631 36299 5f9df58c2139e7edcf37c8fca4bd384d ""
+  "/usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb" 1248133631 32569 5e5ddc8df908dea60932f3c484a54c0d ""
   "/usr/local/texlive/2019/texmf-dist/fonts/type1/public/lm/lmbx10.pfb" 1255129361 121021 1bf809ce4a594679006bd72263eba59b ""
   "/usr/local/texlive/2019/texmf-dist/fonts/type1/public/lm/lmbx12.pfb" 1255129361 116908 1fca96723793882c2e0160350c192fc8 ""
   "/usr/local/texlive/2019/texmf-dist/fonts/type1/public/lm/lmr10.pfb" 1255129361 119235 f35b44530a1d90eb90fe15d9cba67ea0 ""
@@ -187,9 +188,13 @@
   "obrazky-figures/editor_use_case.pdf" 1587823349 11385 b9f5c0f162584acda437ab58871a0297 ""
   "obrazky-figures/headless_cms_graph.pdf" 1585924338 6935 8e1f550a13f6a4ff6f1f163aed640618 ""
   "obrazky-figures/owner_use_case.pdf" 1587823245 12134 3003dc61c8cce363e98cb62f7642fbc3 ""
+  "obrazky-figures/screenshot_collection_create.png" 1588235580 390090 7fbecf2845a7cc84b50fa5bfe889292c ""
+  "obrazky-figures/screenshot_collections.png" 1588236422 365221 b2237e0b0eaaf57d365680b2120474ae ""
+  "obrazky-figures/screenshot_component_update.png" 1588340420 279169 f119eeb1bd431218f463ccc109524020 ""
+  "obrazky-figures/screenshot_components.png" 1588239850 304744 a98d7a052dea8cadad33a39929fb7deb ""
   "obrazky-figures/viewer_use_case.pdf" 1587823701 7816 18acb5b79837e40c5655474a31b53fb0 ""
   "template-fig/VUT_symbol_barevne_CMYK_CZ.pdf" 1584981660 309809 cf559eee790357af64f350838d9706c8 ""
-  "xhrusk25-slack-api-headless-cms-01-kapitoly-chapters.tex" 1587907659 44509 9584c0eb2815294fa9e96cb1a69ea565 ""
+  "xhrusk25-slack-api-headless-cms-01-kapitoly-chapters.tex" 1588493860 67805 0b46e91d2503428414a642cec74fa418 ""
   "xhrusk25-slack-api-headless-cms-30-prilohy-appendices.tex" 1586359609 369 21b1ce0f11174c43538571dcaa5bb3f4 ""
   "xhrusk25-slack-api-headless-cms.aux" 0 -1 0 "pdflatex"
   "xhrusk25-slack-api-headless-cms.bbl" 0 -1 0 "bibtex xhrusk25-slack-api-headless-cms"
@@ -198,10 +203,10 @@
   "zadani.pdf" 1585898429 128602 a963b93b5c6159854ce98fa7beb3c725 ""
   (generated)
   "xhrusk25-slack-api-headless-cms.aux"
-  "/Users/jozefhruska/Development/School/BP/slackify/resources/thesis/main/xhrusk25-slack-api-headless-cms.log"
-  "xhrusk25-slack-api-headless-cms.log"
-  "xhrusk25-slack-api-headless-cms.toc"
-  "/Users/jozefhruska/Development/School/BP/slackify/resources/thesis/main/xhrusk25-slack-api-headless-cms.pdf"
   "xhrusk25-slack-api-headless-cms.ptc"
   "xhrusk25-slack-api-headless-cms.pdf"
   "xhrusk25-slack-api-headless-cms.out"
+  "/Users/jozefhruska/Development/School/BP/slackify/resources/thesis/main/xhrusk25-slack-api-headless-cms.log"
+  "xhrusk25-slack-api-headless-cms.toc"
+  "/Users/jozefhruska/Development/School/BP/slackify/resources/thesis/main/xhrusk25-slack-api-headless-cms.pdf"
+  "xhrusk25-slack-api-headless-cms.log"

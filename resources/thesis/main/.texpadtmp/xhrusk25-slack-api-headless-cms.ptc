@@ -11,7 +11,7 @@
 \contentsline {section}{\numberline {2.5}TypeScript}{6}{section.2.5}% 
 \contentsline {section}{\numberline {2.6}React}{7}{section.2.6}% 
 \contentsline {subsection}{\numberline {2.6.1}JSX}{7}{subsection.2.6.1}% 
-\contentsline {subsection}{\numberline {2.6.2}Komponenty}{8}{subsection.2.6.2}% 
+\contentsline {subsection}{\numberline {2.6.2}Komponenty}{7}{subsection.2.6.2}% 
 \contentsline {section}{\numberline {2.7}Next.js}{8}{section.2.7}% 
 \contentsline {chapter}{\numberline {3}V\IeC {\'y}voj serverov\IeC {\'y}ch aplik\IeC {\'a}cii}{10}{chapter.3}% 
 \contentsline {section}{\numberline {3.1}HTTP}{10}{section.3.1}% 
@@ -25,7 +25,7 @@
 \contentsline {section}{\numberline {3.4}GraphQL}{13}{section.3.4}% 
 \contentsline {subsection}{\numberline {3.4.1}Apollo Client}{14}{subsection.3.4.1}% 
 \contentsline {subsection}{\numberline {3.4.2}Apollo Server}{14}{subsection.3.4.2}% 
-\contentsline {section}{\numberline {3.5}Slack API}{15}{section.3.5}% 
+\contentsline {section}{\numberline {3.5}Slack API}{14}{section.3.5}% 
 \contentsline {subsection}{\numberline {3.5.1}Block Kit}{15}{subsection.3.5.1}% 
 \contentsline {chapter}{\numberline {4}Headless CMS}{16}{chapter.4}% 
 \contentsline {section}{\numberline {4.1}Strapi}{17}{section.4.1}% 
@@ -54,8 +54,28 @@
 \contentsline {subsubsection}{V\IeC {\'y}\IeC {\v c}tov\IeC {\'y} typ \texttt {ComponentType}}{26}{section*.6}% 
 \contentsline {subsection}{\numberline {6.2.3}Model \texttt {User}}{27}{subsection.6.2.3}% 
 \contentsline {subsubsection}{V\IeC {\'y}\IeC {\v c}tov\IeC {\'y} typ \texttt {UserRole}}{27}{section*.7}% 
-\contentsline {subsection}{\numberline {6.2.4}Model \texttt {Team}}{28}{subsection.6.2.4}% 
+\contentsline {subsection}{\numberline {6.2.4}Model \texttt {Team}}{27}{subsection.6.2.4}% 
 \contentsline {section}{\numberline {6.3}Automaticky generovan\IeC {\'y} datab\IeC {\'a}zov\IeC {\'y} klient}{28}{section.6.3}% 
-\contentsline {chapter}{Literat\IeC {\'u}ra}{29}{chapter*.8}% 
+\contentsline {chapter}{\numberline {7}Implement\IeC {\'a}cia GraphQL slu\IeC {\v z}ieb}{29}{chapter.7}% 
+\contentsline {section}{\numberline {7.1}Sch\IeC {\'e}ma}{29}{section.7.1}% 
+\contentsline {section}{\numberline {7.2}Autoriz\IeC {\'a}cia}{30}{section.7.2}% 
+\contentsline {subsection}{\numberline {7.2.1}GraphQL Shield}{30}{subsection.7.2.1}% 
+\contentsline {section}{\numberline {7.3}Skryt\IeC {\'a} slu\IeC {\v z}ba \texttt {service-private}}{30}{section.7.3}% 
+\contentsline {subsection}{\numberline {7.3.1}Autoriz\IeC {\'a}cia}{30}{subsection.7.3.1}% 
+\contentsline {section}{\numberline {7.4}Verejn\IeC {\'a} slu\IeC {\v z}ba \texttt {service-public}}{30}{section.7.4}% 
+\contentsline {subsection}{\numberline {7.4.1}Autoriz\IeC {\'a}cia}{31}{subsection.7.4.1}% 
+\contentsline {subsection}{\numberline {7.4.2}Zjednodu\IeC {\v s}en\IeC {\'y} typ \texttt {Component}}{31}{subsection.7.4.2}% 
+\contentsline {chapter}{\numberline {8}Implement\IeC {\'a}cia Slack aplik\IeC {\'a}cie}{32}{chapter.8}% 
+\contentsline {section}{\numberline {8.1}Domovsk\IeC {\'a} str\IeC {\'a}nka}{32}{section.8.1}% 
+\contentsline {section}{\numberline {8.2}Dial\IeC {\'o}gov\IeC {\'e} okn\IeC {\'a}}{33}{section.8.2}% 
+\contentsline {chapter}{\numberline {9}Implement\IeC {\'a}cia webovej konzoly}{34}{chapter.9}% 
+\contentsline {section}{\numberline {9.1}Prihl\IeC {\'a}senie}{34}{section.9.1}% 
+\contentsline {section}{\numberline {9.2}Spr\IeC {\'a}va kolekci\IeC {\'\i }}{35}{section.9.2}% 
+\contentsline {subsection}{\numberline {9.2.1}Vytvorenie a \IeC {\'u}prava kolekcie}{35}{subsection.9.2.1}% 
+\contentsline {section}{\numberline {9.3}Spr\IeC {\'a}va komponentov}{36}{section.9.3}% 
+\contentsline {subsection}{\numberline {9.3.1}Vytvorenie a \IeC {\'u}prava komponentov}{37}{subsection.9.3.1}% 
+\contentsline {section}{\numberline {9.4}Zmena role u\IeC {\v z}\IeC {\'\i }vate\IeC {\v l}a}{37}{section.9.4}% 
+\contentsline {chapter}{\numberline {10}Testovanie}{38}{chapter.10}% 
+\contentsline {chapter}{Literat\IeC {\'u}ra}{39}{chapter*.8}% 
 \ttl@starttoc {chapters@1}
 \contentsfinish 
