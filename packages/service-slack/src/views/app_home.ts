@@ -3,12 +3,7 @@ import { Option, View, Button, ActionsBlock } from '@slack/web-api';
 import { prisma } from '../prisma';
 import { AppHomeComponentPreview } from '../types';
 import { BLOCK_DIVIDER, BLOCK_TEXT } from '../constants/views';
-import {
-  canCreateCollections,
-  canManageCollections,
-  canManageComponents,
-  canCreateComponents,
-} from '../utils/users';
+import { canCreateCollections, canManageComponents, canCreateComponents } from '../utils/users';
 
 /**
  * Composes app home view for user without account on Slackify.
@@ -308,12 +303,13 @@ export const compose_app_home_view = async (
         if (canCreateComponents(user.role)) {
           actions.elements.push({
             type: 'button',
+            action_id: 'update_component_open',
             text: {
               type: 'plain_text',
-              text: '\tEdit',
+              text: '📝\tEdit',
               emoji: true,
             },
-            value: 'details',
+            value: id,
           });
         }
 

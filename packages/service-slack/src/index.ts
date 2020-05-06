@@ -13,11 +13,13 @@ import {
   settings_open,
   create_new_component_collection_select,
   collection_overflow,
+  update_component_open,
 } from './actions';
 import {
   create_new_collection_submission,
   create_new_component_submission,
   update_collection,
+  update_component,
 } from './view_submissions';
 
 /* Create a Bolt instance
@@ -49,12 +51,14 @@ app.action('create_new_component_collection_select', create_new_component_collec
 app.action('create_new_component_open', create_new_component_open);
 app.action('manage_collections_open', manage_collections_open);
 app.action('settings_open', settings_open);
+app.action('update_component_open', update_component_open);
 
 /* View submissions
 ============================================================================= */
 app.view('create_new_collection', create_new_collection_submission);
 app.view('create_new_component_submission', create_new_component_submission);
 app.view('update_collection', update_collection);
+app.view('update_component', update_component);
 
 /* Start up
 ============================================================================= */
