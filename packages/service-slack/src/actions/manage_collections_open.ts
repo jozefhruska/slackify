@@ -38,7 +38,7 @@ const manage_collections_open: Middleware<SlackActionMiddlewareArgs<BlockButtonA
       view,
     });
   } catch (error) {
-    console.error(error.data.response_metadata);
+    console.error(error);
   }
 };
 
