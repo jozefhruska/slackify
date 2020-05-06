@@ -6,7 +6,6 @@ import { app_home_opened } from './events';
 import {
   manage_collections_open,
   create_new_collection_open,
-  delete_collection,
   create_new_component_open,
   app_home_collection_select,
   component_publish,
@@ -48,7 +47,6 @@ app.action('component_publish', component_publish);
 app.action('create_new_collection_open', create_new_collection_open);
 app.action('create_new_component_collection_select', create_new_component_collection_select);
 app.action('create_new_component_open', create_new_component_open);
-app.action('delete_collection', delete_collection);
 app.action('manage_collections_open', manage_collections_open);
 app.action('settings_open', settings_open);
 
