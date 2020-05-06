@@ -27,17 +27,28 @@ const component_publish: Middleware<SlackActionMiddlewareArgs<BlockButtonAction>
     }
 
     /* Update component data */
-    await prisma.component.update({
+    const updatedComponent = await prisma.component.update({
       where: {
         id: componentId,
       },
       data: {
         published: true,
       },
+      select: {
+        collection: {
+          select: {
+            id: true,
+          },
+        },
+      },
     });
 
     /* Compose app home view */
-    const appHomeView = await compose_app_home_view(teamId, userId);
+    const appHomeView = await compose_app_home_view(
+      teamId,
+      userId,
+      updatedComponent?.collection?.id
+    );
 
     /* Check if view was successfully composed */
     if (!appHomeView) {

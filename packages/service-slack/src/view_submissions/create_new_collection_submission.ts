@@ -8,7 +8,7 @@ import { app } from '..';
 
 /* Local types
 ============================================================================= */
-type SubmissionState = {
+type SubmissionValues = {
   values: {
     name: {
       name: {
@@ -53,31 +53,10 @@ const create_new_collection_submission: Middleware<SlackViewMiddlewareArgs<
     }
 
     /* Extract field values */
-    const values = (view?.state as SubmissionState).values;
+    const values = (view?.state as SubmissionValues).values;
     const name = values?.name?.name.value;
     const description = values?.description?.description.value;
     const type = values?.type?.type?.selected_option.value;
-
-    /* Check if there is a collection with the same name and team ID */
-    const teamCollections = await prisma.collection.count({
-      where: {
-        name,
-        team: {
-          id: teamId,
-        },
-      },
-    });
-
-    if (teamCollections) {
-      await ack({
-        response_action: 'errors',
-        errors: {
-          name: 'There is already a collection with this name in your workspace.',
-        },
-      });
-
-      return;
-    }
 
     /* Acknowledge Slack action */
     await ack();
