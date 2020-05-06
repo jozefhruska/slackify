@@ -59,13 +59,13 @@ export const compose_manage_collections_view = async (
             text: `*${name}*`,
           },
           ...(canManageCollections(user.role) && {
-            accessories: {
+            accessory: {
               type: 'button',
               style: 'danger',
               action_id: 'delete_collection',
               text: {
                 type: 'plain_text',
-                text: 'Delete',
+                text: '🗑\tDelete',
                 emoji: false,
               },
               value: id,
