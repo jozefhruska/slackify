@@ -43,6 +43,9 @@ export const compose_manage_collections_view = async (
           id: teamId,
         },
       },
+      orderBy: {
+        createdAt: 'desc',
+      },
     });
 
     /* Set message as default */
@@ -50,25 +53,53 @@ export const compose_manage_collections_view = async (
 
     /* Render list of collections if there are some */
     if (collections.length) {
-      collectionList = collections.flatMap(({ id, name }) => [
+      collectionList = collections.flatMap(({ id, name, published, description }) => [
         BLOCK_DIVIDER,
         {
           type: 'section',
           text: {
             type: 'mrkdwn',
-            text: `*${name}*`,
+            text: `*${name}*\n${description}`,
           },
           ...(canManageCollections(user.role) && {
             accessory: {
-              type: 'button',
-              style: 'danger',
-              action_id: 'delete_collection',
-              text: {
-                type: 'plain_text',
-                text: '🗑\tDelete',
-                emoji: false,
-              },
-              value: id,
+              type: 'overflow',
+              action_id: 'collection_overflow',
+              options: [
+                {
+                  text: {
+                    type: 'plain_text',
+                    text: published ? '👀\tHide' : '👀 \tPublish',
+                    emoji: true,
+                  },
+                  value: JSON.stringify({
+                    id,
+                    option: published ? 'hide' : 'publish',
+                  }),
+                },
+                {
+                  text: {
+                    type: 'plain_text',
+                    text: '📝\tEdit',
+                    emoji: true,
+                  },
+                  value: JSON.stringify({
+                    id,
+                    option: 'edit',
+                  }),
+                },
+                {
+                  text: {
+                    type: 'plain_text',
+                    text: '🗑\tDelete',
+                    emoji: true,
+                  },
+                  value: JSON.stringify({
+                    id,
+                    option: 'delete',
+                  }),
+                },
+              ],
             },
           }),
         },
