@@ -9,8 +9,10 @@ import { Grid } from '../../common/layout/base';
 import { humanizeComponentType, getComponentQueryExample } from '../../../utils';
 import Fields from './Fields';
 import InCollection from './InCollection';
+import { Block } from '../../common/layout';
 
 import * as S from './Detail.styles';
+import Statistics from './Statistics';
 
 /* Props - <Detail />
 ============================================================================= */
@@ -62,7 +64,9 @@ const Detail: React.FC<Props> = ({ component }) => {
           </div>
         </S.MetaWrapper>
 
-        <div>stats</div>
+        <Block>
+          <Statistics componentId={component?.id} />
+        </Block>
       </Grid>
 
       <Grid

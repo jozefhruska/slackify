@@ -18,5 +18,6 @@ export const TitleBar = styled.div`
 `;
 
 export const Content = styled.div<ContentProps>`
+  height: 100%;
   padding: ${({ theme, isPadded }) => (isPadded ? theme.space.s6 : 0)};
 `;

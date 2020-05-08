@@ -5,3 +5,6 @@
 
 20200423205341-init
 20200424121645-add-user-roles
+20200508130355-add-model-for-statistics-record
+20200508144705-remove-composite-primary-keys-for-stat-record
+20200508174803-add-model-for-statistics
