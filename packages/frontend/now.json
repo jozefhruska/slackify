@@ -1,4 +1,7 @@
 {
+  "name": "slackify",
+  "version": 2,
+  "regions": ["bru"],
   "build": {
     "env": {
       "SCHEMA_URL": "@schema_url"
