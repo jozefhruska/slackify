@@ -5,6 +5,7 @@ export { default as component_publish } from './component_publish';
 export { default as create_new_collection_open } from './create_new_collection_open';
 export { default as create_new_component_collection_select } from './create_new_component_collection_select';
 export { default as create_new_component_open } from './create_new_component_open';
-export { default as update_component_open } from './update_component_open';
+export { default as delete_component } from './delete_component';
 export { default as manage_collections_open } from './manage_collections_open';
 export { default as settings_open } from './settings_open';
+export { default as update_component_open } from './update_component_open';
