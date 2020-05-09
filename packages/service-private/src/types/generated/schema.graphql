@@ -721,7 +721,6 @@ type StatRecord {
   component: Component!
   componentId: String!
   createdAt: DateTime!
-  id: String!
 }
 
 input StatRecordCreateManyWithoutComponentInput {

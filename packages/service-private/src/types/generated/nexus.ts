@@ -1166,7 +1166,6 @@ export interface NexusGenFieldTypes {
     component: NexusGenRootTypes['Component']; // Component!
     componentId: string; // String!
     createdAt: any; // DateTime!
-    id: string; // String!
   }
   Team: { // field return type
     accessToken: string; // String!
