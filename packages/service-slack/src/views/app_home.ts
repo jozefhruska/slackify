@@ -313,6 +313,20 @@ export const compose_app_home_view = async (
           });
         }
 
+        if (canManageComponents(user.role)) {
+          actions.elements.push({
+            type: 'button',
+            action_id: 'delete_component',
+            text: {
+              type: 'plain_text',
+              text: '🗑\tDelete',
+              emoji: true,
+            },
+            style: 'danger',
+            value: id,
+          });
+        }
+
         /* Push actions into result view if it contains at least one child element */
         if (actions.elements.length) {
           result.push(actions);

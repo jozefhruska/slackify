@@ -14,6 +14,7 @@ import {
   create_new_component_collection_select,
   collection_overflow,
   update_component_open,
+  delete_component,
 } from './actions';
 import {
   create_new_collection_submission,
@@ -49,6 +50,7 @@ app.action('component_publish', component_publish);
 app.action('create_new_collection_open', create_new_collection_open);
 app.action('create_new_component_collection_select', create_new_component_collection_select);
 app.action('create_new_component_open', create_new_component_open);
+app.action('delete_component', delete_component);
 app.action('manage_collections_open', manage_collections_open);
 app.action('settings_open', settings_open);
 app.action('update_component_open', update_component_open);
