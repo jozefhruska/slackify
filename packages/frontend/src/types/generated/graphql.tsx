@@ -57,7 +57,7 @@ export type ArticleComponentDataWhereInput = {
   title?: Maybe<StringFilter>;
   lead?: Maybe<NullableStringFilter>;
   content?: Maybe<StringFilter>;
-  component?: Maybe<ComponentFilter>;
+  Component?: Maybe<ComponentFilter>;
   AND?: Maybe<Array<ArticleComponentDataWhereInput>>;
   OR?: Maybe<Array<ArticleComponentDataWhereInput>>;
   NOT?: Maybe<Array<ArticleComponentDataWhereInput>>;
@@ -295,6 +295,7 @@ export type ComponentCreateInput = {
   plainTextData?: Maybe<PlainTextComponentDataCreateOneWithoutComponentInput>;
   articleData?: Maybe<ArticleComponentDataCreateOneWithoutComponentInput>;
   linkData?: Maybe<LinkComponentDataCreateOneWithoutComponentInput>;
+  StatRecord?: Maybe<StatRecordCreateManyWithoutComponentInput>;
 };
 
 export type ComponentCreateManyWithoutAuthorInput = {
@@ -323,6 +324,7 @@ export type ComponentCreateWithoutAuthorInput = {
   plainTextData?: Maybe<PlainTextComponentDataCreateOneWithoutComponentInput>;
   articleData?: Maybe<ArticleComponentDataCreateOneWithoutComponentInput>;
   linkData?: Maybe<LinkComponentDataCreateOneWithoutComponentInput>;
+  StatRecord?: Maybe<StatRecordCreateManyWithoutComponentInput>;
 };
 
 export type ComponentCreateWithoutCollectionInput = {
@@ -336,6 +338,7 @@ export type ComponentCreateWithoutCollectionInput = {
   plainTextData?: Maybe<PlainTextComponentDataCreateOneWithoutComponentInput>;
   articleData?: Maybe<ArticleComponentDataCreateOneWithoutComponentInput>;
   linkData?: Maybe<LinkComponentDataCreateOneWithoutComponentInput>;
+  StatRecord?: Maybe<StatRecordCreateManyWithoutComponentInput>;
 };
 
 export type ComponentCreateWithoutTeamInput = {
@@ -349,6 +352,7 @@ export type ComponentCreateWithoutTeamInput = {
   plainTextData?: Maybe<PlainTextComponentDataCreateOneWithoutComponentInput>;
   articleData?: Maybe<ArticleComponentDataCreateOneWithoutComponentInput>;
   linkData?: Maybe<LinkComponentDataCreateOneWithoutComponentInput>;
+  StatRecord?: Maybe<StatRecordCreateManyWithoutComponentInput>;
 };
 
 export type ComponentFilter = {
@@ -369,6 +373,7 @@ export type ComponentScalarWhereInput = {
   linkDataId?: Maybe<NullableStringFilter>;
   createdAt?: Maybe<DateTimeFilter>;
   updatedAt?: Maybe<DateTimeFilter>;
+  StatRecord?: Maybe<StatRecordFilter>;
   AND?: Maybe<Array<ComponentScalarWhereInput>>;
   OR?: Maybe<Array<ComponentScalarWhereInput>>;
   NOT?: Maybe<Array<ComponentScalarWhereInput>>;
@@ -398,6 +403,7 @@ export type ComponentUpdateInput = {
   plainTextData?: Maybe<PlainTextComponentDataUpdateOneWithoutComponentInput>;
   articleData?: Maybe<ArticleComponentDataUpdateOneWithoutComponentInput>;
   linkData?: Maybe<LinkComponentDataUpdateOneWithoutComponentInput>;
+  StatRecord?: Maybe<StatRecordUpdateManyWithoutComponentInput>;
 };
 
 export type ComponentUpdateManyDataInput = {
@@ -460,6 +466,7 @@ export type ComponentUpdateWithoutAuthorDataInput = {
   plainTextData?: Maybe<PlainTextComponentDataUpdateOneWithoutComponentInput>;
   articleData?: Maybe<ArticleComponentDataUpdateOneWithoutComponentInput>;
   linkData?: Maybe<LinkComponentDataUpdateOneWithoutComponentInput>;
+  StatRecord?: Maybe<StatRecordUpdateManyWithoutComponentInput>;
 };
 
 export type ComponentUpdateWithoutCollectionDataInput = {
@@ -473,6 +480,7 @@ export type ComponentUpdateWithoutCollectionDataInput = {
   plainTextData?: Maybe<PlainTextComponentDataUpdateOneWithoutComponentInput>;
   articleData?: Maybe<ArticleComponentDataUpdateOneWithoutComponentInput>;
   linkData?: Maybe<LinkComponentDataUpdateOneWithoutComponentInput>;
+  StatRecord?: Maybe<StatRecordUpdateManyWithoutComponentInput>;
 };
 
 export type ComponentUpdateWithoutTeamDataInput = {
@@ -486,6 +494,7 @@ export type ComponentUpdateWithoutTeamDataInput = {
   plainTextData?: Maybe<PlainTextComponentDataUpdateOneWithoutComponentInput>;
   articleData?: Maybe<ArticleComponentDataUpdateOneWithoutComponentInput>;
   linkData?: Maybe<LinkComponentDataUpdateOneWithoutComponentInput>;
+  StatRecord?: Maybe<StatRecordUpdateManyWithoutComponentInput>;
 };
 
 export type ComponentUpdateWithWhereUniqueWithoutAuthorInput = {
@@ -533,6 +542,7 @@ export type ComponentWhereInput = {
   linkDataId?: Maybe<NullableStringFilter>;
   createdAt?: Maybe<DateTimeFilter>;
   updatedAt?: Maybe<DateTimeFilter>;
+  StatRecord?: Maybe<StatRecordFilter>;
   AND?: Maybe<Array<ComponentWhereInput>>;
   OR?: Maybe<Array<ComponentWhereInput>>;
   NOT?: Maybe<Array<ComponentWhereInput>>;
@@ -546,6 +556,11 @@ export type ComponentWhereInput = {
 
 export type ComponentWhereUniqueInput = {
   id?: Maybe<Scalars['String']>;
+};
+
+export type CreatedAtComponentIdCompoundUniqueInput = {
+  createdAt: Scalars['DateTime'];
+  componentId: Scalars['String'];
 };
 
 
@@ -602,7 +617,7 @@ export type LinkComponentDataWhereInput = {
   id?: Maybe<StringFilter>;
   text?: Maybe<NullableStringFilter>;
   url?: Maybe<StringFilter>;
-  component?: Maybe<ComponentFilter>;
+  Component?: Maybe<ComponentFilter>;
   AND?: Maybe<Array<LinkComponentDataWhereInput>>;
   OR?: Maybe<Array<LinkComponentDataWhereInput>>;
   NOT?: Maybe<Array<LinkComponentDataWhereInput>>;
@@ -727,7 +742,7 @@ export type PlainTextComponentDataUpsertWithoutComponentInput = {
 export type PlainTextComponentDataWhereInput = {
   id?: Maybe<StringFilter>;
   text?: Maybe<StringFilter>;
-  component?: Maybe<ComponentFilter>;
+  Component?: Maybe<ComponentFilter>;
   AND?: Maybe<Array<PlainTextComponentDataWhereInput>>;
   OR?: Maybe<Array<PlainTextComponentDataWhereInput>>;
   NOT?: Maybe<Array<PlainTextComponentDataWhereInput>>;
@@ -739,12 +754,23 @@ export type PlainTextComponentDataWhereUniqueInput = {
 
 export type Query = {
    __typename?: 'Query';
+  users: Array<User>;
   getUser?: Maybe<User>;
   collections: Array<Collection>;
   collection?: Maybe<Collection>;
   components: Array<Component>;
   component?: Maybe<Component>;
-  users: Array<User>;
+  statRecords: Array<StatRecord>;
+};
+
+
+export type QueryUsersArgs = {
+  where?: Maybe<QueryUsersWhereInput>;
+  skip?: Maybe<Scalars['Int']>;
+  after?: Maybe<UserWhereUniqueInput>;
+  before?: Maybe<UserWhereUniqueInput>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
 };
 
 
@@ -778,11 +804,11 @@ export type QueryComponentArgs = {
 };
 
 
-export type QueryUsersArgs = {
-  where?: Maybe<QueryUsersWhereInput>;
+export type QueryStatRecordsArgs = {
+  where?: Maybe<StatRecordWhereInput>;
   skip?: Maybe<Scalars['Int']>;
-  after?: Maybe<UserWhereUniqueInput>;
-  before?: Maybe<UserWhereUniqueInput>;
+  after?: Maybe<StatRecordWhereUniqueInput>;
+  before?: Maybe<StatRecordWhereUniqueInput>;
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
 };
@@ -807,6 +833,92 @@ export type SignInOutput = {
    __typename?: 'SignInOutput';
   authToken: Scalars['String'];
   user: User;
+};
+
+export type StatRecord = {
+   __typename?: 'StatRecord';
+  id: Scalars['String'];
+  createdAt: Scalars['DateTime'];
+  componentId: Scalars['String'];
+  component: Component;
+};
+
+export type StatRecordCreateManyWithoutComponentInput = {
+  create?: Maybe<Array<StatRecordCreateWithoutComponentInput>>;
+  connect?: Maybe<Array<StatRecordWhereUniqueInput>>;
+};
+
+export type StatRecordCreateWithoutComponentInput = {
+  id?: Maybe<Scalars['String']>;
+  createdAt?: Maybe<Scalars['DateTime']>;
+};
+
+export type StatRecordFilter = {
+  every?: Maybe<StatRecordWhereInput>;
+  some?: Maybe<StatRecordWhereInput>;
+  none?: Maybe<StatRecordWhereInput>;
+};
+
+export type StatRecordScalarWhereInput = {
+  id?: Maybe<StringFilter>;
+  createdAt?: Maybe<DateTimeFilter>;
+  componentId?: Maybe<StringFilter>;
+  AND?: Maybe<Array<StatRecordScalarWhereInput>>;
+  OR?: Maybe<Array<StatRecordScalarWhereInput>>;
+  NOT?: Maybe<Array<StatRecordScalarWhereInput>>;
+};
+
+export type StatRecordUpdateManyDataInput = {
+  id?: Maybe<Scalars['String']>;
+  createdAt?: Maybe<Scalars['DateTime']>;
+};
+
+export type StatRecordUpdateManyWithoutComponentInput = {
+  create?: Maybe<Array<StatRecordCreateWithoutComponentInput>>;
+  connect?: Maybe<Array<StatRecordWhereUniqueInput>>;
+  set?: Maybe<Array<StatRecordWhereUniqueInput>>;
+  disconnect?: Maybe<Array<StatRecordWhereUniqueInput>>;
+  delete?: Maybe<Array<StatRecordWhereUniqueInput>>;
+  update?: Maybe<Array<StatRecordUpdateWithWhereUniqueWithoutComponentInput>>;
+  updateMany?: Maybe<Array<StatRecordUpdateManyWithWhereNestedInput>>;
+  deleteMany?: Maybe<Array<StatRecordScalarWhereInput>>;
+  upsert?: Maybe<Array<StatRecordUpsertWithWhereUniqueWithoutComponentInput>>;
+};
+
+export type StatRecordUpdateManyWithWhereNestedInput = {
+  where: StatRecordScalarWhereInput;
+  data: StatRecordUpdateManyDataInput;
+};
+
+export type StatRecordUpdateWithoutComponentDataInput = {
+  id?: Maybe<Scalars['String']>;
+  createdAt?: Maybe<Scalars['DateTime']>;
+};
+
+export type StatRecordUpdateWithWhereUniqueWithoutComponentInput = {
+  where: StatRecordWhereUniqueInput;
+  data: StatRecordUpdateWithoutComponentDataInput;
+};
+
+export type StatRecordUpsertWithWhereUniqueWithoutComponentInput = {
+  where: StatRecordWhereUniqueInput;
+  update: StatRecordUpdateWithoutComponentDataInput;
+  create: StatRecordCreateWithoutComponentInput;
+};
+
+export type StatRecordWhereInput = {
+  id?: Maybe<StringFilter>;
+  createdAt?: Maybe<DateTimeFilter>;
+  componentId?: Maybe<StringFilter>;
+  AND?: Maybe<Array<StatRecordWhereInput>>;
+  OR?: Maybe<Array<StatRecordWhereInput>>;
+  NOT?: Maybe<Array<StatRecordWhereInput>>;
+  component?: Maybe<ComponentWhereInput>;
+};
+
+export type StatRecordWhereUniqueInput = {
+  id?: Maybe<Scalars['String']>;
+  createdAt_componentId?: Maybe<CreatedAtComponentIdCompoundUniqueInput>;
 };
 
 export type StringFilter = {
@@ -1457,6 +1569,19 @@ export type GetComponentsListingQuery = (
   )> }
 );
 
+export type GetComponentStatsQueryVariables = {
+  where: StatRecordWhereInput;
+};
+
+
+export type GetComponentStatsQuery = (
+  { __typename?: 'Query' }
+  & { statRecords: Array<(
+    { __typename?: 'StatRecord' }
+    & Pick<StatRecord, 'createdAt'>
+  )> }
+);
+
 export type GetUserQueryVariables = {};
 
 
@@ -1753,6 +1878,14 @@ export const GetComponentsListingDocument = gql`
 }
     ${ComponentListingFragmentDoc}`;
 export type GetComponentsListingQueryResult = ApolloReactCommon.QueryResult<GetComponentsListingQuery, GetComponentsListingQueryVariables>;
+export const GetComponentStatsDocument = gql`
+    query GetComponentStats($where: StatRecordWhereInput!) {
+  statRecords(where: $where) {
+    createdAt
+  }
+}
+    `;
+export type GetComponentStatsQueryResult = ApolloReactCommon.QueryResult<GetComponentStatsQuery, GetComponentStatsQueryVariables>;
 export const GetUserDocument = gql`
     query GetUser {
   getUser {

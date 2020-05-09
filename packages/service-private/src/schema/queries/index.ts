@@ -36,5 +36,10 @@ export const Query = queryType({
     });
 
     t.crud.component();
+
+    /* Statistics */
+    t.crud.statRecords({
+      filtering: true,
+    });
   },
 });

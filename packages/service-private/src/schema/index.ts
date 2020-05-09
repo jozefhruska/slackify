@@ -1,4 +1,4 @@
-import { makeSchema } from 'nexus';
+import { makeSchema } from '@nexus/schema';
 import { nexusPrismaPlugin } from 'nexus-prisma';
 import path from 'path';
 

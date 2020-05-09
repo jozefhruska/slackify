@@ -3,7 +3,7 @@ import { applyMiddleware } from 'graphql-middleware';
 import { PrismaClient, Team } from '@prisma/client';
 
 import { schema } from './schema';
-import { collectionsMiddleware } from './middleware';
+import { collectionsMiddleware, statsMiddleware } from './middleware';
 import { permissions } from './permissions';
 import { PORT } from './config';
 
@@ -17,7 +17,12 @@ export interface Context {
 }
 
 /* Apply GraphQL middleware */
-const schemaWithMiddleware = applyMiddleware(schema, permissions, collectionsMiddleware);
+const schemaWithMiddleware = applyMiddleware(
+  schema,
+  permissions,
+  collectionsMiddleware,
+  statsMiddleware
+);
 
 /* Create Apollo Server instance */
 const server = new ApolloServer({

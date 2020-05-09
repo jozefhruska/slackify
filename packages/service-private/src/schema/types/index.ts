@@ -3,6 +3,7 @@ import { inputObjectType } from 'nexus';
 export * from './auth';
 export * from './collections';
 export * from './components';
+export * from './statistics';
 export * from './teams';
 export * from './users';
 

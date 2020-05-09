@@ -1,0 +1,181 @@
+{
+  "version": "0.3.14-fixed",
+  "steps": [
+    {
+      "tag": "CreateModel",
+      "model": "StatRecord"
+    },
+    {
+      "tag": "CreateField",
+      "model": "StatRecord",
+      "field": "id",
+      "type": "String",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "StatRecord",
+          "field": "id"
+        },
+        "directive": "default"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "StatRecord",
+          "field": "id"
+        },
+        "directive": "default"
+      },
+      "argument": "",
+      "value": "cuid()"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "StatRecord",
+          "field": "id"
+        },
+        "directive": "id"
+      }
+    },
+    {
+      "tag": "CreateField",
+      "model": "StatRecord",
+      "field": "createdAt",
+      "type": "DateTime",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "StatRecord",
+          "field": "createdAt"
+        },
+        "directive": "default"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "StatRecord",
+          "field": "createdAt"
+        },
+        "directive": "default"
+      },
+      "argument": "",
+      "value": "now()"
+    },
+    {
+      "tag": "CreateField",
+      "model": "StatRecord",
+      "field": "componentId",
+      "type": "String",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateField",
+      "model": "StatRecord",
+      "field": "component",
+      "type": "Component",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "StatRecord",
+          "field": "component"
+        },
+        "directive": "relation"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "StatRecord",
+          "field": "component"
+        },
+        "directive": "relation"
+      },
+      "argument": "fields",
+      "value": "[componentId]"
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "StatRecord",
+          "field": "component"
+        },
+        "directive": "relation"
+      },
+      "argument": "references",
+      "value": "[id]"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Model",
+          "model": "StatRecord",
+          "arguments": [
+            {
+              "name": "",
+              "value": "[createdAt, componentId]"
+            }
+          ]
+        },
+        "directive": "unique"
+      }
+    },
+    {
+      "tag": "CreateField",
+      "model": "Component",
+      "field": "StatRecord",
+      "type": "StatRecord",
+      "arity": "List"
+    },
+    {
+      "tag": "CreateField",
+      "model": "PlainTextComponentData",
+      "field": "Component",
+      "type": "Component",
+      "arity": "List"
+    },
+    {
+      "tag": "CreateField",
+      "model": "ArticleComponentData",
+      "field": "Component",
+      "type": "Component",
+      "arity": "List"
+    },
+    {
+      "tag": "CreateField",
+      "model": "LinkComponentData",
+      "field": "Component",
+      "type": "Component",
+      "arity": "List"
+    }
+  ]
+}
