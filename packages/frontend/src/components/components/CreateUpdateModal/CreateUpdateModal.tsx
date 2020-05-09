@@ -56,7 +56,7 @@ const ModalContent: React.FC<ModalContentProps> = ({ collectionId }) => {
             <Select
               id="collection"
               name="collection"
-              value={state.collection?.id ?? data.collections[0].id}
+              value={state.collection?.id ?? ''}
               onChange={({ target }) => {
                 const collection = data?.collections?.find(({ id }) => target?.value === id);
 
@@ -71,6 +71,10 @@ const ModalContent: React.FC<ModalContentProps> = ({ collectionId }) => {
                 });
               }}
             >
+              <option value="" disabled>
+                -- Select --
+              </option>
+
               {data?.collections.map(({ id, name }) => (
                 <option key={id} value={id}>
                   {name}
