@@ -213,8 +213,12 @@ export const addToSlack: FieldResolver<'Mutation', 'addToSlack'> = async (
         },
       },
     });
+
+    return true;
   } catch (error) {
     console.error(error);
     throw new Error('Something went wrong. Please try again later.');
   }
+
+  return false;
 };
