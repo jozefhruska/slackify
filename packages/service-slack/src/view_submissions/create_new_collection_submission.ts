@@ -39,7 +39,7 @@ type SubmissionValues = {
  */
 const create_new_collection_submission: Middleware<SlackViewMiddlewareArgs<
   ViewSubmitAction
->> = async ({ view, body, ack }) => {
+>> = async ({ view, body, ack, context }) => {
   try {
     /* Extract user and team IDs */
     const userId = body?.user?.id;
@@ -90,6 +90,7 @@ const create_new_collection_submission: Middleware<SlackViewMiddlewareArgs<
 
     /* Publish app home view */
     await app.client.views.publish({
+      token: context?.botToken,
       user_id: userId,
       view: appHomeView,
     });

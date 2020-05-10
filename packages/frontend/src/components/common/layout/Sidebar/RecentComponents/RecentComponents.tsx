@@ -4,7 +4,7 @@ import moment from 'moment';
 import Link from 'next/link';
 
 import {
-  User,
+  UserDetailFragment,
   GetRecentComponentsQuery,
   GetRecentComponentsQueryVariables,
 } from '../../../../../types/generated/graphql';
@@ -18,7 +18,7 @@ import * as S from './RecentComponents.styles';
 /* Props - <RecentComponents />
 ============================================================================= */
 type Props = {
-  user: User;
+  user: UserDetailFragment;
 };
 
 /* <RecentComponents />

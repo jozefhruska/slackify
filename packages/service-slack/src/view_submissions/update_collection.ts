@@ -3,7 +3,6 @@ import { ViewSubmitAction, Middleware, SlackViewMiddlewareArgs } from '@slack/bo
 import { prisma } from '../prisma';
 import { compose_manage_collections_view } from '../utils/views';
 import { app } from '..';
-import { SLACK_BOT_TOKEN } from '../config';
 
 /* Local types
 ============================================================================= */
@@ -34,6 +33,7 @@ const update_collection: Middleware<SlackViewMiddlewareArgs<ViewSubmitAction>> =
   view,
   body,
   ack,
+  context,
 }) => {
   try {
     /* Extract private metadata, user and team IDs */
@@ -77,7 +77,7 @@ const update_collection: Middleware<SlackViewMiddlewareArgs<ViewSubmitAction>> =
 
     /* Update modal */
     await app.client.views.update({
-      token: SLACK_BOT_TOKEN,
+      token: context?.botToken,
       view_id: privateMetadata.manageCollectionsViewId,
       view: modalView,
     });

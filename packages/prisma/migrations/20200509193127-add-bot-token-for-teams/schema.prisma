@@ -1,6 +1,6 @@
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
+  url = "***"
   enabled  = env("DATABASE_URL")
 }
 
@@ -15,7 +15,12 @@ model User {
   name        String
   role        UserRole    @default(VIEWER)
   accessToken String      @unique
-  avatar      String?
+  image_24    String?
+  image_32    String?
+  image_48    String?
+  image_72    String?
+  image_192   String?
+  image_512   String?
   team        Team        @relation(fields: [teamId], references: [id])
   teamId      String
   components  Component[]
@@ -37,7 +42,6 @@ model Collection {
 model Team {
   id          String       @id
   name        String
-  botId       String
   botToken    String       @unique
   accessToken String       @unique
   collections Collection[]

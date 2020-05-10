@@ -1,50 +1,39 @@
 import React, { useEffect } from 'react';
 import { NextPage, GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
-import { useDispatch } from 'react-redux';
-import { Dispatch } from 'redux';
 
 import { createApolloClient } from '../../src/api';
 import { Flex, Box } from '../../src/components/common/layout/base';
 import { Block } from '../../src/components/common/layout';
 import { Paragraph } from '../../src/components/common/typography';
-import { SIGN_IN } from '../../src/api/mutation/users';
-import { getAuthToken, setAuthToken } from '../../src/cookies';
+import { getAuthToken } from '../../src/cookies';
 import {
-  SignInMutation,
-  SignInMutationVariables,
   GetUserQuery,
   GetUserQueryVariables,
+  AddToSlackMutation,
+  AddToSlackMutationVariables,
 } from '../../src/types/generated/graphql';
 import { GET_USER } from '../../src/api/query/users';
 import { Loader } from '../../src/components/common/misc';
-import { StoreUser } from '../../src/actions/auth';
+import { ADD_TO_SLACK } from '../../src/api/mutation/auth';
 
-/* Props - <RedirectPage />
+/* Props - <AddToSlackPage />
 ============================================================================= */
 type Props = {
-  data: SignInMutation;
+  success: boolean;
   errorMessage: string;
 };
 
-/* <RedirectPage />
+/* <AddToSlackPage />
 ============================================================================= */
-const RedirectPage: NextPage<Props> = ({ data, errorMessage }) => {
-  const dispatch = useDispatch<Dispatch<StoreUser>>();
-
+const AddToSlackPage: NextPage<Props> = ({ success, errorMessage }) => {
   const { push } = useRouter();
 
   useEffect(() => {
-    if (data?.signIn) {
-      /* Set auth token cookie */
-      setAuthToken(data.signIn?.authToken);
-
-      /* Store user into local state */
-      dispatch({ type: '[AUTH] STORE_USER', payload: { user: data.signIn?.user } });
-
-      push('/');
+    if (success) {
+      push('/?addToSlackSuccess=true');
     }
-  }, [data]);
+  }, [success]);
 
   if (errorMessage) {
     return (
@@ -58,7 +47,7 @@ const RedirectPage: NextPage<Props> = ({ data, errorMessage }) => {
     );
   }
 
-  if (data) {
+  if (success) {
     return (
       <Flex alignItems="center" justifyContent="center" mx="auto" minHeight="100vh" padding="s2">
         <Block>
@@ -82,7 +71,7 @@ const RedirectPage: NextPage<Props> = ({ data, errorMessage }) => {
   );
 };
 
-/* getServerSideProps - <RedirectPage />
+/* getServerSideProps - <AddToSlackPage />
 ============================================================================= */
 export const getServerSideProps: GetServerSideProps<Props> = async (ctx) => {
   const authToken = getAuthToken(ctx);
@@ -102,23 +91,23 @@ export const getServerSideProps: GetServerSideProps<Props> = async (ctx) => {
     return;
   }
 
-  let data = null;
+  let success = false;
   let errorMessage = null;
   await apolloClient
-    .mutate<SignInMutation, SignInMutationVariables>({
-      mutation: SIGN_IN,
+    .mutate<AddToSlackMutation, AddToSlackMutationVariables>({
+      mutation: ADD_TO_SLACK,
       variables: {
         code: ctx?.query?.code as string,
       },
     })
-    .then(({ data: signInData }) => {
-      data = signInData;
+    .then(() => {
+      success = true;
     })
     .catch(({ message }) => {
       errorMessage = message;
     });
 
-  return { props: { data, errorMessage } };
+  return { props: { success, errorMessage } };
 };
 
-export default RedirectPage;
+export default AddToSlackPage;

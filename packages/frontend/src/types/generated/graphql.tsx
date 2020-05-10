@@ -629,8 +629,9 @@ export type LinkComponentDataWhereUniqueInput = {
 
 export type Mutation = {
    __typename?: 'Mutation';
-  updateOneUser?: Maybe<User>;
   signIn?: Maybe<SignInOutput>;
+  addToSlack?: Maybe<Scalars['Boolean']>;
+  updateOneUser?: Maybe<User>;
   createOneCollection: Collection;
   updateOneCollection?: Maybe<Collection>;
   deleteOneCollection: Collection;
@@ -640,14 +641,19 @@ export type Mutation = {
 };
 
 
-export type MutationUpdateOneUserArgs = {
-  data: UserUpdateInput;
-  where: UserWhereUniqueInput;
+export type MutationSignInArgs = {
+  code: Scalars['String'];
 };
 
 
-export type MutationSignInArgs = {
+export type MutationAddToSlackArgs = {
   code: Scalars['String'];
+};
+
+
+export type MutationUpdateOneUserArgs = {
+  data: UserUpdateInput;
+  where: UserWhereUniqueInput;
 };
 
 
@@ -837,7 +843,6 @@ export type SignInOutput = {
 
 export type StatRecord = {
    __typename?: 'StatRecord';
-  id: Scalars['String'];
   createdAt: Scalars['DateTime'];
   componentId: Scalars['String'];
   component: Component;
@@ -939,7 +944,7 @@ export type Team = {
    __typename?: 'Team';
   id: Scalars['String'];
   name: Scalars['String'];
-  domain: Scalars['String'];
+  botToken: Scalars['String'];
   accessToken: Scalars['String'];
 };
 
@@ -961,7 +966,7 @@ export type TeamCreateOneWithoutUsersInput = {
 export type TeamCreateWithoutCollectionsInput = {
   id: Scalars['String'];
   name: Scalars['String'];
-  domain: Scalars['String'];
+  botToken: Scalars['String'];
   accessToken: Scalars['String'];
   users?: Maybe<UserCreateManyWithoutTeamInput>;
   components?: Maybe<ComponentCreateManyWithoutTeamInput>;
@@ -970,7 +975,7 @@ export type TeamCreateWithoutCollectionsInput = {
 export type TeamCreateWithoutComponentsInput = {
   id: Scalars['String'];
   name: Scalars['String'];
-  domain: Scalars['String'];
+  botToken: Scalars['String'];
   accessToken: Scalars['String'];
   collections?: Maybe<CollectionCreateManyWithoutTeamInput>;
   users?: Maybe<UserCreateManyWithoutTeamInput>;
@@ -979,7 +984,7 @@ export type TeamCreateWithoutComponentsInput = {
 export type TeamCreateWithoutUsersInput = {
   id: Scalars['String'];
   name: Scalars['String'];
-  domain: Scalars['String'];
+  botToken: Scalars['String'];
   accessToken: Scalars['String'];
   collections?: Maybe<CollectionCreateManyWithoutTeamInput>;
   components?: Maybe<ComponentCreateManyWithoutTeamInput>;
@@ -1009,7 +1014,7 @@ export type TeamUpdateOneRequiredWithoutUsersInput = {
 export type TeamUpdateWithoutCollectionsDataInput = {
   id?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
-  domain?: Maybe<Scalars['String']>;
+  botToken?: Maybe<Scalars['String']>;
   accessToken?: Maybe<Scalars['String']>;
   users?: Maybe<UserUpdateManyWithoutTeamInput>;
   components?: Maybe<ComponentUpdateManyWithoutTeamInput>;
@@ -1018,7 +1023,7 @@ export type TeamUpdateWithoutCollectionsDataInput = {
 export type TeamUpdateWithoutComponentsDataInput = {
   id?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
-  domain?: Maybe<Scalars['String']>;
+  botToken?: Maybe<Scalars['String']>;
   accessToken?: Maybe<Scalars['String']>;
   collections?: Maybe<CollectionUpdateManyWithoutTeamInput>;
   users?: Maybe<UserUpdateManyWithoutTeamInput>;
@@ -1027,7 +1032,7 @@ export type TeamUpdateWithoutComponentsDataInput = {
 export type TeamUpdateWithoutUsersDataInput = {
   id?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
-  domain?: Maybe<Scalars['String']>;
+  botToken?: Maybe<Scalars['String']>;
   accessToken?: Maybe<Scalars['String']>;
   collections?: Maybe<CollectionUpdateManyWithoutTeamInput>;
   components?: Maybe<ComponentUpdateManyWithoutTeamInput>;
@@ -1051,7 +1056,7 @@ export type TeamUpsertWithoutUsersInput = {
 export type TeamWhereInput = {
   id?: Maybe<StringFilter>;
   name?: Maybe<StringFilter>;
-  domain?: Maybe<StringFilter>;
+  botToken?: Maybe<StringFilter>;
   accessToken?: Maybe<StringFilter>;
   collections?: Maybe<CollectionFilter>;
   users?: Maybe<UserFilter>;
@@ -1063,7 +1068,7 @@ export type TeamWhereInput = {
 
 export type TeamWhereUniqueInput = {
   id?: Maybe<Scalars['String']>;
-  domain?: Maybe<Scalars['String']>;
+  botToken?: Maybe<Scalars['String']>;
   accessToken?: Maybe<Scalars['String']>;
 };
 
@@ -1074,12 +1079,7 @@ export type User = {
   email: Scalars['String'];
   role: UserRole;
   accessToken: Scalars['String'];
-  image_24?: Maybe<Scalars['String']>;
-  image_32?: Maybe<Scalars['String']>;
-  image_48?: Maybe<Scalars['String']>;
-  image_72?: Maybe<Scalars['String']>;
-  image_192?: Maybe<Scalars['String']>;
-  image_512?: Maybe<Scalars['String']>;
+  avatar?: Maybe<Scalars['String']>;
   team: Team;
 };
 
@@ -1099,12 +1099,7 @@ export type UserCreateWithoutComponentsInput = {
   name: Scalars['String'];
   role?: Maybe<UserRole>;
   accessToken: Scalars['String'];
-  image_24?: Maybe<Scalars['String']>;
-  image_32?: Maybe<Scalars['String']>;
-  image_48?: Maybe<Scalars['String']>;
-  image_72?: Maybe<Scalars['String']>;
-  image_192?: Maybe<Scalars['String']>;
-  image_512?: Maybe<Scalars['String']>;
+  avatar?: Maybe<Scalars['String']>;
   team: TeamCreateOneWithoutUsersInput;
 };
 
@@ -1114,12 +1109,7 @@ export type UserCreateWithoutTeamInput = {
   name: Scalars['String'];
   role?: Maybe<UserRole>;
   accessToken: Scalars['String'];
-  image_24?: Maybe<Scalars['String']>;
-  image_32?: Maybe<Scalars['String']>;
-  image_48?: Maybe<Scalars['String']>;
-  image_72?: Maybe<Scalars['String']>;
-  image_192?: Maybe<Scalars['String']>;
-  image_512?: Maybe<Scalars['String']>;
+  avatar?: Maybe<Scalars['String']>;
   components?: Maybe<ComponentCreateManyWithoutAuthorInput>;
 };
 
@@ -1142,12 +1132,7 @@ export type UserScalarWhereInput = {
   name?: Maybe<StringFilter>;
   role?: Maybe<UserRole>;
   accessToken?: Maybe<StringFilter>;
-  image_24?: Maybe<NullableStringFilter>;
-  image_32?: Maybe<NullableStringFilter>;
-  image_48?: Maybe<NullableStringFilter>;
-  image_72?: Maybe<NullableStringFilter>;
-  image_192?: Maybe<NullableStringFilter>;
-  image_512?: Maybe<NullableStringFilter>;
+  avatar?: Maybe<NullableStringFilter>;
   teamId?: Maybe<StringFilter>;
   components?: Maybe<ComponentFilter>;
   AND?: Maybe<Array<UserScalarWhereInput>>;
@@ -1161,12 +1146,7 @@ export type UserUpdateInput = {
   name?: Maybe<Scalars['String']>;
   role?: Maybe<UserRole>;
   accessToken?: Maybe<Scalars['String']>;
-  image_24?: Maybe<Scalars['String']>;
-  image_32?: Maybe<Scalars['String']>;
-  image_48?: Maybe<Scalars['String']>;
-  image_72?: Maybe<Scalars['String']>;
-  image_192?: Maybe<Scalars['String']>;
-  image_512?: Maybe<Scalars['String']>;
+  avatar?: Maybe<Scalars['String']>;
   team?: Maybe<TeamUpdateOneRequiredWithoutUsersInput>;
   components?: Maybe<ComponentUpdateManyWithoutAuthorInput>;
 };
@@ -1177,12 +1157,7 @@ export type UserUpdateManyDataInput = {
   name?: Maybe<Scalars['String']>;
   role?: Maybe<UserRole>;
   accessToken?: Maybe<Scalars['String']>;
-  image_24?: Maybe<Scalars['String']>;
-  image_32?: Maybe<Scalars['String']>;
-  image_48?: Maybe<Scalars['String']>;
-  image_72?: Maybe<Scalars['String']>;
-  image_192?: Maybe<Scalars['String']>;
-  image_512?: Maybe<Scalars['String']>;
+  avatar?: Maybe<Scalars['String']>;
 };
 
 export type UserUpdateManyWithoutTeamInput = {
@@ -1215,12 +1190,7 @@ export type UserUpdateWithoutComponentsDataInput = {
   name?: Maybe<Scalars['String']>;
   role?: Maybe<UserRole>;
   accessToken?: Maybe<Scalars['String']>;
-  image_24?: Maybe<Scalars['String']>;
-  image_32?: Maybe<Scalars['String']>;
-  image_48?: Maybe<Scalars['String']>;
-  image_72?: Maybe<Scalars['String']>;
-  image_192?: Maybe<Scalars['String']>;
-  image_512?: Maybe<Scalars['String']>;
+  avatar?: Maybe<Scalars['String']>;
   team?: Maybe<TeamUpdateOneRequiredWithoutUsersInput>;
 };
 
@@ -1230,12 +1200,7 @@ export type UserUpdateWithoutTeamDataInput = {
   name?: Maybe<Scalars['String']>;
   role?: Maybe<UserRole>;
   accessToken?: Maybe<Scalars['String']>;
-  image_24?: Maybe<Scalars['String']>;
-  image_32?: Maybe<Scalars['String']>;
-  image_48?: Maybe<Scalars['String']>;
-  image_72?: Maybe<Scalars['String']>;
-  image_192?: Maybe<Scalars['String']>;
-  image_512?: Maybe<Scalars['String']>;
+  avatar?: Maybe<Scalars['String']>;
   components?: Maybe<ComponentUpdateManyWithoutAuthorInput>;
 };
 
@@ -1261,12 +1226,7 @@ export type UserWhereInput = {
   name?: Maybe<StringFilter>;
   role?: Maybe<UserRole>;
   accessToken?: Maybe<StringFilter>;
-  image_24?: Maybe<NullableStringFilter>;
-  image_32?: Maybe<NullableStringFilter>;
-  image_48?: Maybe<NullableStringFilter>;
-  image_72?: Maybe<NullableStringFilter>;
-  image_192?: Maybe<NullableStringFilter>;
-  image_512?: Maybe<NullableStringFilter>;
+  avatar?: Maybe<NullableStringFilter>;
   teamId?: Maybe<StringFilter>;
   components?: Maybe<ComponentFilter>;
   AND?: Maybe<Array<UserWhereInput>>;
@@ -1349,16 +1309,26 @@ export type ComponentListingFragment = (
 
 export type UserDetailFragment = (
   { __typename?: 'User' }
-  & Pick<User, 'id' | 'name' | 'email' | 'role' | 'accessToken' | 'image_72'>
+  & Pick<User, 'id' | 'role' | 'name' | 'email' | 'accessToken' | 'avatar'>
   & { team: (
     { __typename?: 'Team' }
-    & Pick<Team, 'id' | 'name' | 'domain' | 'accessToken'>
+    & Pick<Team, 'id' | 'name' | 'accessToken'>
   ) }
 );
 
 export type UserPreviewFragment = (
   { __typename?: 'User' }
-  & Pick<User, 'id' | 'name' | 'role' | 'image_72'>
+  & Pick<User, 'id' | 'name' | 'role' | 'avatar'>
+);
+
+export type AddToSlackMutationVariables = {
+  code: Scalars['String'];
+};
+
+
+export type AddToSlackMutation = (
+  { __typename?: 'Mutation' }
+  & Pick<Mutation, 'addToSlack'>
 );
 
 export type CreateOneCollectionMutationVariables = {
@@ -1716,15 +1686,14 @@ export const ComponentListingFragmentDoc = gql`
 export const UserDetailFragmentDoc = gql`
     fragment UserDetail on User {
   id
+  role
   name
   email
-  role
   accessToken
-  image_72
+  avatar
   team {
     id
     name
-    domain
     accessToken
   }
 }
@@ -1734,9 +1703,17 @@ export const UserPreviewFragmentDoc = gql`
   id
   name
   role
-  image_72
+  avatar
 }
     `;
+export const AddToSlackDocument = gql`
+    mutation AddToSlack($code: String!) {
+  addToSlack(code: $code)
+}
+    `;
+export type AddToSlackMutationFn = ApolloReactCommon.MutationFunction<AddToSlackMutation, AddToSlackMutationVariables>;
+export type AddToSlackMutationResult = ApolloReactCommon.MutationResult<AddToSlackMutation>;
+export type AddToSlackMutationOptions = ApolloReactCommon.BaseMutationOptions<AddToSlackMutation, AddToSlackMutationVariables>;
 export const CreateOneCollectionDocument = gql`
     mutation CreateOneCollection($data: CollectionCreateInput!) {
   createOneCollection(data: $data) {

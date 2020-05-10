@@ -13,7 +13,11 @@ import {
 } from '../../src/components/common/layout';
 import withApollo, { createApolloClient } from '../../src/api';
 import ListingPage from '../../src/components/collections/listing/ListingPage/ListingPage';
-import { User, GetUserQuery, GetUserQueryVariables } from '../../src/types/generated/graphql';
+import {
+  UserDetailFragment,
+  GetUserQuery,
+  GetUserQueryVariables,
+} from '../../src/types/generated/graphql';
 import { StoreUser } from '../../src/actions/auth';
 import { OpenCreateUpdateModal } from '../../src/actions/collections';
 import { getAuthToken, removeAuthToken } from '../../src/cookies';
@@ -25,7 +29,7 @@ import { canCreateCollections } from '../../src/utils/users';
 /* Props - <CollectionsPage />
 ============================================================================= */
 type Props = {
-  user: User;
+  user: UserDetailFragment;
 };
 
 /* <CollectionsPage />

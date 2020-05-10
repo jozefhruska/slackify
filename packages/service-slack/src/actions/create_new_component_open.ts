@@ -1,7 +1,6 @@
 import { SlackActionMiddlewareArgs, Middleware, BlockButtonAction } from '@slack/bolt';
 
 import { app } from '..';
-import { SLACK_BOT_TOKEN } from '../config';
 import { compose_create_new_component_modal } from '../views/components';
 
 /**
@@ -11,6 +10,7 @@ const create_new_component_open: Middleware<SlackActionMiddlewareArgs<BlockButto
   body,
   action,
   ack,
+  context,
 }) => {
   try {
     /* Acknowledge Slack action */
@@ -26,7 +26,7 @@ const create_new_component_open: Middleware<SlackActionMiddlewareArgs<BlockButto
 
     /* Open modal */
     await app.client.views.open({
-      token: SLACK_BOT_TOKEN,
+      token: context?.botToken,
       trigger_id: body.trigger_id,
       view,
     });

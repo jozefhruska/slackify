@@ -7,13 +7,13 @@ import * as S from './UserAvatar.styles';
 /* Props - <UserAvatar />
 ============================================================================= */
 type Props = {
-  user: Pick<User, 'name' | 'image_72'>;
+  user: Pick<User, 'name' | 'avatar'>;
 };
 
 /* <UserAvatar />
 ============================================================================= */
 const UserAvatar: React.FC<Props> = ({ user }) => {
-  const image = user?.image_72;
+  const image = user?.avatar;
   const name = user?.name;
 
   if (!image && !name) {

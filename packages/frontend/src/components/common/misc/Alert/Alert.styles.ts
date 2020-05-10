@@ -7,7 +7,7 @@ const getTypeColor = ({ type }: AlertProps) => {
   switch (type) {
     case 'success':
       return css`
-        background: ${({ theme }) => theme.colors.brand};
+        background: ${({ theme }) => theme.colors.success};
       `;
     case 'danger':
       return css`
@@ -34,7 +34,7 @@ export const Wrapper = styled.div<Pick<AlertProps, 'type'>>`
   padding: ${({ theme }) => theme.space.s4} ${({ theme }) => theme.space.s6};
   background: ${({ theme }) => theme.colors.gray[0]};
   color: ${({ theme }) => theme.colors.gray[1]};
-  border-radius: 4px;
+  border-radius: ${({ theme }) => theme.radii.medium};
   box-sizing: border-box;
   overflow: hidden;
 

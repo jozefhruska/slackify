@@ -3,7 +3,7 @@ import moment from 'moment';
 import Highlight, { defaultProps } from 'prism-react-renderer';
 import { FiCheck, FiCopy } from 'react-icons/fi';
 
-import { CollectionDetailFragment, User } from '../../../types/generated/graphql';
+import { CollectionDetailFragment, UserDetailFragment } from '../../../types/generated/graphql';
 import { Grid, Box } from '../../common/layout/base';
 import { humanizeComponentType } from '../../../utils';
 import ListingPage from '../../components/listing/ListingPage/ListingPage';
@@ -14,7 +14,7 @@ import * as S from './Detail.styles';
 /* Props - <Detail />
 ============================================================================= */
 type Props = {
-  user: User;
+  user: UserDetailFragment;
   collection: CollectionDetailFragment;
 };
 

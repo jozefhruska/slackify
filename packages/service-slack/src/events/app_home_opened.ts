@@ -9,6 +9,7 @@ import { compose_app_home_view } from '../views/app_home';
 const app_home_opened: Middleware<SlackEventMiddlewareArgs<'app_home_opened'>> = async ({
   event,
   body,
+  context,
 }) => {
   try {
     /* Extract user ID */
@@ -29,6 +30,7 @@ const app_home_opened: Middleware<SlackEventMiddlewareArgs<'app_home_opened'>> =
 
     /* Publish app home view */
     await app.client.views.publish({
+      token: context?.botToken,
       user_id: userId,
       view,
     });

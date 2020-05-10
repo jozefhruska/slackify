@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { FiLogOut } from 'react-icons/fi';
 import Link from 'next/link';
 
-import { User } from '../../../../types/generated/graphql';
+import { UserDetailFragment } from '../../../../types/generated/graphql';
 import { selectIsSidebarOpen } from '../../../../selectors/ui';
 import { Box, Flex } from '../base';
 import { Heading } from '../../typography';
@@ -18,7 +18,7 @@ import * as S from './Sidebar.styles';
 /* Props - <Sidebar />
 ============================================================================= */
 type Props = {
-  user: User;
+  user: UserDetailFragment;
 };
 
 /* <Sidebar />

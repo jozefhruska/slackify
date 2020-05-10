@@ -607,6 +607,7 @@ input LinkComponentDataWhereUniqueInput {
 }
 
 type Mutation {
+  addToSlack(code: String!): Boolean
   createOneCollection(data: CollectionCreateInput!): Collection!
   createOneComponent(data: ComponentCreateInput!): Component!
   deleteOneCollection(where: CollectionWhereUniqueInput!): Collection!
@@ -817,7 +818,7 @@ input StringFilter {
 
 type Team {
   accessToken: String!
-  domain: String!
+  botToken: String!
   id: String!
   name: String!
 }
@@ -839,8 +840,9 @@ input TeamCreateOneWithoutUsersInput {
 
 input TeamCreateWithoutCollectionsInput {
   accessToken: String!
+  botId: String!
+  botToken: String!
   components: ComponentCreateManyWithoutTeamInput
-  domain: String!
   id: String!
   name: String!
   users: UserCreateManyWithoutTeamInput
@@ -848,8 +850,9 @@ input TeamCreateWithoutCollectionsInput {
 
 input TeamCreateWithoutComponentsInput {
   accessToken: String!
+  botId: String!
+  botToken: String!
   collections: CollectionCreateManyWithoutTeamInput
-  domain: String!
   id: String!
   name: String!
   users: UserCreateManyWithoutTeamInput
@@ -857,9 +860,10 @@ input TeamCreateWithoutComponentsInput {
 
 input TeamCreateWithoutUsersInput {
   accessToken: String!
+  botId: String!
+  botToken: String!
   collections: CollectionCreateManyWithoutTeamInput
   components: ComponentCreateManyWithoutTeamInput
-  domain: String!
   id: String!
   name: String!
 }
@@ -887,8 +891,9 @@ input TeamUpdateOneRequiredWithoutUsersInput {
 
 input TeamUpdateWithoutCollectionsDataInput {
   accessToken: String
+  botId: String
+  botToken: String
   components: ComponentUpdateManyWithoutTeamInput
-  domain: String
   id: String
   name: String
   users: UserUpdateManyWithoutTeamInput
@@ -896,8 +901,9 @@ input TeamUpdateWithoutCollectionsDataInput {
 
 input TeamUpdateWithoutComponentsDataInput {
   accessToken: String
+  botId: String
+  botToken: String
   collections: CollectionUpdateManyWithoutTeamInput
-  domain: String
   id: String
   name: String
   users: UserUpdateManyWithoutTeamInput
@@ -905,9 +911,10 @@ input TeamUpdateWithoutComponentsDataInput {
 
 input TeamUpdateWithoutUsersDataInput {
   accessToken: String
+  botId: String
+  botToken: String
   collections: CollectionUpdateManyWithoutTeamInput
   components: ComponentUpdateManyWithoutTeamInput
-  domain: String
   id: String
   name: String
 }
@@ -930,9 +937,10 @@ input TeamUpsertWithoutUsersInput {
 input TeamWhereInput {
   accessToken: StringFilter
   AND: [TeamWhereInput!]
+  botId: StringFilter
+  botToken: StringFilter
   collections: CollectionFilter
   components: ComponentFilter
-  domain: StringFilter
   id: StringFilter
   name: StringFilter
   NOT: [TeamWhereInput!]
@@ -942,20 +950,15 @@ input TeamWhereInput {
 
 input TeamWhereUniqueInput {
   accessToken: String
-  domain: String
+  botToken: String
   id: String
 }
 
 type User {
   accessToken: String!
+  avatar: String
   email: String!
   id: String!
-  image_192: String
-  image_24: String
-  image_32: String
-  image_48: String
-  image_512: String
-  image_72: String
   name: String!
   role: UserRole!
   team: Team!
@@ -973,14 +976,9 @@ input UserCreateOneWithoutComponentsInput {
 
 input UserCreateWithoutComponentsInput {
   accessToken: String!
+  avatar: String
   email: String!
   id: String!
-  image_192: String
-  image_24: String
-  image_32: String
-  image_48: String
-  image_512: String
-  image_72: String
   name: String!
   role: UserRole
   team: TeamCreateOneWithoutUsersInput!
@@ -988,15 +986,10 @@ input UserCreateWithoutComponentsInput {
 
 input UserCreateWithoutTeamInput {
   accessToken: String!
+  avatar: String
   components: ComponentCreateManyWithoutAuthorInput
   email: String!
   id: String!
-  image_192: String
-  image_24: String
-  image_32: String
-  image_48: String
-  image_512: String
-  image_72: String
   name: String!
   role: UserRole
 }
@@ -1017,15 +1010,10 @@ enum UserRole {
 input UserScalarWhereInput {
   accessToken: StringFilter
   AND: [UserScalarWhereInput!]
+  avatar: NullableStringFilter
   components: ComponentFilter
   email: StringFilter
   id: StringFilter
-  image_192: NullableStringFilter
-  image_24: NullableStringFilter
-  image_32: NullableStringFilter
-  image_48: NullableStringFilter
-  image_512: NullableStringFilter
-  image_72: NullableStringFilter
   name: StringFilter
   NOT: [UserScalarWhereInput!]
   OR: [UserScalarWhereInput!]
@@ -1035,15 +1023,10 @@ input UserScalarWhereInput {
 
 input UserUpdateInput {
   accessToken: String
+  avatar: String
   components: ComponentUpdateManyWithoutAuthorInput
   email: String
   id: String
-  image_192: String
-  image_24: String
-  image_32: String
-  image_48: String
-  image_512: String
-  image_72: String
   name: String
   role: UserRole
   team: TeamUpdateOneRequiredWithoutUsersInput
@@ -1051,14 +1034,9 @@ input UserUpdateInput {
 
 input UserUpdateManyDataInput {
   accessToken: String
+  avatar: String
   email: String
   id: String
-  image_192: String
-  image_24: String
-  image_32: String
-  image_48: String
-  image_512: String
-  image_72: String
   name: String
   role: UserRole
 }
@@ -1089,14 +1067,9 @@ input UserUpdateOneRequiredWithoutComponentsInput {
 
 input UserUpdateWithoutComponentsDataInput {
   accessToken: String
+  avatar: String
   email: String
   id: String
-  image_192: String
-  image_24: String
-  image_32: String
-  image_48: String
-  image_512: String
-  image_72: String
   name: String
   role: UserRole
   team: TeamUpdateOneRequiredWithoutUsersInput
@@ -1104,15 +1077,10 @@ input UserUpdateWithoutComponentsDataInput {
 
 input UserUpdateWithoutTeamDataInput {
   accessToken: String
+  avatar: String
   components: ComponentUpdateManyWithoutAuthorInput
   email: String
   id: String
-  image_192: String
-  image_24: String
-  image_32: String
-  image_48: String
-  image_512: String
-  image_72: String
   name: String
   role: UserRole
 }
@@ -1136,15 +1104,10 @@ input UserUpsertWithWhereUniqueWithoutTeamInput {
 input UserWhereInput {
   accessToken: StringFilter
   AND: [UserWhereInput!]
+  avatar: NullableStringFilter
   components: ComponentFilter
   email: StringFilter
   id: StringFilter
-  image_192: NullableStringFilter
-  image_24: NullableStringFilter
-  image_32: NullableStringFilter
-  image_48: NullableStringFilter
-  image_512: NullableStringFilter
-  image_72: NullableStringFilter
   name: StringFilter
   NOT: [UserWhereInput!]
   OR: [UserWhereInput!]

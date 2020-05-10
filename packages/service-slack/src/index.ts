@@ -1,7 +1,6 @@
 import { App } from '@slack/bolt';
-import { WebClient } from '@slack/web-api';
 
-import { SLACK_BOT_TOKEN, SLACK_SIGNING_SECRET, PORT } from './config';
+import { SLACK_SIGNING_SECRET, PORT } from './config';
 import { app_home_opened } from './events';
 import {
   manage_collections_open,
@@ -22,20 +21,40 @@ import {
   update_collection,
   update_component,
 } from './view_submissions';
+import { prisma } from './prisma';
 
 /* Create a Bolt instance
 ============================================================================= */
 export const app = new App({
-  token: SLACK_BOT_TOKEN,
   signingSecret: SLACK_SIGNING_SECRET,
   endpoints: {
     events: '/events',
     actions: '/actions',
   },
-});
+  authorize: async ({ teamId }) => {
+    try {
+      /* Get team data */
+      const team = await prisma.team.findOne({
+        where: {
+          id: teamId,
+        },
+      });
 
-// Re-initialize the WebClient
-app.client = new WebClient(process.env.SLACK_BOT_TOKEN);
+      /* Check if team data were found */
+      if (!team) {
+        throw new Error('Unable to get team data.');
+      }
+
+      return {
+        botId: team.botId,
+        botToken: team.botToken,
+      };
+    } catch (error) {
+      console.error(error);
+      throw new Error('Something went wrong. Please try again later.');
+    }
+  },
+});
 
 /* Events
 ============================================================================= */

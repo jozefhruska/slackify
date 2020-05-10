@@ -1,95 +1,105 @@
 import { FieldResolver } from 'nexus';
 import axios from 'axios';
 import jwt from 'jsonwebtoken';
+import { createHash, randomBytes } from 'crypto';
 
 import { SLACK_CLIENT_ID, SLACK_CLIENT_SECRET, SIGNING_SECRET } from '../../config';
-import { SlackAuthResponse } from '../../types/auth';
+import {
+  SlackAuthResponse,
+  SlackUserIdentityResponse,
+  SlackAuthTestResponse,
+} from '../../types/auth';
 
 /**
- * Resolves sign in with Slack mutation.
+ * Signs in user using Slack API.
  */
 export const signIn: FieldResolver<'Mutation', 'signIn'> = async (_, { code }, { prisma }) => {
-  const slackAuthResponse = await axios
-    .get<SlackAuthResponse>('https://slack.com/api/oauth.access', {
+  const authResponse = await axios
+    .get<SlackAuthResponse>('https://slack.com/api/oauth.v2.access', {
       params: {
         client_id: SLACK_CLIENT_ID,
         client_secret: SLACK_CLIENT_SECRET,
         code,
       },
     })
-    .then((res) => res.data)
-    .catch(() => {
-      throw new Error('Slack authorization failed (unable to fetch auth token).');
+    .then(({ data }) => data)
+    .catch((error) => {
+      console.error(error);
+      throw new Error('Something went wrong. Please try again later.');
     });
 
-  const user = slackAuthResponse.user;
-  const accessToken = slackAuthResponse.access_token;
-  const teamId = slackAuthResponse.team_id;
-
-  if (user === undefined || accessToken === undefined) {
-    throw new Error('Slack authorization failed (invalid auth response data).');
+  /* Check if response is OK */
+  if (!authResponse?.ok) {
+    throw new Error(`Invalid response from Slack (code: "${authResponse?.error}").`);
   }
 
-  if (!slackAuthResponse.ok) {
-    throw new Error('Slack authorization failed (response not ok).');
+  /* Check if token type is correct */
+  if (authResponse?.authed_user?.token_type !== 'user') {
+    throw new Error(
+      `Wrong access token type "${authResponse?.authed_user?.token_type}" (expected "user").`
+    );
   }
 
-  try {
-    /* Check if user with this ID already exists */
-    const existingUser = await prisma.user.findOne({
-      where: {
-        id: user.id,
+  /* Extract user token */
+  const userToken = authResponse.authed_user.access_token;
+
+  if (!userToken) {
+    throw new Error('Unable to extract user access token from Slack response.');
+  }
+
+  /* Extract team ID */
+  const teamId = authResponse.team?.id;
+
+  if (!teamId) {
+    throw new Error('Unable to extract team ID from Slack response.');
+  }
+
+  /* Get user data */
+  const slackUser = await axios
+    .get<SlackUserIdentityResponse>('https://slack.com/api/users.identity', {
+      params: {
+        token: userToken,
       },
+    })
+    .then(({ data }) => data.user)
+    .catch((error) => {
+      console.error(error);
+      throw new Error('Something went wrong. Please try again later.');
     });
 
-    let resultUser;
-    if (existingUser) {
-      resultUser = await prisma.user.update({
-        where: {
-          id: user.id,
-        },
-        data: {
-          id: user.id,
-          name: user.name,
-          email: user.email,
-          image_24: user.image_24,
-          image_32: user.image_32,
-          image_48: user.image_48,
-          image_72: user.image_72,
-          image_192: user.image_192,
-          image_512: user.image_512,
-          accessToken,
-        },
-      });
-    } else {
-      resultUser = await prisma.user.create({
-        data: {
-          id: user.id,
-          name: user.name,
-          email: user.email,
-          image_24: user.image_24,
-          image_32: user.image_32,
-          image_48: user.image_48,
-          image_72: user.image_72,
-          image_192: user.image_192,
-          image_512: user.image_512,
-          accessToken,
-          team: {
-            connect: {
-              id: teamId,
-            },
+  /* Create/update user */
+  try {
+    const user = await prisma.user.upsert({
+      where: {
+        id: slackUser.id,
+      },
+      create: {
+        id: slackUser.id,
+        name: slackUser.name,
+        email: slackUser.email,
+        accessToken: userToken,
+        avatar: slackUser.image_72,
+        team: {
+          connect: {
+            id: teamId,
           },
         },
-      });
-    }
+      },
+      update: {
+        name: slackUser.name,
+        email: slackUser.email,
+        accessToken: userToken,
+        avatar: slackUser.image_72,
+      },
+    });
 
     const authToken = jwt.sign(
       {
         data: {
-          id: user.id,
-          name: user.name,
-          email: user.email,
-          accessToken,
+          id: slackUser.id,
+          name: slackUser.name,
+          email: slackUser.email,
+          userToken,
         },
         exp: Math.floor(Date.now() / 1000) + 60 * 60 * 24 * 30,
       },
@@ -98,11 +108,136 @@ export const signIn: FieldResolver<'Mutation', 'signIn'> = async (_, { code }, {
 
     return {
       authToken,
-      user: resultUser,
+      user,
     };
   } catch (error) {
     console.error(error);
+    throw new Error('Something went wrong. Please try again later.');
+  }
+};
+
+/**
+ * Adds a new team (workspace) to Slackify.
+ */
+export const addToSlack: FieldResolver<'Mutation', 'addToSlack'> = async (
+  _,
+  { code },
+  { prisma }
+) => {
+  const authResponse = await axios
+    .get<SlackAuthResponse>('https://slack.com/api/oauth.v2.access', {
+      params: {
+        client_id: SLACK_CLIENT_ID,
+        client_secret: SLACK_CLIENT_SECRET,
+        code,
+        redirect_uri: 'https://slackify-x.now.sh/auth/add',
+      },
+    })
+    .then(({ data }) => {
+      return data;
+    })
+    .catch((error) => {
+      console.error(error);
+      throw new Error('Something went wrong. Please try again later.');
+    });
+
+  /* Check if response is OK */
+  if (!authResponse?.ok) {
+    throw new Error(`Invalid response from Slack (code: "${authResponse?.error}").`);
   }
 
-  return null;
+  /* Check if token type is correct */
+  if (authResponse.token_type !== 'bot') {
+    throw new Error(`Wrong access token type "${authResponse.token_type}" (expected "bot").`);
+  }
+
+  /* Extract bot access token */
+  const botToken = authResponse.access_token;
+
+  if (!botToken) {
+    throw new Error('Unable to extract bot access token from Slack response.');
+  }
+
+  /* Extract user access token */
+  const userToken = authResponse.authed_user?.access_token;
+
+  if (!userToken) {
+    throw new Error('Unable to extract user access token from Slack response.');
+  }
+
+  /* Extract team data */
+  const teamId = authResponse.team?.id;
+  const teamName = authResponse.team?.name;
+
+  if (!teamId || !teamName) {
+    throw new Error('Unable to extract team data from Slack response.');
+  }
+
+  /* Get user info and bot ID */
+  const authTestRequest = axios.get<SlackAuthTestResponse>('https://slack.com/api/auth.test', {
+    params: {
+      token: botToken,
+    },
+  });
+
+  const userInfoRequest = axios.get<SlackUserIdentityResponse>(
+    'https://slack.com/api/users.identity',
+    {
+      params: {
+        token: userToken,
+      },
+    }
+  );
+
+  await Promise.all([authTestRequest, userInfoRequest])
+    .then(async ([{ data: authTestData }, { data: userInfoData }]) => {
+      /* Check if requests were successful */
+      if (!authTestData?.ok || !userInfoData?.ok) {
+        throw new Error('Unable to get auth test and user data.');
+      }
+
+      /* Extract user and bot ID */
+      const user = userInfoData.user;
+      const botId = authTestData.bot_id;
+
+      /* Generate access token */
+      const accessToken =
+        createHash('sha256').update(teamId).digest('hex') + '-' + randomBytes(64).toString('hex');
+
+      /* Create team */
+      await prisma.team.create({
+        data: {
+          id: teamId,
+          name: teamName,
+          botId,
+          botToken,
+          accessToken,
+        },
+      });
+
+      /* Create user */
+      await prisma.user.create({
+        data: {
+          id: user.id,
+          role: 'OWNER',
+          name: user.name,
+          email: user.email,
+          accessToken: userToken,
+          avatar: user.image_72,
+          team: {
+            connect: {
+              id: teamId,
+            },
+          },
+        },
+      });
+    })
+    .catch((error) => {
+      console.error(error);
+      throw new Error('Something went wrong. Please try again later.');
+    });
+
+  return true;
+
+  return false;
 };

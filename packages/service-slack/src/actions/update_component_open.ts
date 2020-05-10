@@ -2,7 +2,6 @@ import { Middleware, SlackActionMiddlewareArgs, BlockButtonAction } from '@slack
 
 import { app } from '..';
 import { compose_update_component_modal } from '../views/components';
-import { SLACK_BOT_TOKEN } from '../config';
 
 /**
  * Opens a modal on "update_component_open" action.
@@ -11,6 +10,7 @@ const update_component_open: Middleware<SlackActionMiddlewareArgs<BlockButtonAct
   action,
   body,
   ack,
+  context,
 }) => {
   try {
     /* Acknowledge action */
@@ -35,7 +35,7 @@ const update_component_open: Middleware<SlackActionMiddlewareArgs<BlockButtonAct
 
     /* Open modal */
     await app.client.views.open({
-      token: SLACK_BOT_TOKEN,
+      token: context?.botToken,
       trigger_id: triggerId,
       view,
     });
