@@ -39,6 +39,18 @@ if [[ $SLACKIFY_SERVICE == "slackify-service-public" || $SLACKIFY_SERVICE == "al
   fi
 fi
 
+# Build "slackify-service-slack"
+if [[ $SLACKIFY_SERVICE == "slackify-service-slack" || $SLACKIFY_SERVICE == "all" ]]; then
+  CURRENT_SERVICE="slackify-service-slack"
+  echo "[postbuild]: Building \"$CURRENT_SERVICE\""
+
+  npx lerna run build --scope $CURRENT_SERVICE
+  EXIT_STATUS=$?
+  if [ $EXIT_STATUS -ne 0 ]; then
+    exit $EXIT_STATUS
+  fi
+fi
+
 # Build "slackify-frontend"
 if [[ $SLACKIFY_SERVICE == "slackify-frontend" || $SLACKIFY_SERVICE == "all" ]]; then
   CURRENT_SERVICE="slackify-frontend"
