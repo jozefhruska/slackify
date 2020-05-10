@@ -27,6 +27,7 @@ const schemaWithMiddleware = applyMiddleware(
 /* Create Apollo Server instance */
 const server = new ApolloServer({
   schema: schemaWithMiddleware,
+  introspection: true,
   playground: true,
   context: async ({ req }) => {
     let authToken = req.headers.authorization;
