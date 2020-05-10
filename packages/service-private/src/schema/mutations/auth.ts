@@ -153,7 +153,6 @@ export const addToSlack: FieldResolver<'Mutation', 'addToSlack'> = async (
 
   /* Extract bot access token */
   const botToken = authResponse.access_token;
-  console.log(authResponse.bot_user_id);
 
   if (!botToken) {
     throw new Error('Unable to extract bot access token from Slack response.');
