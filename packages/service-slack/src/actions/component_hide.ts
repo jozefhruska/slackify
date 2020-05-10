@@ -11,6 +11,7 @@ const component_hide: Middleware<SlackActionMiddlewareArgs<BlockButtonAction>> =
   action,
   body,
   ack,
+  context,
 }) => {
   try {
     /* Acknowledge action */
@@ -57,6 +58,7 @@ const component_hide: Middleware<SlackActionMiddlewareArgs<BlockButtonAction>> =
 
     /* Publish app home view */
     await app.client.views.publish({
+      token: context?.botToken,
       user_id: userId,
       view: appHomeView,
     });

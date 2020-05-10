@@ -20,6 +20,7 @@ type OptionPayload = {
 const collection_overflow: Middleware<SlackActionMiddlewareArgs<BlockOverflowAction>> = async ({
   body,
   ack,
+  context,
 }) => {
   try {
     /* Acknowledge Slack action */
@@ -79,7 +80,7 @@ const collection_overflow: Middleware<SlackActionMiddlewareArgs<BlockOverflowAct
 
         /* Push new modal view */
         await app.client.views.push({
-          token: SLACK_BOT_TOKEN,
+          token: context?.botToken,
           trigger_id: body.trigger_id,
           view,
         });
@@ -124,7 +125,7 @@ const collection_overflow: Middleware<SlackActionMiddlewareArgs<BlockOverflowAct
 
     /* Update modal */
     await app.client.views.update({
-      token: SLACK_BOT_TOKEN,
+      token: context?.botToken,
       view_id: viewId,
       view,
     });
@@ -139,6 +140,7 @@ const collection_overflow: Middleware<SlackActionMiddlewareArgs<BlockOverflowAct
 
     /* Publish app home view */
     await app.client.views.publish({
+      token: context?.botToken,
       user_id: userId,
       view: appHomeView,
     });

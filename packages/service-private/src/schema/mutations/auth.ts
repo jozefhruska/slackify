@@ -4,7 +4,11 @@ import jwt from 'jsonwebtoken';
 import { createHash, randomBytes } from 'crypto';
 
 import { SLACK_CLIENT_ID, SLACK_CLIENT_SECRET, SIGNING_SECRET } from '../../config';
-import { SlackAuthResponse, SlackUserIdentityResponse } from '../../types/auth';
+import {
+  SlackAuthResponse,
+  SlackUserIdentityResponse,
+  SlackAuthTestResponse,
+} from '../../types/auth';
 
 /**
  * Signs in user using Slack API.
@@ -149,6 +153,7 @@ export const addToSlack: FieldResolver<'Mutation', 'addToSlack'> = async (
 
   /* Extract bot access token */
   const botToken = authResponse.access_token;
+  console.log(authResponse.bot_user_id);
 
   if (!botToken) {
     throw new Error('Unable to extract bot access token from Slack response.');
@@ -169,56 +174,71 @@ export const addToSlack: FieldResolver<'Mutation', 'addToSlack'> = async (
     throw new Error('Unable to extract team data from Slack response.');
   }
 
-  /* Get user data */
-  const user = await axios
-    .get<SlackUserIdentityResponse>('https://slack.com/api/users.identity', {
+  /* Get user info and bot ID */
+  const authTestRequest = axios.get<SlackAuthTestResponse>('https://slack.com/api/auth.test', {
+    params: {
+      token: botToken,
+    },
+  });
+
+  const userInfoRequest = axios.get<SlackUserIdentityResponse>(
+    'https://slack.com/api/users.identity',
+    {
       params: {
         token: userToken,
       },
+    }
+  );
+
+  await Promise.all([authTestRequest, userInfoRequest])
+    .then(async ([{ data: authTestData }, { data: userInfoData }]) => {
+      /* Check if requests were successful */
+      if (!authTestData?.ok || !userInfoData?.ok) {
+        throw new Error('Unable to get auth test and user data.');
+      }
+
+      /* Extract user and bot ID */
+      const user = userInfoData.user;
+      const botId = authTestData.bot_id;
+
+      /* Generate access token */
+      const accessToken =
+        createHash('sha256').update(teamId).digest('hex') + '-' + randomBytes(64).toString('hex');
+
+      /* Create team */
+      await prisma.team.create({
+        data: {
+          id: teamId,
+          name: teamName,
+          botId,
+          botToken,
+          accessToken,
+        },
+      });
+
+      /* Create user */
+      await prisma.user.create({
+        data: {
+          id: user.id,
+          role: 'OWNER',
+          name: user.name,
+          email: user.email,
+          accessToken: userToken,
+          avatar: user.image_72,
+          team: {
+            connect: {
+              id: teamId,
+            },
+          },
+        },
+      });
     })
-    .then(({ data }) => data.user)
     .catch((error) => {
       console.error(error);
       throw new Error('Something went wrong. Please try again later.');
     });
 
-  try {
-    /* Generate access token */
-    const accessToken =
-      createHash('sha256').update(teamId).digest('hex') + '-' + randomBytes(64).toString('hex');
-
-    /* Create team */
-    await prisma.team.create({
-      data: {
-        id: teamId,
-        name: teamName,
-        botToken,
-        accessToken,
-      },
-    });
-
-    /* Create user */
-    await prisma.user.create({
-      data: {
-        id: user.id,
-        role: 'OWNER',
-        name: user.name,
-        email: user.email,
-        accessToken: userToken,
-        avatar: user.image_72,
-        team: {
-          connect: {
-            id: teamId,
-          },
-        },
-      },
-    });
-
-    return true;
-  } catch (error) {
-    console.error(error);
-    throw new Error('Something went wrong. Please try again later.');
-  }
+  return true;
 
   return false;
 };

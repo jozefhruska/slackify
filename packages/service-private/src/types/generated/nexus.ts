@@ -673,6 +673,7 @@ export interface NexusGenInputs {
   }
   TeamCreateWithoutCollectionsInput: { // input type
     accessToken: string; // String!
+    botId: string; // String!
     botToken: string; // String!
     components?: NexusGenInputs['ComponentCreateManyWithoutTeamInput'] | null; // ComponentCreateManyWithoutTeamInput
     id: string; // String!
@@ -681,6 +682,7 @@ export interface NexusGenInputs {
   }
   TeamCreateWithoutComponentsInput: { // input type
     accessToken: string; // String!
+    botId: string; // String!
     botToken: string; // String!
     collections?: NexusGenInputs['CollectionCreateManyWithoutTeamInput'] | null; // CollectionCreateManyWithoutTeamInput
     id: string; // String!
@@ -689,6 +691,7 @@ export interface NexusGenInputs {
   }
   TeamCreateWithoutUsersInput: { // input type
     accessToken: string; // String!
+    botId: string; // String!
     botToken: string; // String!
     collections?: NexusGenInputs['CollectionCreateManyWithoutTeamInput'] | null; // CollectionCreateManyWithoutTeamInput
     components?: NexusGenInputs['ComponentCreateManyWithoutTeamInput'] | null; // ComponentCreateManyWithoutTeamInput
@@ -715,6 +718,7 @@ export interface NexusGenInputs {
   }
   TeamUpdateWithoutCollectionsDataInput: { // input type
     accessToken?: string | null; // String
+    botId?: string | null; // String
     botToken?: string | null; // String
     components?: NexusGenInputs['ComponentUpdateManyWithoutTeamInput'] | null; // ComponentUpdateManyWithoutTeamInput
     id?: string | null; // String
@@ -723,6 +727,7 @@ export interface NexusGenInputs {
   }
   TeamUpdateWithoutComponentsDataInput: { // input type
     accessToken?: string | null; // String
+    botId?: string | null; // String
     botToken?: string | null; // String
     collections?: NexusGenInputs['CollectionUpdateManyWithoutTeamInput'] | null; // CollectionUpdateManyWithoutTeamInput
     id?: string | null; // String
@@ -731,6 +736,7 @@ export interface NexusGenInputs {
   }
   TeamUpdateWithoutUsersDataInput: { // input type
     accessToken?: string | null; // String
+    botId?: string | null; // String
     botToken?: string | null; // String
     collections?: NexusGenInputs['CollectionUpdateManyWithoutTeamInput'] | null; // CollectionUpdateManyWithoutTeamInput
     components?: NexusGenInputs['ComponentUpdateManyWithoutTeamInput'] | null; // ComponentUpdateManyWithoutTeamInput
@@ -752,6 +758,7 @@ export interface NexusGenInputs {
   TeamWhereInput: { // input type
     accessToken?: NexusGenInputs['StringFilter'] | null; // StringFilter
     AND?: NexusGenInputs['TeamWhereInput'][] | null; // [TeamWhereInput!]
+    botId?: NexusGenInputs['StringFilter'] | null; // StringFilter
     botToken?: NexusGenInputs['StringFilter'] | null; // StringFilter
     collections?: NexusGenInputs['CollectionFilter'] | null; // CollectionFilter
     components?: NexusGenInputs['ComponentFilter'] | null; // ComponentFilter

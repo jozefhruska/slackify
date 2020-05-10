@@ -60,6 +60,7 @@ const update_component: Middleware<SlackViewMiddlewareArgs<ViewSubmitAction>> = 
   view,
   body,
   ack,
+  context,
 }) => {
   try {
     /* Extract required data */
@@ -174,6 +175,7 @@ const update_component: Middleware<SlackViewMiddlewareArgs<ViewSubmitAction>> = 
 
     /* Publish app home view */
     await app.client.views.publish({
+      token: context?.botToken,
       user_id: userId,
       view: appHomeView,
     });

@@ -840,6 +840,7 @@ input TeamCreateOneWithoutUsersInput {
 
 input TeamCreateWithoutCollectionsInput {
   accessToken: String!
+  botId: String!
   botToken: String!
   components: ComponentCreateManyWithoutTeamInput
   id: String!
@@ -849,6 +850,7 @@ input TeamCreateWithoutCollectionsInput {
 
 input TeamCreateWithoutComponentsInput {
   accessToken: String!
+  botId: String!
   botToken: String!
   collections: CollectionCreateManyWithoutTeamInput
   id: String!
@@ -858,6 +860,7 @@ input TeamCreateWithoutComponentsInput {
 
 input TeamCreateWithoutUsersInput {
   accessToken: String!
+  botId: String!
   botToken: String!
   collections: CollectionCreateManyWithoutTeamInput
   components: ComponentCreateManyWithoutTeamInput
@@ -888,6 +891,7 @@ input TeamUpdateOneRequiredWithoutUsersInput {
 
 input TeamUpdateWithoutCollectionsDataInput {
   accessToken: String
+  botId: String
   botToken: String
   components: ComponentUpdateManyWithoutTeamInput
   id: String
@@ -897,6 +901,7 @@ input TeamUpdateWithoutCollectionsDataInput {
 
 input TeamUpdateWithoutComponentsDataInput {
   accessToken: String
+  botId: String
   botToken: String
   collections: CollectionUpdateManyWithoutTeamInput
   id: String
@@ -906,6 +911,7 @@ input TeamUpdateWithoutComponentsDataInput {
 
 input TeamUpdateWithoutUsersDataInput {
   accessToken: String
+  botId: String
   botToken: String
   collections: CollectionUpdateManyWithoutTeamInput
   components: ComponentUpdateManyWithoutTeamInput
@@ -931,6 +937,7 @@ input TeamUpsertWithoutUsersInput {
 input TeamWhereInput {
   accessToken: StringFilter
   AND: [TeamWhereInput!]
+  botId: StringFilter
   botToken: StringFilter
   collections: CollectionFilter
   components: ComponentFilter

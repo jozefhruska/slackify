@@ -1,7 +1,6 @@
 import { Middleware, SlackActionMiddlewareArgs, BlockStaticSelectAction } from '@slack/bolt';
 
 import { compose_create_new_component_modal } from '../views/components';
-import { SLACK_BOT_TOKEN } from '../config';
 import { app } from '..';
 
 /**
@@ -9,7 +8,7 @@ import { app } from '..';
  */
 const create_new_component_collection_select: Middleware<SlackActionMiddlewareArgs<
   BlockStaticSelectAction
->> = async ({ body, action, ack }) => {
+>> = async ({ body, action, ack, context }) => {
   try {
     /* Acknowledge action */
     await ack();
@@ -39,9 +38,9 @@ const create_new_component_collection_select: Middleware<SlackActionMiddlewareAr
 
     /* Update modal view */
     await app.client.views.update({
-      view_id: viewId,
-      token: SLACK_BOT_TOKEN,
+      token: context?.botToken,
       trigger_id: body.trigger_id,
+      view_id: viewId,
       view,
     });
   } catch (error) {

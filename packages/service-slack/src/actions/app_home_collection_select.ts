@@ -8,7 +8,7 @@ import { app } from '..';
  */
 const app_home_collection_select: Middleware<SlackActionMiddlewareArgs<
   BlockStaticSelectAction
->> = async ({ body, action, ack }) => {
+>> = async ({ body, action, ack, context }) => {
   try {
     /* Acknowledge action */
     await ack();
@@ -35,6 +35,7 @@ const app_home_collection_select: Middleware<SlackActionMiddlewareArgs<
 
     /* Publish app home view */
     await app.client.views.publish({
+      token: context?.botToken,
       user_id: userId,
       view,
     });
