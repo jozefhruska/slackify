@@ -1,7 +1,6 @@
 import { SlackActionMiddlewareArgs, Middleware, BlockOverflowAction } from '@slack/bolt';
 
 import { app } from '..';
-import { SLACK_BOT_TOKEN } from '../config';
 import { prisma } from '../prisma';
 import { compose_manage_collections_view } from '../utils/views';
 import { compose_update_collection_modal } from '../views/collections';
