@@ -3,7 +3,11 @@ import { GetServerSideProps } from 'next';
 import { useDispatch } from 'react-redux';
 
 import { Header, Navigation, Sidebar, PageHeader, Content } from '../src/components/common/layout';
-import { User, GetUserQuery, GetUserQueryVariables } from '../src/types/generated/graphql';
+import {
+  UserDetailFragment,
+  GetUserQuery,
+  GetUserQueryVariables,
+} from '../src/types/generated/graphql';
 import { getAuthToken, removeAuthToken } from '../src/cookies';
 import { checkAuthentication } from '../src/utils';
 import withApollo, { createApolloClient } from '../src/api';
@@ -15,7 +19,7 @@ import { ListingPage } from '../src/components/users/listing';
 /* Props - <UsersPage />
 ============================================================================= */
 type Props = {
-  user: User;
+  user: UserDetailFragment;
 };
 
 /* <UsersPage />

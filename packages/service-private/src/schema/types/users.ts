@@ -8,12 +8,7 @@ export const User = objectType({
     t.model.email();
     t.model.role();
     t.model.accessToken();
-    t.model.image_24();
-    t.model.image_32();
-    t.model.image_48();
-    t.model.image_72();
-    t.model.image_192();
-    t.model.image_512();
+    t.model.avatar();
     t.model.team();
   },
 });

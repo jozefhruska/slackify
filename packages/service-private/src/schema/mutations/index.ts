@@ -1,13 +1,12 @@
 import { objectType, stringArg, arg } from 'nexus';
 
-import { signIn } from './auth';
+import { signIn, addToSlack } from './auth';
 import { deleteOneCollection } from './collections';
 
 export const Mutation = objectType({
   name: 'Mutation',
   definition(t) {
-    /* Users */
-    t.crud.updateOneUser();
+    /* Auth */
     t.field('signIn', {
       type: 'SignInOutput',
       nullable: true,
@@ -18,6 +17,20 @@ export const Mutation = objectType({
       },
       resolve: signIn,
     });
+
+    t.field('addToSlack', {
+      type: 'Boolean',
+      nullable: true,
+      args: {
+        code: stringArg({
+          required: true,
+        }),
+      },
+      resolve: addToSlack,
+    });
+
+    /* Users */
+    t.crud.updateOneUser();
 
     /* Collections */
     t.crud.createOneCollection();

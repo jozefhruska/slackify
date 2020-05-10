@@ -13,7 +13,11 @@ import {
 } from '../../src/components/common/layout';
 import withApollo, { createApolloClient } from '../../src/api';
 import { checkAuthentication } from '../../src/utils';
-import { User, GetUserQuery, GetUserQueryVariables } from '../../src/types/generated/graphql';
+import {
+  UserDetailFragment,
+  GetUserQuery,
+  GetUserQueryVariables,
+} from '../../src/types/generated/graphql';
 import { StoreUser } from '../../src/actions/auth';
 import ListingPage from '../../src/components/components/listing/ListingPage/ListingPage';
 import { OpenCreateUpdateModal } from '../../src/actions/components';
@@ -25,7 +29,7 @@ import { canCreateComponents } from '../../src/utils/users';
 /* Props - <ComponentsPage />
 ============================================================================= */
 type Props = {
-  user: User;
+  user: UserDetailFragment;
 };
 
 /* <ComponentsPage />

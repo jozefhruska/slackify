@@ -3,15 +3,14 @@ import { gql } from '@apollo/client';
 export const UserDetail = gql`
   fragment UserDetail on User {
     id
+    role
     name
     email
-    role
     accessToken
-    image_72
+    avatar
     team {
       id
       name
-      domain
       accessToken
     }
   }
@@ -22,6 +21,6 @@ export const UserPreview = gql`
     id
     name
     role
-    image_72
+    avatar
   }
 `;

@@ -4,7 +4,11 @@ import { Dispatch } from 'redux';
 import { useDispatch } from 'react-redux';
 
 import { Navigation, Content, Header, PageHeader, Sidebar } from '../src/components/common/layout';
-import { User, GetUserQuery, GetUserQueryVariables } from '../src/types/generated/graphql';
+import {
+  GetUserQuery,
+  GetUserQueryVariables,
+  UserDetailFragment,
+} from '../src/types/generated/graphql';
 import { StoreUser } from '../src/actions/auth';
 import withApollo, { createApolloClient } from '../src/api';
 import { getAuthToken } from '../src/cookies';
@@ -14,7 +18,7 @@ import WelcomePage from '../src/components/public/WelcomePage/WelcomePage';
 /* Props - <HomePage />
 ============================================================================= */
 type Props = {
-  user: User;
+  user: UserDetailFragment;
 };
 
 /* <HomePage />
@@ -47,6 +51,15 @@ const HomePage: NextPage<Props> = ({ user }) => {
 ============================================================================= */
 export const getServerSideProps: GetServerSideProps<Props> = async (ctx) => {
   const authToken = getAuthToken(ctx);
+
+  /* Return user as null if there's no auth token in cookies */
+  if (!authToken) {
+    return {
+      props: {
+        user: null,
+      },
+    };
+  }
 
   /* Create new instance of Apollo Client */
   const apolloClient = createApolloClient(authToken);

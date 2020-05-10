@@ -6,7 +6,7 @@ import Listing from '../../../common/layout/Listing/Listing';
 import {
   GetComponentsListingQuery,
   GetComponentsListingQueryVariables,
-  User,
+  UserDetailFragment,
 } from '../../../../types/generated/graphql';
 import { PageLoader, ListingLoader } from '../../../common/misc';
 import { Flex } from '../../../common/layout/base';
@@ -17,7 +17,7 @@ import ListingItem from '../ListingItem/ListingItem';
 /* Props - <ListingPage />
 ============================================================================= */
 type Props = {
-  user: User;
+  user: UserDetailFragment;
   collectionId?: string;
 };
 

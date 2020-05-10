@@ -14,6 +14,7 @@ export const colors = {
     10: '#000000',
   },
   info: '#0062ff',
+  success: '#78c963',
   danger: '#fe4759',
   warning: '#ffc542',
   accent: '#a461d8',

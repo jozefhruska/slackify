@@ -1,9 +1,9 @@
-import { User } from '../types/generated/graphql';
+import { UserDetailFragment } from '../types/generated/graphql';
 
 export type StoreUser = {
   type: '[AUTH] STORE_USER';
   payload: {
-    user: User;
+    user: UserDetailFragment;
   };
 };
 

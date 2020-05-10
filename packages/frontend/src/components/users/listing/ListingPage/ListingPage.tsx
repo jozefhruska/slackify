@@ -3,7 +3,7 @@ import { useQuery } from '@apollo/client';
 import { useInView } from 'react-intersection-observer';
 
 import {
-  User,
+  UserDetailFragment,
   GetUsersListingQuery,
   GetUsersListingQueryVariables,
 } from '../../../../types/generated/graphql';
@@ -17,7 +17,7 @@ import * as S from './ListingPage.styles';
 /* Props - <ListingPage />
 ============================================================================= */
 type Props = {
-  user: User;
+  user: UserDetailFragment;
 };
 
 /* <ListingPage />

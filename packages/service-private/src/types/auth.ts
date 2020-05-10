@@ -3,19 +3,25 @@ import { User } from '@prisma/client';
 export type SlackAuthResponse = {
   ok: boolean;
   error?: string;
+  token_type?: 'bot';
   access_token?: string;
-  user_id?: string;
-  team_id?: string;
-  enterprise_id?: string;
-  user: SlackUser;
   team: SlackTeam;
+  authed_user: {
+    id: string;
+    token_type?: 'user';
+    access_token: string;
+  };
+};
+
+export type SlackUserIdentityResponse = {
+  ok: boolean;
+  user: SlackUser;
 };
 
 export type SlackUser = {
   id: string;
   name: string;
   email: string;
-  accessToken: string;
   image_24?: string;
   image_32?: string;
   image_48?: string;
@@ -27,9 +33,9 @@ export type SlackUser = {
 
 export type SlackTeam = {
   id: string;
-  name: string;
+  name?: string;
 };
 
 export type JWTUser = {
-  data: User;
+  data: Pick<User, 'id' | 'email' | 'accessToken'>;
 };

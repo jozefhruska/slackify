@@ -47,7 +47,7 @@ export const MainActionButton = styled.a`
   align-items: center;
   justify-content: space-between;
   padding: ${({ theme }) => theme.space.s6};
-  background: ${({ theme }) => theme.colors.gray[8]};
+  background: ${({ theme }) => theme.colors.gray[9]};
   border-radius: ${({ theme }) => theme.radii.medium};
   border: 1px solid ${({ theme }) => theme.colors.gray[4]};
 

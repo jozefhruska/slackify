@@ -7,7 +7,7 @@ import { GET_COLLECTIONS_LISTING } from '../../../../api/query/collections';
 import {
   GetCollectionsListingQueryVariables,
   GetCollectionsListingQuery,
-  User,
+  UserDetailFragment,
 } from '../../../../types/generated/graphql';
 import { PageLoader, ListingLoader } from '../../../common/misc';
 import ListingItem from '../ListingItem/ListingItem';
@@ -17,7 +17,7 @@ import CreateUpdateModal from '../../CreateUpdateModal/CreateUpdateModal';
 /* Props - <ListingPage />
 ============================================================================= */
 type Props = {
-  user: User;
+  user: UserDetailFragment;
 };
 
 /* <ListingPage />

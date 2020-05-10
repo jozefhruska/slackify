@@ -5,7 +5,7 @@ export const Team = objectType({
   definition(t) {
     t.model.id();
     t.model.name();
-    t.model.domain();
+    t.model.botToken();
     t.model.accessToken();
   },
 });

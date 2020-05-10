@@ -1,12 +1,12 @@
 import { Reducer } from 'redux';
 
-import { User } from '../types/generated/graphql';
+import { UserDetailFragment } from '../types/generated/graphql';
 import { AuthAction } from '../actions/auth';
 
 /* State type - authReducer
 ============================================================================= */
 export type AuthState = {
-  user: User;
+  user: UserDetailFragment;
 };
 
 /* Initial state - authReducer

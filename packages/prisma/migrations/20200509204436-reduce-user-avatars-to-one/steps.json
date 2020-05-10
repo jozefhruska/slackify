@@ -1,0 +1,42 @@
+{
+  "version": "0.3.14-fixed",
+  "steps": [
+    {
+      "tag": "CreateField",
+      "model": "User",
+      "field": "avatar",
+      "type": "String",
+      "arity": "Optional"
+    },
+    {
+      "tag": "DeleteField",
+      "model": "User",
+      "field": "image_24"
+    },
+    {
+      "tag": "DeleteField",
+      "model": "User",
+      "field": "image_32"
+    },
+    {
+      "tag": "DeleteField",
+      "model": "User",
+      "field": "image_48"
+    },
+    {
+      "tag": "DeleteField",
+      "model": "User",
+      "field": "image_72"
+    },
+    {
+      "tag": "DeleteField",
+      "model": "User",
+      "field": "image_192"
+    },
+    {
+      "tag": "DeleteField",
+      "model": "User",
+      "field": "image_512"
+    }
+  ]
+}

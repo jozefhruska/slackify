@@ -673,25 +673,25 @@ export interface NexusGenInputs {
   }
   TeamCreateWithoutCollectionsInput: { // input type
     accessToken: string; // String!
+    botToken: string; // String!
     components?: NexusGenInputs['ComponentCreateManyWithoutTeamInput'] | null; // ComponentCreateManyWithoutTeamInput
-    domain: string; // String!
     id: string; // String!
     name: string; // String!
     users?: NexusGenInputs['UserCreateManyWithoutTeamInput'] | null; // UserCreateManyWithoutTeamInput
   }
   TeamCreateWithoutComponentsInput: { // input type
     accessToken: string; // String!
+    botToken: string; // String!
     collections?: NexusGenInputs['CollectionCreateManyWithoutTeamInput'] | null; // CollectionCreateManyWithoutTeamInput
-    domain: string; // String!
     id: string; // String!
     name: string; // String!
     users?: NexusGenInputs['UserCreateManyWithoutTeamInput'] | null; // UserCreateManyWithoutTeamInput
   }
   TeamCreateWithoutUsersInput: { // input type
     accessToken: string; // String!
+    botToken: string; // String!
     collections?: NexusGenInputs['CollectionCreateManyWithoutTeamInput'] | null; // CollectionCreateManyWithoutTeamInput
     components?: NexusGenInputs['ComponentCreateManyWithoutTeamInput'] | null; // ComponentCreateManyWithoutTeamInput
-    domain: string; // String!
     id: string; // String!
     name: string; // String!
   }
@@ -715,25 +715,25 @@ export interface NexusGenInputs {
   }
   TeamUpdateWithoutCollectionsDataInput: { // input type
     accessToken?: string | null; // String
+    botToken?: string | null; // String
     components?: NexusGenInputs['ComponentUpdateManyWithoutTeamInput'] | null; // ComponentUpdateManyWithoutTeamInput
-    domain?: string | null; // String
     id?: string | null; // String
     name?: string | null; // String
     users?: NexusGenInputs['UserUpdateManyWithoutTeamInput'] | null; // UserUpdateManyWithoutTeamInput
   }
   TeamUpdateWithoutComponentsDataInput: { // input type
     accessToken?: string | null; // String
+    botToken?: string | null; // String
     collections?: NexusGenInputs['CollectionUpdateManyWithoutTeamInput'] | null; // CollectionUpdateManyWithoutTeamInput
-    domain?: string | null; // String
     id?: string | null; // String
     name?: string | null; // String
     users?: NexusGenInputs['UserUpdateManyWithoutTeamInput'] | null; // UserUpdateManyWithoutTeamInput
   }
   TeamUpdateWithoutUsersDataInput: { // input type
     accessToken?: string | null; // String
+    botToken?: string | null; // String
     collections?: NexusGenInputs['CollectionUpdateManyWithoutTeamInput'] | null; // CollectionUpdateManyWithoutTeamInput
     components?: NexusGenInputs['ComponentUpdateManyWithoutTeamInput'] | null; // ComponentUpdateManyWithoutTeamInput
-    domain?: string | null; // String
     id?: string | null; // String
     name?: string | null; // String
   }
@@ -752,9 +752,9 @@ export interface NexusGenInputs {
   TeamWhereInput: { // input type
     accessToken?: NexusGenInputs['StringFilter'] | null; // StringFilter
     AND?: NexusGenInputs['TeamWhereInput'][] | null; // [TeamWhereInput!]
+    botToken?: NexusGenInputs['StringFilter'] | null; // StringFilter
     collections?: NexusGenInputs['CollectionFilter'] | null; // CollectionFilter
     components?: NexusGenInputs['ComponentFilter'] | null; // ComponentFilter
-    domain?: NexusGenInputs['StringFilter'] | null; // StringFilter
     id?: NexusGenInputs['StringFilter'] | null; // StringFilter
     name?: NexusGenInputs['StringFilter'] | null; // StringFilter
     NOT?: NexusGenInputs['TeamWhereInput'][] | null; // [TeamWhereInput!]
@@ -763,7 +763,7 @@ export interface NexusGenInputs {
   }
   TeamWhereUniqueInput: { // input type
     accessToken?: string | null; // String
-    domain?: string | null; // String
+    botToken?: string | null; // String
     id?: string | null; // String
   }
   UserCreateManyWithoutTeamInput: { // input type
@@ -776,29 +776,19 @@ export interface NexusGenInputs {
   }
   UserCreateWithoutComponentsInput: { // input type
     accessToken: string; // String!
+    avatar?: string | null; // String
     email: string; // String!
     id: string; // String!
-    image_192?: string | null; // String
-    image_24?: string | null; // String
-    image_32?: string | null; // String
-    image_48?: string | null; // String
-    image_512?: string | null; // String
-    image_72?: string | null; // String
     name: string; // String!
     role?: NexusGenEnums['UserRole'] | null; // UserRole
     team: NexusGenInputs['TeamCreateOneWithoutUsersInput']; // TeamCreateOneWithoutUsersInput!
   }
   UserCreateWithoutTeamInput: { // input type
     accessToken: string; // String!
+    avatar?: string | null; // String
     components?: NexusGenInputs['ComponentCreateManyWithoutAuthorInput'] | null; // ComponentCreateManyWithoutAuthorInput
     email: string; // String!
     id: string; // String!
-    image_192?: string | null; // String
-    image_24?: string | null; // String
-    image_32?: string | null; // String
-    image_48?: string | null; // String
-    image_512?: string | null; // String
-    image_72?: string | null; // String
     name: string; // String!
     role?: NexusGenEnums['UserRole'] | null; // UserRole
   }
@@ -810,15 +800,10 @@ export interface NexusGenInputs {
   UserScalarWhereInput: { // input type
     accessToken?: NexusGenInputs['StringFilter'] | null; // StringFilter
     AND?: NexusGenInputs['UserScalarWhereInput'][] | null; // [UserScalarWhereInput!]
+    avatar?: NexusGenInputs['NullableStringFilter'] | null; // NullableStringFilter
     components?: NexusGenInputs['ComponentFilter'] | null; // ComponentFilter
     email?: NexusGenInputs['StringFilter'] | null; // StringFilter
     id?: NexusGenInputs['StringFilter'] | null; // StringFilter
-    image_192?: NexusGenInputs['NullableStringFilter'] | null; // NullableStringFilter
-    image_24?: NexusGenInputs['NullableStringFilter'] | null; // NullableStringFilter
-    image_32?: NexusGenInputs['NullableStringFilter'] | null; // NullableStringFilter
-    image_48?: NexusGenInputs['NullableStringFilter'] | null; // NullableStringFilter
-    image_512?: NexusGenInputs['NullableStringFilter'] | null; // NullableStringFilter
-    image_72?: NexusGenInputs['NullableStringFilter'] | null; // NullableStringFilter
     name?: NexusGenInputs['StringFilter'] | null; // StringFilter
     NOT?: NexusGenInputs['UserScalarWhereInput'][] | null; // [UserScalarWhereInput!]
     OR?: NexusGenInputs['UserScalarWhereInput'][] | null; // [UserScalarWhereInput!]
@@ -827,29 +812,19 @@ export interface NexusGenInputs {
   }
   UserUpdateInput: { // input type
     accessToken?: string | null; // String
+    avatar?: string | null; // String
     components?: NexusGenInputs['ComponentUpdateManyWithoutAuthorInput'] | null; // ComponentUpdateManyWithoutAuthorInput
     email?: string | null; // String
     id?: string | null; // String
-    image_192?: string | null; // String
-    image_24?: string | null; // String
-    image_32?: string | null; // String
-    image_48?: string | null; // String
-    image_512?: string | null; // String
-    image_72?: string | null; // String
     name?: string | null; // String
     role?: NexusGenEnums['UserRole'] | null; // UserRole
     team?: NexusGenInputs['TeamUpdateOneRequiredWithoutUsersInput'] | null; // TeamUpdateOneRequiredWithoutUsersInput
   }
   UserUpdateManyDataInput: { // input type
     accessToken?: string | null; // String
+    avatar?: string | null; // String
     email?: string | null; // String
     id?: string | null; // String
-    image_192?: string | null; // String
-    image_24?: string | null; // String
-    image_32?: string | null; // String
-    image_48?: string | null; // String
-    image_512?: string | null; // String
-    image_72?: string | null; // String
     name?: string | null; // String
     role?: NexusGenEnums['UserRole'] | null; // UserRole
   }
@@ -880,29 +855,19 @@ export interface NexusGenInputs {
   }
   UserUpdateWithoutComponentsDataInput: { // input type
     accessToken?: string | null; // String
+    avatar?: string | null; // String
     email?: string | null; // String
     id?: string | null; // String
-    image_192?: string | null; // String
-    image_24?: string | null; // String
-    image_32?: string | null; // String
-    image_48?: string | null; // String
-    image_512?: string | null; // String
-    image_72?: string | null; // String
     name?: string | null; // String
     role?: NexusGenEnums['UserRole'] | null; // UserRole
     team?: NexusGenInputs['TeamUpdateOneRequiredWithoutUsersInput'] | null; // TeamUpdateOneRequiredWithoutUsersInput
   }
   UserUpdateWithoutTeamDataInput: { // input type
     accessToken?: string | null; // String
+    avatar?: string | null; // String
     components?: NexusGenInputs['ComponentUpdateManyWithoutAuthorInput'] | null; // ComponentUpdateManyWithoutAuthorInput
     email?: string | null; // String
     id?: string | null; // String
-    image_192?: string | null; // String
-    image_24?: string | null; // String
-    image_32?: string | null; // String
-    image_48?: string | null; // String
-    image_512?: string | null; // String
-    image_72?: string | null; // String
     name?: string | null; // String
     role?: NexusGenEnums['UserRole'] | null; // UserRole
   }
@@ -918,15 +883,10 @@ export interface NexusGenInputs {
   UserWhereInput: { // input type
     accessToken?: NexusGenInputs['StringFilter'] | null; // StringFilter
     AND?: NexusGenInputs['UserWhereInput'][] | null; // [UserWhereInput!]
+    avatar?: NexusGenInputs['NullableStringFilter'] | null; // NullableStringFilter
     components?: NexusGenInputs['ComponentFilter'] | null; // ComponentFilter
     email?: NexusGenInputs['StringFilter'] | null; // StringFilter
     id?: NexusGenInputs['StringFilter'] | null; // StringFilter
-    image_192?: NexusGenInputs['NullableStringFilter'] | null; // NullableStringFilter
-    image_24?: NexusGenInputs['NullableStringFilter'] | null; // NullableStringFilter
-    image_32?: NexusGenInputs['NullableStringFilter'] | null; // NullableStringFilter
-    image_48?: NexusGenInputs['NullableStringFilter'] | null; // NullableStringFilter
-    image_512?: NexusGenInputs['NullableStringFilter'] | null; // NullableStringFilter
-    image_72?: NexusGenInputs['NullableStringFilter'] | null; // NullableStringFilter
     name?: NexusGenInputs['StringFilter'] | null; // StringFilter
     NOT?: NexusGenInputs['UserWhereInput'][] | null; // [UserWhereInput!]
     OR?: NexusGenInputs['UserWhereInput'][] | null; // [UserWhereInput!]
@@ -1136,6 +1096,7 @@ export interface NexusGenFieldTypes {
     url: string; // String!
   }
   Mutation: { // field return type
+    addToSlack: boolean | null; // Boolean
     createOneCollection: NexusGenRootTypes['Collection']; // Collection!
     createOneComponent: NexusGenRootTypes['Component']; // Component!
     deleteOneCollection: NexusGenRootTypes['Collection']; // Collection!
@@ -1169,20 +1130,15 @@ export interface NexusGenFieldTypes {
   }
   Team: { // field return type
     accessToken: string; // String!
-    domain: string; // String!
+    botToken: string; // String!
     id: string; // String!
     name: string; // String!
   }
   User: { // field return type
     accessToken: string; // String!
+    avatar: string | null; // String
     email: string; // String!
     id: string; // String!
-    image_192: string | null; // String
-    image_24: string | null; // String
-    image_32: string | null; // String
-    image_48: string | null; // String
-    image_512: string | null; // String
-    image_72: string | null; // String
     name: string; // String!
     role: NexusGenEnums['UserRole']; // UserRole!
     team: NexusGenRootTypes['Team']; // Team!
@@ -1200,6 +1156,9 @@ export interface NexusGenArgTypes {
     }
   }
   Mutation: {
+    addToSlack: { // args
+      code: string; // String!
+    }
     createOneCollection: { // args
       data: NexusGenInputs['CollectionCreateInput']; // CollectionCreateInput!
     }
