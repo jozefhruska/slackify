@@ -8,6 +8,7 @@ import { Alert } from '../../common/misc';
 import theme from '../../../theme';
 
 import * as S from './WelcomePage.styles';
+import { REDIRECT_HOST } from '../../../config';
 
 /* <WelcomePage />
 ============================================================================= */
@@ -60,7 +61,7 @@ const WelcomePage: React.FC = () => {
 
           <S.MainActionButton
             id="add-to-slack"
-            href="https://slack.com/oauth/v2/authorize?scope=commands,users:read&user_scope=identity.basic,identity.email,identity.avatar&client_id=791343423090.804137961685&redirect_uri=https://slackify-x.now.sh/auth/add"
+            href={`https://slack.com/oauth/v2/authorize?scope=commands,users:read&user_scope=identity.basic,identity.email,identity.avatar&client_id=791343423090.804137961685&redirect_uri=${REDIRECT_HOST}/auth/add`}
           >
             <Flex alignItems="center">
               <FiSlack size={50} color={theme.colors.gray[4]} />
@@ -81,7 +82,7 @@ const WelcomePage: React.FC = () => {
 
           <S.MainActionButton
             id="sign-in-with-slack"
-            href="https://slack.com/oauth/v2/authorize?user_scope=identity.basic,identity.email,identity.avatar&client_id=791343423090.804137961685"
+            href={`https://slack.com/oauth/v2/authorize?user_scope=identity.basic,identity.email,identity.avatar&client_id=791343423090.804137961685&redirect_uri=${REDIRECT_HOST}/auth/redirect`}
           >
             <Flex alignItems="center">
               <FiSlack size={50} color={theme.colors.gray[4]} />

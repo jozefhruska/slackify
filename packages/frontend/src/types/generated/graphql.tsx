@@ -643,11 +643,13 @@ export type Mutation = {
 
 export type MutationSignInArgs = {
   code: Scalars['String'];
+  redirect_host?: Maybe<Scalars['String']>;
 };
 
 
 export type MutationAddToSlackArgs = {
   code: Scalars['String'];
+  redirect_host?: Maybe<Scalars['String']>;
 };
 
 
@@ -966,6 +968,7 @@ export type TeamCreateOneWithoutUsersInput = {
 export type TeamCreateWithoutCollectionsInput = {
   id: Scalars['String'];
   name: Scalars['String'];
+  botId: Scalars['String'];
   botToken: Scalars['String'];
   accessToken: Scalars['String'];
   users?: Maybe<UserCreateManyWithoutTeamInput>;
@@ -975,6 +978,7 @@ export type TeamCreateWithoutCollectionsInput = {
 export type TeamCreateWithoutComponentsInput = {
   id: Scalars['String'];
   name: Scalars['String'];
+  botId: Scalars['String'];
   botToken: Scalars['String'];
   accessToken: Scalars['String'];
   collections?: Maybe<CollectionCreateManyWithoutTeamInput>;
@@ -984,6 +988,7 @@ export type TeamCreateWithoutComponentsInput = {
 export type TeamCreateWithoutUsersInput = {
   id: Scalars['String'];
   name: Scalars['String'];
+  botId: Scalars['String'];
   botToken: Scalars['String'];
   accessToken: Scalars['String'];
   collections?: Maybe<CollectionCreateManyWithoutTeamInput>;
@@ -1014,6 +1019,7 @@ export type TeamUpdateOneRequiredWithoutUsersInput = {
 export type TeamUpdateWithoutCollectionsDataInput = {
   id?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
+  botId?: Maybe<Scalars['String']>;
   botToken?: Maybe<Scalars['String']>;
   accessToken?: Maybe<Scalars['String']>;
   users?: Maybe<UserUpdateManyWithoutTeamInput>;
@@ -1023,6 +1029,7 @@ export type TeamUpdateWithoutCollectionsDataInput = {
 export type TeamUpdateWithoutComponentsDataInput = {
   id?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
+  botId?: Maybe<Scalars['String']>;
   botToken?: Maybe<Scalars['String']>;
   accessToken?: Maybe<Scalars['String']>;
   collections?: Maybe<CollectionUpdateManyWithoutTeamInput>;
@@ -1032,6 +1039,7 @@ export type TeamUpdateWithoutComponentsDataInput = {
 export type TeamUpdateWithoutUsersDataInput = {
   id?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
+  botId?: Maybe<Scalars['String']>;
   botToken?: Maybe<Scalars['String']>;
   accessToken?: Maybe<Scalars['String']>;
   collections?: Maybe<CollectionUpdateManyWithoutTeamInput>;
@@ -1056,6 +1064,7 @@ export type TeamUpsertWithoutUsersInput = {
 export type TeamWhereInput = {
   id?: Maybe<StringFilter>;
   name?: Maybe<StringFilter>;
+  botId?: Maybe<StringFilter>;
   botToken?: Maybe<StringFilter>;
   accessToken?: Maybe<StringFilter>;
   collections?: Maybe<CollectionFilter>;
@@ -1323,6 +1332,7 @@ export type UserPreviewFragment = (
 
 export type AddToSlackMutationVariables = {
   code: Scalars['String'];
+  redirect_host?: Maybe<Scalars['String']>;
 };
 
 
@@ -1413,6 +1423,7 @@ export type DeleteOneComponentMutation = (
 
 export type SignInMutationVariables = {
   code: Scalars['String'];
+  redirect_host?: Maybe<Scalars['String']>;
 };
 
 
@@ -1707,8 +1718,8 @@ export const UserPreviewFragmentDoc = gql`
 }
     `;
 export const AddToSlackDocument = gql`
-    mutation AddToSlack($code: String!) {
-  addToSlack(code: $code)
+    mutation AddToSlack($code: String!, $redirect_host: String) {
+  addToSlack(code: $code, redirect_host: $redirect_host)
 }
     `;
 export type AddToSlackMutationFn = ApolloReactCommon.MutationFunction<AddToSlackMutation, AddToSlackMutationVariables>;
@@ -1775,8 +1786,8 @@ export type DeleteOneComponentMutationFn = ApolloReactCommon.MutationFunction<De
 export type DeleteOneComponentMutationResult = ApolloReactCommon.MutationResult<DeleteOneComponentMutation>;
 export type DeleteOneComponentMutationOptions = ApolloReactCommon.BaseMutationOptions<DeleteOneComponentMutation, DeleteOneComponentMutationVariables>;
 export const SignInDocument = gql`
-    mutation SignIn($code: String!) {
-  signIn(code: $code) {
+    mutation SignIn($code: String!, $redirect_host: String) {
+  signIn(code: $code, redirect_host: $redirect_host) {
     authToken
     user {
       ...UserDetail

@@ -3,8 +3,8 @@ import { gql } from '@apollo/client';
 import { UserDetail, UserPreview } from '../fragments/users';
 
 export const SIGN_IN = gql`
-  mutation SignIn($code: String!) {
-    signIn(code: $code) {
+  mutation SignIn($code: String!, $redirect_host: String) {
+    signIn(code: $code, redirect_host: $redirect_host) {
       authToken
       user {
         ...UserDetail

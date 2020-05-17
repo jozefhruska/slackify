@@ -13,13 +13,20 @@ import {
 /**
  * Signs in user using Slack API.
  */
-export const signIn: FieldResolver<'Mutation', 'signIn'> = async (_, { code }, { prisma }) => {
+export const signIn: FieldResolver<'Mutation', 'signIn'> = async (
+  _,
+  { code, redirect_host },
+  { prisma }
+) => {
   const authResponse = await axios
     .get<SlackAuthResponse>('https://slack.com/api/oauth.v2.access', {
       params: {
         client_id: SLACK_CLIENT_ID,
         client_secret: SLACK_CLIENT_SECRET,
         code,
+        redirect_uri: redirect_host
+          ? `${redirect_host}/auth/add`
+          : 'https://slackify.now.sh/auth/add',
       },
     })
     .then(({ data }) => data)
@@ -121,7 +128,7 @@ export const signIn: FieldResolver<'Mutation', 'signIn'> = async (_, { code }, {
  */
 export const addToSlack: FieldResolver<'Mutation', 'addToSlack'> = async (
   _,
-  { code },
+  { code, redirect_host },
   { prisma }
 ) => {
   const authResponse = await axios
@@ -130,7 +137,9 @@ export const addToSlack: FieldResolver<'Mutation', 'addToSlack'> = async (
         client_id: SLACK_CLIENT_ID,
         client_secret: SLACK_CLIENT_SECRET,
         code,
-        redirect_uri: 'https://slackify-x.now.sh/auth/add',
+        redirect_uri: redirect_host
+          ? `${redirect_host}/auth/add`
+          : 'https://slackify.now.sh/auth/add',
       },
     })
     .then(({ data }) => {

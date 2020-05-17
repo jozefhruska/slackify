@@ -607,12 +607,12 @@ input LinkComponentDataWhereUniqueInput {
 }
 
 type Mutation {
-  addToSlack(code: String!): Boolean
+  addToSlack(code: String!, redirect_host: String): Boolean
   createOneCollection(data: CollectionCreateInput!): Collection!
   createOneComponent(data: ComponentCreateInput!): Component!
   deleteOneCollection(where: CollectionWhereUniqueInput!): Collection!
   deleteOneComponent(where: ComponentWhereUniqueInput!): Component
-  signIn(code: String!): SignInOutput
+  signIn(code: String!, redirect_host: String): SignInOutput
   updateOneCollection(data: CollectionUpdateInput!, where: CollectionWhereUniqueInput!): Collection
   updateOneComponent(data: ComponentUpdateInput!, where: ComponentWhereUniqueInput!): Component
   updateOneUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
