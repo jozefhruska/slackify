@@ -19,6 +19,7 @@ import {
 import { GET_USER } from '../../src/api/query/users';
 import { Loader } from '../../src/components/common/misc';
 import { StoreUser } from '../../src/actions/auth';
+import { REDIRECT_HOST } from '../../src/config';
 
 /* Props - <RedirectPage />
 ============================================================================= */
@@ -109,6 +110,8 @@ export const getServerSideProps: GetServerSideProps<Props> = async (ctx) => {
       mutation: SIGN_IN,
       variables: {
         code: ctx?.query?.code as string,
+        // eslint-disable-next-line @typescript-eslint/camelcase
+        redirect_host: REDIRECT_HOST,
       },
     })
     .then(({ data: signInData }) => {

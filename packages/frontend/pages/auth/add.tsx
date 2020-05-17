@@ -16,6 +16,7 @@ import {
 import { GET_USER } from '../../src/api/query/users';
 import { Loader } from '../../src/components/common/misc';
 import { ADD_TO_SLACK } from '../../src/api/mutation/auth';
+import { REDIRECT_HOST } from '../../src/config';
 
 /* Props - <AddToSlackPage />
 ============================================================================= */
@@ -98,6 +99,8 @@ export const getServerSideProps: GetServerSideProps<Props> = async (ctx) => {
       mutation: ADD_TO_SLACK,
       variables: {
         code: ctx?.query?.code as string,
+        // eslint-disable-next-line @typescript-eslint/camelcase
+        redirect_host: REDIRECT_HOST,
       },
     })
     .then(() => {

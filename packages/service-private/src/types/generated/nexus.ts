@@ -1165,6 +1165,7 @@ export interface NexusGenArgTypes {
   Mutation: {
     addToSlack: { // args
       code: string; // String!
+      redirect_host?: string | null; // String
     }
     createOneCollection: { // args
       data: NexusGenInputs['CollectionCreateInput']; // CollectionCreateInput!
@@ -1180,6 +1181,7 @@ export interface NexusGenArgTypes {
     }
     signIn: { // args
       code: string; // String!
+      redirect_host?: string | null; // String
     }
     updateOneCollection: { // args
       data: NexusGenInputs['CollectionUpdateInput']; // CollectionUpdateInput!

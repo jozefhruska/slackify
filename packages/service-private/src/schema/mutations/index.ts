@@ -14,6 +14,9 @@ export const Mutation = objectType({
         code: stringArg({
           required: true,
         }),
+        redirect_host: stringArg({
+          required: false,
+        }),
       },
       resolve: signIn,
     });
@@ -24,6 +27,9 @@ export const Mutation = objectType({
       args: {
         code: stringArg({
           required: true,
+        }),
+        redirect_host: stringArg({
+          required: false,
         }),
       },
       resolve: addToSlack,
