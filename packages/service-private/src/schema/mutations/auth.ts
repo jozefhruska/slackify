@@ -25,8 +25,8 @@ export const signIn: FieldResolver<'Mutation', 'signIn'> = async (
         client_secret: SLACK_CLIENT_SECRET,
         code,
         redirect_uri: redirect_host
-          ? `${redirect_host}/auth/add`
-          : 'https://slackify.now.sh/auth/add',
+          ? `${redirect_host}/auth/redirect`
+          : 'https://slackify.now.sh/auth/redirect',
       },
     })
     .then(({ data }) => data)
