@@ -28,11 +28,13 @@
 \contentsline {section}{\numberline {3.5}Slack API}{14}{section.3.5}% 
 \contentsline {subsection}{\numberline {3.5.1}Block Kit}{15}{subsection.3.5.1}% 
 \contentsline {chapter}{\numberline {4}Headless CMS}{16}{chapter.4}% 
-\contentsline {section}{\numberline {4.1}Strapi}{17}{section.4.1}% 
-\contentsline {section}{\numberline {4.2}Netlify CMS}{17}{section.4.2}% 
+\contentsline {section}{\numberline {4.1}Existuj\IeC {\'u}ce rie\IeC {\v s}enia}{17}{section.4.1}% 
+\contentsline {subsection}{\numberline {4.1.1}Strapi}{17}{subsection.4.1.1}% 
+\contentsline {subsection}{\numberline {4.1.2}Netlify CMS}{17}{subsection.4.1.2}% 
 \contentsline {chapter}{\numberline {5}N\IeC {\'a}vrh rie\IeC {\v s}enia}{18}{chapter.5}% 
 \contentsline {section}{\numberline {5.1}Funk\IeC {\v c}n\IeC {\'e} po\IeC {\v z}iadavky}{18}{section.5.1}% 
 \contentsline {subsection}{\numberline {5.1.1}Odch\IeC {\'y}lky n\IeC {\'a}vrhu od p\IeC {\^o}vodn\IeC {\'e}ho zadania}{18}{subsection.5.1.1}% 
+\contentsline {subsection}{\numberline {5.1.2}Porovnanie s~existuj\IeC {\'u}cimi rie\IeC {\v s}eniami}{19}{subsection.5.1.2}% 
 \contentsline {section}{\numberline {5.2}Diagramy pr\IeC {\'\i }padov pou\IeC {\v z}itia}{19}{section.5.2}% 
 \contentsline {subsection}{\numberline {5.2.1}Viewer}{19}{subsection.5.2.1}% 
 \contentsline {subsection}{\numberline {5.2.2}Author}{19}{subsection.5.2.2}% 
@@ -66,17 +68,25 @@
 \contentsline {subsection}{\numberline {6.2.4}Verejn\IeC {\'a} slu\IeC {\v z}ba \texttt {service-public}}{30}{subsection.6.2.4}% 
 \contentsline {subsubsection}{Autoriz\IeC {\'a}cia}{30}{section*.14}% 
 \contentsline {subsubsection}{Zjednodu\IeC {\v s}en\IeC {\'y} typ \texttt {Component}}{30}{section*.15}% 
-\contentsline {section}{\numberline {6.3}Slack aplik\IeC {\'a}cia}{31}{section.6.3}% 
-\contentsline {subsection}{\numberline {6.3.1}Domovsk\IeC {\'a} str\IeC {\'a}nka}{31}{subsection.6.3.1}% 
-\contentsline {subsection}{\numberline {6.3.2}Dial\IeC {\'o}gov\IeC {\'e} okn\IeC {\'a}}{32}{subsection.6.3.2}% 
-\contentsline {section}{\numberline {6.4}Webov\IeC {\'a} konzola}{32}{section.6.4}% 
-\contentsline {subsection}{\numberline {6.4.1}Prihl\IeC {\'a}senie}{32}{subsection.6.4.1}% 
-\contentsline {subsection}{\numberline {6.4.2}Spr\IeC {\'a}va kolekci\IeC {\'\i }}{33}{subsection.6.4.2}% 
-\contentsline {subsubsection}{Vytvorenie a \IeC {\'u}prava kolekcie}{33}{section*.16}% 
-\contentsline {subsection}{\numberline {6.4.3}Spr\IeC {\'a}va komponentov}{34}{subsection.6.4.3}% 
-\contentsline {subsubsection}{Vytvorenie a \IeC {\'u}prava komponentov}{34}{section*.17}% 
-\contentsline {subsection}{\numberline {6.4.4}Zmena role u\IeC {\v z}\IeC {\'\i }vate\IeC {\v l}a}{35}{subsection.6.4.4}% 
-\contentsline {chapter}{\numberline {7}Testovanie}{37}{chapter.7}% 
-\contentsline {chapter}{Literat\IeC {\'u}ra}{38}{chapter*.18}% 
+\contentsline {subsubsection}{Zber \IeC {\v s}tatist\IeC {\'\i }k}{31}{section*.16}% 
+\contentsline {section}{\numberline {6.3}Webov\IeC {\'a} konzola}{31}{section.6.3}% 
+\contentsline {subsection}{\numberline {6.3.1}Pridanie Slackify do pracovn\IeC {\'e}ho prostredia}{32}{subsection.6.3.1}% 
+\contentsline {subsection}{\numberline {6.3.2}Prihl\IeC {\'a}senie u\IeC {\v z}\IeC {\'\i }vate\IeC {\v l}a}{32}{subsection.6.3.2}% 
+\contentsline {subsection}{\numberline {6.3.3}Spr\IeC {\'a}va kolekci\IeC {\'\i }}{33}{subsection.6.3.3}% 
+\contentsline {subsubsection}{Vytvorenie a \IeC {\'u}prava kolekcie}{33}{section*.17}% 
+\contentsline {subsection}{\numberline {6.3.4}Spr\IeC {\'a}va komponentov}{34}{subsection.6.3.4}% 
+\contentsline {subsubsection}{Vytvorenie a \IeC {\'u}prava komponentov}{35}{section*.18}% 
+\contentsline {subsection}{\numberline {6.3.5}Zmena role u\IeC {\v z}\IeC {\'\i }vate\IeC {\v l}a}{35}{subsection.6.3.5}% 
+\contentsline {section}{\numberline {6.4}Slack aplik\IeC {\'a}cia}{35}{section.6.4}% 
+\contentsline {subsection}{\numberline {6.4.1}Autoriz\IeC {\'a}cia t\IeC {\'\i }mov}{36}{subsection.6.4.1}% 
+\contentsline {subsection}{\numberline {6.4.2}Domovsk\IeC {\'a} str\IeC {\'a}nka}{36}{subsection.6.4.2}% 
+\contentsline {subsection}{\numberline {6.4.3}Spr\IeC {\'a}va kolekci\IeC {\'\i } a komponentov}{37}{subsection.6.4.3}% 
+\contentsline {chapter}{\numberline {7}Testovanie}{38}{chapter.7}% 
+\contentsline {section}{\numberline {7.1}Testovanie po\IeC {\v c}as v\IeC {\'y}voja}{38}{section.7.1}% 
+\contentsline {section}{\numberline {7.2}U\IeC {\v z}\IeC {\'\i }vate\IeC {\v l}sk\IeC {\'e} testovanie}{38}{section.7.2}% 
+\contentsline {subsection}{\numberline {7.2.1}Testovacie scen\IeC {\'a}re}{38}{subsection.7.2.1}% 
+\contentsline {subsection}{\numberline {7.2.2}Z\IeC {\'a}ver u\IeC {\v z}\IeC {\'\i }vate\IeC {\v l}sk\IeC {\'e}ho testovania}{39}{subsection.7.2.2}% 
+\contentsline {chapter}{\numberline {8}Z\IeC {\'a}ver}{40}{chapter.8}% 
+\contentsline {chapter}{Literat\IeC {\'u}ra}{41}{chapter*.19}% 
 \ttl@starttoc {chapters@1}
 \contentsfinish 
