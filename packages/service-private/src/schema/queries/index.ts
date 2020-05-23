@@ -1,4 +1,5 @@
 import { queryType } from 'nexus';
+import { resolveDashData } from './common';
 
 export const Query = queryType({
   definition(t) {
@@ -40,6 +41,13 @@ export const Query = queryType({
     /* Statistics */
     t.crud.statRecords({
       filtering: true,
+    });
+
+    /* Common */
+    t.field('dashData', {
+      type: 'DashData',
+      nullable: false,
+      resolve: resolveDashData,
     });
   },
 });

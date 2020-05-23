@@ -1,15 +1,4 @@
-import { objectType, enumType, inputObjectType } from 'nexus';
-
-export const ComponentsListingInput = inputObjectType({
-  name: 'ComponentsListingInput',
-  definition(t) {
-    t.string('collectionId');
-    t.string('authorId'),
-      t.field('pagination', {
-        type: 'PaginationInput',
-      });
-  },
-});
+import { objectType, enumType } from 'nexus';
 
 export const ComponentType = enumType({
   name: 'ComponentType',

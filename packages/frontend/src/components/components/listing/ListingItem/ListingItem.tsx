@@ -13,31 +13,27 @@ import {
   DeleteOneComponentMutationVariables,
   UpdateOneComponentMutation,
   ComponentListingFragment,
-  GetComponentsListingQuery,
-  GetComponentsListingQueryVariables,
-  Collection,
 } from '../../../../types/generated/graphql';
 import { PlainTextContent, ArticleContent, LinkContent } from './types';
 import { Grid, Flex } from '../../../common/layout/base';
 import { Button, PopperButton } from '../../../common/misc';
 import { OpenCreateUpdateModal } from '../../../../actions/components';
 import { UPDATE_ONE_COMPONENT, DELETE_ONE_COMPONENT } from '../../../../api/mutation/components';
-import { GET_COMPONENTS_LISTING } from '../../../../api/query/components';
 import { selectUser } from '../../../../selectors/auth';
+import { canManageComponents, canCreateComponents } from '../../../../utils/users';
 
 import * as S from './ListingItem.styles';
-import { canManageComponents, canCreateComponents } from '../../../../utils/users';
 
 /* Props - <ListingItem />
 ============================================================================= */
 type Props = {
   component: ComponentListingFragment;
-  collectionId?: Collection['id'];
+  onDelete?: () => void;
 };
 
 /* <ListingItem />
 ============================================================================= */
-const ListingItem: React.FC<Props> = ({ component, collectionId }) => {
+const ListingItem: React.FC<Props> = ({ component, onDelete }) => {
   const user = useSelector(selectUser);
   const dispatch = useDispatch<Dispatch<OpenCreateUpdateModal>>();
 
@@ -45,53 +41,7 @@ const ListingItem: React.FC<Props> = ({ component, collectionId }) => {
     DeleteOneComponentMutation,
     DeleteOneComponentMutationVariables
   >(DELETE_ONE_COMPONENT, {
-    update: (cache, { data: { deleteOneComponent } }) => {
-      const { components: components } = cache.readQuery<
-        GetComponentsListingQuery,
-        GetComponentsListingQueryVariables
-      >({
-        query: GET_COMPONENTS_LISTING,
-        variables: {
-          where: {
-            team: {
-              id: {
-                equals: user?.team.id,
-              },
-            },
-            collection: {
-              id: {
-                equals: collectionId,
-              },
-            },
-          },
-          first: 40,
-        },
-      });
-
-      cache.writeQuery<GetComponentsListingQuery, GetComponentsListingQueryVariables>({
-        query: GET_COMPONENTS_LISTING,
-        data: {
-          components: components.filter((component) => component.id !== deleteOneComponent?.id),
-        },
-        variables: {
-          where: {
-            team: {
-              id: {
-                equals: user?.team.id,
-              },
-            },
-            collection: {
-              id: {
-                equals: collectionId,
-              },
-            },
-          },
-          first: 40,
-        },
-      });
-
-      cache.gc();
-    },
+    onCompleted: onDelete,
   });
 
   const [updateComponent, { loading: updateLoading }] = useMutation<

@@ -1,0 +1,23 @@
+{
+  "version": "0.3.14-fixed",
+  "steps": [
+    {
+      "tag": "UpdateField",
+      "model": "PlainTextComponentData",
+      "field": "Component",
+      "arity": "Required"
+    },
+    {
+      "tag": "UpdateField",
+      "model": "ArticleComponentData",
+      "field": "Component",
+      "arity": "Required"
+    },
+    {
+      "tag": "UpdateField",
+      "model": "LinkComponentData",
+      "field": "Component",
+      "arity": "Required"
+    }
+  ]
+}

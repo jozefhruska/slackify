@@ -3,12 +3,6 @@ import { gql } from '@apollo/client';
 import { UserDetail } from '../fragments/users';
 import { CollectionDetail, CollectionListing } from '../fragments/collections';
 
-export const CollectionsListingInput = gql`
-  input CollectionsListingInput {
-    pagination: PaginationInput
-  }
-`;
-
 export const GET_COLLECTION_DETAIL = gql`
   query GetCollectionDetail($where: CollectionWhereUniqueInput!) {
     getUser {

@@ -160,10 +160,6 @@ export type CollectionScalarWhereInput = {
   NOT?: Maybe<Array<CollectionScalarWhereInput>>;
 };
 
-export type CollectionsListingInput = {
-  pagination?: Maybe<PaginationInput>;
-};
-
 export type CollectionUpdateInput = {
   id?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
@@ -379,12 +375,6 @@ export type ComponentScalarWhereInput = {
   NOT?: Maybe<Array<ComponentScalarWhereInput>>;
 };
 
-export type ComponentsListingInput = {
-  collectionId?: Maybe<Scalars['String']>;
-  authorId?: Maybe<Scalars['String']>;
-  pagination?: Maybe<PaginationInput>;
-};
-
 export enum ComponentType {
   PlainText = 'PLAIN_TEXT',
   Article = 'ARTICLE',
@@ -563,6 +553,13 @@ export type CreatedAtComponentIdCompoundUniqueInput = {
   componentId: Scalars['String'];
 };
 
+export type DashData = {
+   __typename?: 'DashData';
+  requestedComponents: Array<Component>;
+  createdComponents: Array<Component>;
+  createdCollections: Array<Collection>;
+};
+
 
 export type DateTimeFilter = {
   equals?: Maybe<Scalars['DateTime']>;
@@ -704,14 +701,6 @@ export type NullableStringFilter = {
   endsWith?: Maybe<Scalars['String']>;
 };
 
-export type PaginationInput = {
-  skip?: Maybe<Scalars['Int']>;
-  after?: Maybe<CollectionWhereUniqueInput>;
-  before?: Maybe<CollectionWhereUniqueInput>;
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
-};
-
 export type PlainTextComponentData = {
    __typename?: 'PlainTextComponentData';
   id: Scalars['String'];
@@ -769,6 +758,7 @@ export type Query = {
   components: Array<Component>;
   component?: Maybe<Component>;
   statRecords: Array<StatRecord>;
+  dashData: DashData;
 };
 
 
@@ -1498,6 +1488,26 @@ export type GetCollectionsOptionsQuery = (
   )> }
 );
 
+export type GetDashDataQueryVariables = {};
+
+
+export type GetDashDataQuery = (
+  { __typename?: 'Query' }
+  & { dashData: (
+    { __typename?: 'DashData' }
+    & { requestedComponents: Array<(
+      { __typename?: 'Component' }
+      & ComponentListingFragment
+    )>, createdComponents: Array<(
+      { __typename?: 'Component' }
+      & ComponentListingFragment
+    )>, createdCollections: Array<(
+      { __typename?: 'Collection' }
+      & CollectionListingFragment
+    )> }
+  ) }
+);
+
 export type GetComponentDetailQueryVariables = {
   where: ComponentWhereUniqueInput;
 };
@@ -1552,6 +1562,11 @@ export type GetComponentsListingQuery = (
 
 export type GetComponentStatsQueryVariables = {
   where: StatRecordWhereInput;
+  skip?: Maybe<Scalars['Int']>;
+  after?: Maybe<StatRecordWhereUniqueInput>;
+  before?: Maybe<StatRecordWhereUniqueInput>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
 };
 
 
@@ -1838,6 +1853,23 @@ export const GetCollectionsOptionsDocument = gql`
 }
     `;
 export type GetCollectionsOptionsQueryResult = ApolloReactCommon.QueryResult<GetCollectionsOptionsQuery, GetCollectionsOptionsQueryVariables>;
+export const GetDashDataDocument = gql`
+    query GetDashData {
+  dashData {
+    requestedComponents {
+      ...ComponentListing
+    }
+    createdComponents {
+      ...ComponentListing
+    }
+    createdCollections {
+      ...CollectionListing
+    }
+  }
+}
+    ${ComponentListingFragmentDoc}
+${CollectionListingFragmentDoc}`;
+export type GetDashDataQueryResult = ApolloReactCommon.QueryResult<GetDashDataQuery, GetDashDataQueryVariables>;
 export const GetComponentDetailDocument = gql`
     query GetComponentDetail($where: ComponentWhereUniqueInput!) {
   getUser {
@@ -1867,8 +1899,8 @@ export const GetComponentsListingDocument = gql`
     ${ComponentListingFragmentDoc}`;
 export type GetComponentsListingQueryResult = ApolloReactCommon.QueryResult<GetComponentsListingQuery, GetComponentsListingQueryVariables>;
 export const GetComponentStatsDocument = gql`
-    query GetComponentStats($where: StatRecordWhereInput!) {
-  statRecords(where: $where) {
+    query GetComponentStats($where: StatRecordWhereInput!, $skip: Int, $after: StatRecordWhereUniqueInput, $before: StatRecordWhereUniqueInput, $first: Int, $last: Int) {
+  statRecords(where: $where, skip: $skip, after: $after, before: $before, first: $first, last: $last) {
     createdAt
   }
 }

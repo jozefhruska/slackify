@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useQuery } from '@apollo/client';
 import { useInView } from 'react-intersection-observer';
 
-import Listing from '../../../common/layout/Listing/Listing';
+import CommonListing from '../../../common/layout/Listing/Listing';
 import {
   GetComponentsListingQuery,
   GetComponentsListingQueryVariables,
@@ -24,7 +24,7 @@ type Props = {
 /* <ListingPage />
 ============================================================================= */
 const ListingPage: React.FC<Props> = ({ user, collectionId }) => {
-  const { data, error, loading, fetchMore } = useQuery<
+  const { data, error, loading, fetchMore, refetch } = useQuery<
     GetComponentsListingQuery,
     GetComponentsListingQueryVariables
   >(GET_COMPONENTS_LISTING, {
@@ -48,6 +48,10 @@ const ListingPage: React.FC<Props> = ({ user, collectionId }) => {
   const [isOutOfResults, setOutOfResults] = useState<boolean>(false);
 
   const [ref, inView] = useInView();
+
+  useEffect(() => {
+    refetch();
+  }, []);
 
   useEffect(() => {
     if (inView) {
@@ -101,11 +105,11 @@ const ListingPage: React.FC<Props> = ({ user, collectionId }) => {
   if (data) {
     return (
       <>
-        <Listing>
+        <CommonListing>
           {data.components?.map((component) => (
-            <ListingItem key={component?.id} component={component} collectionId={collectionId} />
+            <ListingItem key={component?.id} component={component} onDelete={refetch} />
           ))}
-        </Listing>
+        </CommonListing>
 
         {!isOutOfResults ? (
           <Flex

@@ -1,0 +1,234 @@
+{
+  "version": "0.3.14-fixed",
+  "steps": [
+    {
+      "tag": "CreateField",
+      "model": "Component",
+      "field": "statRecord",
+      "type": "StatRecord",
+      "arity": "List"
+    },
+    {
+      "tag": "DeleteField",
+      "model": "Component",
+      "field": "articleDataId"
+    },
+    {
+      "tag": "DeleteField",
+      "model": "Component",
+      "field": "linkDataId"
+    },
+    {
+      "tag": "DeleteField",
+      "model": "Component",
+      "field": "StatRecord"
+    },
+    {
+      "tag": "DeleteDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "Component",
+          "field": "plainTextData"
+        },
+        "directive": "relation"
+      }
+    },
+    {
+      "tag": "DeleteDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "Component",
+          "field": "articleData"
+        },
+        "directive": "relation"
+      }
+    },
+    {
+      "tag": "DeleteDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "Component",
+          "field": "linkData"
+        },
+        "directive": "relation"
+      }
+    },
+    {
+      "tag": "CreateField",
+      "model": "PlainTextComponentData",
+      "field": "componentId",
+      "type": "String",
+      "arity": "Optional"
+    },
+    {
+      "tag": "CreateField",
+      "model": "PlainTextComponentData",
+      "field": "component",
+      "type": "Component",
+      "arity": "Optional"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "PlainTextComponentData",
+          "field": "component"
+        },
+        "directive": "relation"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "PlainTextComponentData",
+          "field": "component"
+        },
+        "directive": "relation"
+      },
+      "argument": "fields",
+      "value": "[componentId]"
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "PlainTextComponentData",
+          "field": "component"
+        },
+        "directive": "relation"
+      },
+      "argument": "references",
+      "value": "[id]"
+    },
+    {
+      "tag": "DeleteField",
+      "model": "PlainTextComponentData",
+      "field": "Component"
+    },
+    {
+      "tag": "CreateField",
+      "model": "ArticleComponentData",
+      "field": "componentId",
+      "type": "String",
+      "arity": "Optional"
+    },
+    {
+      "tag": "CreateField",
+      "model": "ArticleComponentData",
+      "field": "component",
+      "type": "Component",
+      "arity": "Optional"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "ArticleComponentData",
+          "field": "component"
+        },
+        "directive": "relation"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "ArticleComponentData",
+          "field": "component"
+        },
+        "directive": "relation"
+      },
+      "argument": "fields",
+      "value": "[componentId]"
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "ArticleComponentData",
+          "field": "component"
+        },
+        "directive": "relation"
+      },
+      "argument": "references",
+      "value": "[id]"
+    },
+    {
+      "tag": "DeleteField",
+      "model": "ArticleComponentData",
+      "field": "Component"
+    },
+    {
+      "tag": "CreateField",
+      "model": "LinkComponentData",
+      "field": "componentId",
+      "type": "String",
+      "arity": "Optional"
+    },
+    {
+      "tag": "CreateField",
+      "model": "LinkComponentData",
+      "field": "component",
+      "type": "Component",
+      "arity": "Optional"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "LinkComponentData",
+          "field": "component"
+        },
+        "directive": "relation"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "LinkComponentData",
+          "field": "component"
+        },
+        "directive": "relation"
+      },
+      "argument": "fields",
+      "value": "[componentId]"
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "LinkComponentData",
+          "field": "component"
+        },
+        "directive": "relation"
+      },
+      "argument": "references",
+      "value": "[id]"
+    },
+    {
+      "tag": "DeleteField",
+      "model": "LinkComponentData",
+      "field": "Component"
+    }
+  ]
+}

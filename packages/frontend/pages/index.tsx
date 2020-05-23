@@ -3,17 +3,36 @@ import { NextPage, GetServerSideProps } from 'next';
 import { Dispatch } from 'redux';
 import { useDispatch } from 'react-redux';
 
-import { Navigation, Content, Header, PageHeader, Sidebar } from '../src/components/common/layout';
+import {
+  Navigation,
+  Content,
+  Header,
+  PageHeader,
+  Sidebar,
+  PageSubHeader,
+} from '../src/components/common/layout';
 import {
   GetUserQuery,
   GetUserQueryVariables,
   UserDetailFragment,
+  GetDashDataQuery,
+  GetDashDataQueryVariables,
 } from '../src/types/generated/graphql';
 import { StoreUser } from '../src/actions/auth';
 import withApollo, { createApolloClient } from '../src/api';
 import { getAuthToken } from '../src/cookies';
 import { GET_USER } from '../src/api/query/users';
 import WelcomePage from '../src/components/public/WelcomePage/WelcomePage';
+import { Button, Alert, ListingLoader } from '../src/components/common/misc';
+import { Box, Flex } from '../src/components/common/layout/base';
+import { useRouter } from 'next/router';
+import { OneRowListing } from '../src/components/common/layout/Listing/Listing';
+import { useQuery } from '@apollo/client';
+import { ListingItem as CollectionListingItem } from '../src/components/collections/listing';
+import { ListingItem } from '../src/components/components/listing';
+import { GET_DASH_DATA } from '../src/api/query/common';
+import { default as CollectionCreateUpdateModal } from '../src/components/collections/CreateUpdateModal/CreateUpdateModal';
+import { default as ComponentCreateUpdateModal } from '../src/components/components/CreateUpdateModal/CreateUpdateModal';
 
 /* Props - <HomePage />
 ============================================================================= */
@@ -26,25 +45,140 @@ type Props = {
 const HomePage: NextPage<Props> = ({ user }) => {
   const dispatch = useDispatch<Dispatch<StoreUser>>();
 
+  const { data, error: dashError, loading: dashLoading, refetch } = useQuery<
+    GetDashDataQuery,
+    GetDashDataQueryVariables
+  >(GET_DASH_DATA, {
+    pollInterval: 4000,
+  });
+
+  const { push } = useRouter();
+
   useEffect(() => {
     dispatch({ type: '[AUTH] STORE_USER', payload: { user } });
+
+    refetch();
   }, []);
 
-  if (user) {
-    return (
-      <>
-        <Header />
-        <Navigation />
-        <Sidebar user={user} />
+  const renderComponentStatsListing = () => {
+    if (dashLoading) {
+      return (
+        <Flex justifyContent="center">
+          <ListingLoader />
+        </Flex>
+      );
+    }
 
-        <Content>
-          <PageHeader heading="Dashboard" />
-        </Content>
-      </>
-    );
+    if (!data?.dashData?.requestedComponents.length) {
+      return null;
+    }
+
+    return data.dashData.requestedComponents.map((component) => (
+      <ListingItem key={component.id} component={component} />
+    ));
+  };
+
+  const renderComponentsListing = () => {
+    if (dashLoading) {
+      return (
+        <Flex justifyContent="center">
+          <ListingLoader />
+        </Flex>
+      );
+    }
+
+    if (!data?.dashData?.createdComponents.length) {
+      return null;
+    }
+
+    return data.dashData.createdComponents.map((component) => (
+      <ListingItem key={component.id} component={component} onDelete={refetch} />
+    ));
+  };
+
+  const renderCollectionsListing = () => {
+    if (dashLoading) {
+      return (
+        <Flex justifyContent="center">
+          <ListingLoader />
+        </Flex>
+      );
+    }
+
+    if (!data?.dashData?.createdCollections.length) {
+      return null;
+    }
+
+    return data.dashData.createdCollections.map((collection) => (
+      <CollectionListingItem key={collection.id} collection={collection} onDelete={refetch} />
+    ));
+  };
+
+  if (!user) {
+    return <WelcomePage />;
   }
 
-  return <WelcomePage />;
+  return (
+    <>
+      <Header />
+      <Navigation />
+      <Sidebar user={user} />
+
+      <Content>
+        <PageHeader heading="Dashboard" />
+        {dashError ? (
+          <Alert type="danger">{dashError.message}</Alert>
+        ) : (
+          <>
+            <Box as="section" mb="s8">
+              <PageSubHeader heading="Recently requested components"></PageSubHeader>
+
+              {data?.dashData?.requestedComponents.length === 0 ? (
+                <Flex justifyContent="center">
+                  <span>There are no recently requested components.</span>
+                </Flex>
+              ) : (
+                <OneRowListing>{renderComponentStatsListing()}</OneRowListing>
+              )}
+            </Box>
+            <Box as="section" mb="s8">
+              <PageSubHeader heading="Recently created components">
+                <Button onClick={() => push('/components')} variant="brand">
+                  View more
+                </Button>
+              </PageSubHeader>
+
+              {data?.dashData?.createdComponents.length === 0 ? (
+                <Flex justifyContent="center">
+                  <span>There are no recently created components.</span>
+                </Flex>
+              ) : (
+                <OneRowListing>{renderComponentsListing()}</OneRowListing>
+              )}
+            </Box>
+            <Box as="section" mb="s8">
+              <PageSubHeader heading="Recently created collections">
+                <Button onClick={() => push('/collections')} variant="brand">
+                  View more
+                </Button>
+              </PageSubHeader>
+
+              {data?.dashData?.createdCollections.length === 0 ? (
+                <Flex justifyContent="center">
+                  <span>There are no recently created collections.</span>
+                </Flex>
+              ) : (
+                <OneRowListing>{renderCollectionsListing()}</OneRowListing>
+              )}
+            </Box>
+          </>
+        )}
+      </Content>
+
+      <ComponentCreateUpdateModal />
+      <CollectionCreateUpdateModal />
+    </>
+  );
 };
 
 /* getServerSideProps - <HomePage />
