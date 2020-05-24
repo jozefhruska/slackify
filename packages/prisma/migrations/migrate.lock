@@ -11,3 +11,6 @@
 20200509193127-add-bot-token-for-teams
 20200509204436-reduce-user-avatars-to-one
 20200510123142-add-bot-id-to-team-model
+20200523170619-statrecord--relation-with-component-nullable
+20200523222310-edit-component-data-relation
+20200523222756-update-component-data-relations

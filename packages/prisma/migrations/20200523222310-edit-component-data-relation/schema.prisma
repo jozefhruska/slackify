@@ -1,6 +1,6 @@
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
+  url = "***"
   enabled  = env("DATABASE_URL")
 }
 
@@ -56,12 +56,14 @@ model Component {
   team            Team                    @relation(fields: [teamId], references: [id])
   teamId          String
   plainTextDataId String?
-  plainTextData   PlainTextComponentData?
-  articleData     ArticleComponentData?
-  linkData        LinkComponentData?
+  plainTextData   PlainTextComponentData? @relation(fields: [plainTextDataId], references: [id])
+  articleDataId   String?
+  articleData     ArticleComponentData?   @relation(fields: [articleDataId], references: [id])
+  linkDataId      String?
+  linkData        LinkComponentData?      @relation(fields: [linkDataId], references: [id])
   createdAt       DateTime                @default(now())
   updatedAt       DateTime                @updatedAt
-  statRecord      StatRecord[]
+  StatRecord      StatRecord[]
 }
 
 model StatRecord {
@@ -74,27 +76,24 @@ model StatRecord {
 }
 
 model PlainTextComponentData {
-  id          String     @default(cuid()) @id
-  text        String
-  componentId String?
-  component   Component? @relation(fields: [componentId], references: [id])
+  id        String    @default(cuid()) @id
+  text      String
+  Component Component
 }
 
 model ArticleComponentData {
-  id          String     @default(cuid()) @id
-  title       String
-  lead        String?
-  content     String
-  componentId String?
-  component   Component? @relation(fields: [componentId], references: [id])
+  id        String    @default(cuid()) @id
+  title     String
+  lead      String?
+  content   String
+  Component Component
 }
 
 model LinkComponentData {
-  id          String     @default(cuid()) @id
-  text        String?
-  url         String
-  componentId String?
-  component   Component? @relation(fields: [componentId], references: [id])
+  id        String    @default(cuid()) @id
+  text      String?
+  url       String
+  Component Component
 }
 
 enum UserRole {

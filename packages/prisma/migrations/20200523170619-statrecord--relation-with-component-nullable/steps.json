@@ -1,0 +1,17 @@
+{
+  "version": "0.3.14-fixed",
+  "steps": [
+    {
+      "tag": "UpdateField",
+      "model": "StatRecord",
+      "field": "componentId",
+      "arity": "Optional"
+    },
+    {
+      "tag": "UpdateField",
+      "model": "StatRecord",
+      "field": "component",
+      "arity": "Optional"
+    }
+  ]
+}

@@ -11,8 +11,7 @@ import { GET_USERS_LISTING } from '../../../../api/query/users';
 import { ListingItem } from '../';
 import { Alert, PageLoader, ListingLoader } from '../../../common/misc';
 import { Flex } from '../../../common/layout/base';
-
-import * as S from './ListingPage.styles';
+import { UsersListing } from '../../../common/layout/Listing/Listing';
 
 /* Props - <ListingPage />
 ============================================================================= */
@@ -83,11 +82,11 @@ const ListingPage: React.FC<Props> = ({ user }) => {
   if (data) {
     return (
       <>
-        <S.Listing>
+        <UsersListing>
           {data.users?.map((userItem) => (
             <ListingItem key={userItem?.id} user={userItem} />
           ))}
-        </S.Listing>
+        </UsersListing>
 
         {!isOutOfResults ? (
           <Flex

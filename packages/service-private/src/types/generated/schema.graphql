@@ -44,7 +44,8 @@ input ArticleComponentDataUpsertWithoutComponentInput {
 
 input ArticleComponentDataWhereInput {
   AND: [ArticleComponentDataWhereInput!]
-  Component: ComponentFilter
+  component: ComponentWhereInput
+  componentId: NullableStringFilter
   content: StringFilter
   id: StringFilter
   lead: NullableStringFilter
@@ -138,10 +139,6 @@ input CollectionScalarWhereInput {
   teamId: StringFilter
   type: ComponentType
   updatedAt: DateTimeFilter
-}
-
-input CollectionsListingInput {
-  pagination: PaginationInput
 }
 
 input CollectionUpdateInput {
@@ -270,8 +267,9 @@ input ComponentCreateInput {
   id: String
   linkData: LinkComponentDataCreateOneWithoutComponentInput
   plainTextData: PlainTextComponentDataCreateOneWithoutComponentInput
+  plainTextDataId: String
   published: Boolean
-  StatRecord: StatRecordCreateManyWithoutComponentInput
+  statRecord: StatRecordCreateManyWithoutComponentInput
   team: TeamCreateOneWithoutComponentsInput!
   type: ComponentType
   updatedAt: DateTime
@@ -299,8 +297,9 @@ input ComponentCreateWithoutAuthorInput {
   id: String
   linkData: LinkComponentDataCreateOneWithoutComponentInput
   plainTextData: PlainTextComponentDataCreateOneWithoutComponentInput
+  plainTextDataId: String
   published: Boolean
-  StatRecord: StatRecordCreateManyWithoutComponentInput
+  statRecord: StatRecordCreateManyWithoutComponentInput
   team: TeamCreateOneWithoutComponentsInput!
   type: ComponentType
   updatedAt: DateTime
@@ -313,8 +312,9 @@ input ComponentCreateWithoutCollectionInput {
   id: String
   linkData: LinkComponentDataCreateOneWithoutComponentInput
   plainTextData: PlainTextComponentDataCreateOneWithoutComponentInput
+  plainTextDataId: String
   published: Boolean
-  StatRecord: StatRecordCreateManyWithoutComponentInput
+  statRecord: StatRecordCreateManyWithoutComponentInput
   team: TeamCreateOneWithoutComponentsInput!
   type: ComponentType
   updatedAt: DateTime
@@ -328,8 +328,9 @@ input ComponentCreateWithoutTeamInput {
   id: String
   linkData: LinkComponentDataCreateOneWithoutComponentInput
   plainTextData: PlainTextComponentDataCreateOneWithoutComponentInput
+  plainTextDataId: String
   published: Boolean
-  StatRecord: StatRecordCreateManyWithoutComponentInput
+  statRecord: StatRecordCreateManyWithoutComponentInput
   type: ComponentType
   updatedAt: DateTime
 }
@@ -342,26 +343,18 @@ input ComponentFilter {
 
 input ComponentScalarWhereInput {
   AND: [ComponentScalarWhereInput!]
-  articleDataId: NullableStringFilter
   authorId: StringFilter
   collectionId: StringFilter
   createdAt: DateTimeFilter
   id: StringFilter
-  linkDataId: NullableStringFilter
   NOT: [ComponentScalarWhereInput!]
   OR: [ComponentScalarWhereInput!]
   plainTextDataId: NullableStringFilter
   published: BooleanFilter
-  StatRecord: StatRecordFilter
+  statRecord: StatRecordFilter
   teamId: StringFilter
   type: ComponentType
   updatedAt: DateTimeFilter
-}
-
-input ComponentsListingInput {
-  authorId: String
-  collectionId: String
-  pagination: PaginationInput
 }
 
 enum ComponentType {
@@ -378,8 +371,9 @@ input ComponentUpdateInput {
   id: String
   linkData: LinkComponentDataUpdateOneWithoutComponentInput
   plainTextData: PlainTextComponentDataUpdateOneWithoutComponentInput
+  plainTextDataId: String
   published: Boolean
-  StatRecord: StatRecordUpdateManyWithoutComponentInput
+  statRecord: StatRecordUpdateManyWithoutComponentInput
   team: TeamUpdateOneRequiredWithoutComponentsInput
   type: ComponentType
   updatedAt: DateTime
@@ -388,6 +382,7 @@ input ComponentUpdateInput {
 input ComponentUpdateManyDataInput {
   createdAt: DateTime
   id: String
+  plainTextDataId: String
   published: Boolean
   type: ComponentType
   updatedAt: DateTime
@@ -441,8 +436,9 @@ input ComponentUpdateWithoutAuthorDataInput {
   id: String
   linkData: LinkComponentDataUpdateOneWithoutComponentInput
   plainTextData: PlainTextComponentDataUpdateOneWithoutComponentInput
+  plainTextDataId: String
   published: Boolean
-  StatRecord: StatRecordUpdateManyWithoutComponentInput
+  statRecord: StatRecordUpdateManyWithoutComponentInput
   team: TeamUpdateOneRequiredWithoutComponentsInput
   type: ComponentType
   updatedAt: DateTime
@@ -455,8 +451,9 @@ input ComponentUpdateWithoutCollectionDataInput {
   id: String
   linkData: LinkComponentDataUpdateOneWithoutComponentInput
   plainTextData: PlainTextComponentDataUpdateOneWithoutComponentInput
+  plainTextDataId: String
   published: Boolean
-  StatRecord: StatRecordUpdateManyWithoutComponentInput
+  statRecord: StatRecordUpdateManyWithoutComponentInput
   team: TeamUpdateOneRequiredWithoutComponentsInput
   type: ComponentType
   updatedAt: DateTime
@@ -470,8 +467,9 @@ input ComponentUpdateWithoutTeamDataInput {
   id: String
   linkData: LinkComponentDataUpdateOneWithoutComponentInput
   plainTextData: PlainTextComponentDataUpdateOneWithoutComponentInput
+  plainTextDataId: String
   published: Boolean
-  StatRecord: StatRecordUpdateManyWithoutComponentInput
+  statRecord: StatRecordUpdateManyWithoutComponentInput
   type: ComponentType
   updatedAt: DateTime
 }
@@ -512,7 +510,6 @@ input ComponentUpsertWithWhereUniqueWithoutTeamInput {
 input ComponentWhereInput {
   AND: [ComponentWhereInput!]
   articleData: ArticleComponentDataWhereInput
-  articleDataId: NullableStringFilter
   author: UserWhereInput
   authorId: StringFilter
   collection: CollectionWhereInput
@@ -520,13 +517,12 @@ input ComponentWhereInput {
   createdAt: DateTimeFilter
   id: StringFilter
   linkData: LinkComponentDataWhereInput
-  linkDataId: NullableStringFilter
   NOT: [ComponentWhereInput!]
   OR: [ComponentWhereInput!]
   plainTextData: PlainTextComponentDataWhereInput
   plainTextDataId: NullableStringFilter
   published: BooleanFilter
-  StatRecord: StatRecordFilter
+  statRecord: StatRecordFilter
   team: TeamWhereInput
   teamId: StringFilter
   type: ComponentType
@@ -540,6 +536,12 @@ input ComponentWhereUniqueInput {
 input CreatedAtComponentIdCompoundUniqueInput {
   componentId: String!
   createdAt: DateTime!
+}
+
+type DashData {
+  createdCollections: [Collection!]!
+  createdComponents: [Component!]!
+  requestedComponents: [Component!]!
 }
 
 scalar DateTime
@@ -594,7 +596,8 @@ input LinkComponentDataUpsertWithoutComponentInput {
 
 input LinkComponentDataWhereInput {
   AND: [LinkComponentDataWhereInput!]
-  Component: ComponentFilter
+  component: ComponentWhereInput
+  componentId: NullableStringFilter
   id: StringFilter
   NOT: [LinkComponentDataWhereInput!]
   OR: [LinkComponentDataWhereInput!]
@@ -630,14 +633,6 @@ input NullableStringFilter {
   not: String
   notIn: [String!]
   startsWith: String
-}
-
-input PaginationInput {
-  after: CollectionWhereUniqueInput
-  before: CollectionWhereUniqueInput
-  first: Int
-  last: Int
-  skip: Int
 }
 
 type PlainTextComponentData {
@@ -676,7 +671,8 @@ input PlainTextComponentDataUpsertWithoutComponentInput {
 
 input PlainTextComponentDataWhereInput {
   AND: [PlainTextComponentDataWhereInput!]
-  Component: ComponentFilter
+  component: ComponentWhereInput
+  componentId: NullableStringFilter
   id: StringFilter
   NOT: [PlainTextComponentDataWhereInput!]
   OR: [PlainTextComponentDataWhereInput!]
@@ -692,6 +688,7 @@ type Query {
   collections(after: CollectionWhereUniqueInput, before: CollectionWhereUniqueInput, first: Int, last: Int, skip: Int, where: QueryCollectionsWhereInput): [Collection!]!
   component(where: ComponentWhereUniqueInput!): Component
   components(after: ComponentWhereUniqueInput, before: ComponentWhereUniqueInput, first: Int, last: Int, skip: Int, where: QueryComponentsWhereInput): [Component!]!
+  dashData: DashData!
   getUser: User
   statRecords(after: StatRecordWhereUniqueInput, before: StatRecordWhereUniqueInput, first: Int, last: Int, skip: Int, where: StatRecordWhereInput): [StatRecord!]!
   users(after: UserWhereUniqueInput, before: UserWhereUniqueInput, first: Int, last: Int, skip: Int, where: QueryUsersWhereInput): [User!]!
@@ -719,8 +716,8 @@ type SignInOutput {
 }
 
 type StatRecord {
-  component: Component!
-  componentId: String!
+  component: Component
+  componentId: String
   createdAt: DateTime!
 }
 
@@ -742,7 +739,7 @@ input StatRecordFilter {
 
 input StatRecordScalarWhereInput {
   AND: [StatRecordScalarWhereInput!]
-  componentId: StringFilter
+  componentId: NullableStringFilter
   createdAt: DateTimeFilter
   id: StringFilter
   NOT: [StatRecordScalarWhereInput!]
@@ -790,7 +787,7 @@ input StatRecordUpsertWithWhereUniqueWithoutComponentInput {
 input StatRecordWhereInput {
   AND: [StatRecordWhereInput!]
   component: ComponentWhereInput
-  componentId: StringFilter
+  componentId: NullableStringFilter
   createdAt: DateTimeFilter
   id: StringFilter
   NOT: [StatRecordWhereInput!]

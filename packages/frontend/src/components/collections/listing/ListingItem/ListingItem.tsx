@@ -30,18 +30,21 @@ import * as S from './ListingItem.styles';
 ============================================================================= */
 type Props = {
   collection: CollectionListingFragment;
+  onDelete?: () => void;
 };
 
 /* <ListingItem />
 ============================================================================= */
-const ListingItem: React.FC<Props> = ({ collection }) => {
+const ListingItem: React.FC<Props> = ({ collection, onDelete }) => {
   const user = useSelector(selectUser);
   const dispatch = useDispatch<Dispatch<OpenCreateUpdateModal>>();
 
   const [deleteCollection, { loading: deleteLoading }] = useMutation<
     DeleteOneCollectionMutation,
     DeleteOneCollectionMutationVariables
-  >(DELETE_ONE_COLLECTION);
+  >(DELETE_ONE_COLLECTION, {
+    onCompleted: onDelete,
+  });
 
   const [updateCollection, { loading: updateLoading }] = useMutation<
     UpdateOneCollectionMutation,

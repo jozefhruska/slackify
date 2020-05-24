@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import { FiFolder, FiUsers, FiPieChart, FiSettings, FiGrid, FiTag } from 'react-icons/fi';
+import { FiFolder, FiUsers, FiSettings, FiGrid, FiTag } from 'react-icons/fi';
 import { useSelector } from 'react-redux';
 
 import { Box } from '../base';
@@ -73,21 +73,6 @@ const Navigation: React.FC = () => {
                         <FiUsers size={20} />
                       </Box>
                       <span>Users</span>
-                    </S.NavLink>
-                  </Link>
-                )}
-              </ActiveLink>
-            </S.NavItem>
-
-            <S.NavItem>
-              <ActiveLink href="/statistics">
-                {(isActive) => (
-                  <Link href="/users" passHref>
-                    <S.NavLink isActive={isActive}>
-                      <Box mr="s4">
-                        <FiPieChart size={20} />
-                      </Box>
-                      <span>Statistics</span>
                     </S.NavLink>
                   </Link>
                 )}
