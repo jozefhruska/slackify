@@ -1,0 +1,2 @@
+- [Úvod](/)
+- [Lokálna inštalácia a spustenie](install)
