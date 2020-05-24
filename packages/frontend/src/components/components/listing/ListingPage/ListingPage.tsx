@@ -43,6 +43,7 @@ const ListingPage: React.FC<Props> = ({ user, collectionId }) => {
       },
       first: 40,
     },
+    pollInterval: 4000,
   });
 
   const [isOutOfResults, setOutOfResults] = useState<boolean>(false);

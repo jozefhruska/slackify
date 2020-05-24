@@ -10,6 +10,8 @@ import {
   UserDetailFragment,
   UpdateOneComponentMutation,
   UpdateOneComponentMutationVariables,
+  DeleteOneComponentMutation,
+  DeleteOneComponentMutationVariables,
 } from '../../src/types/generated/graphql';
 import { checkAuthentication } from '../../src/utils';
 import { getAuthToken, removeAuthToken } from '../../src/cookies';
@@ -25,11 +27,12 @@ import {
 import { GET_COMPONENT_DETAIL } from '../../src/api/query/components';
 import { Button, PopperButton, PageLoader, Alert } from '../../src/components/common/misc';
 import { Grid, Flex } from '../../src/components/common/layout/base';
-import { UPDATE_ONE_COMPONENT } from '../../src/api/mutation/components';
+import { UPDATE_ONE_COMPONENT, DELETE_ONE_COMPONENT } from '../../src/api/mutation/components';
 import { OpenCreateUpdateModal } from '../../src/actions/components';
 import Detail from '../../src/components/components/detail/Detail';
 import CreateUpdateModal from '../../src/components/components/CreateUpdateModal/CreateUpdateModal';
 import { canManageComponents, canCreateComponents } from '../../src/utils/users';
+import { useRouter } from 'next/router';
 
 /* Local types
 ============================================================================= */
@@ -50,6 +53,8 @@ type Props = {
 const ComponentDetailPage: React.FC<Props> = ({ id, user }) => {
   const dispatch = useDispatch<Dispatch<StoreUser | OpenCreateUpdateModal>>();
 
+  const { push } = useRouter();
+
   const { data, loading: detailLoading } = useQuery<
     GetComponentDetailQuery,
     GetComponentDetailQueryVariables
@@ -59,6 +64,19 @@ const ComponentDetailPage: React.FC<Props> = ({ id, user }) => {
         id: id,
       },
     },
+    pollInterval: 4000,
+  });
+
+  const [deleteComponent, { loading: deleteLoading }] = useMutation<
+    DeleteOneComponentMutation,
+    DeleteOneComponentMutationVariables
+  >(DELETE_ONE_COMPONENT, {
+    variables: {
+      where: {
+        id,
+      },
+    },
+    onCompleted: () => push('/components'),
   });
 
   const [updateComponent, { loading: updateLoading }] = useMutation<
@@ -223,8 +241,10 @@ const ComponentDetailPage: React.FC<Props> = ({ id, user }) => {
 
             <Button
               icon={<FiTrash2 />}
-              variant="danger"
+              onClick={() => deleteComponent()}
+              isLoading={deleteLoading}
               disabled={!canManageComponents(user?.role)}
+              variant="danger"
             >
               Delete component
             </Button>

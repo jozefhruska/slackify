@@ -38,6 +38,7 @@ const RecentComponents: React.FC<Props> = ({ user }) => {
       },
       first: 4,
     },
+    pollInterval: 4000,
   });
 
   if (error) {
@@ -54,6 +55,8 @@ const RecentComponents: React.FC<Props> = ({ user }) => {
 
   return (
     <Flex flexDirection="column">
+      {!data?.components?.length && <Alert>There are no recently updated components.</Alert>}
+
       {data.components.map((component) => (
         <Link key={component.id} href="/components/[id]" as={`/components/${component.id}`}>
           <S.RCPreview>

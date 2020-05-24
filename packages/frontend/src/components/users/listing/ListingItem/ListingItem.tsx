@@ -4,7 +4,7 @@ import { useMutation } from '@apollo/client';
 
 import UserAvatar from '../../../common/layout/Sidebar/UserAvatar/UserAvatar';
 import { Box, Flex } from '../../../common/layout/base';
-import { Heading } from '../../../common/typography';
+import { Paragraph } from '../../../common/typography';
 import { Label, Select } from '../../../common/forms';
 import {
   UserPreviewFragment,
@@ -35,14 +35,14 @@ const ListingItem: React.FC<Props> = ({ user }) => {
   >(UPDATE_ONE_USER);
 
   return (
-    <S.Wrapper border={user.id === signedInUser?.id}>
+    <S.Wrapper isCurrentUser={user.id === signedInUser?.id}>
       <Box mb="s6">
         <UserAvatar user={user} />
       </Box>
 
-      <Heading as="h2" mb="s2">
+      <Paragraph as="strong" mb="s2" fontSize="1.3rem" color="gray.0">
         {user.name}
-      </Heading>
+      </Paragraph>
 
       {loading && 'Updating...'}
 

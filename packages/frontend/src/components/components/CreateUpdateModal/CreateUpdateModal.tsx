@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Dispatch } from 'redux';
 import { useDispatch, useSelector } from 'react-redux';
 import { useQuery } from '@apollo/client';
@@ -30,9 +30,16 @@ const ModalContent: React.FC<ModalContentProps> = ({ collectionId }) => {
   const state = useSelector(selectCreateUpdateModalState);
   const dispatch = useDispatch<Dispatch<OpenCreateUpdateModal>>();
 
-  const { data, error } = useQuery<GetCollectionsOptionsQuery, GetCollectionsOptionsQueryVariables>(
-    GET_COLLECTIONS_OPTIONS
-  );
+  const { data, error, loading, refetch } = useQuery<
+    GetCollectionsOptionsQuery,
+    GetCollectionsOptionsQueryVariables
+  >(GET_COLLECTIONS_OPTIONS, {
+    pollInterval: 4000,
+  });
+
+  useEffect(() => {
+    refetch();
+  }, []);
 
   /* Render error if query failed */
   if (error) {
@@ -56,6 +63,7 @@ const ModalContent: React.FC<ModalContentProps> = ({ collectionId }) => {
             <Select
               id="collection"
               name="collection"
+              isLoading={loading}
               value={state.collection?.id ?? ''}
               onChange={({ target }) => {
                 const collection = data?.collections?.find(({ id }) => target?.value === id);

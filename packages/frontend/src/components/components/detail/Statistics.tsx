@@ -34,7 +34,7 @@ const Statistics: React.FC<Props> = ({ componentId }) => {
         },
       },
     },
-    pollInterval: 5000,
+    pollInterval: 4000,
   });
 
   useEffect(() => {

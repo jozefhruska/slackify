@@ -1,11 +1,14 @@
 import React from 'react';
 import Link from 'next/link';
+import { Dispatch } from 'redux';
 import { FiFolder, FiUsers, FiSettings, FiGrid, FiTag } from 'react-icons/fi';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 import { Box } from '../base';
 import ActiveLink from '../../misc/ActiveLink/ActiveLink';
 import { selectIsNavigationOpen } from '../../../../selectors/ui';
+import { SettingsModal } from '../../misc';
+import { OpenSettings } from '../../../../actions/ui';
 
 import * as S from './Navigation.styles';
 
@@ -13,6 +16,7 @@ import * as S from './Navigation.styles';
 ============================================================================= */
 const Navigation: React.FC = () => {
   const isOpen = useSelector(selectIsNavigationOpen);
+  const dispatch = useDispatch<Dispatch<OpenSettings>>();
 
   return (
     <>
@@ -84,22 +88,24 @@ const Navigation: React.FC = () => {
 
           <S.NavList>
             <S.NavItem>
-              <ActiveLink href="/settings">
-                {(isActive) => (
-                  <Link href="/settings" passHref>
-                    <S.NavLink isActive={isActive}>
-                      <Box mr="s4">
-                        <FiSettings size={20} />
-                      </Box>
-                      <span>Settings</span>
-                    </S.NavLink>
-                  </Link>
-                )}
-              </ActiveLink>
+              <S.NavLink
+                href="#"
+                onClick={(e) => {
+                  e.preventDefault();
+                  dispatch({ type: '[UI] OPEN_SETTINGS' });
+                }}
+              >
+                <Box mr="s4">
+                  <FiSettings size={20} />
+                </Box>
+                <span>Settings</span>
+              </S.NavLink>
             </S.NavItem>
           </S.NavList>
         </Box>
       </S.Wrapper>
+
+      <SettingsModal />
     </>
   );
 };

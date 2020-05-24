@@ -1,13 +1,17 @@
 import React, { useState } from 'react';
 import moment from 'moment';
 import Highlight, { defaultProps } from 'prism-react-renderer';
-import { FiCheck, FiCopy } from 'react-icons/fi';
+import { Dispatch } from 'redux';
+import { useDispatch } from 'react-redux';
+import { FiCheck, FiCopy, FiPlus } from 'react-icons/fi';
 
 import { CollectionDetailFragment, UserDetailFragment } from '../../../types/generated/graphql';
 import { Grid, Box } from '../../common/layout/base';
 import { humanizeComponentType } from '../../../utils';
 import ListingPage from '../../components/listing/ListingPage/ListingPage';
-import { Heading } from '../../common/typography';
+import { PageSubHeader } from '../../common/layout';
+import { Button } from '../../common/misc';
+import { OpenCreateUpdateModal } from '../../../actions/components';
 
 import * as S from './Detail.styles';
 
@@ -22,6 +26,7 @@ type Props = {
 ============================================================================= */
 const Detail: React.FC<Props> = ({ user, collection }) => {
   const [isCopySuccessful, setCopySuccessful] = useState(false);
+  const dispatch = useDispatch<Dispatch<OpenCreateUpdateModal>>();
 
   const queryCode = [
     'query {',
@@ -103,9 +108,26 @@ const Detail: React.FC<Props> = ({ user, collection }) => {
       </Grid>
 
       <Box mt="s6">
-        <Heading as="h2" mb="s6">
-          Components
-        </Heading>
+        <PageSubHeader heading="Components">
+          <Button
+            icon={<FiPlus />}
+            onClick={() =>
+              dispatch({
+                type: '[COMPONENTS] OPEN_CREATE_UPDATE_MODAL',
+                payload: {
+                  state: {
+                    mode: 'create',
+                    collection,
+                  },
+                },
+              })
+            }
+            variant="brand"
+          >
+            Create new component
+          </Button>
+        </PageSubHeader>
+
         <ListingPage user={user} collectionId={collection.id} />
       </Box>
     </>
