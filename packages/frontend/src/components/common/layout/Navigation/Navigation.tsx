@@ -1,21 +1,23 @@
 import React from 'react';
 import Link from 'next/link';
 import { Dispatch } from 'redux';
-import { FiFolder, FiUsers, FiSettings, FiGrid, FiTag } from 'react-icons/fi';
+import { FiFolder, FiUsers, FiSettings, FiGrid, FiTag, FiPlay, FiSlack } from 'react-icons/fi';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { Box } from '../base';
+import { Box, Flex } from '../base';
 import ActiveLink from '../../misc/ActiveLink/ActiveLink';
 import { selectIsNavigationOpen } from '../../../../selectors/ui';
 import { SettingsModal } from '../../misc';
 import { OpenSettings } from '../../../../actions/ui';
 
 import * as S from './Navigation.styles';
+import { selectUser } from '../../../../selectors/auth';
 
 /* <Navigation />
 ============================================================================= */
 const Navigation: React.FC = () => {
   const isOpen = useSelector(selectIsNavigationOpen);
+  const user = useSelector(selectUser);
   const dispatch = useDispatch<Dispatch<OpenSettings>>();
 
   return (
@@ -81,6 +83,42 @@ const Navigation: React.FC = () => {
                   </Link>
                 )}
               </ActiveLink>
+            </S.NavItem>
+          </S.NavList>
+
+          <S.Divider />
+
+          <S.NavList>
+            <S.NavItem>
+              <S.NavLink
+                href="https://slackify-service-public.herokuapp.com/"
+                target="_blank"
+                rel="noreferrer noopener"
+              >
+                <Box mr="s4">
+                  <FiPlay size={20} />
+                </Box>
+                <Flex flexDirection="column">
+                  <span>Open public API</span>
+                  <small>GraphQL playground</small>
+                </Flex>
+              </S.NavLink>
+            </S.NavItem>
+
+            <S.NavItem>
+              <S.NavLink
+                href={`slack://app?team=${user?.team?.id}&id=APN41U9L5&tab=home`}
+                target="_blank"
+                rel="noreferrer noopener"
+              >
+                <Box mr="s4">
+                  <FiSlack size={20} />
+                </Box>
+                <Flex flexDirection="column">
+                  <span>Open in Slack</span>
+                  <small>Slackify&apos;s Slack app</small>
+                </Flex>
+              </S.NavLink>
             </S.NavItem>
           </S.NavList>
 
