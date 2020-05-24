@@ -43,13 +43,17 @@ export const compose_manage_collections_view = async (
           id: teamId,
         },
       },
+      first: 20, // Limit count due to Slack's max layout blocks rule
       orderBy: {
         createdAt: 'desc',
       },
     });
 
     /* Set message as default */
-    let collectionList = [BLOCK_DIVIDER, BLOCK_TEXT("You don't have any collections created.")];
+    let collectionList: View['blocks'] = [
+      BLOCK_DIVIDER,
+      BLOCK_TEXT("You don't have any collections created."),
+    ];
 
     /* Render list of collections if there are some */
     if (collections.length) {
@@ -59,7 +63,7 @@ export const compose_manage_collections_view = async (
           type: 'section',
           text: {
             type: 'mrkdwn',
-            text: `*${name}*\n${description}`,
+            text: `*${name}*\nID: \`${id}\`\n\n${description}`,
           },
           ...(canManageCollections(user.role) && {
             accessory: {
@@ -104,6 +108,18 @@ export const compose_manage_collections_view = async (
           }),
         },
       ]);
+    }
+
+    /* Add alert if max collections count reached */
+    if (collections.length === 20) {
+      collectionList.push({
+        type: 'section',
+        text: {
+          type: 'mrkdwn',
+          text:
+            "*Sorry we're unable to show more collections here.* Go to https://slackify.now.sh/ to view all of your collections.",
+        },
+      });
     }
 
     return {
@@ -174,7 +190,7 @@ export const compose_settings_view = async (teamId: string): Promise<View | unde
         BLOCK_TEXT('*Access token:*'),
         BLOCK_TEXT('``` Bearer' + team?.accessToken + '```'),
         BLOCK_TEXT(
-          '_You must send this token in *Authorization* header when making requests to public API._'
+          '_You must send this token in *Authorization* header when making requests to public API (https://slackify-service-public.herokuapp.com/)._'
         ),
       ],
     };

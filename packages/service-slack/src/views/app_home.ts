@@ -92,6 +92,36 @@ const compose_app_home_header = (collectionId?: string): View => {
         elements,
       },
       {
+        type: 'section',
+        text: {
+          type: 'mrkdwn',
+          text: '*Useful links:*',
+        },
+      },
+      {
+        type: 'actions',
+        elements: [
+          {
+            type: 'button',
+            text: {
+              type: 'plain_text',
+              text: '🌍 \t Open Slackify on web',
+              emoji: true,
+            },
+            url: 'https://slackify.now.sh/',
+          },
+          {
+            type: 'button',
+            text: {
+              type: 'plain_text',
+              text: '🌍 \t Open public API',
+              emoji: true,
+            },
+            url: 'https://slackify-service-public.herokuapp.com/',
+          },
+        ],
+      },
+      {
         type: 'context',
         elements: [
           {
@@ -194,17 +224,13 @@ export const compose_app_home_view = async (
           id: activeCollection.value,
         },
       },
+      first: 22, // Limit count due to Slack's max layout blocks rule
       orderBy: {
         createdAt: 'desc',
       },
       include: {
         plainTextData: true,
-        articleData: {
-          select: {
-            title: true,
-            lead: true,
-          },
-        },
+        articleData: true,
         linkData: true,
         author: {
           select: {
@@ -222,7 +248,7 @@ export const compose_app_home_view = async (
 
             return {
               id: component.id,
-              text: data?.text ?? 'Error: Unable to compose preview.',
+              text: `*Text:* ${data?.text}`,
               author: component.author.name,
               published: component.published,
             };
@@ -234,7 +260,9 @@ export const compose_app_home_view = async (
             return {
               id: component.id,
               title: data?.title ?? '',
-              text: data?.lead ?? 'Error: Unable to compose preview.',
+              text: `${data?.lead ? `*Lead:* ${data?.lead}` : ''}\n${
+                data?.content ? `*Content:* ${data?.content}` : ''
+              }`,
               author: component.author.name,
               published: component.published,
             };
@@ -245,7 +273,9 @@ export const compose_app_home_view = async (
 
             return {
               id: component.id,
-              text: data?.url ?? 'Error: Unable to compose preview.',
+              text: `${data?.url ? `*URL:* ${data?.url}` : ''}\n${
+                data?.text ? `*Text:* ${data?.text}` : ''
+              }`,
               author: component.author.name,
               published: component.published,
             };
@@ -255,7 +285,7 @@ export const compose_app_home_view = async (
     );
 
     /* Set message as default */
-    let componentList = [BLOCK_DIVIDER, BLOCK_TEXT('No components here 🤷‍♂️')];
+    let componentList: View['blocks'] = [BLOCK_DIVIDER, BLOCK_TEXT('No components here 🤷‍♂️')];
 
     /* Render list of components if there are some */
     if (componentPreviews.length) {
@@ -266,7 +296,7 @@ export const compose_app_home_view = async (
             type: 'section',
             text: {
               type: 'mrkdwn',
-              text: `${title ? `*${title}* \n ` : ''}${text ? text : ''}`,
+              text: `${title ? `*${title}*\n ` : ''}ID: \`${id}\`\n\n${text}`,
             },
           },
           {
@@ -333,6 +363,18 @@ export const compose_app_home_view = async (
         }
 
         return result;
+      });
+    }
+
+    /* Add alert if max component count reached */
+    if (components.length === 22) {
+      componentList.push({
+        type: 'section',
+        text: {
+          type: 'mrkdwn',
+          text:
+            "*Sorry we're unable to show more components here.* Go to https://slackify.now.sh/ to view all of your components.",
+        },
       });
     }
 

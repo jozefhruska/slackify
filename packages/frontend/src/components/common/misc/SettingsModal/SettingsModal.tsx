@@ -30,7 +30,15 @@ const SettingsModal: React.FC = () => {
         <Box mt="s3">
           <i>
             You must send this token in <strong>Authorization</strong> header when making requests
-            to public API.
+            to public API (
+            <a
+              href="https://slackify-service-public.herokuapp.com/"
+              target="_blank"
+              rel="noreferrer noopener"
+            >
+              https://slackify-service-public.herokuapp.com/
+            </a>
+            ).
           </i>
         </Box>
       </Box>
