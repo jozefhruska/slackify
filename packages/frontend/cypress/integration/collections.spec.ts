@@ -92,6 +92,8 @@ describe('Collections: Listing', () => {
           /* Click on "Delete" button */
           cy.get('button').last().click();
         });
+
+        cy.wait(1000);
       });
 
     /* Check if collection was deleted */
