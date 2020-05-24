@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { useRouter } from 'next/router';
 import { NormalizedCacheObject, useQuery, useMutation } from '@apollo/client';
 import { Dispatch } from 'redux';
 import { useDispatch } from 'react-redux';
@@ -11,6 +12,8 @@ import {
   GetCollectionDetailQuery,
   UpdateOneCollectionMutation,
   UpdateOneCollectionMutationVariables,
+  DeleteOneCollectionMutation,
+  DeleteOneCollectionMutationVariables,
 } from '../../src/types/generated/graphql';
 import { StoreUser } from '../../src/actions/auth';
 import { OpenCreateUpdateModal } from '../../src/actions/collections';
@@ -28,7 +31,7 @@ import {
 } from '../../src/components/common/layout';
 import CreateUpdateModal from '../../src/components/collections/CreateUpdateModal/CreateUpdateModal';
 import { Grid, Flex } from '../../src/components/common/layout/base';
-import { UPDATE_ONE_COLLECTION } from '../../src/api/mutation/collections';
+import { UPDATE_ONE_COLLECTION, DELETE_ONE_COLLECTION } from '../../src/api/mutation/collections';
 import Detail from '../../src/components/collections/detail/Detail';
 import { canCreateCollections, canManageCollections } from '../../src/utils/users';
 
@@ -51,6 +54,8 @@ type Props = {
 const CollectionDetailPage: React.FC<Props> = ({ id, user }) => {
   const dispatch = useDispatch<Dispatch<StoreUser | OpenCreateUpdateModal>>();
 
+  const { push } = useRouter();
+
   const { data, loading: detailLoading } = useQuery<
     GetCollectionDetailQuery,
     GetCollectionDetailQueryVariables
@@ -60,6 +65,19 @@ const CollectionDetailPage: React.FC<Props> = ({ id, user }) => {
         id: id,
       },
     },
+    pollInterval: 4000,
+  });
+
+  const [deleteCollection, { loading: deleteLoading }] = useMutation<
+    DeleteOneCollectionMutation,
+    DeleteOneCollectionMutationVariables
+  >(DELETE_ONE_COLLECTION, {
+    variables: {
+      where: {
+        id,
+      },
+    },
+    onCompleted: () => push('/collections'),
   });
 
   const [updateCollection, { loading: updateLoading }] = useMutation<
@@ -224,6 +242,8 @@ const CollectionDetailPage: React.FC<Props> = ({ id, user }) => {
 
             <Button
               icon={<FiTrash2 />}
+              onClick={() => deleteCollection()}
+              isLoading={deleteLoading}
               disabled={!canManageCollections(user?.role)}
               variant="danger"
             >

@@ -1,10 +1,10 @@
 import styled, { css } from 'styled-components';
 
 type WrapperProps = {
-  border?: boolean;
+  isCurrentUser?: boolean;
 };
 
-export const Wrapper = styled.div<WrapperProps>`
+export const Wrapper = styled.li<WrapperProps>`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -12,11 +12,15 @@ export const Wrapper = styled.div<WrapperProps>`
   background: ${({ theme }) => theme.colors.gray[8]};
   border-radius: ${({ theme }) => theme.radii.medium};
 
-  ${({ border, theme }) =>
-    border &&
-    css`
-      border: 1px solid ${theme.colors.gray[3]};
-    `};
+  ${({ isCurrentUser, theme }) =>
+    isCurrentUser
+      ? css`
+          border: 1px solid ${theme.colors.gray[3]};
+          order: 0;
+        `
+      : css`
+          order: 1;
+        `};
 `;
 
 export const Tag = styled.span`

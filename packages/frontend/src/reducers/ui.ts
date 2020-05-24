@@ -7,6 +7,7 @@ import { UIAction } from '../actions/ui';
 export type UIState = {
   isNavigationOpen: boolean;
   isSidebarOpen: boolean;
+  isSettingsModalOpen: boolean;
 };
 
 /* Initial state - UIReducer
@@ -14,6 +15,7 @@ export type UIState = {
 const INITIAL_STATE: UIState = {
   isNavigationOpen: false,
   isSidebarOpen: false,
+  isSettingsModalOpen: false,
 };
 
 /* UIReducer
@@ -41,6 +43,18 @@ const UIReducer: Reducer<UIState, UIAction> = (state = INITIAL_STATE, action) =>
     case '[UI] CLOSE_SIDEBAR': {
       return Object.assign<{}, UIState, Pick<UIState, 'isSidebarOpen'>>({}, state, {
         isSidebarOpen: false,
+      });
+    }
+
+    case '[UI] OPEN_SETTINGS': {
+      return Object.assign<{}, UIState, Pick<UIState, 'isSettingsModalOpen'>>({}, state, {
+        isSettingsModalOpen: true,
+      });
+    }
+
+    case '[UI] CLOSE_SETTINGS': {
+      return Object.assign<{}, UIState, Pick<UIState, 'isSettingsModalOpen'>>({}, state, {
+        isSettingsModalOpen: false,
       });
     }
 

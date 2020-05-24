@@ -31,6 +31,15 @@ export const Select = styled.select`
   }
 `;
 
+export const LoadingWrapper = styled.span<{ isLoading: boolean }>`
+  display: ${({ isLoading }) => (isLoading ? 'block' : 'none')};
+  transform: translateY(-50%);
+  position: absolute;
+  top: 50%;
+  right: ${({ theme }) => theme.space.s12};
+  pointer-events: none;
+`;
+
 export const IconWrapper = styled.span<{ disabled: boolean }>`
   display: ${({ disabled }) => (disabled ? 'none' : 'block')};
   transform: translateY(-50%);

@@ -14,4 +14,18 @@ export type CloseSidebar = {
   type: '[UI] CLOSE_SIDEBAR';
 };
 
-export type UIAction = OpenNavigation | CloseNavigation | OpenSidebar | CloseSidebar;
+export type OpenSettings = {
+  type: '[UI] OPEN_SETTINGS';
+};
+
+export type CloseSettings = {
+  type: '[UI] CLOSE_SETTINGS';
+};
+
+export type UIAction =
+  | OpenNavigation
+  | CloseNavigation
+  | OpenSidebar
+  | CloseSidebar
+  | OpenSettings
+  | CloseSettings;

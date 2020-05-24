@@ -24,7 +24,7 @@ const ArticleContent: React.FC<Props> = ({ component }) => {
     <>
       <Box>
         <Box mb="s8">
-          <Heading as="h2" mb="s6">
+          <Heading as="h3" mb="s6">
             {component.articleData?.title}
           </Heading>
 

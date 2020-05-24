@@ -33,6 +33,10 @@ import { ListingItem } from '../src/components/components/listing';
 import { GET_DASH_DATA } from '../src/api/query/common';
 import { default as CollectionCreateUpdateModal } from '../src/components/collections/CreateUpdateModal/CreateUpdateModal';
 import { default as ComponentCreateUpdateModal } from '../src/components/components/CreateUpdateModal/CreateUpdateModal';
+import { Paragraph } from '../src/components/common/typography';
+import { FiPlus } from 'react-icons/fi';
+import { OpenCreateUpdateModal as OpenCollectionCreateUpdateModal } from '../src/actions/collections';
+import { OpenCreateUpdateModal as OpenComponentCreateUpdateModal } from '../src/actions/components';
 
 /* Props - <HomePage />
 ============================================================================= */
@@ -43,7 +47,9 @@ type Props = {
 /* <HomePage />
 ============================================================================= */
 const HomePage: NextPage<Props> = ({ user }) => {
-  const dispatch = useDispatch<Dispatch<StoreUser>>();
+  const dispatch = useDispatch<
+    Dispatch<StoreUser | OpenCollectionCreateUpdateModal | OpenComponentCreateUpdateModal>
+  >();
 
   const { data, error: dashError, loading: dashLoading, refetch } = useQuery<
     GetDashDataQuery,
@@ -144,13 +150,28 @@ const HomePage: NextPage<Props> = ({ user }) => {
             <Box as="section" mb="s8">
               <PageSubHeader heading="Recently created components">
                 <Button onClick={() => push('/components')} variant="brand">
-                  View more
+                  View all components
                 </Button>
               </PageSubHeader>
 
               {data?.dashData?.createdComponents.length === 0 ? (
-                <Flex justifyContent="center">
-                  <span>There are no recently created components.</span>
+                <Flex flexDirection="column" alignItems="center">
+                  <Paragraph>There are no recently created components.</Paragraph>
+                  <Button
+                    icon={<FiPlus />}
+                    onClick={() =>
+                      dispatch({
+                        type: '[COMPONENTS] OPEN_CREATE_UPDATE_MODAL',
+                        payload: {
+                          state: {
+                            mode: 'create',
+                          },
+                        },
+                      })
+                    }
+                  >
+                    Create new component
+                  </Button>
                 </Flex>
               ) : (
                 <OneRowListing>{renderComponentsListing()}</OneRowListing>
@@ -159,13 +180,28 @@ const HomePage: NextPage<Props> = ({ user }) => {
             <Box as="section" mb="s8">
               <PageSubHeader heading="Recently created collections">
                 <Button onClick={() => push('/collections')} variant="brand">
-                  View more
+                  View all collections
                 </Button>
               </PageSubHeader>
 
               {data?.dashData?.createdCollections.length === 0 ? (
-                <Flex justifyContent="center">
-                  <span>There are no recently created collections.</span>
+                <Flex flexDirection="column" alignItems="center">
+                  <Paragraph>There are no recently created collections.</Paragraph>
+                  <Button
+                    icon={<FiPlus />}
+                    onClick={() =>
+                      dispatch({
+                        type: '[COLLECTIONS] OPEN_CREATE_UPDATE_MODAL',
+                        payload: {
+                          state: {
+                            mode: 'create',
+                          },
+                        },
+                      })
+                    }
+                  >
+                    Create new collection
+                  </Button>
                 </Flex>
               ) : (
                 <OneRowListing>{renderCollectionsListing()}</OneRowListing>

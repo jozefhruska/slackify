@@ -17,6 +17,12 @@ export const ButtonLoader: React.FunctionComponent = () => {
   return <ReactLoader type="ThreeDots" color={theme.colors.gray[0]} height={20} width={25} />;
 };
 
+/* <SelectLoader />
+============================================================================= */
+export const SelectLoader: React.FunctionComponent = () => {
+  return <ReactLoader type="ThreeDots" color={theme.colors.brand} height={15} width={20} />;
+};
+
 /* <ListingLoader />
 ============================================================================= */
 export const ListingLoader: React.FunctionComponent = () => {
