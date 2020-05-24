@@ -1,4 +1,5 @@
 import { FieldResolver } from 'nexus';
+import { Component, Collection } from '@prisma/client';
 
 export const resolveDashData: FieldResolver<'Query', 'dashData'> = async (
   _parent,
@@ -40,7 +41,9 @@ export const resolveDashData: FieldResolver<'Query', 'dashData'> = async (
     },
   });
 
-  let requestedComponents, createdComponents, createdCollections;
+  let requestedComponents: Component[] = [],
+    createdComponents: Component[] = [],
+    createdCollections: Collection[] = [];
 
   await Promise.all([
     requestedComponentIdsRequest,
@@ -60,6 +63,8 @@ export const resolveDashData: FieldResolver<'Query', 'dashData'> = async (
     const requested = await prisma.component.findMany({
       where: {
         id: {
+          // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+          // @ts-ignore
           in: uniqueComponentIds,
         },
       },
