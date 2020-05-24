@@ -9,12 +9,24 @@ Slackify je **headless** redakčný systém, ktorého implementácia sa skladá 
 
 ## Prístupové údaje
 
-?> _TODO_
+- **Slack App ID:** APN41U9L5
+- **Slack Client ID:** 791343423090.804137961685
+- **Slack Client Secret:** 5084f361758ccc331aa0d135662810c1
+- **Slack Signing Secret:** 51f388598a2219f91800a7fc641ea2ef
+
+### Testovací tím v aplikácií Slack
+
+Do tohto tímu je nutné sa prihlásiť pre prepojenie tímu so Slackify.
+
+- **URL:** http://slackifycms-demo.slack.com/
+- **Email:** xhrusk25@stud.fit.vutbr.cz
+- **Heslo:** slackify-demo
 
 ## Dôležité webové adresy
 
 - https://slackify.now.sh/ - Webová konzola Slackify (služba **frontend**).
-- https://slackify-service-public.herokuapp.com/ - Verejná GraphQL služba **service-public** aj s playground pre testovanie GraphQL dotazov a vlastnou dokumentáciou.
+- http://slackifycms-demo.slack.com/ - Prihlásenie do testovacieho tímu v Slacku
+- https://slackify-service-public.herokuapp.com/ - Verejná GraphQL služba **service-public** aj s playground pre testovanie GraphQL dotazov a vlastnou dokumentáciou. (služba je nasadená na free dyno heroku, môže trvať ~30 sekúnd než sa prebudí)
 
 ## Štruktúra priečinkov
 
