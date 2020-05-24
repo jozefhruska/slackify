@@ -170,7 +170,13 @@ export const compose_settings_view = async (teamId: string): Promise<View | unde
         text: 'Settings',
         emoji: false,
       },
-      blocks: [BLOCK_TEXT('*Authorization token:*'), BLOCK_TEXT('```' + team?.accessToken + '```')],
+      blocks: [
+        BLOCK_TEXT('*Access token:*'),
+        BLOCK_TEXT('``` Bearer' + team?.accessToken + '```'),
+        BLOCK_TEXT(
+          '_You must send this token in *Authorization* header when making requests to public API._'
+        ),
+      ],
     };
   } catch (error) {
     console.error(error);
