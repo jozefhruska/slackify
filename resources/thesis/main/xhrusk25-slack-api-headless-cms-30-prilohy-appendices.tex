@@ -1,12 +1,38 @@
-% Tento soubor nahraďte vlastním souborem s přílohami (nadpisy níže jsou pouze pro příklad)
+\chapter{Obsah priloženého pamäťového média}
 
-% Umístění obsahu paměťového média do příloh je vhodné konzultovat s vedoucím
-%\chapter{Obsah přiloženého paměťového média}
+\dirtree{%
+.1 /.
+.2 packages.
+.3 frontend.
+.4 cypress\DTcomment{End to end testy}.
+.4 pages\DTcomment{Jednotlivé stránky pre SSR}.
+.4 src\DTcomment{Zdrojové kódy aplikácie}.
+.4 .env\DTcomment{Konfigurácia environmentálnych premenných}.
+.3 prisma.
+.4 migrations\DTcomment{História migrácií databázy}.
+.4 scripts.
+.5 post-migrate.sh\DTcomment{Skript pre doplnenie databázových pravidiel}.
+.4 seed\DTcomment{Testovacie (demo) dáta pre databázu}.
+.4 schema.prisma\DTcomment{Konfiguračný súbor prisma}.
+.4 .env\DTcomment{Konfigurácia environmentálnych premenných}.
+.3 service-private.
+.4 src.
+.5 permissions\DTcomment{GraphQL Shield pravidlá pre autorizáciu}.
+.5 schema\DTcomment{Zdrojové kódy GraphQL schémy}.
+.4 .env\DTcomment{Konfigurácia environmentálnych premenných}.
+.3 service-public.
+.4 src.
+.5 permissions\DTcomment{GraphQL Shield pravidlá pre autorizáciu}.
+.5 schema\DTcomment{Zdrojové kódy GraphQL schémy}.
+.5 middleware.ts\DTcomment{GraphQL middleware}.
+.4 .env\DTcomment{Konfigurácia environmentálnych premenných}.
+.3 service-slack.
+.4 src\DTcomment{Zdrojové súbory aplikácie}.
+.4 .env\DTcomment{Konfigurácia environmentálnych premenných}.
+.2 resources.
+.3 docs\DTcomment{Dokumentácia}.
+.3 thesis\DTcomment{Zdrojové súbory textovej práce}.
+}
 
-%\chapter{Manuál}
-
-%\chapter{Konfigurační soubor}
-
-%\chapter{RelaxNG Schéma konfiguračního souboru}
-
-%\chapter{Plakát}
+\chapter{Manuál}
+Manuál (dokumentácia) k lokálnej inštalácií a používaní sa nachádza na \href{https://slackify-docs.now.sh/}{https://slackify-docs.now.sh/} alebo v priečinku \texttt{/resources/docs/} na priloženom pamäťovom médiu.
