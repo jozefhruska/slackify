@@ -1,0 +1,5 @@
+- [Úvod](/)
+- [Lokálna inštalácia a spustenie](install)
+- [Pridanie tímu a prihlásenie](team_add)
+- [Slack aplikácia](slack_app)
+- [Verejné API](public_api)

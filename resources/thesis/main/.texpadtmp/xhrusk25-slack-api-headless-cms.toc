@@ -88,4 +88,6 @@
 \contentsline {subsection}{\numberline {7.2.2}Z\IeC {\'a}ver u\IeC {\v z}\IeC {\'\i }vate\IeC {\v l}sk\IeC {\'e}ho testovania}{39}{subsection.7.2.2}% 
 \contentsline {chapter}{\numberline {8}Z\IeC {\'a}ver}{40}{chapter.8}% 
 \contentsline {chapter}{Literat\IeC {\'u}ra}{41}{chapter*.19}% 
+\contentsline {chapter}{\numberline {A}Obsah prilo\IeC {\v z}en\IeC {\'e}ho pam\IeC {\"a}\IeC {\v t}ov\IeC {\'e}ho m\IeC {\'e}dia}{42}{appendix.A}% 
+\contentsline {chapter}{\numberline {B}Manu\IeC {\'a}l}{43}{appendix.B}% 
 \contentsfinish 
