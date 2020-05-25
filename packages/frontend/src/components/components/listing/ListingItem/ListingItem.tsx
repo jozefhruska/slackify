@@ -70,6 +70,7 @@ const ListingItem: React.FC<Props> = ({ component, onDelete }) => {
           </Link>
 
           <PopperButton
+            placement="top"
             options={(closePopper) => [
               {
                 icon: component.published ? <FiEye /> : <FiEyeOff />,

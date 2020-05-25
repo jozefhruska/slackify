@@ -10,7 +10,7 @@ import * as S from './PopperButton.styles';
 type Props = {
   options: (close: () => void) => Array<{ text?: string } & ButtonProps>;
   children: (ref: React.Ref<HTMLButtonElement>, onClick: () => void) => React.ReactElement;
-} & Pick<PopperProps, 'placement'>;
+} & Pick<PopperProps<unknown>, 'placement'>;
 
 /* <PopperButton />
 ============================================================================= */
