@@ -6,6 +6,7 @@ export default async (prisma: PrismaClient) => {
   try {
     await prisma.user.create({
       data: {
+        id: 'ckamsfgcx000084sdftr9n2zo',
         slackId: 'UP9A3CFM0',
         name: 'Jozef Hruška',
         role: 'OWNER',
