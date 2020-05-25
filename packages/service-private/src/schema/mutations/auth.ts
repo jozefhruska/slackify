@@ -78,10 +78,13 @@ export const signIn: FieldResolver<'Mutation', 'signIn'> = async (
   try {
     const user = await prisma.user.upsert({
       where: {
-        id: slackUser.id,
+        slackId_teamId: {
+          slackId: slackUser.id,
+          teamId: teamId,
+        },
       },
       create: {
-        id: slackUser.id,
+        slackId: slackUser.id,
         name: slackUser.name,
         email: slackUser.email,
         accessToken: userToken,
@@ -103,7 +106,7 @@ export const signIn: FieldResolver<'Mutation', 'signIn'> = async (
     const authToken = jwt.sign(
       {
         data: {
-          id: slackUser.id,
+          id: user.id,
           name: slackUser.name,
           email: slackUser.email,
           userToken,
@@ -227,7 +230,7 @@ export const addToSlack: FieldResolver<'Mutation', 'addToSlack'> = async (
       /* Create user */
       await prisma.user.create({
         data: {
-          id: user.id,
+          slackId: user.id,
           role: 'OWNER',
           name: user.name,
           email: user.email,
