@@ -715,6 +715,11 @@ type SignInOutput {
   user: User!
 }
 
+input SlackIdTeamIdCompoundUniqueInput {
+  slackId: String!
+  teamId: String!
+}
+
 type StatRecord {
   component: Component
   componentId: String
@@ -975,9 +980,10 @@ input UserCreateWithoutComponentsInput {
   accessToken: String!
   avatar: String
   email: String!
-  id: String!
+  id: String
   name: String!
   role: UserRole
+  slackId: String!
   team: TeamCreateOneWithoutUsersInput!
 }
 
@@ -986,9 +992,10 @@ input UserCreateWithoutTeamInput {
   avatar: String
   components: ComponentCreateManyWithoutAuthorInput
   email: String!
-  id: String!
+  id: String
   name: String!
   role: UserRole
+  slackId: String!
 }
 
 input UserFilter {
@@ -1015,6 +1022,7 @@ input UserScalarWhereInput {
   NOT: [UserScalarWhereInput!]
   OR: [UserScalarWhereInput!]
   role: UserRole
+  slackId: StringFilter
   teamId: StringFilter
 }
 
@@ -1026,6 +1034,7 @@ input UserUpdateInput {
   id: String
   name: String
   role: UserRole
+  slackId: String
   team: TeamUpdateOneRequiredWithoutUsersInput
 }
 
@@ -1036,6 +1045,7 @@ input UserUpdateManyDataInput {
   id: String
   name: String
   role: UserRole
+  slackId: String
 }
 
 input UserUpdateManyWithoutTeamInput {
@@ -1069,6 +1079,7 @@ input UserUpdateWithoutComponentsDataInput {
   id: String
   name: String
   role: UserRole
+  slackId: String
   team: TeamUpdateOneRequiredWithoutUsersInput
 }
 
@@ -1080,6 +1091,7 @@ input UserUpdateWithoutTeamDataInput {
   id: String
   name: String
   role: UserRole
+  slackId: String
 }
 
 input UserUpdateWithWhereUniqueWithoutTeamInput {
@@ -1109,6 +1121,7 @@ input UserWhereInput {
   NOT: [UserWhereInput!]
   OR: [UserWhereInput!]
   role: UserRole
+  slackId: StringFilter
   team: TeamWhereInput
   teamId: StringFilter
 }
@@ -1117,4 +1130,5 @@ input UserWhereUniqueInput {
   accessToken: String
   email: String
   id: String
+  slackId_teamId: SlackIdTeamIdCompoundUniqueInput
 }
