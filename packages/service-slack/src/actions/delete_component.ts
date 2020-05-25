@@ -1,4 +1,5 @@
 import { Middleware, SlackActionMiddlewareArgs, BlockButtonAction } from '@slack/bolt';
+import { User } from '@prisma/client';
 
 import { prisma } from '../prisma';
 import { compose_app_home_view } from '../views/app_home';
@@ -17,9 +18,17 @@ const delete_component: Middleware<SlackActionMiddlewareArgs<BlockButtonAction>>
     /* Acknowledge action */
     await ack();
 
+    /* Extract user */
+    const user = context?.user as User;
+
+    /* Check if user was extracted successfully */
+    if (!user) {
+      throw new Error('[actions/delete_component]: Unable to extract user data.');
+    }
+
     /* Extract component, user and view IDs */
     const componentId = action?.value;
-    const userId = body?.user?.id;
+    const userId = user.id;
     const teamId = body?.team?.id;
 
     /* Check if component, user and view IDs are defined */
@@ -56,7 +65,7 @@ const delete_component: Middleware<SlackActionMiddlewareArgs<BlockButtonAction>>
     /* Publish app home view */
     await app.client.views.publish({
       token: context?.botToken,
-      user_id: userId,
+      user_id: user.slackId,
       view: appHomeView,
     });
   } catch (error) {

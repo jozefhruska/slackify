@@ -1,4 +1,5 @@
 import { SlackActionMiddlewareArgs, Middleware, BlockOverflowAction } from '@slack/bolt';
+import { User } from '@prisma/client';
 
 import { app } from '..';
 import { prisma } from '../prisma';
@@ -25,10 +26,18 @@ const collection_overflow: Middleware<SlackActionMiddlewareArgs<BlockOverflowAct
     /* Acknowledge Slack action */
     await ack();
 
+    /* Extract user */
+    const user = context?.user as User;
+
+    /* Check if user was extracted successfully */
+    if (!user) {
+      throw new Error('[actions/collection_overflow]: Unable to extract user data.');
+    }
+
     /* Extract selected option, view, user and team IDs */
     const selectedOption: OptionPayload = JSON.parse(body?.actions[0].selected_option?.value);
     const viewId = body?.view?.id;
-    const userId = body?.user?.id;
+    const userId = user.id;
     const teamId = body?.team?.id;
 
     /* Check if selected option, view, user and team IDs are defined */
@@ -140,7 +149,7 @@ const collection_overflow: Middleware<SlackActionMiddlewareArgs<BlockOverflowAct
     /* Publish app home view */
     await app.client.views.publish({
       token: context?.botToken,
-      user_id: userId,
+      user_id: user.slackId,
       view: appHomeView,
     });
   } catch (error) {

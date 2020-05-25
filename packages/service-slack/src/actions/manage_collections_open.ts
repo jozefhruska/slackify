@@ -16,7 +16,7 @@ const manage_collections_open: Middleware<SlackActionMiddlewareArgs<BlockButtonA
     await ack();
 
     /* Extract user ID */
-    const userId = body?.user?.id;
+    const userId = context?.user?.id;
 
     /* Check if user ID is defined */
     if (!userId) {

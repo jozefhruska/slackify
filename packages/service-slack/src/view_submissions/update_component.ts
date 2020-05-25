@@ -1,4 +1,5 @@
 import { SlackViewMiddlewareArgs, ViewSubmitAction, Middleware } from '@slack/bolt';
+import { User } from '@prisma/client';
 
 import { prisma } from '../prisma';
 import { compose_app_home_view } from '../views/app_home';
@@ -63,9 +64,17 @@ const update_component: Middleware<SlackViewMiddlewareArgs<ViewSubmitAction>> = 
   context,
 }) => {
   try {
+    /* Extract user */
+    const user = context?.user as User;
+
+    /* Check if user was extracted successfully */
+    if (!user) {
+      throw new Error('[view_submission/update_component]: Unable to extract user data.');
+    }
+
     /* Extract required data */
     const componentId = view?.private_metadata;
-    const userId = body?.user?.id;
+    const userId = user.id;
     const teamId = body?.user?.team_id;
 
     /* Check if extraction of required data was successful */
@@ -176,7 +185,7 @@ const update_component: Middleware<SlackViewMiddlewareArgs<ViewSubmitAction>> = 
     /* Publish app home view */
     await app.client.views.publish({
       token: context?.botToken,
-      user_id: userId,
+      user_id: user.slackId,
       view: appHomeView,
     });
   } catch (error) {

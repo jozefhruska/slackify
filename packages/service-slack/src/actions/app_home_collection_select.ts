@@ -1,6 +1,7 @@
 import { SlackActionMiddlewareArgs, Middleware, BlockStaticSelectAction } from '@slack/bolt';
 
 import { compose_app_home_view } from '../views/app_home';
+import { User } from '@prisma/client';
 import { app } from '..';
 
 /**
@@ -13,9 +14,17 @@ const app_home_collection_select: Middleware<SlackActionMiddlewareArgs<
     /* Acknowledge action */
     await ack();
 
+    /* Extract user */
+    const user = context?.user as User;
+
+    /* Check if user was extracted successfully */
+    if (!user) {
+      throw new Error('[actions/app_home_collection_select]: Unable to extract user data.');
+    }
+
     /* Extract selected collection, user and team IDs */
     const selectedCollection = action.selected_option;
-    const userId = body?.user?.id;
+    const userId = user.id;
     const teamId = body?.team?.id;
 
     /* Check if selected collection, user and team IDs are defined */
@@ -36,7 +45,7 @@ const app_home_collection_select: Middleware<SlackActionMiddlewareArgs<
     /* Publish app home view */
     await app.client.views.publish({
       token: context?.botToken,
-      user_id: userId,
+      user_id: user.slackId,
       view,
     });
   } catch (error) {

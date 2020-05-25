@@ -3,6 +3,7 @@ import { SlackViewMiddlewareArgs, ViewSubmitAction, Middleware } from '@slack/bo
 import { prisma } from '../prisma';
 import { compose_app_home_view } from '../views/app_home';
 import { app } from '..';
+import { User } from '@prisma/client';
 
 /* Local types
 ============================================================================= */
@@ -60,9 +61,17 @@ const create_new_component_submission: Middleware<SlackViewMiddlewareArgs<
   ViewSubmitAction
 >> = async ({ view, body, ack, context }) => {
   try {
+    /* Extract user */
+    const user = context?.user as User;
+
+    /* Check if user was extracted successfully */
+    if (!user) {
+      throw new Error('[actions/create_new_component_submission]: Unable to extract user data.');
+    }
+
     /* Extract collection, user and team IDs */
     const collectionId = view?.private_metadata;
-    const userId = body?.user?.id;
+    const userId = user.id;
     const teamId = body?.user?.team_id;
 
     /* Check if user and team IDs are defined */
@@ -212,7 +221,7 @@ const create_new_component_submission: Middleware<SlackViewMiddlewareArgs<
     /* Publish app home view */
     await app.client.views.publish({
       token: context?.botToken,
-      user_id: userId,
+      user_id: user.slackId,
       view: appHomeView,
     });
   } catch (error) {
