@@ -43,8 +43,8 @@ export const GET_COLLECTIONS_LISTING = gql`
 `;
 
 export const GET_COLLECTIONS_OPTIONS = gql`
-  query GetCollectionsOptions {
-    collections {
+  query GetCollectionsOptions($where: QueryCollectionsWhereInput) {
+    collections(where: $where) {
       id
       name
       type

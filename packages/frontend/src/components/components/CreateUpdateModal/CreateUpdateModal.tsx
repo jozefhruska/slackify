@@ -17,6 +17,7 @@ import { PlainTextForm, ArticleForm, LinkForm } from './forms';
 import { GET_COLLECTIONS_OPTIONS } from '../../../api/query/collections';
 
 import * as S from './CreateUpdateModal.styles';
+import { selectUser } from '../../../selectors/auth';
 
 /* Props - <ModalContent />
 ============================================================================= */
@@ -28,12 +29,22 @@ type ModalContentProps = {
 ============================================================================= */
 const ModalContent: React.FC<ModalContentProps> = ({ collectionId }) => {
   const state = useSelector(selectCreateUpdateModalState);
+  const user = useSelector(selectUser);
   const dispatch = useDispatch<Dispatch<OpenCreateUpdateModal>>();
 
   const { data, error, loading, refetch } = useQuery<
     GetCollectionsOptionsQuery,
     GetCollectionsOptionsQueryVariables
   >(GET_COLLECTIONS_OPTIONS, {
+    variables: {
+      where: {
+        team: {
+          id: {
+            equals: user?.team?.id,
+          },
+        },
+      },
+    },
     pollInterval: 4000,
   });
 
