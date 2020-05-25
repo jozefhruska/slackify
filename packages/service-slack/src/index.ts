@@ -22,6 +22,7 @@ import {
   update_component,
 } from './view_submissions';
 import { prisma } from './prisma';
+import { Team, User } from '@prisma/client';
 
 /* Create a Bolt instance
 ============================================================================= */
@@ -31,14 +32,26 @@ export const app = new App({
     events: '/events',
     actions: '/actions',
   },
-  authorize: async ({ teamId }) => {
+  authorize: async ({ userId, teamId }) => {
     try {
       /* Get team data */
-      const team = await prisma.team.findOne({
+      const teamRequest = prisma.team.findOne({
         where: {
           id: teamId,
         },
       });
+
+      /* Get user data */
+      const userRequest = prisma.user.findOne({
+        where: {
+          slackId_teamId: {
+            slackId: userId ?? '',
+            teamId,
+          },
+        },
+      });
+
+      const [team, user] = await Promise.all([teamRequest, userRequest]);
 
       /* Check if team data were found */
       if (!team) {
@@ -48,6 +61,8 @@ export const app = new App({
       return {
         botId: team.botId,
         botToken: team.botToken,
+        team,
+        user,
       };
     } catch (error) {
       console.error(error);

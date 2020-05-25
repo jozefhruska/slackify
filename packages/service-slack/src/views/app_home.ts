@@ -16,7 +16,7 @@ export const compose_app_home_sign_up_view = (): View => ({
       text: {
         type: 'mrkdwn',
         text:
-          "*It seems like your account isn't connected with Slackify.*\n You can sign in with you Slack account by clicking on the button below.",
+          "*It seems like your account isn't connected with Slackify.*\n You can sign in with your Slack account by clicking on the button below.",
       },
     },
     {
