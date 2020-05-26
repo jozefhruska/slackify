@@ -1,7 +1,7 @@
 % Úvod
 %---------------------------------------------------------------------------
 \chapter{Úvod}
-Tradičné redakčné systémy pre správu obsahu sú obvykle zostavené z~dvoch hlavných súčastí -- \emph{administračného} a \emph{verejného webového rozhrania}. Administračné rozhranie slúži pre tvorbu a úpravu obsahu, webové na jeho nasledné zobrazenie. Webové rozhranie je typicky jednotné pre všetky typy zariadení na ktorých je zobrazované, tzn. že jeho používanie často nie je optimálne (napr. na mobilných telefónoch s~dotykovou obrazovkou).
+Tradičné redakčné systémy pre správu obsahu sú obvykle zostavené z~dvoch hlavných súčastí -- \emph{administračného} a \emph{verejného webového rozhrania}. Administračné rozhranie slúži pre tvorbu a úpravu obsahu, webové na jeho nasledné zobrazenie. Webové rozhranie je typicky jednotné pre všetky typy zariadení, na ktorých je zobrazované, tzn. že jeho používanie často nie je optimálne (napr. na mobilných telefónoch s~dotykovou obrazovkou).
 
 Pre tento dôvod sa začali využívať systémy bez webového rozhrania, disponujúce klasickým administračným a \emph{verejným aplikačným rozhraním} (API\footnote{API -- Application programming interface}), ktoré umožňuje obsah získať a následne ho zobraziť optimálne na ľubovoľnej platforme. Takéto redakčné systémy sa nazývajú \emph{Headless CMS}. Súčasné Headless CMS sú často robustné systémy, ktoré však vyžadujú komplexnú konfiguráciu predtým, ako ich je možné začať využívať. Niektoré takéto systémy potrebujú aj vlastnú infraštruktúru pre ich nasadenie. Tieto skutočnosti otvárajú priestor pre taký Headless CMS, ktorý by pomohol vyriešiť tieto prekážky. Takýto redakčný systém je cieľom tejto práce.
 
@@ -21,20 +21,20 @@ Sekcia \ref{theory:UX} sa venuje základným pravidlám user experience\footnote
 % User Experience (UX)
 \section{User experience (UX)}
 \label{theory:UX}
-Prí návrhu uživateľského rozhrania je jedným z~najdôležiteľších parametrov \emph{uživateľská skúsenosť}. Dizajnéri sa snažia zaistiť aby ich návrh bol intuitívny, jednoduchý, ale zároveň aj plne použiteľný a originálny. Pri UX analýze sa dizajnér snaží vnímať svoj návrh zo strany koncového užívateľa. Vo svete však neexistuje jednotná definícia úkonov, ktoré vedú k~dokonalému uživateľskému zážitku.
+Pri návrhu uživateľského rozhrania je jedným z~najdôležiteľších parametrov \emph{uživateľská skúsenosť}. Dizajnéri sa snažia zaistiť aby ich návrh bol intuitívny, jednoduchý, ale zároveň aj plne použiteľný a originálny. Pri UX analýze sa dizajnér snaží vnímať svoj návrh zo strany koncového užívateľa. Vo svete však neexistuje jednotná definícia úkonov, ktoré vedú k~dokonalému uživateľskému zážitku.
 
 \subsection{Porozumenie potrebám užívateľa}
-Dizajnér sa pri návrhu pozerá na produkt ako jeho koncový užívateľ. Analyzuje potreby, pre ktoré sa uživateľ rozhodol produkt využívať, ale aj problémy, ktoré užívateľovi bránia v~jednoduchom a intuitívnom používaní daného produktu. Po porozumení potrieb užívateľa príchádza z~riešeniami, ktoré by však nemali vytvoriť ďaľšie problémy a prekážky v~používaní produktu.
+Dizajnér sa pri návrhu pozerá na produkt ako jeho koncový užívateľ. Analyzuje potreby, pre ktoré sa uživateľ rozhodol produkt využívať, ale aj problémy, ktoré užívateľovi bránia v~jednoduchom a intuitívnom používaní daného produktu. Po porozumení potrieb užívateľa príchádza s~riešeniami, ktoré by však nemali vytvoriť ďaľšie problémy a prekážky v~používaní produktu.
 
 \subsection{Prístupnosť (Accessibility)}
-Veľmi jednoducho dosiahnuteľná, ale často zanedbávaná vlastnosť je dobrá prístupnosť (použiteľnosť) pre ľudí so zdravotnými znevýhodneniami. Dizajnér musí zaistiť, aby farebné pozadia jednotlivých prvkov mali dostatočný kontrast od ich obsahu,alebo zvýrazniť prvok v~prípade, že je užívateľom (túto vlastnosť majú v~určitej podobe vstavané aj niektoré webové prehliadače, avšak nie vždy optimálne).
+Veľmi jednoducho dosiahnuteľná, ale často zanedbávaná vlastnosť je dobrá prístupnosť (použiteľnosť) pre ľudí so zdravotnými znevýhodneniami. Dizajnér musí zaistiť, aby farebné pozadia jednotlivých prvkov mali dostatočný kontrast od ich obsahu, alebo zvýrazniť prvok v~prípade, že je užívateľom (túto vlastnosť majú v~určitej podobe vstavané aj niektoré webové prehliadače, avšak nie vždy optimálne).
 
 % HTML
 \section{HTML}
 \label{theory:HTML}
 HTML (Hypertext Markup Language) je \emph{značkovací jazyk}, pomocou ktorého je možné popísať štruktúru webových stránok. Skladá sa zo stromu elementov [\ref{theory:HTML:elements}], ktoré majú svoj obsah, parametre a sú ohraničené pomocou značiek (tags).
 
-\blockquote[MDN \cite{MDN}]{HTML je nejzákladnejším stavebným kameňom webových stránok. \uv{Hypertext}, v~názve odkazuje k~možnosti vytvorenia odkazov, ktorými je možné prepojiť webové stránky.}
+\blockquote[MDN \cite{MDN}]{HTML je najzákladnejším stavebným kameňom webových stránok. \uv{Hypertext}, v~názve odkazuje k~možnosti vytvorenia odkazov, ktorými je možné prepojiť webové stránky.}
 
 \noindent Pre zobrazovanie HTML slúžia webové prehliadače. Každý webový prehliadač postupuje pri vykresľovaní niektorých častí HTML inak ako ostatné, preto je nutné skontrolovať či je webová stránka správne zobrazená na viacerých webových prehliadačoch.
 
@@ -49,7 +49,7 @@ HTML element je oddelený od zbytku textu v~dokumente pomocou značiek (tags), k
 	\item \texttt{head} -- Obsahuje strojom čítateľné informácie (metadáta) o~dokumente ako napríklad titulok, skripty alebo štýly. \cite{MDN}
 	\item \texttt{body} -- Reprezentuje obsah HTML dokumentu, pričom sa v~jednom dokumente môže nachádzať maximálne raz. \cite{MDN}
 	\item \texttt{title} -- Definuje titulok dokumentu, ktorý je zobrazený vo webovom prehliadači. \cite{MDN}
-	\item \texttt{button} -- Reprezentuje klikateľné tlačidlo, použiteľné napríklad pre potvrdzovanie formulárov alebo kdekoľvek inde v~HTML dokumente ako štandardné tlačidlo. Tlačidlá sú v~štýle jednotnom s~platformou na ktorej sú zobrazované, ak nie sú priložené štýly, ktoré by ich upravovali. \cite{MDN}
+	\item \texttt{button} -- Reprezentuje klikateľné tlačidlo, použiteľné napríklad pre potvrdzovanie formulárov alebo kdekoľvek inde v~HTML dokumente ako štandardné tlačidlo. Tlačidlá sú v~štýle jednotnom s~platformou, na ktorej sú zobrazované, ak nie sú priložené štýly, ktoré by ich upravovali. \cite{MDN}
 \end{itemize}
 
 % CSS
