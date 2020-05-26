@@ -4,7 +4,7 @@
   "regions": ["bru"],
   "build": {
     "env": {
-      "SCHEMA_URL": "@schema_url"
+      "NEXT_PUBLIC_SCHEMA_URL": "@schema_url"
     }
   }
 }

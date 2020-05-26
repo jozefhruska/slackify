@@ -33,7 +33,7 @@ export const Wrapper = styled.div<Pick<AlertProps, 'type'>>`
   width: 100%;
   padding: ${({ theme }) => theme.space.s4} ${({ theme }) => theme.space.s6};
   background: ${({ theme }) => theme.colors.gray[0]};
-  color: ${({ theme }) => theme.colors.gray[1]};
+  color: ${({ theme }) => theme.colors.gray[0]};
   border-radius: ${({ theme }) => theme.radii.medium};
   box-sizing: border-box;
   overflow: hidden;

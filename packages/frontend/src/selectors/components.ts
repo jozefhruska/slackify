@@ -6,5 +6,5 @@ const getState = (state: AppState) => state.components;
 
 export const selectCreateUpdateModalState = createSelector(
   getState,
-  state => state.createUpdateModal
+  (state) => state.createUpdateModal
 );

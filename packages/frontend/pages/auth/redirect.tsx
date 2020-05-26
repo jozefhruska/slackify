@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 import { Dispatch } from 'redux';
 
 import { createApolloClient } from '../../src/api';
-import { Flex, Box } from '../../src/components/common/layout/base';
+import { Flex } from '../../src/components/common/layout/base';
 import { Block } from '../../src/components/common/layout';
 import { Paragraph } from '../../src/components/common/typography';
 import { SIGN_IN } from '../../src/api/mutation/users';
@@ -45,39 +45,34 @@ const RedirectPage: NextPage<Props> = ({ data, errorMessage }) => {
 
       push('/');
     }
-  }, [data]);
 
-  if (errorMessage) {
-    return (
-      <Flex alignItems="center" justifyContent="center" mx="auto" minHeight="100vh" padding="s2">
-        <Block>
-          <Box textAlign="center">
-            <Paragraph mb={0}>{errorMessage}</Paragraph>
-          </Box>
-        </Block>
-      </Flex>
-    );
-  }
-
-  if (data) {
-    return (
-      <Flex alignItems="center" justifyContent="center" mx="auto" minHeight="100vh" padding="s2">
-        <Block>
-          <Box textAlign="center">
-            <Paragraph mb={0}>Success</Paragraph>
-          </Box>
-        </Block>
-      </Flex>
-    );
-  }
+    if (errorMessage) {
+      console.error(errorMessage);
+      push('/?error=true');
+    }
+  }, [data, errorMessage]);
 
   return (
-    <Flex alignItems="center" justifyContent="center" mx="auto" minHeight="100vh" padding="s2">
+    <Flex
+      alignItems="center"
+      justifyContent="center"
+      mx="auto"
+      minHeight="100vh"
+      padding="s2"
+      textAlign="center"
+    >
       <Block>
-        <Box textAlign="center">
-          <Paragraph mb={0}>{'Please wait...'}</Paragraph>
+        <Flex
+          width={['100%', '20rem']}
+          flexDirection="column"
+          alignItems="center"
+          justifyContent="center"
+        >
           <Loader />
-        </Box>
+          <Paragraph mb={0}>
+            {'Please wait while we are connecting your workspace with Slackify...'}
+          </Paragraph>
+        </Flex>
       </Block>
     </Flex>
   );

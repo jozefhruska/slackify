@@ -74,7 +74,7 @@ export const getServerSideProps: GetServerSideProps<Props> = async (ctx) => {
     removeAuthToken(ctx);
 
     /* Redirect */
-    ctx?.res.writeHead(302, { Location: '/' });
+    ctx?.res.writeHead(302, { Location: '/?sessionExpired=true' });
     ctx?.res.end();
     return;
   }

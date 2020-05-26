@@ -20,7 +20,7 @@ import {
 } from '../src/types/generated/graphql';
 import { StoreUser } from '../src/actions/auth';
 import withApollo, { createApolloClient } from '../src/api';
-import { getAuthToken } from '../src/cookies';
+import { getAuthToken, removeAuthToken } from '../src/cookies';
 import { GET_USER } from '../src/api/query/users';
 import WelcomePage from '../src/components/public/WelcomePage/WelcomePage';
 import { Button, Alert, ListingLoader } from '../src/components/common/misc';
@@ -238,6 +238,11 @@ export const getServerSideProps: GetServerSideProps<Props> = async (ctx) => {
   const { data } = await apolloClient.query<GetUserQuery, GetUserQueryVariables>({
     query: GET_USER,
   });
+
+  /* Remove auth token if user was not found */
+  if (!data?.getUser) {
+    removeAuthToken(ctx);
+  }
 
   return { props: { user: data?.getUser } };
 };
