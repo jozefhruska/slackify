@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 import { Dispatch } from 'redux';
 
 import { createApolloClient } from '../../src/api';
-import { Flex, Box } from '../../src/components/common/layout/base';
+import { Flex } from '../../src/components/common/layout/base';
 import { Block } from '../../src/components/common/layout';
 import { Paragraph } from '../../src/components/common/typography';
 import { SIGN_IN } from '../../src/api/mutation/users';
