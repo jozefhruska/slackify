@@ -23,7 +23,7 @@ addDecorator(withKnobs);
 
 /* Mocked Next.js config
 ============================================================================= */
-const { SCHEMA_URL } = process.env;
+const { NEXT_PUBLIC_SCHEMA_URL } = process.env;
 
 setConfig({
   publicRuntimeConfig: {

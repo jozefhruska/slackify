@@ -1128,7 +1128,6 @@ input UserWhereInput {
 
 input UserWhereUniqueInput {
   accessToken: String
-  email: String
   id: String
   slackId_teamId: SlackIdTeamIdCompoundUniqueInput
 }

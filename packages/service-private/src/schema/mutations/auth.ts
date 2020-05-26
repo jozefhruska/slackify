@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-ignore */
 import { FieldResolver } from 'nexus';
 import axios from 'axios';
 import jwt from 'jsonwebtoken';
@@ -9,10 +10,12 @@ import {
   SlackUserIdentityResponse,
   SlackAuthTestResponse,
 } from '../../types/auth';
+import { ApolloError } from 'apollo-server';
 
 /**
  * Signs in user using Slack API.
  */
+// @ts-ignore
 export const signIn: FieldResolver<'Mutation', 'signIn'> = async (
   _,
   { code, redirect_host },
@@ -37,12 +40,12 @@ export const signIn: FieldResolver<'Mutation', 'signIn'> = async (
 
   /* Check if response is OK */
   if (!authResponse?.ok) {
-    throw new Error(`Invalid response from Slack (code: "${authResponse?.error}").`);
+    return new Error(`Invalid response from Slack (code: "${authResponse?.error}").`);
   }
 
   /* Check if token type is correct */
   if (authResponse?.authed_user?.token_type !== 'user') {
-    throw new Error(
+    return new Error(
       `Wrong access token type "${authResponse?.authed_user?.token_type}" (expected "user").`
     );
   }
@@ -51,14 +54,14 @@ export const signIn: FieldResolver<'Mutation', 'signIn'> = async (
   const userToken = authResponse.authed_user.access_token;
 
   if (!userToken) {
-    throw new Error('Unable to extract user access token from Slack response.');
+    return new Error('Unable to extract user access token from Slack response.');
   }
 
   /* Extract team ID */
   const teamId = authResponse.team?.id;
 
   if (!teamId) {
-    throw new Error('Unable to extract team ID from Slack response.');
+    return new Error('Unable to extract team ID from Slack response.');
   }
 
   /* Get user data */
@@ -122,13 +125,14 @@ export const signIn: FieldResolver<'Mutation', 'signIn'> = async (
     };
   } catch (error) {
     console.error(error);
-    throw new Error('Something went wrong. Please try again later.');
+    return new Error('Something went wrong. Please try again later.');
   }
 };
 
 /**
  * Adds a new team (workspace) to Slackify.
  */
+// @ts-ignore
 export const addToSlack: FieldResolver<'Mutation', 'addToSlack'> = async (
   _,
   { code, redirect_host },
@@ -155,26 +159,26 @@ export const addToSlack: FieldResolver<'Mutation', 'addToSlack'> = async (
 
   /* Check if response is OK */
   if (!authResponse?.ok) {
-    throw new Error(`Invalid response from Slack (code: "${authResponse?.error}").`);
+    return new Error(`Invalid response from Slack (code: "${authResponse?.error}").`);
   }
 
   /* Check if token type is correct */
   if (authResponse.token_type !== 'bot') {
-    throw new Error(`Wrong access token type "${authResponse.token_type}" (expected "bot").`);
+    return new Error(`Wrong access token type "${authResponse.token_type}" (expected "bot").`);
   }
 
   /* Extract bot access token */
   const botToken = authResponse.access_token;
 
   if (!botToken) {
-    throw new Error('Unable to extract bot access token from Slack response.');
+    return new Error('Unable to extract bot access token from Slack response.');
   }
 
   /* Extract user access token */
   const userToken = authResponse.authed_user?.access_token;
 
   if (!userToken) {
-    throw new Error('Unable to extract user access token from Slack response.');
+    return new Error('Unable to extract user access token from Slack response.');
   }
 
   /* Extract team data */
@@ -182,7 +186,20 @@ export const addToSlack: FieldResolver<'Mutation', 'addToSlack'> = async (
   const teamName = authResponse.team?.name;
 
   if (!teamId || !teamName) {
-    throw new Error('Unable to extract team data from Slack response.');
+    return new Error('Unable to extract team data from Slack response.');
+  }
+
+  /* Check if team with this ID is already connected */
+  const existingTeamCheck = await prisma.team.count({
+    where: {
+      id: {
+        equals: teamId,
+      },
+    },
+  });
+
+  if (existingTeamCheck) {
+    return new ApolloError('', 'TEAM_ALREADY_CONNECTED');
   }
 
   /* Get user info and bot ID */
@@ -246,10 +263,8 @@ export const addToSlack: FieldResolver<'Mutation', 'addToSlack'> = async (
     })
     .catch((error) => {
       console.error(error);
-      throw new Error('Something went wrong. Please try again later.');
+      return new Error('Something went wrong. Please try again later.');
     });
 
   return true;
-
-  return false;
 };

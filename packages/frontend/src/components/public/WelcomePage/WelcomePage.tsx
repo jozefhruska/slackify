@@ -6,9 +6,9 @@ import { Box, Flex } from '../../common/layout/base';
 import { FiHeart, FiArrowRight, FiSlack } from 'react-icons/fi';
 import { Alert } from '../../common/misc';
 import theme from '../../../theme';
+import { REDIRECT_HOST } from '../../../config';
 
 import * as S from './WelcomePage.styles';
-import { REDIRECT_HOST } from '../../../config';
 
 /* <WelcomePage />
 ============================================================================= */
@@ -49,9 +49,23 @@ const WelcomePage: React.FC = () => {
 
           {router?.query?.addToSlackSuccess && (
             <Alert type="success">
-              Your workspace was connected successfully. You can now sign in to start using
+              Your Slack workspace was connected successfully. You can now sign in to start using
               Slackify.
             </Alert>
+          )}
+
+          {router?.query?.sessionExpired && (
+            <Alert type="warning">Your session has expired. Please sign in again.</Alert>
+          )}
+
+          {router?.query?.teamAlreadyConnected && (
+            <Alert type="warning">
+              Your Slack workspace is already connected with Slackify. You can sign in now.
+            </Alert>
+          )}
+
+          {router?.query?.error && (
+            <Alert type="danger">Something went wrong. Please try again later.</Alert>
           )}
 
           <Paragraph>

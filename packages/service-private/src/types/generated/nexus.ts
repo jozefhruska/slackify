@@ -908,7 +908,6 @@ export interface NexusGenInputs {
   }
   UserWhereUniqueInput: { // input type
     accessToken?: string | null; // String
-    email?: string | null; // String
     id?: string | null; // String
     slackId_teamId?: NexusGenInputs['SlackIdTeamIdCompoundUniqueInput'] | null; // SlackIdTeamIdCompoundUniqueInput
   }

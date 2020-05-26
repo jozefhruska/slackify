@@ -3,7 +3,7 @@ import { NextPage, GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
 
 import { createApolloClient } from '../../src/api';
-import { Flex, Box } from '../../src/components/common/layout/base';
+import { Flex } from '../../src/components/common/layout/base';
 import { Block } from '../../src/components/common/layout';
 import { Paragraph } from '../../src/components/common/typography';
 import { getAuthToken } from '../../src/cookies';
@@ -17,56 +17,59 @@ import { GET_USER } from '../../src/api/query/users';
 import { Loader } from '../../src/components/common/misc';
 import { ADD_TO_SLACK } from '../../src/api/mutation/auth';
 import { REDIRECT_HOST } from '../../src/config';
+import { ApolloError } from '@apollo/client';
 
 /* Props - <AddToSlackPage />
 ============================================================================= */
 type Props = {
   success: boolean;
+  errorCode: 'TEAM_ALREADY_CONNECTED';
   errorMessage: string;
 };
 
 /* <AddToSlackPage />
 ============================================================================= */
-const AddToSlackPage: NextPage<Props> = ({ success, errorMessage }) => {
+const AddToSlackPage: NextPage<Props> = ({ success, errorCode, errorMessage }) => {
   const { push } = useRouter();
 
   useEffect(() => {
     if (success) {
       push('/?addToSlackSuccess=true');
+      return;
     }
-  }, [success]);
 
-  if (errorMessage) {
-    return (
-      <Flex alignItems="center" justifyContent="center" mx="auto" minHeight="100vh" padding="s2">
-        <Block>
-          <Box textAlign="center">
-            <Paragraph mb={0}>{errorMessage}</Paragraph>
-          </Box>
-        </Block>
-      </Flex>
-    );
-  }
+    if (errorCode === 'TEAM_ALREADY_CONNECTED') {
+      push('/?teamAlreadyConnected=true');
+      return;
+    }
 
-  if (success) {
-    return (
-      <Flex alignItems="center" justifyContent="center" mx="auto" minHeight="100vh" padding="s2">
-        <Block>
-          <Box textAlign="center">
-            <Paragraph mb={0}>Success</Paragraph>
-          </Box>
-        </Block>
-      </Flex>
-    );
-  }
+    if (errorMessage) {
+      console.error(errorMessage);
+      push('/?error=true');
+    }
+  }, [success, errorCode, errorMessage]);
 
   return (
-    <Flex alignItems="center" justifyContent="center" mx="auto" minHeight="100vh" padding="s2">
+    <Flex
+      alignItems="center"
+      justifyContent="center"
+      mx="auto"
+      minHeight="100vh"
+      padding="s2"
+      textAlign="center"
+    >
       <Block>
-        <Box textAlign="center">
-          <Paragraph mb={0}>{'Please wait...'}</Paragraph>
+        <Flex
+          width={['100%', '20rem']}
+          flexDirection="column"
+          alignItems="center"
+          justifyContent="center"
+        >
           <Loader />
-        </Box>
+          <Paragraph mb={0}>
+            {'Please wait while we are connecting your workspace with Slackify...'}
+          </Paragraph>
+        </Flex>
       </Block>
     </Flex>
   );
@@ -93,7 +96,9 @@ export const getServerSideProps: GetServerSideProps<Props> = async (ctx) => {
   }
 
   let success = false;
+  let errorCode = null;
   let errorMessage = null;
+
   await apolloClient
     .mutate<AddToSlackMutation, AddToSlackMutationVariables>({
       mutation: ADD_TO_SLACK,
@@ -106,11 +111,12 @@ export const getServerSideProps: GetServerSideProps<Props> = async (ctx) => {
     .then(() => {
       success = true;
     })
-    .catch(({ message }) => {
-      errorMessage = message;
+    .catch(({ message, graphQLErrors }: ApolloError) => {
+      errorCode = graphQLErrors[0].extensions?.code ?? null;
+      errorMessage = message ?? null;
     });
 
-  return { props: { success, errorMessage } };
+  return { props: { success, errorCode, errorMessage } };
 };
 
 export default AddToSlackPage;
