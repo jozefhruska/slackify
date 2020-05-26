@@ -57,10 +57,11 @@ export type ArticleComponentDataWhereInput = {
   title?: Maybe<StringFilter>;
   lead?: Maybe<NullableStringFilter>;
   content?: Maybe<StringFilter>;
-  Component?: Maybe<ComponentFilter>;
+  componentId?: Maybe<NullableStringFilter>;
   AND?: Maybe<Array<ArticleComponentDataWhereInput>>;
   OR?: Maybe<Array<ArticleComponentDataWhereInput>>;
   NOT?: Maybe<Array<ArticleComponentDataWhereInput>>;
+  component?: Maybe<ComponentWhereInput>;
 };
 
 export type ArticleComponentDataWhereUniqueInput = {
@@ -283,6 +284,7 @@ export type ComponentCreateInput = {
   id?: Maybe<Scalars['String']>;
   type?: Maybe<ComponentType>;
   published?: Maybe<Scalars['Boolean']>;
+  plainTextDataId?: Maybe<Scalars['String']>;
   createdAt?: Maybe<Scalars['DateTime']>;
   updatedAt?: Maybe<Scalars['DateTime']>;
   collection: CollectionCreateOneWithoutComponentsInput;
@@ -291,7 +293,7 @@ export type ComponentCreateInput = {
   plainTextData?: Maybe<PlainTextComponentDataCreateOneWithoutComponentInput>;
   articleData?: Maybe<ArticleComponentDataCreateOneWithoutComponentInput>;
   linkData?: Maybe<LinkComponentDataCreateOneWithoutComponentInput>;
-  StatRecord?: Maybe<StatRecordCreateManyWithoutComponentInput>;
+  statRecord?: Maybe<StatRecordCreateManyWithoutComponentInput>;
 };
 
 export type ComponentCreateManyWithoutAuthorInput = {
@@ -313,6 +315,7 @@ export type ComponentCreateWithoutAuthorInput = {
   id?: Maybe<Scalars['String']>;
   type?: Maybe<ComponentType>;
   published?: Maybe<Scalars['Boolean']>;
+  plainTextDataId?: Maybe<Scalars['String']>;
   createdAt?: Maybe<Scalars['DateTime']>;
   updatedAt?: Maybe<Scalars['DateTime']>;
   collection: CollectionCreateOneWithoutComponentsInput;
@@ -320,13 +323,14 @@ export type ComponentCreateWithoutAuthorInput = {
   plainTextData?: Maybe<PlainTextComponentDataCreateOneWithoutComponentInput>;
   articleData?: Maybe<ArticleComponentDataCreateOneWithoutComponentInput>;
   linkData?: Maybe<LinkComponentDataCreateOneWithoutComponentInput>;
-  StatRecord?: Maybe<StatRecordCreateManyWithoutComponentInput>;
+  statRecord?: Maybe<StatRecordCreateManyWithoutComponentInput>;
 };
 
 export type ComponentCreateWithoutCollectionInput = {
   id?: Maybe<Scalars['String']>;
   type?: Maybe<ComponentType>;
   published?: Maybe<Scalars['Boolean']>;
+  plainTextDataId?: Maybe<Scalars['String']>;
   createdAt?: Maybe<Scalars['DateTime']>;
   updatedAt?: Maybe<Scalars['DateTime']>;
   author: UserCreateOneWithoutComponentsInput;
@@ -334,13 +338,14 @@ export type ComponentCreateWithoutCollectionInput = {
   plainTextData?: Maybe<PlainTextComponentDataCreateOneWithoutComponentInput>;
   articleData?: Maybe<ArticleComponentDataCreateOneWithoutComponentInput>;
   linkData?: Maybe<LinkComponentDataCreateOneWithoutComponentInput>;
-  StatRecord?: Maybe<StatRecordCreateManyWithoutComponentInput>;
+  statRecord?: Maybe<StatRecordCreateManyWithoutComponentInput>;
 };
 
 export type ComponentCreateWithoutTeamInput = {
   id?: Maybe<Scalars['String']>;
   type?: Maybe<ComponentType>;
   published?: Maybe<Scalars['Boolean']>;
+  plainTextDataId?: Maybe<Scalars['String']>;
   createdAt?: Maybe<Scalars['DateTime']>;
   updatedAt?: Maybe<Scalars['DateTime']>;
   collection: CollectionCreateOneWithoutComponentsInput;
@@ -348,7 +353,7 @@ export type ComponentCreateWithoutTeamInput = {
   plainTextData?: Maybe<PlainTextComponentDataCreateOneWithoutComponentInput>;
   articleData?: Maybe<ArticleComponentDataCreateOneWithoutComponentInput>;
   linkData?: Maybe<LinkComponentDataCreateOneWithoutComponentInput>;
-  StatRecord?: Maybe<StatRecordCreateManyWithoutComponentInput>;
+  statRecord?: Maybe<StatRecordCreateManyWithoutComponentInput>;
 };
 
 export type ComponentFilter = {
@@ -365,11 +370,9 @@ export type ComponentScalarWhereInput = {
   authorId?: Maybe<StringFilter>;
   teamId?: Maybe<StringFilter>;
   plainTextDataId?: Maybe<NullableStringFilter>;
-  articleDataId?: Maybe<NullableStringFilter>;
-  linkDataId?: Maybe<NullableStringFilter>;
   createdAt?: Maybe<DateTimeFilter>;
   updatedAt?: Maybe<DateTimeFilter>;
-  StatRecord?: Maybe<StatRecordFilter>;
+  statRecord?: Maybe<StatRecordFilter>;
   AND?: Maybe<Array<ComponentScalarWhereInput>>;
   OR?: Maybe<Array<ComponentScalarWhereInput>>;
   NOT?: Maybe<Array<ComponentScalarWhereInput>>;
@@ -385,6 +388,7 @@ export type ComponentUpdateInput = {
   id?: Maybe<Scalars['String']>;
   type?: Maybe<ComponentType>;
   published?: Maybe<Scalars['Boolean']>;
+  plainTextDataId?: Maybe<Scalars['String']>;
   createdAt?: Maybe<Scalars['DateTime']>;
   updatedAt?: Maybe<Scalars['DateTime']>;
   collection?: Maybe<CollectionUpdateOneRequiredWithoutComponentsInput>;
@@ -393,13 +397,14 @@ export type ComponentUpdateInput = {
   plainTextData?: Maybe<PlainTextComponentDataUpdateOneWithoutComponentInput>;
   articleData?: Maybe<ArticleComponentDataUpdateOneWithoutComponentInput>;
   linkData?: Maybe<LinkComponentDataUpdateOneWithoutComponentInput>;
-  StatRecord?: Maybe<StatRecordUpdateManyWithoutComponentInput>;
+  statRecord?: Maybe<StatRecordUpdateManyWithoutComponentInput>;
 };
 
 export type ComponentUpdateManyDataInput = {
   id?: Maybe<Scalars['String']>;
   type?: Maybe<ComponentType>;
   published?: Maybe<Scalars['Boolean']>;
+  plainTextDataId?: Maybe<Scalars['String']>;
   createdAt?: Maybe<Scalars['DateTime']>;
   updatedAt?: Maybe<Scalars['DateTime']>;
 };
@@ -449,6 +454,7 @@ export type ComponentUpdateWithoutAuthorDataInput = {
   id?: Maybe<Scalars['String']>;
   type?: Maybe<ComponentType>;
   published?: Maybe<Scalars['Boolean']>;
+  plainTextDataId?: Maybe<Scalars['String']>;
   createdAt?: Maybe<Scalars['DateTime']>;
   updatedAt?: Maybe<Scalars['DateTime']>;
   collection?: Maybe<CollectionUpdateOneRequiredWithoutComponentsInput>;
@@ -456,13 +462,14 @@ export type ComponentUpdateWithoutAuthorDataInput = {
   plainTextData?: Maybe<PlainTextComponentDataUpdateOneWithoutComponentInput>;
   articleData?: Maybe<ArticleComponentDataUpdateOneWithoutComponentInput>;
   linkData?: Maybe<LinkComponentDataUpdateOneWithoutComponentInput>;
-  StatRecord?: Maybe<StatRecordUpdateManyWithoutComponentInput>;
+  statRecord?: Maybe<StatRecordUpdateManyWithoutComponentInput>;
 };
 
 export type ComponentUpdateWithoutCollectionDataInput = {
   id?: Maybe<Scalars['String']>;
   type?: Maybe<ComponentType>;
   published?: Maybe<Scalars['Boolean']>;
+  plainTextDataId?: Maybe<Scalars['String']>;
   createdAt?: Maybe<Scalars['DateTime']>;
   updatedAt?: Maybe<Scalars['DateTime']>;
   author?: Maybe<UserUpdateOneRequiredWithoutComponentsInput>;
@@ -470,13 +477,14 @@ export type ComponentUpdateWithoutCollectionDataInput = {
   plainTextData?: Maybe<PlainTextComponentDataUpdateOneWithoutComponentInput>;
   articleData?: Maybe<ArticleComponentDataUpdateOneWithoutComponentInput>;
   linkData?: Maybe<LinkComponentDataUpdateOneWithoutComponentInput>;
-  StatRecord?: Maybe<StatRecordUpdateManyWithoutComponentInput>;
+  statRecord?: Maybe<StatRecordUpdateManyWithoutComponentInput>;
 };
 
 export type ComponentUpdateWithoutTeamDataInput = {
   id?: Maybe<Scalars['String']>;
   type?: Maybe<ComponentType>;
   published?: Maybe<Scalars['Boolean']>;
+  plainTextDataId?: Maybe<Scalars['String']>;
   createdAt?: Maybe<Scalars['DateTime']>;
   updatedAt?: Maybe<Scalars['DateTime']>;
   collection?: Maybe<CollectionUpdateOneRequiredWithoutComponentsInput>;
@@ -484,7 +492,7 @@ export type ComponentUpdateWithoutTeamDataInput = {
   plainTextData?: Maybe<PlainTextComponentDataUpdateOneWithoutComponentInput>;
   articleData?: Maybe<ArticleComponentDataUpdateOneWithoutComponentInput>;
   linkData?: Maybe<LinkComponentDataUpdateOneWithoutComponentInput>;
-  StatRecord?: Maybe<StatRecordUpdateManyWithoutComponentInput>;
+  statRecord?: Maybe<StatRecordUpdateManyWithoutComponentInput>;
 };
 
 export type ComponentUpdateWithWhereUniqueWithoutAuthorInput = {
@@ -528,11 +536,9 @@ export type ComponentWhereInput = {
   authorId?: Maybe<StringFilter>;
   teamId?: Maybe<StringFilter>;
   plainTextDataId?: Maybe<NullableStringFilter>;
-  articleDataId?: Maybe<NullableStringFilter>;
-  linkDataId?: Maybe<NullableStringFilter>;
   createdAt?: Maybe<DateTimeFilter>;
   updatedAt?: Maybe<DateTimeFilter>;
-  StatRecord?: Maybe<StatRecordFilter>;
+  statRecord?: Maybe<StatRecordFilter>;
   AND?: Maybe<Array<ComponentWhereInput>>;
   OR?: Maybe<Array<ComponentWhereInput>>;
   NOT?: Maybe<Array<ComponentWhereInput>>;
@@ -614,10 +620,11 @@ export type LinkComponentDataWhereInput = {
   id?: Maybe<StringFilter>;
   text?: Maybe<NullableStringFilter>;
   url?: Maybe<StringFilter>;
-  Component?: Maybe<ComponentFilter>;
+  componentId?: Maybe<NullableStringFilter>;
   AND?: Maybe<Array<LinkComponentDataWhereInput>>;
   OR?: Maybe<Array<LinkComponentDataWhereInput>>;
   NOT?: Maybe<Array<LinkComponentDataWhereInput>>;
+  component?: Maybe<ComponentWhereInput>;
 };
 
 export type LinkComponentDataWhereUniqueInput = {
@@ -739,10 +746,11 @@ export type PlainTextComponentDataUpsertWithoutComponentInput = {
 export type PlainTextComponentDataWhereInput = {
   id?: Maybe<StringFilter>;
   text?: Maybe<StringFilter>;
-  Component?: Maybe<ComponentFilter>;
+  componentId?: Maybe<NullableStringFilter>;
   AND?: Maybe<Array<PlainTextComponentDataWhereInput>>;
   OR?: Maybe<Array<PlainTextComponentDataWhereInput>>;
   NOT?: Maybe<Array<PlainTextComponentDataWhereInput>>;
+  component?: Maybe<ComponentWhereInput>;
 };
 
 export type PlainTextComponentDataWhereUniqueInput = {
@@ -833,11 +841,16 @@ export type SignInOutput = {
   user: User;
 };
 
+export type SlackIdTeamIdCompoundUniqueInput = {
+  slackId: Scalars['String'];
+  teamId: Scalars['String'];
+};
+
 export type StatRecord = {
    __typename?: 'StatRecord';
   createdAt: Scalars['DateTime'];
-  componentId: Scalars['String'];
-  component: Component;
+  componentId?: Maybe<Scalars['String']>;
+  component?: Maybe<Component>;
 };
 
 export type StatRecordCreateManyWithoutComponentInput = {
@@ -859,7 +872,7 @@ export type StatRecordFilter = {
 export type StatRecordScalarWhereInput = {
   id?: Maybe<StringFilter>;
   createdAt?: Maybe<DateTimeFilter>;
-  componentId?: Maybe<StringFilter>;
+  componentId?: Maybe<NullableStringFilter>;
   AND?: Maybe<Array<StatRecordScalarWhereInput>>;
   OR?: Maybe<Array<StatRecordScalarWhereInput>>;
   NOT?: Maybe<Array<StatRecordScalarWhereInput>>;
@@ -906,7 +919,7 @@ export type StatRecordUpsertWithWhereUniqueWithoutComponentInput = {
 export type StatRecordWhereInput = {
   id?: Maybe<StringFilter>;
   createdAt?: Maybe<DateTimeFilter>;
-  componentId?: Maybe<StringFilter>;
+  componentId?: Maybe<NullableStringFilter>;
   AND?: Maybe<Array<StatRecordWhereInput>>;
   OR?: Maybe<Array<StatRecordWhereInput>>;
   NOT?: Maybe<Array<StatRecordWhereInput>>;
@@ -1093,7 +1106,8 @@ export type UserCreateOneWithoutComponentsInput = {
 };
 
 export type UserCreateWithoutComponentsInput = {
-  id: Scalars['String'];
+  id?: Maybe<Scalars['String']>;
+  slackId: Scalars['String'];
   email: Scalars['String'];
   name: Scalars['String'];
   role?: Maybe<UserRole>;
@@ -1103,7 +1117,8 @@ export type UserCreateWithoutComponentsInput = {
 };
 
 export type UserCreateWithoutTeamInput = {
-  id: Scalars['String'];
+  id?: Maybe<Scalars['String']>;
+  slackId: Scalars['String'];
   email: Scalars['String'];
   name: Scalars['String'];
   role?: Maybe<UserRole>;
@@ -1127,6 +1142,7 @@ export enum UserRole {
 
 export type UserScalarWhereInput = {
   id?: Maybe<StringFilter>;
+  slackId?: Maybe<StringFilter>;
   email?: Maybe<StringFilter>;
   name?: Maybe<StringFilter>;
   role?: Maybe<UserRole>;
@@ -1141,6 +1157,7 @@ export type UserScalarWhereInput = {
 
 export type UserUpdateInput = {
   id?: Maybe<Scalars['String']>;
+  slackId?: Maybe<Scalars['String']>;
   email?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
   role?: Maybe<UserRole>;
@@ -1152,6 +1169,7 @@ export type UserUpdateInput = {
 
 export type UserUpdateManyDataInput = {
   id?: Maybe<Scalars['String']>;
+  slackId?: Maybe<Scalars['String']>;
   email?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
   role?: Maybe<UserRole>;
@@ -1185,6 +1203,7 @@ export type UserUpdateOneRequiredWithoutComponentsInput = {
 
 export type UserUpdateWithoutComponentsDataInput = {
   id?: Maybe<Scalars['String']>;
+  slackId?: Maybe<Scalars['String']>;
   email?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
   role?: Maybe<UserRole>;
@@ -1195,6 +1214,7 @@ export type UserUpdateWithoutComponentsDataInput = {
 
 export type UserUpdateWithoutTeamDataInput = {
   id?: Maybe<Scalars['String']>;
+  slackId?: Maybe<Scalars['String']>;
   email?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
   role?: Maybe<UserRole>;
@@ -1221,6 +1241,7 @@ export type UserUpsertWithWhereUniqueWithoutTeamInput = {
 
 export type UserWhereInput = {
   id?: Maybe<StringFilter>;
+  slackId?: Maybe<StringFilter>;
   email?: Maybe<StringFilter>;
   name?: Maybe<StringFilter>;
   role?: Maybe<UserRole>;
@@ -1238,6 +1259,7 @@ export type UserWhereUniqueInput = {
   id?: Maybe<Scalars['String']>;
   email?: Maybe<Scalars['String']>;
   accessToken?: Maybe<Scalars['String']>;
+  slackId_teamId?: Maybe<SlackIdTeamIdCompoundUniqueInput>;
 };
 
 export type CollectionDetailFragment = (
@@ -1477,7 +1499,9 @@ export type GetCollectionsListingQuery = (
   )> }
 );
 
-export type GetCollectionsOptionsQueryVariables = {};
+export type GetCollectionsOptionsQueryVariables = {
+  where?: Maybe<QueryCollectionsWhereInput>;
+};
 
 
 export type GetCollectionsOptionsQuery = (
@@ -1844,8 +1868,8 @@ export const GetCollectionsListingDocument = gql`
     ${CollectionListingFragmentDoc}`;
 export type GetCollectionsListingQueryResult = ApolloReactCommon.QueryResult<GetCollectionsListingQuery, GetCollectionsListingQueryVariables>;
 export const GetCollectionsOptionsDocument = gql`
-    query GetCollectionsOptions {
-  collections {
+    query GetCollectionsOptions($where: QueryCollectionsWhereInput) {
+  collections(where: $where) {
     id
     name
     type
