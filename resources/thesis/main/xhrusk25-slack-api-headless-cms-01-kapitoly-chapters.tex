@@ -892,7 +892,7 @@ Verejná GraphQL služba (\texttt{service-public}) slúži ako hlavné aplikačn
 Po prepojení tímu v~službe Slack s~redakčným systémom Slackify je tomuto tímu vygenerovaný \emph{unikátny autorizačný token}. Tento token je následne očakávaný v~HTTP hlavičke \texttt{Authorization} každej požiadavky smerujúcej na službu \texttt{service-public}. V~prípade, že autorizačný token chýba alebo je nesprávny, služba požiadavku zahodí a odpovie chybovou správou vysvetľujúcou zlyhanie. 
 
 \subsubsection{Zjednodušený typ \texttt{Component}}
-Databázový model \texttt{Component} slúži pre uchovávanie metadát o~komponente. Samotný obsah komponentu sa nachádza v~oddelených databázových modeloch s~ktorými je daný komponent v~relácií (viac viz \ref{impl:model:component}). Takýto princíp ukladania dát umožňuje jednoduchú modifikáciu typov komponentov a ich obsahu, no nie je optimálny pre vývojárov, ktorí implementujú Slackify do svojich projektov. \\
+Databázový model \texttt{Component} slúži pre uchovávanie metadát o~komponente. Samotný obsah komponentu sa nachádza v~oddelených databázových modeloch s~ktorými je komponent v~relácií (viac viz \ref{impl:model:component}). Takýto princíp ukladania dát umožňuje jednoduchú modifikáciu typov komponentov a ich obsahu, no nie je optimálny pre vývojárov, ktorí využívajú Slackify vo svojich projektoch. \\
 
 \begin{lstlisting}[language={GraphQL}, caption={Príklad získania obsahu komponentu pred optimalizáciou.}]
 	query {

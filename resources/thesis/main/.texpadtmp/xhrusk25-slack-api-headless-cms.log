@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2020.3.2)  27 MAY 2020 16:53
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2020.3.2)  27 MAY 2020 19:00
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1238,46 +1238,46 @@ Underfull \hbox (badness 10000) in paragraph at lines 965--966
 
  []
 
-<obrazky-figures/screenshot_collections.png, id=1135, 3597.44pt x 2248.4pt>
+<obrazky-figures/screenshot_collections.png, id=1135, 4111.36pt x 2569.6pt>
 File: obrazky-figures/screenshot_collections.png Graphic file (type png)
 <use obrazky-figures/screenshot_collections.png>
 Package pdftex.def Info: obrazky-figures/screenshot_collections.png  used on input line 974.
-(pdftex.def)             Requested size: 305.8058pt x 191.12863pt.
+(pdftex.def)             Requested size: 349.49234pt x 218.43271pt.
 [32]
-<obrazky-figures/screenshot_collection_create.png, id=1152, 3597.44pt x 2248.4pt>
+<obrazky-figures/screenshot_collection_create.png, id=1152, 4111.36pt x 2569.6pt>
 File: obrazky-figures/screenshot_collection_create.png Graphic file (type png)
 <use obrazky-figures/screenshot_collection_create.png>
 Package pdftex.def Info: obrazky-figures/screenshot_collection_create.png  used on input line 992.
-(pdftex.def)             Requested size: 305.8058pt x 191.12863pt.
+(pdftex.def)             Requested size: 349.49234pt x 218.43271pt.
  [33 <./obrazky-figures/screenshot_collections.png>]
-<obrazky-figures/screenshot_components.png, id=1161, 3597.44pt x 2248.4pt>
+<obrazky-figures/screenshot_components.png, id=1161, 4111.36pt x 2569.6pt>
 File: obrazky-figures/screenshot_components.png Graphic file (type png)
 <use obrazky-figures/screenshot_components.png>
 Package pdftex.def Info: obrazky-figures/screenshot_components.png  used on input line 1001.
-(pdftex.def)             Requested size: 305.8058pt x 191.12863pt.
+(pdftex.def)             Requested size: 349.49234pt x 218.43271pt.
  [34 <./obrazky-figures/screenshot_collection_create.png> <./obrazky-figures/screenshot_components.png>]
-<obrazky-figures/screenshot_component_update.png, id=1170, 3597.44pt x 2248.4pt>
+<obrazky-figures/screenshot_component_update.png, id=1170, 4111.36pt x 2569.6pt>
 File: obrazky-figures/screenshot_component_update.png Graphic file (type png)
 <use obrazky-figures/screenshot_component_update.png>
 Package pdftex.def Info: obrazky-figures/screenshot_component_update.png  used on input line 1018.
-(pdftex.def)             Requested size: 305.8058pt x 191.12863pt.
+(pdftex.def)             Requested size: 349.49234pt x 218.43271pt.
  [35 <./obrazky-figures/screenshot_component_update.png>]
-<obrazky-figures/screenshot_slack-home.png, id=1178, 3597.44pt x 2248.4pt>
+<obrazky-figures/screenshot_slack-home.png, id=1178, 4111.36pt x 2569.6pt>
 File: obrazky-figures/screenshot_slack-home.png Graphic file (type png)
 <use obrazky-figures/screenshot_slack-home.png>
 Package pdftex.def Info: obrazky-figures/screenshot_slack-home.png  used on input line 1040.
-(pdftex.def)             Requested size: 305.8058pt x 191.12863pt.
+(pdftex.def)             Requested size: 349.49234pt x 218.43271pt.
 
 Underfull \hbox (badness 10000) in paragraph at lines 1044--1045
 
  []
 
 [36 <./obrazky-figures/screenshot_slack-home.png>]
-<obrazky-figures/screenshot_slack_collections.png, id=1191, 3597.44pt x 2248.4pt>
+<obrazky-figures/screenshot_slack_collections.png, id=1185, 4111.36pt x 2569.6pt>
 File: obrazky-figures/screenshot_slack_collections.png Graphic file (type png)
 <use obrazky-figures/screenshot_slack_collections.png>
 Package pdftex.def Info: obrazky-figures/screenshot_slack_collections.png  used on input line 1063.
-(pdftex.def)             Requested size: 305.8058pt x 191.12863pt.
+(pdftex.def)             Requested size: 349.49234pt x 218.43271pt.
  [37 <./obrazky-figures/screenshot_slack_collections.png>]
 Kapitola 7.
 
@@ -1325,7 +1325,7 @@ Here is how much of TeX's memory you used:
  1144 hyphenation exceptions out of 8191
  48i,18n,65p,906b,1974s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2019/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}{/usr/local/texlive/2019/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}{/usr/local/texlive/2019/texmf-dist/fonts/enc/dvips/opensans/opensans-03.enc}{/usr/local/texlive/2019/texmf-dist/fonts/enc/dvips/opensans/opensans-02.enc}{/usr/local/texlive/2019/texmf-dist/fonts/enc/dvips/opensans/opensans-04.enc}{/usr/local/texlive/2019/texmf-dist/fonts/enc/dvips/opensans/opensans-01.enc}</usr/local/texlive/2019/texmf-dist/fonts/type1/public/opensans/OpenSans-Bold.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/lm/lmbx10.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/lm/lmbx12.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/lm/lmcsc10.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/lm/lmr10.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/lm/lmr6.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/lm/lmr8.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/lm/lmr9.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/lm/lmri10.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/lm/lmsy10.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/lm/lmtk10.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/lm/lmtt10.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/lm/lmtt9.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on /Users/jozefhruska/Development/School/BP/slackify/resources/thesis/main/.texpadtmp/xhrusk25-slack-api-headless-cms.pdf (47 pages, 2069174 bytes).
+Output written on /Users/jozefhruska/Development/School/BP/slackify/resources/thesis/main/.texpadtmp/xhrusk25-slack-api-headless-cms.pdf (47 pages, 2128440 bytes).
 PDF statistics:
  1395 PDF objects out of 1440 (max. 8388607)
  1242 compressed objects within 13 object streams
