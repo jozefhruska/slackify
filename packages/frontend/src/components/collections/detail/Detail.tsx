@@ -14,6 +14,7 @@ import { Button } from '../../common/misc';
 import { OpenCreateUpdateModal } from '../../../actions/components';
 
 import * as S from './Detail.styles';
+import { canCreateComponents } from '../../../utils/users';
 
 /* Props - <Detail />
 ============================================================================= */
@@ -111,6 +112,7 @@ const Detail: React.FC<Props> = ({ user, collection }) => {
         <PageSubHeader heading="Components">
           <Button
             icon={<FiPlus />}
+            disabled={!canCreateComponents(user?.role)}
             onClick={() =>
               dispatch({
                 type: '[COMPONENTS] OPEN_CREATE_UPDATE_MODAL',
