@@ -5,7 +5,7 @@ import { Component } from '@prisma/client';
 /**
  * Filters collection by a team so user is not able to view data of other teams.
  */
-export const collectionsMiddleware: IMiddleware<unknown, Context> = async (
+export const teamIdMiddleware: IMiddleware<unknown, Context> = async (
   resolve,
   root,
   args,
@@ -14,7 +14,7 @@ export const collectionsMiddleware: IMiddleware<unknown, Context> = async (
 ) => {
   let modifiedArgs = args;
 
-  if (!root && info.fieldName === 'collections') {
+  if (!root && (info.fieldName === 'collections' || info.fieldName === 'components')) {
     modifiedArgs = {
       ...modifiedArgs,
       where: {

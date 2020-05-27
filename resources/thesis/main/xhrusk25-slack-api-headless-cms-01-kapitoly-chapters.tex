@@ -1,14 +1,14 @@
 % Úvod
 %---------------------------------------------------------------------------
 \chapter{Úvod}
-Tradičné redakčné systémy pre správu obsahu sú obvykle zostavené z~dvoch hlavných súčastí -- \emph{administračného} a \emph{verejného webového rozhrania}. Administračné rozhranie slúži pre tvorbu a úpravu obsahu, webové na jeho nasledné zobrazenie. Webové rozhranie je typicky jednotné pre všetky typy zariadení na ktorých je zobrazované, tzn. že jeho používanie často nie je optimálne (napr. na mobilných telefónoch s~dotykovou obrazovkou).
+Tradičné redakčné systémy pre správu obsahu sú obvykle zostavené z~dvoch hlavných súčastí -- \emph{administračného} a \emph{verejného webového rozhrania}. Administračné rozhranie slúži pre tvorbu a úpravu obsahu, webové na jeho následné zobrazenie. Webové rozhranie je typicky jednotné pre všetky typy zariadení, na ktorých je zobrazované, tzn. že jeho používanie často nie je optimálne (napr. na mobilných telefónoch s~dotykovou obrazovkou).
 
-Pre tento dôvod sa začali využívať systémy bez webového rozhrania, disponujúce klasickým administračným a \emph{verejným aplikačným rozhraním} (API\footnote{API -- Application programming interface}), ktoré umožňuje obsah získať a následne ho zobraziť optimálne na ľubovoľnej platforme. Takéto redakčné systémy sa nazývajú \emph{Headless CMS}. Súčasné Headless CMS sú často robustné systémy, ktoré však vyžadujú komplexnú konfiguráciu predtým, ako ich je možné začať využívať. Niektoré takéto systémy potrebujú aj vlastnú infraštruktúru pre ich nasadenie. Tieto skutočnosti otvárajú priestor pre taký Headless CMS, ktorý by pomohol vyriešiť tieto prekážky. Takýto redakčný systém je cieľom tejto práce.
+Z tohto dôvodu sa začali využívať redakčné systémy bez webového rozhrania, disponujúce klasickým administračným a \emph{verejným aplikačným rozhraním} (API\footnote{API -- Application programming interface}), ktoré umožňuje obsah získať a následne ho zobraziť optimálne na ľubovoľnej platforme. Takéto redakčné systémy sa nazývajú \emph{Headless CMS}. Súčasné Headless CMS sú často robustné systémy, ktoré však vyžadujú komplexnú konfiguráciu predtým, ako ich je možné začať využívať. Niektoré takéto systémy potrebujú aj vlastnú infraštruktúru pre ich nasadenie. Tieto skutočnosti otvárajú priestor pre taký Headless CMS, ktorý by pomohol vyriešiť tieto prekážky. Takýto redakčný systém je cieľom tejto práce.
 
 Navrhovaný systém poskytuje možnosť správy obsahu bez nutnosti úvodnej konfigurácie a infraštruktúry. Obsah je možné spravovať pomocou užívateľského rozhrania v~službe Slack alebo doplnkového webového rozhrania.
 
 \subsection*{Obsah kapitol}
-Prvá časť práce je venovaná teoretickým znalostiam nutným pre riešenie tejto práce. Kapitola \ref{theory:client_dev} popisuje vývoj klientských aplikácií, kapitola \ref{theory:server_dev} vývoj serverových aplikácií a kapitola~\ref{theory:headless} koncepcií headless redakčného systému. V~druhej časti práce kapitola \ref{design} popisuje návrh riešenia, kapitola \ref{impl} implementáciu jednotlivých častí návrhu a kapitola \ref{test} priebežné a finálne testovanie výsledného riešenia. Posledná kapitola \ref{conc} obsahuje záverečné zhrnutie a hodnotenie autora práce.
+Prvá časť práce je venovaná teoretickým znalostiam nutným pre riešenie tejto práce. Kapitola \ref{theory:client_dev} popisuje vývoj klientských aplikácií, kapitola \ref{theory:server_dev} vývoj serverových aplikácií a kapitola~\ref{theory:headless} koncepciu headless redakčných systémov. V~druhej časti práce kapitola \ref{design} popisuje návrh riešenia, kapitola \ref{impl} implementáciu jednotlivých častí návrhu a kapitola \ref{test} priebežné a finálne testovanie výsledného riešenia. Posledná kapitola \ref{conc} obsahuje záverečné zhrnutie a hodnotenie autora práce.
 
 % Vývoj klientských aplikácii
 %---------------------------------------------------------------------------
@@ -21,40 +21,40 @@ Sekcia \ref{theory:UX} sa venuje základným pravidlám user experience\footnote
 % User Experience (UX)
 \section{User experience (UX)}
 \label{theory:UX}
-Prí návrhu uživateľského rozhrania je jedným z~najdôležiteľších parametrov \emph{uživateľská skúsenosť}. Dizajnéri sa snažia zaistiť aby ich návrh bol intuitívny, jednoduchý, ale zároveň aj plne použiteľný a originálny. Pri UX analýze sa dizajnér snaží vnímať svoj návrh zo strany koncového užívateľa. Vo svete však neexistuje jednotná definícia úkonov, ktoré vedú k~dokonalému uživateľskému zážitku.
+Pri návrhu uživateľského rozhrania je jedným z~najdôležitejších parametrov \emph{uživateľská skúsenosť}. Dizajnéri sa snažia zaistiť aby ich návrh bol intuitívny, jednoduchý, ale zároveň aj plne použiteľný a originálny. Pri UX analýze sa dizajnér snaží vnímať svoj návrh zo strany koncového užívateľa. Vo svete však neexistuje jednotná definícia úkonov, ktoré vedú k~dokonalému uživateľskému zážitku.
 
 \subsection{Porozumenie potrebám užívateľa}
-Dizajnér sa pri návrhu pozerá na produkt ako jeho koncový užívateľ. Analyzuje potreby, pre ktoré sa uživateľ rozhodol produkt využívať, ale aj problémy, ktoré užívateľovi bránia v~jednoduchom a intuitívnom používaní daného produktu. Po porozumení potrieb užívateľa príchádza z~riešeniami, ktoré by však nemali vytvoriť ďaľšie problémy a prekážky v~používaní produktu.
+Dizajnér sa pri návrhu pozerá na produkt ako jeho koncový užívateľ. Analyzuje potreby, pre ktoré sa uživateľ rozhodol produkt využívať, ale aj problémy, ktoré užívateľovi bránia v~jednoduchom a intuitívnom používaní daného produktu. Po porozumení potrieb užívateľa prichádza s~riešeniami, ktoré by však nemali vytvoriť ďaľšie problémy a prekážky v~používaní produktu.
 
 \subsection{Prístupnosť (Accessibility)}
-Veľmi jednoducho dosiahnuteľná, ale často zanedbávaná vlastnosť je dobrá prístupnosť (použiteľnosť) pre ľudí so zdravotnými znevýhodneniami. Dizajnér musí zaistiť, aby farebné pozadia jednotlivých prvkov mali dostatočný kontrast od ich obsahu,alebo zvýrazniť prvok v~prípade, že je užívateľom (túto vlastnosť majú v~určitej podobe vstavané aj niektoré webové prehliadače, avšak nie vždy optimálne).
+Veľmi jednoducho dosiahnuteľná, ale často zanedbávaná vlastnosť je dobrá prístupnosť (použiteľnosť) pre ľudí so zdravotnými znevýhodneniami. Dizajnér musí zaistiť, aby farebné pozadia jednotlivých prvkov mali dostatočný kontrast s ich obsahom, alebo zvýrazniť prvok v~prípade, že je užívateľom používaný (túto vlastnosť majú v~určitej podobe vstavané aj niektoré webové prehliadače, avšak nie vždy optimálne).
 
 % HTML
 \section{HTML}
 \label{theory:HTML}
 HTML (Hypertext Markup Language) je \emph{značkovací jazyk}, pomocou ktorého je možné popísať štruktúru webových stránok. Skladá sa zo stromu elementov [\ref{theory:HTML:elements}], ktoré majú svoj obsah, parametre a sú ohraničené pomocou značiek (tags).
 
-\blockquote[MDN \cite{MDN}]{HTML je nejzákladnejším stavebným kameňom webových stránok. \uv{Hypertext}, v~názve odkazuje k~možnosti vytvorenia odkazov, ktorými je možné prepojiť webové stránky.}
+\blockquote[MDN \cite{MDN}]{HTML je najzákladnejším stavebným kameňom webových stránok. \uv{Hypertext}, v~názve odkazuje k~možnosti vytvorenia odkazov, ktorými je možné prepojiť webové stránky.}
 
 \noindent Pre zobrazovanie HTML slúžia webové prehliadače. Každý webový prehliadač postupuje pri vykresľovaní niektorých častí HTML inak ako ostatné, preto je nutné skontrolovať či je webová stránka správne zobrazená na viacerých webových prehliadačoch.
 
 \subsection{Elementy}
 \label{theory:HTML:elements}
-HTML element je oddelený od zbytku textu v~dokumente pomocou značiek (tags), ktoré pozostávajú z~názvu elementu ohraničeného znakmi \uv{\texttt{<}} a \uv{\texttt{>}}. Názov elementu vo vnútri značky je \emph{case insensitive}, tzn. že nezáleží či je písaný veľkými alebo malými písmenami. Napríklad značka \texttt{<title>} môže byť napísaná aj ako \texttt{<Title>} alebo \texttt{<TITLE>}. Všetky tieto zápisy sú správne. \cite{MDN} \\
+HTML element je oddelený od zbytku textu v~dokumente pomocou značiek, ktoré pozostávajú z~názvu elementu ohraničeného znakmi \uv{\texttt{<}} a \uv{\texttt{>}}. Názov elementu vo vnútri značky je \emph{case insensitive}, tzn. že nezáleží či je písaný veľkými alebo malými písmenami. Napríklad značka \texttt{<title>} môže byť napísaná aj ako \texttt{<Title>} alebo \texttt{<TITLE>}. Všetky tieto zápisy sú správne. \cite{MDN} \\
 
-\noindent Značky sa klasifikujú na dve skupiny -- \emph{párové} a \emph{nepárové}. Párové značky sú také, ktoré obsah elementu ohraničujú otvárajúcou (\texttt{<title>}) a uzatvárajúcou (\texttt{</title>}) značkou. Nepárové značky sú také, ktoré nemajú svoju uzatvárajúcu značku, napríklad obrázok (\texttt{<img />}). \\
+\noindent Značky sa rozdeľujú do dvoch skupín -- \emph{párové} a \emph{nepárové}. Párové značky sú také, ktoré obsah elementu ohraničujú otvárajúcou (\texttt{<title>}) a uzatvárajúcou (\texttt{</title>}) značkou. Nepárové značky sú také, ktoré nemajú svoju uzatvárajúcu značku, napríklad obrázok (\texttt{<img />}). \\
 
 \noindent Zoznam niektorých najpoužívanejších elementov:
 \begin{itemize}
-	\item \texttt{head} -- Obsahuje strojom čítateľné informácie (metadáta) o~dokumente ako napríklad titulok, skripty alebo štýly. \cite{MDN}
+	\item \texttt{head} -- Obsahuje strojom čitateľné informácie (metadáta) o~dokumente ako napríklad titulok, skripty alebo štýly. \cite{MDN}
 	\item \texttt{body} -- Reprezentuje obsah HTML dokumentu, pričom sa v~jednom dokumente môže nachádzať maximálne raz. \cite{MDN}
 	\item \texttt{title} -- Definuje titulok dokumentu, ktorý je zobrazený vo webovom prehliadači. \cite{MDN}
-	\item \texttt{button} -- Reprezentuje klikateľné tlačidlo, použiteľné napríklad pre potvrdzovanie formulárov alebo kdekoľvek inde v~HTML dokumente ako štandardné tlačidlo. Tlačidlá sú v~štýle jednotnom s~platformou na ktorej sú zobrazované, ak nie sú priložené štýly, ktoré by ich upravovali. \cite{MDN}
+	\item \texttt{button} -- Reprezentuje klikateľné tlačidlo, použiteľné napríklad pre potvrdzovanie formulárov alebo kdekoľvek inde v~HTML dokumente ako štandardné tlačidlo s ľubovoľnou akciou. Tlačidlá sú v~štýle jednotnom s~platformou, na ktorej sú zobrazované, ak nie sú priložené štýly, ktoré by ich upravovali. \cite{MDN}
 \end{itemize}
 
 % CSS
 \section{CSS}
-CSS (Cascading Style Sheets) je deklaratívny jazyk, ktorý dokáže kontrolovať ako sa webový stránky zobrazujú vo webových prehliadačoch. Prehliadače aplikujú CSS štýly priamo na elementy nimi upravené a potom ich zobrazia. Deklarácie štýlov obsahujú \emph{vlastnosti} a~ich \emph{hodnoty}, ktoré určujú ako má webová stránka vyzerať. \cite{MDN} \\
+CSS (Cascading Style Sheets) je deklaratívny jazyk, ktorý dokáže kontrolovať ako sa webové stránky zobrazujú vo webových prehliadačoch. Prehliadače aplikujú CSS štýly priamo na elementy nimi upravené a potom ich zobrazia. Deklarácie štýlov obsahujú \emph{vlastnosti} a~ich \emph{hodnoty}, ktoré určujú ako má webová stránka vyzerať. \cite{MDN} \\
 
 \noindent CSS je možné pridať do HTML dokumentu tromi spôsobmi: 
 \begin{itemize}
@@ -98,17 +98,17 @@ TypeScript je obvykle vhodné skompilovať do natívneho JavaScriptu pre zachova
 
 \medskip
 
-\noindent Využitie programovacieho jazyka TypeScript nie je limitované pre vývoj klientských aplikácii. Rovnako ako pri JavaScripte sa jedná o~univerzálny programovací jazyk, ktorý je vďaka nástrojom ako Node.js [\ref{subsection:nodejs}] možné využiť napríklad aj na tvorbu serverových aplikácií.
+\noindent Využitie programovacieho jazyka TypeScript nie je limitované pre vývoj klientských aplikácií. Rovnako ako pri JavaScripte sa jedná o~univerzálny programovací jazyk, ktorý je vďaka nástrojom ako Node.js [\ref{theory:nodejs}] možné využiť napríklad aj na tvorbu serverových aplikácií.
 
 % React
 \section{React}
 \label{theory:react}
-Populárna JavaScriptová knižnica pre \emph{budovanie uživateľských rozhraní}. React je deklaratívny, efektívny a flexibilný. Dovoľuje vytvárať uživateľské rozhrania zložené z~malých izolovaných častí kódu, nazývaných \emph{komponenty} [\ref{theory:components}]. \cite{React}
+Populárna JavaScriptová knižnica pre \emph{budovanie užívateľských rozhraní}. React je deklaratívny, efektívny a flexibilný. Dovoľuje vytvárať užívateľské rozhrania zložené z~malých izolovaných častí kódu, nazývaných \emph{komponenty} [\ref{theory:components}]. \cite{React}
 
 \subsection{JSX}
-Syntaktické rozšírenie JavaScriptu inšpirované značkovacími jazykmi, avšak s~možnosťou využívať plné schpnosti JavaScriptu. JSX vzniklo z~dôvodu, že v~moderných webových aplikáciach bolo čoraz častejšie nutné spájať vykreslovaciu logiku a logiku uživateľských rozhraní. \cite{React} \\
+Syntaktické rozšírenie JavaScriptu inšpirované značkovacími jazykmi, avšak s~možnosťou využívať plné schopnosti JavaScriptu. JSX vzniklo z~dôvodu, že v~moderných webových aplikáciach bolo čoraz častejšie nutné spájať vykresľovaciu logiku a logiku užívateľských rozhraní. \cite{React} \\
 
-\begin{lstlisting}[language=TypeScript, caption=Príklad využitia JSX v~React aplikácií. \cite{React}]
+\begin{lstlisting}[language=TypeScript, caption=Príklad využitia JSX v~React aplikácii. \cite{React}]
 	const name = "Jozef";
 	const element = <h1>Hello, {name}!</h1>;
 
@@ -136,7 +136,7 @@ Syntaktické rozšírenie JavaScriptu inšpirované značkovacími jazykmi, avš
 
 \medskip
 
-\noindent Tieto objekty slúžia Reactu ako \uv{popis} pre zobrazenie. Využíva ich pre zostavenie a urdržovanie aktuálneho DOM\footnote{DOM -- document object model}. \cite{React}
+\noindent Tieto objekty slúžia Reactu ako \uv{popis} pre zobrazenie. Využíva ich pre zostavenie a udržovanie aktuálneho DOM\footnote{DOM -- document object model}. \cite{React}
 
 \subsection{Komponenty}
 \label{theory:components}
@@ -198,7 +198,7 @@ Najväčším problémom moderných React a celkovo JavaScriptových aplikácií
 
 Serverové aplikácie je možné implementovať v~rôznych programovacích jazykoch, no medzi najpoužívanejšie patrí PHP, Java, Python alebo JavaScript (popr. rozšírenie TypeScript). Aplikácia má obvykle určený komunikačný protokol, pomocou ktorého prijíma požiadavky a odosiela odpovede.
 
-Táto kapitola pojednáva o~základných princípoch vývoja serverových aplikácií. Sekcia \ref{theory:HTTP} je venovaná komunikačnému protokolu HTTP, sekcia \ref{theory:nodejs} JavaScriptovému prostrediu pre tvorbu sieťových aplikcií Node.js, sekcia \ref{theory:databases} relačným databázam, sekcia \ref{theory:graphql} špecifikácií GraphQL. Posledná sekcia \ref{theory:slack_api} je venovaná verejnej API služby Slack, ktorej znalosť je nutná pre vytvorenie tejto práce.
+Táto kapitola pojednáva o~základných princípoch vývoja serverových aplikácií. Sekcia \ref{theory:HTTP} je venovaná komunikačnému protokolu HTTP, sekcia \ref{theory:nodejs} JavaScriptovému prostrediu pre tvorbu sieťových aplikcií Node.js, sekcia \ref{theory:databases} relačným databázam, sekcia \ref{theory:graphql} špecifikácii GraphQL. Posledná sekcia \ref{theory:slack_api} je venovaná verejnej API služby Slack, ktorej znalosť je nutná pre vytvorenie tejto práce.
 
 % HTTP
 \section{HTTP}
@@ -247,16 +247,16 @@ Asynchrónny, udalosťami riadený Javascriptový runtime\footnote{runtime -- be
 \noindent Node.js umožňuje spustiť JavaScriptový kód mimo prostredia webových prehliadačov a poskytuje rozšírené funkcionality ako prístup k~súborovému systému alebo kryptografické metódy.
 
 \subsection{Node Package Manager - NPM}
-Najväčší softvérový register na svete. NPM umožňuje vývojárom open-source softvéru zdieľať JavaScriptové balíčky verejne alebo si vytvoriť súkromný repozitár a balíčky zdieľať iba v~organizácií. \cite{NPM} \\
+Najväčší softvérový register na svete. NPM umožňuje vývojárom open-source softvéru zdieľať JavaScriptové balíčky verejne alebo si vytvoriť súkromný repozitár a balíčky zdieľať iba v~organizácii. \cite{NPM} \\
 
 \noindent NPM je rozdelené do troch hlavných častí:
 \begin{itemize}
-	\item \texttt{\href{https://npmjs.com/}{Webová stránka}} -- Vyhľadávanie balíčkov, správu profilov a organizácií. \cite{NPM}
+	\item \texttt{\href{https://npmjs.com/}{Webová stránka}} -- Vyhľadávanie balíčkov, správu profilov a organizácii. \cite{NPM}
 	\item \texttt{Command Line Interface (CLI)} -- Konzolové rozhranie pre interakciu s~NPM. \cite{NPM}
 	\item \texttt{Register} -- Verejná databáza JavaScriptového softvéru a metadát. \cite{NPM}
 \end{itemize}
 
-\noindent Hlavnou časťou je pre vývojára práve \texttt{CLI}, ktoré mu umožňuje spravovať balíčky vo svojej aplikácií. Nainštalované balíčky ale ich závislosti sú inštalované do zložky v~koreňovom adresári projektu \texttt{node\_modules}. Nastavenia, informácie o~projekte a~zoznam nainštalovaných balíčkov sa uchováva v~súbore \texttt{package.json}, taktiež umiestenom v~koreňovom adresári projektu.
+\noindent Hlavnou časťou je pre vývojára práve \texttt{CLI}, ktoré mu umožňuje spravovať balíčky vo svojej aplikácii. Nainštalované balíčky a ich závislosti sú uložné do zložky v~koreňovom adresári projektu \texttt{node\_modules}. Nastavenia, informácie o~projekte a~zoznam nainštalovaných balíčkov sa uchováva v~súbore \texttt{package.json}, taktiež umiestenom v~koreňovom adresári projektu.
 
 % Relačné databázy
 \section{Relačné databázy}
@@ -286,9 +286,9 @@ Prisma je open-source \emph{sada nástrojov pre správu databázy}. Nahradzuje t
 % GraphQL
 \section{GraphQL}
 \label{theory:graphql}
-Dotazovací (query) jazyk pre API a runtime na strane servera pre vykonávanie dotazov pomocou \emph{vopred definovaného} typového systému. GraphQL nie je viazané žiadnou špecifickou technológou ukladania dát, naopak pracuje ako backend pre už existujúci kód a~dáta. \cite{GraphQL} GraphQL nie je implementácia, ale iba špecifikácia. Existujú mnohé implementácie GraphQL implementované v~mnohých programovacích jazykoch, na rôznych platformách. \\
+Dotazovací (query) jazyk pre API a runtime na strane servera pre vykonávanie dotazov pomocou \emph{vopred definovaného} typového systému. GraphQL nie je viazané žiadnou špecifickou technológiou ukladania dát, naopak pracuje ako backend pre už existujúci kód a~dáta. \cite{GraphQL} GraphQL nie je implementácia, ale iba špecifikácia. Existujú mnohé implementácie GraphQL v~rôznych programovacích jazykoch, na rozlišných platformách. \\
 
-\noindent GraphQL služba je vytvorená definovaním typov a ich jednotlivých polí. Každému polu každého typu je následne priradená funkcia. \cite{GraphQL} Tieto funkcie sú nazývané \uv{\emph{resolvers}}. Tieto funkcie vyhodnocujú dáta jednotlivých polí pri prichádzajúcej požiadavke. \\
+\noindent GraphQL služba je vytvorená definovaním typov a ich jednotlivých polí. Každému polu každého typu je následne priradená funkcia. \cite{GraphQL} Tieto funkcie sú nazývané \uv{\emph{resolvers}} a vyhodnocujú dáta jednotlivých polí pri prichádzajúcej požiadavke. \\
 
 \begin{lstlisting}[label=lstlisting:graphql_schema, language=GraphQL, caption=Príklad jednoduchej GraphQL schémy. \cite{GraphQL}]
 	type Query {
@@ -305,7 +305,7 @@ Dotazovací (query) jazyk pre API a runtime na strane servera pre vykonávanie d
 
 \noindent Po spustení GraphQL služby (typicky URL adresa dostupná cez HTTPS) očakáva GraphQL dotazy, ktoré spracováva a vyhodnocuje. Obdržané dotazy najskôr skontroluje, či požadujú iba typy a polia, ktoré sú definované. V~prípade, že sú dotazy v~poriadku, Graphql spustí požadované resolvery a vracia výsledok. \cite{GraphQL} \\
 
-\noindent GraphQL rozlišuje tri typy operácií s~dátami. Prvý typ operácie je \emph{query} a slúži výhradne na čítanie dát. Druhým typ operácie sa nazýva \emph{mutation} a slúži na úpravu, vkladanie alebo odstránenie dát. Tretím a posledným typom operácie je \emph{subscription}. Ak GraphQL služba spracuje operáciu typu \emph{subscription}, pošle vyžiadané dáta klientovi pri každej ich zmene. \\
+\noindent GraphQL rozlišuje tri typy operácií s~dátami. Prvý typ operácie je \emph{query} a slúži výhradne na čítanie dát. Druhý typ operácie sa nazýva \emph{mutation} a slúži na úpravu, vkladanie alebo odstránenie dát. Tretím a posledným typom operácie je \emph{subscription}. Ak GraphQL služba spracuje operáciu typu \emph{subscription}, pošle vyžiadané dáta klientovi pri každej ich zmene. \\
 
 \noindent Pre ukážku, \emph{query} dotaz na GraphQL službu so schémou ukázanou vo výpise \ref{lstlisting:graphql_schema}: \\
 
@@ -350,32 +350,32 @@ Serverová časť GraphQL implementácie, kompatibilná so všetkými GraphQL ki
 % Slack API
 \section{Slack API}
 \label{theory:slack_api}
-Služba pre tímovú a pracovnú komunikáciu Slack umožňuje vývojárom vytvoriť vlastné aplikácie (Slack apps). Tieto aplikácie následne môžu vykonávať rôzne akcie v~pracovných prostrediach, v~ktorých sú nainštalované. Vo svojej podstate je Slack aplikácia iba HTTP server komunikujúci s~verejnou API služby Slack. Vždy, keď užívateľ v aplikácií vykoná nejakú akciu, Slack API upozorní HTTP server danej aplikácie, ktorý akciu spracuje a vyhodnotí (napr. otvorí dialógové okno). \\
+Služba pre tímovú a pracovnú komunikáciu Slack umožňuje vývojárom vytvoriť vlastné aplikácie (Slack apps). Tieto aplikácie následne môžu vykonávať rôzne akcie v~pracovných prostrediach, v~ktorých sú nainštalované. Vo svojej podstate je Slack aplikácia iba HTTP server komunikujúci s~verejným API služby Slack. Vždy, keď užívateľ v aplikácii vykoná nejakú akciu, Slack API upozorní HTTP server danej aplikácie, ktorý akciu spracuje a vyhodnotí (napr. otvorí dialógové okno). \\
 
-\noindent Aplikácie môžu vykonávať niektoré akcie bežných užívateľov:
+\noindent Aplikácie môžu vykonávať niektoré akcie bežných užívateľov \cite{SlackAPI}:
 
 \begin{itemize}
-	\item \emph{Odosielať správy} do rôznych koverzácií. \cite{SlackAPI}
-	\item \emph{Čítať správy a konverzácie}. \cite{SlackAPI}
-	\item \emph{Vytvoriť, archivovať a spravovať konverzácie}. \cite{SlackAPI}
-	\item \emph{Reagovať na označenia} od užívateľov. \cite{SlackAPI}
+	\item \emph{Odosielať správy} do rôznych koverzácií.
+	\item \emph{Čítať správy a konverzácie}.
+	\item \emph{Vytvoriť, archivovať a spravovať konverzácie}.
+	\item \emph{Reagovať na označenia} od užívateľov.
 \end{itemize}
 
-\ldots no verejná API aplikáciam umožňuje aj akcie mimo uživateľských práv:
+\ldots no verejná API aplikáciam umožňuje aj akcie mimo uživateľských práv \cite{SlackAPI}:
 
 \begin{itemize}
-	\item \emph{Otvoriť dialógové okná} pre získanie alebo zobrazenie extra informácií. \cite{SlackAPI}
-	\item \emph{Zostaviť interaktívne komponenty} na ktoré môzu reagovať \cite{SlackAPI}
-	\item \emph{Vytvoriť a aktualizovať \uv{Home tab} (domovskú obrazovku)} kde môže užívateľ interagovať s~aplikáciou. \cite{SlackAPI}
-	\item \emph{Definovať skratky} vďaka ktorým užívateľ môže rýchlo vykonať akcie v~aplikácií. \cite{SlackAPI}
+	\item \emph{Otvoriť dialógové okná} pre získanie alebo zobrazenie extra informácií.
+	\item \emph{Zostaviť interaktívne komponenty} na ktoré môzu reagovať.
+	\item \emph{Vytvoriť a aktualizovať \uv{Home tab} (domovskú obrazovku)} kde môže užívateľ interagovať s~aplikáciou.
+	\item \emph{Definovať skratky} vďaka ktorým užívateľ môže rýchlo vykonať akcie v~aplikácii.
 \end{itemize}
 
 \subsection{Block Kit}
-Framework pre tvorbu uživateľského rozhrania v~Slack aplikáciách, ktorý ponúka kompromis kontroly a flexibility pri budovaní rozhraní v~správach. \cite{SlackAPI}
+Framework pre tvorbu užívateľského rozhrania v~Slack aplikáciách, ktorý ponúka kompromis kontroly a flexibility pri budovaní rozhraní v~správach. \cite{SlackAPI}
 
-Užívateľské rozhranie v~Slack aplikácií sa skladá z~blokov rôznych typov vo forme JSON objektov usporiadaných do lineárneho zoznamu. \\
+Užívateľské rozhranie v~Slack aplikácii sa skladá z~blokov rôznych typov vo forme JSON objektov usporiadaných do lineárneho zoznamu. \\
 
-\begin{lstlisting}[caption=Príklad jednoduchého bloku v~Slack aplikácií.]
+\begin{lstlisting}[caption=Príklad jednoduchého bloku v~Slack aplikácii.]
 	{
 		"type": "section",
 		"text": {
@@ -418,7 +418,7 @@ Takéto systémy typicky disponujú rozhraním REST\footnote{REST -- Representat
 
 % Existujúce riešenia
 \section{Existujúce riešenia}
-Headless redakčné systémy získavajú na popularite a v~súčasnej dobe existuje množstvo riešení, ktoré sa typicky rozdeľujú do dvoch skupín podľa ukladania a správy dát -- \emph{API-based} a \emph{Git-based}. V~tejto sekcií sú predstavené dva najpopulárnejšie systémy z~každej kategórie.
+Headless redakčné systémy získavajú na popularite a v~súčasnej dobe existuje množstvo riešení, ktoré sa typicky rozdeľujú do dvoch skupín podľa ukladania a správy dát -- \emph{API-based} a \emph{Git-based}. V~tejto sekcii sú predstavené dva najpopulárnejšie systémy z~každej kategórie.
 
 \subsection{Strapi}
 Najpopulárnejší \emph{API-based} headless redakčný systém. Disponuje administračným panelom zostaveným na mieru, REST aj GraphQL rozhraním, systémom uživateľských práv a mnohými inými vlastnosťami. Tento redakčný systém má aj vlastný obchod s~aplikáciami, ktoré si môžu používatelia pridať a tým rozšíriť funkcionalitu. 
@@ -445,7 +445,7 @@ Najpopulárnejší \emph{Git-based} headless redakčný systém. Netlify na rozd
 
 \blockquote[Dokumentácia Netlify CMS \cite{NetlifyDocs}]{Jadro Netlify CMS tvorí React [\ref{theory:react}] aplikácia ktorá využíva rozhranie pre prácu s~GitHub\footnote{\href{https://developer.github.com/v3/}{https://developer.github.com/v3/}}, GitLab\footnote{\href{https://docs.gitlab.com/ee/api/}{https://docs.gitlab.com/ee/api/}} alebo Bitbucket\footnote{\href{https://confluence.atlassian.com/bitbucket/}{https://confluence.atlassian.com/bitbucket/}} API.}
 
-\noindent Netlify sa využíva väčšinou pre menšie stránky ako sú napríklad dokumentácie alebo produktové stránky, pretože umožňuje udržovať obsah relevantný k~danej verzií produktu. \\
+\noindent Netlify sa využíva väčšinou pre menšie stránky ako sú napríklad dokumentácie alebo produktové stránky, pretože umožňuje udržovať obsah relevantný k~danej verzii produktu. \\
 
 \noindent \textbf{Výhody:} Veľmi jednoduchý na používanie, nevyžaduje vlastnú databázu.
 
@@ -481,6 +481,27 @@ Slack API umožňuje vytvoriť uživateľské rozhranie zložené z~maximálneho
 \subsection{Porovnanie s~existujúcimi riešeniami}
 Slackify patrí do kategórie \emph{API-driven} headless redakčných systémov. Na rozdiel od iných systémov z~tejto kategórie však Slackify nevyžaduje žiadnu vstupnú konfiguráciu, pretože už disponuje vopred definovanými dátovými typmi, ktoré je možné distribuovať. Redakčný systém je teda možné využívať okamžite, no za cenu menšej flexibility.
 
+% Dátové typy redakčného systému
+\section{Dátové typy redakčného systému}
+\label{theory:data_types}
+Slackify je headless redakčný systém obsahujúci dva hlavné dátové typy -- \emph{collection} (kolekcia) a \emph{component} (komponent). Pomocou týchto dvoch dátových typov je možné vytvoriť logickú štruktúru obsahu, ktorú je možné následne distribuovať pomocou verejného API. Oba dátové typy uchovávajú okrem svojich vlastných parametrov aj momentálny stav uverejnenosti \emph{published}, repretenzovaný dátovým typom \texttt{boolean}.
+
+\subsection{Component}
+Component (komponent) je základná dátová struktúra v~Slackify. Celý obsah redakčného systému je zložený z~komponentov usporiadaných do kolekcií [\ref{design:collection}]. Každý komponent má povinnú položku \emph{type} (typ), ktorá určuje ďaľšie zloženie štruktúry.
+
+\subsubsection{Typ \uv{\texttt{Plain Text}}}
+Najjednoduchší typ obsahujúci jediné povinné textové pole s~názvom \emph{text}.
+
+\subsubsection{Typ \uv{\texttt{Article}}}
+Typ pre vytvorenie jednoduchého článku. Obsahuje povinné textové položky \emph{title} (titulok), \emph{content} (obsah článku) a nepovinnú textovú položku \emph{lead} (úvodný text).
+
+\subsubsection{Typ \uv{\texttt{Link}}}
+Typ pre vytvorenie hypertextového odkazu. Obsahuje povinnú textovú položku \emph{url} (cieľová adresa) a voliteľnú textovú položku \emph{text}.
+
+\subsection{Collection}
+\label{design:collection}
+Collection (kolekcia) je zoznam slúžiaci pre kategorizovanie jednotlivých komponentov. Každá kolekcia ich môže obsahovať 0 až $n$. Jedná sa o~\emph{homogénny zoznam}, tzn. že pri tvorbe kolekcie sa vždy musí zvoliť práve jeden typ komponentov, z~ktorých sa môže zoznam skladať. Každá kolekcia má povinnú položku \emph{name} (názov) a nepovinnú \emph{description} (popis).
+
 % Diagramy prípadov použitia
 \section{Diagramy prípadov použitia}
 \label{design:use_case}
@@ -492,11 +513,11 @@ Každému novému užívateľovi, ktorý prepojí svoj účet v~službe Slack so
 \noindent Užívateľ s~rolou \emph{Viewer} môže vykonávať nasledujúce akcie:
 
 \begin{itemize}
-	\item \texttt{Získať detail kolekcie/komponentu} -- Zobrazenie všetkých informácií o~kolekcií alebo alebo komponente. Dáta je možné iba čítať, nie modifikovať.
+	\item \texttt{Získať detail kolekcie/komponentu} -- Zobrazenie všetkých informácií o~kolekcii alebo komponente. Dáta je možné iba čítať, nie modifikovať.
 	\item \texttt{Získať list kolekcií/komponentov} -- Zobrazenie zoznamu kolekcií alebo komponentov. Komponenty je možné zobraziť všetky alebo podľa pridelených kolekcií. Dáta je možné iba čítať, nie modifikovať.
 \end{itemize}
 
-\begin{figure}[h]
+\begin{figure}[H]
 	\centering
 	\includegraphics[scale=0.9]{obrazky-figures/viewer_use_case}
 	\caption{Diagram prípadov použitia -- \emph{Viewer}.}
@@ -510,21 +531,21 @@ Užívateľská rola \emph{Author} zahŕňa všetky právomoci, ktoré mala rola
 	\item \texttt{Upraviť kolekciu/komponentu} -- Kolekcie alebo komponety je možné upraviť v~ľubovoľný čas. Jediná hodnota, ktorú nie je možné modifikovať je typ kolekcie alebo komponentu.
 \end{itemize}
 
-\begin{figure}[h]
+\begin{figure}[H]
 	\centering
 	\includegraphics[scale=0.9]{obrazky-figures/author_use_case}
-	\caption{Diagram prípadov použitia -- \emph{Autor}.}
+	\caption{Diagram prípadov použitia -- \emph{Author}.}
 \end{figure}
 
 \subsection{Editor}
 Užívateľská rola \emph{Editor} zahŕňa všetky právomoci, ktoré mala rola \emph{Author} a rozširuje ich o~možnosť vykonávať nasledujúce akcie:
 
 \begin{itemize}
-	\item \texttt{Zmazať kolekciu/komponent} -- Kolekcie alebo komponety je možné zmazať v~ľubovoľný čas. Pri zmazaní kolekcie sa zmazú aj všetky komponenty k~nej priradené.
+	\item \texttt{Zmazať kolekciu/komponent} -- Kolekcie alebo komponety je možné zmazať v~ľubovoľný čas. Pri zmazaní kolekcie sa zmažú aj všetky komponenty k~nej priradené.
 	\item \texttt{Publikovať kolekciu/komponent} -- Publikovaná kolekcia alebo komponent je okamžite dostupná verejne. \emph{Editor} rovnako môže kolekcie alebo komponenty skryť.
 \end{itemize}
 
-\begin{figure}[h]
+\begin{figure}[H]
 	\centering
 	\includegraphics[scale=0.9]{obrazky-figures/editor_use_case}
 	\caption{Diagram prípadov použitia -- \emph{Editor}.}
@@ -537,7 +558,7 @@ Užívateľská rola \emph{Owner} je rola s~najvyššími právomocami. Zahŕňa
 	\item \texttt{Zmeniť rolu užívateľa} -- Umožňuje modifikovať užívateľské role ostatných užívateľov. Užívateľ nemôže zmeniť rolu sám sebe. 
 \end{itemize}
 
-\begin{figure}[h]
+\begin{figure}[H]
 	\centering
 	\includegraphics[scale=0.9]{obrazky-figures/owner_use_case}
 	\caption{Diagram prípadov použitia -- \emph{Owner}.}
@@ -551,16 +572,14 @@ Obsah zo Slackify je možné získať z~verejného API prostredníctvom akéhoko
 \begin{itemize}
 	\item \texttt{Vyžiadať detail kolekcie/komponentu} -- Informácie o~jednej kolekcií alebo komponente je možné vyžiadať od API pomocou ich unikátneho ID.
 	\item \texttt{Vyžiadať list kolekcií} -- Zariadenie si môže vyžiadať zoznam kolekcií. Zoznam kolekcií je v~základnom nastavení zoradený chronologicky podľa času vytvorenia. Výsledky je možné zoradiť alebo filtrovať pomocou parametrov operácie.
-	\item \texttt{Vyžiadať list komponentov} -- Pomocou unikátneho ID kolekcie je možné vyžiadať k~nej priradené komponenty. V~prípade neuvedenia ID kolekcie je navrátený lisť všetkých komponentov v~danom Slack pracovnom prostredí (zoradené chronologicky podľa času vytvorenia). Výsledky je možné zoradiť alebo filtrovať pomocou parametrov operácie.
+	\item \texttt{Vyžiadať list komponentov} -- Pomocou unikátneho ID kolekcie je možné vyžiadať k~nej priradené komponenty. V~prípade neuvedenia ID kolekcie je navrátený list všetkých komponentov v~danom Slack pracovnom prostredí (zoradené chronologicky podľa času vytvorenia). Výsledky je možné zoradiť alebo filtrovať pomocou parametrov operácie.
 \end{itemize}
 
-\begin{figure}[h]
+\begin{figure}[H]
 	\centering
 	\includegraphics[scale=0.9]{obrazky-figures/device_use_case}
 	\caption{Diagram prípadov použitia -- \emph{Zariadenie}.}
 \end{figure}
-
-\pagebreak
 
 % Návrh architektúry
 \section{Návrh architektúry}
@@ -582,11 +601,11 @@ V~počiatočných návrhoch architektúry bol systém rozdelený do dvoch čast�
 \begin{itemize}
 	\item \texttt{frontend} -- Webová konzola poskytujúca prístup k~obsahu a nastaveniam Slackify. Táto časť zostala nezmenená.
 	\item \texttt{service-slack} -- Rozhranie zodpovedné za komunikáciu s verejným API služby Slack. Udalosti a akcie prichádzajúce zo Slack aplikácie sú smerované na túto službu, ktorá ich spracuje a vyhodnotí.
-	\item \texttt{service-private} -- Skryté GraphQL rozhranie poskytujúce prístup k~dátam a logiku pre \texttt{frontend}
+	\item \texttt{service-private} -- Skryté GraphQL rozhranie poskytujúce prístup k~dátam a logiku pre \texttt{frontend}.
 	\item \texttt{service-public} -- Verejné GraphQL rozhranie poskytujúce prístup k~obsahu redakčného systému.
 \end{itemize}
 
-\noindent Takáto architektúra sa oproti jednej veľkej \texttt{backend} službe ukázala výhodnejšia z~dvoch hlavných dôvodov. Prvým dôvodom je \emph{jednoduchšia údržba} (napríklad udržovanie logickej súborovej štruktúry bolo pri jednej monolitickej službe obtiažne). Druhým významným dôvodom je možnosť jednotlivé služby \emph{verziovať a vydávať samostatne}, pretože každá služba je nezávislá od ostatných.
+\noindent Takáto architektúra sa oproti jednej veľkej \texttt{backend} službe ukázala ako výhodnejšia z~dvoch hlavných dôvodov. Prvým dôvodom je \emph{jednoduchšia údržba} (napríklad udržovanie logickej súborovej štruktúry bolo pri jednej monolitickej službe obtiažne). Druhým významným dôvodom je možnosť jednotlivé služby \emph{verziovať a vydávať samostatne}, pretože každá služba je nezávislá od ostatných.
 
 \begin{figure}[h]
 	\centering
@@ -596,47 +615,26 @@ V~počiatočných návrhoch architektúry bol systém rozdelený do dvoch čast�
 
 \noindent Všetky služby využívajú \emph{zdieľanú databázovú vrstvu}, ktorá poskytuje prístup k~dátam uloženým v~relačnej databáze. Celkovo je teda architektúra redakčného systému rozdelená do piatich samostatných súčastí.
 
-% Dátové typy redakčného systému
-\section{Dátové typy redakčného systému}
-\label{theory:data_types}
-Slackify je headless redakčný systém obsahujúci dva hlavné dátové typy -- \emph{collection} (kolekcia) a \emph{component} (komponent). Pomocou týchto dvoch dátových typov je možné vytvoriť logickú štruktúru obsahu, ktorú je možné následne distribuovať pomocou verejného API. Oba dátové typy uchovávajú okrem svojich vlastných parametrov aj momentálny stav uverejnenosti \emph{published}, repretenzovaný dátovým typom \texttt{boolean}.
-
-\subsection{Component}
-Component (komponent) je základná dátová struktúra v~Slackify. Celý obsah redakčného systému je zložený z~komponentov usporiadaných do kolekcií [\ref{design:collection}]. Každý komponent má povinnú položku \emph{type} (typ), ktorá určuje ďaľšie zloženie štruktúry.
-
-\subsubsection{Typ \uv{\texttt{Plain Text}}}
-Najjednoduchší typ obsahujúci jediné povinné textové pole s~názvom \emph{text}.
-
-\subsubsection{Typ \uv{\texttt{Article}}}
-Typ pre vytvorenie jednoduchého článku. Obsahuje povinné textové položky \emph{title} (titulok), \emph{content} (obsah článku) a nepovinnú textovú položku \emph{lead} (úvodný text).
-
-\subsubsection{Typ \uv{\texttt{Link}}}
-Typ pre vytvorenie hypertextového odkazu. Obsahuje povinnú textovú položku \emph{url} (cieľová adresa) a voliteľnú textovú položku \emph{text}.
-
-\subsection{Collection}
-\label{design:collection}
-Collection (kolekcia) je zoznam slúžiaci pre kategorizovanie jednotlivých komponentov. Každá kolekcia ich môže obsahovať 0 až $n$. Jedná sa o~\emph{homogénny zoznam}, tzn. že pri tvorbe kolekcie sa vždy musí zvoliť práve jeden typ komponentov z~ktorých sa môže zoznam skladať. Každá kolekcia má povinnú položku \emph{name} (názov) a nepovinnú \emph{description} (popis).
-
 % Implementácia
 %---------------------------------------------------------------------------
 \chapter{Implementácia}
 \label{impl}
 Ako vysvetľuje sekcia \ref{design:architecture}, headless redakčný systém Slackify je rozdelený do spoločnej databázovej vstvy a štyroch samostatných služieb. Táto kapitola popisuje vybrané časti implementácie všetkých piatich súčastí systému.
 
-Sekcia \ref{impl:database} je venovaná implementácií spoločnej databázovej vrstvy, sekcia \ref{impl:graphql} implementácií verejnej a skrytej GraphQL služby, sekcia \ref{impl:slack_app} implementácií Slack aplikácie. Posledná sekcia \ref{impl:frontend} je venovaná implementácií webovej konzoly.
+Sekcia \ref{impl:database} je venovaná implementácii spoločnej databázovej vrstvy, sekcia \ref{impl:graphql} implementácií verejnej a skrytej GraphQL služby, sekcia \ref{impl:slack_app} implementácii Slack aplikácie. Posledná sekcia \ref{impl:frontend} je venovaná implementácii webovej konzoly.
 
 % Databázová vrstva
 \section{Databázová vrstva}
 \label{impl:database}
-Zdieľaná súčasť systému, ktorá poskytuje prístup k~databáze službám \texttt{service-private}, \texttt{service-public} a \texttt{service-slack}. Pre zostavenie databázy a prístup k~nej je využitá sada nástrojov \texttt{prisma}, bližšie popísaná v~sekcií \ref{theory:databases}.
+Zdieľaná súčasť systému, ktorá poskytuje prístup k~databáze službám \texttt{service-private}, \texttt{service-public} a \texttt{service-slack}. Pre zostavenie databázy a prístup k~nej je využitá sada nástrojov \texttt{prisma}, bližšie popísaná v~sekcii \ref{theory:databases}.
 
 \subsection{Schéma}
 Hlavný konfiguračný súbor sady nástrojov \texttt{prisma}, pomenovaný \texttt{schema.prisma}, ktorý sa skladá z~troch hlavných súčastí:
 
 \begin{itemize}
 	\item \texttt{datasource} -- Konfiguračný blok špecifikujúci typ zdroja dát (databázy) a údaje potrebné k~nadviazaniu úspešného pripojenia. Slackify využíva PostgreSQL databázu ako jediný zdroj dát. Environmentálna premenná \texttt{DATABASE\_URL} určuje URL pre pripojenie k~danej databáze (viz výpis \ref{impl:code:prisma_schema}).
-	\item \texttt{generator} -- Konfiguračný blok obsahujúci nastavenia automaticky generovaného databázového klienta. Slackify generuje iba jednoho databázového klienta do zložky \texttt{node\_modules} v~koreňovom adresári systému. Tento databázový klient je zdieľaný ostatnými službami (viac viz \ref{impl:prisma:client}).
-	\item \texttt{model} -- Jednotlivé dátové modely systému, bližšie popísané v~sekcií \ref{impl:data_models}.
+	\item \texttt{generator} -- Konfiguračný blok obsahujúci nastavenia automaticky generovaného databázového klienta. Slackify generuje iba jedného databázového klienta do zložky \texttt{node\_modules} v~koreňovom adresári systému. Tento databázový klient je zdieľaný ostatnými službami (viac viz \ref{impl:prisma:client}).
+	\item \texttt{model} -- Jednotlivé dátové modely systému, bližšie popísané v~sekcii \ref{impl:data_models}.
 \end{itemize}
 
 \noindent Sada nástrojov \texttt{prisma} využíva konfiguračný súbor aj pre \emph{migrácie} databázy. Pri každej zmene dátových modelov automaticky zmení schému databázy a vytvorí nový záznam v~zložke \texttt{migrations}. Tento záznam obsahuje výpis zmien, ktoré migrácia aplikuje, obsah konfiguračného súboru po aplikovaní migrácie a jednotlivé kroky, ktoré migrácia vykoná pre zmenu schémy databázy. Vďaka týmto záznamom je schému databázy možné vrátiť do stavu pred aplikovaním jednej alebo viacerých migrácií.
@@ -657,12 +655,12 @@ Hlavný konfiguračný súbor sady nástrojov \texttt{prisma}, pomenovaný \text
 
 \subsection{Dátové modely}
 \label{impl:data_models}
-Dátové modely definované v~konfiguračnom súbore \texttt{prisma} reprezentujú entity využívané v~aplikácií. Sada nástrojov \texttt{prisma} tieto modely automaticky mapuje do jednotlivých tabuliek v~databáze. \\
+Dátové modely definované v~konfiguračnom súbore \texttt{prisma} reprezentujú entity využívané v~aplikácii. Sada nástrojov \texttt{prisma} tieto modely automaticky mapuje do jednotlivých tabuliek v~databáze. \\
 
-\noindent Slackify obsahuje dva hlavné modely \texttt{Collection} a \texttt{Component} reprezentujúce obsah uložený v~redakčnom systéme. Ďaľšie modely \texttt{User} a \texttt{Team} služia pre uchovávanie informácií o~užívateľoch a tímoch (pracovných prostredí) \emph{prepojených so službou Slack}.
+\noindent Slackify obsahuje dva hlavné modely \texttt{Collection} a \texttt{Component} reprezentujúce obsah uložený v~redakčnom systéme. Ďaľšie modely \texttt{User} a \texttt{Team} slúžia pre uchovávanie informácií o~užívateľoch a tímoch (pracovných prostredí) \emph{prepojených so službou Slack}.
 
 \subsubsection{Model \texttt{Collection}}
-Dátový model \texttt{Collection} (kolekcia) slúžiaci ako zoznam pre jednotlivé komponenty. Sú to homogénne zoznamy, ktoré môžu obsahovať iba komponenty jednoho typu. \\
+Dátový model \texttt{Collection} (kolekcia) slúžiaci ako zoznam pre jednotlivé komponenty. Sú to homogénne zoznamy, ktoré môžu obsahovať iba komponenty jedného typu. \\
 
 \begin{lstlisting}[language={Prisma}, caption=Dátový model \texttt{Collection} v~konfiguračnom súbore \texttt{prisma}.]
 	model Collection {
@@ -681,12 +679,12 @@ Dátový model \texttt{Collection} (kolekcia) slúžiaci ako zoznam pre jednotli
 
 \medskip
 
-\noindent Popis niektorých významých položiek obsiahutých v~dátovom modeli:
+\noindent Popis niektorých významných položiek obsiahnutých v~dátovom modeli:
 
 \begin{itemize}
-	\item \texttt{type} -- Určuje jediný typ komponentu, ktorý je možné vložiť do danej kolekcie. Typ komponentu je bližšie popísaný v~sekcií \ref{impl:model:component}.
+	\item \texttt{type} -- Určuje jediný typ komponentu, ktorý je možné vložiť do danej kolekcie. Typ komponentu je bližšie popísaný v~sekcii \ref{impl:model:component}.
 	\item \texttt{team} -- Relácia s~dátovým modelom \texttt{Team} ku ktorému je kolekcia priradená. Každá kolekcia musí byť priradená k~práve jednej entite modelu \texttt{Team}.
-	\item \texttt{components} -- Relácia 1~:~$n$ všetkých komponentov priradených ku kolekcií. Každá kolekcia môže mať 0 až $\infty$ priradených komponentov.
+	\item \texttt{components} -- Relácia 1~:~$n$ všetkých komponentov priradených ku kolekcii. Každá kolekcia môže mať 0 až $\infty$ priradených komponentov.
 \end{itemize}
 
 \subsubsection{Model \texttt{Component}}
@@ -717,13 +715,13 @@ Dátový model \texttt{Component} (komponent) reprezentujúci malú časť obsah
 
 \medskip
 
-\noindent Popis niektorých významých položiek obsiahutých v~dátovom modeli:
+\noindent Popis niektorých významných položiek obsiahnutých v~dátovom modeli:
 
 \begin{itemize}
 	\item \texttt{type} -- Typ komponentu nadobúdajúci jednu z~hodnôt výčtového typu \texttt{ComponentType}.
-	\item \texttt{collection} -- Relácia s~dátovým modelom \texttt{Collection}. Každý komponent musí byť priradený k~práve jednej kolekcií.
-	\item \texttt{author} -- Relácia s~dátovým modelom \texttt{Author}. Každý komponent musí byť priradený k~právej jednomu autorovi.
-	\item \texttt{team} -- Relácia s~dátovým modelom \texttt{Team}. Každý komponent musí byť priradený k~práve jednomu tímu.
+	\item \texttt{collection} -- Relácia s~dátovým modelom \texttt{Collection}. Každý komponent musí byť priradený k~práve jednej kolekcii.
+	\item \texttt{author} -- Relácia s~dátovým modelom \texttt{Author}. Každý komponent musí byť priradený k~právej jednému autorovi.
+	\item \texttt{team} -- Relácia s~dátovým modelom \texttt{Team}. Každý komponent musí byť priradený k~práve jednému tímu.
 \end{itemize}
 
 \noindent Hodnota položky \texttt{type} určuje práve jednu z~položiek \texttt{plainTextData}, \texttt{articleData} alebo \texttt{linkData} ako povinnú. Tieto položky ukazujú na rôzne špecifické dátové modely, ktoré reprezentujú obsah daných komponentov. Napríklad ak položka \texttt{type} má hodnotu \texttt{LINK}, položka \texttt{linkData} \emph{musí} byť reláciou na dátový model \texttt{LinkComponentData}, ktorý obsahuje povinné pole URL a nepovinné pole text. \\
@@ -771,13 +769,13 @@ Dátový model \texttt{User} (užívateľ) reprezentujúci informácie o~užíva
 
 \medskip
 
-\noindent Popis niektorých významých položiek obsiahutých v~dátovom modeli:
+\noindent Popis niektorých významných položiek obsiahnutých v~dátovom modeli:
 
 \begin{itemize}
 	\item \texttt{id} -- Jedinečný identifikátor užívateľa, prevzatý z~autentifikačnej API služby Slack.
 	\item \texttt{role} -- Užívateľská rola nadobúdajúca jednu z~hodnôt výčtového typu \texttt{UserRole}. Určuje právomoci užívateľa, inicializuje sa s~hodnotou \texttt{VIEWER}.
-	\item \texttt{team} -- Relácia s~dátovým modelom \texttt{Team}. Každý užívateľ musí byť priradený k~práve jednomu tímu.
-	\item \texttt{components} -- Relácia 1~:~$n$ všetkých komponentov, ktorým je uživateľ autorom. Každý užívateľ môže byť autorom 0 až $\infty$ komponentov.
+	\item \texttt{team} -- Relácia s~dátovým modelom \texttt{Team}. Každý užívateľ musí byť priradený k~práve jednému tímu.
+	\item \texttt{components} -- Relácia 1~:~$n$ všetkých komponentov, ktorých je užívateľ autorom. Každý užívateľ môže byť autorom 0 až $\infty$ komponentov.
 \end{itemize}
 
 \subsubsection{Výčtový typ \texttt{UserRole}}
@@ -809,11 +807,11 @@ Dátový model \texttt{Team} (tím) reprezentujúci informácie o~tíme (pracovn
 
 \medskip
 
-\noindent Popis niektorých významých položiek obsiahutých v~dátovom modeli:
+\noindent Popis niektorých významných položiek obsiahnutých v~dátovom modeli:
 
 \begin{itemize}
 	\item \texttt{id} -- Jedinečný identifikátor tímu, prevzatý z~autentifikačnej API služby Slack.
-	\item \texttt{accessToken} -- Generovaný prístupový kód, ktorý je nutné využiť pre získanie obsahu z~redakčného systému cez verejnú api (službu \texttt{service-public}). 
+	\item \texttt{accessToken} -- Generovaný prístupový kód, ktorý je nutné využiť pre získanie obsahu z~redakčného systému cez verejné API (službu \texttt{service-public}). 
 	\item \texttt{collections} -- Relácia 1~:~$n$ všetkých kolekcií, ktoré sú vytvorené pod daným tímom. Každý tím môže mať priradených 0 až $\infty$ kolekcií.
 	\item \texttt{users} -- Relácia 1~:~$n$ všetkých užívateľov, ktorí sú členmi daného tímu. Každý tím môže mať 0 až $\infty$ užívateľov.
 	\item \texttt{components} -- Relácia 1~:~$n$ všetkých komponentov, ktoré sú vytvorené pod daným tímom. Každý tím môže mať priradených 0 až $\infty$ komponentov.
@@ -825,7 +823,7 @@ Pomocou konfiguračného súboru \texttt{prisma} automaticky zostrojí striktne 
 
 \noindent Databázový klient je generovaný do zložky \texttt{node\_modules}, odkiaľ je možné ho importovať ako z~modulu \texttt{@prisma/client}. \\
 
-\begin{lstlisting}[caption=Príklad vytvorenia instancie databázového klienta v~Slackify.]
+\begin{lstlisting}[caption=Príklad vytvorenia inštancie databázového klienta v~Slackify.]
 	import { PrismaClient } from "@prisma/client";
 
 	export const prisma = new PrismaClient();
@@ -834,10 +832,10 @@ Pomocou konfiguračného súboru \texttt{prisma} automaticky zostrojí striktne 
 % GraphQL služby
 \section{GraphQL služby}
 \label{impl:graphql}
-Ako bolo vysvetlené v~sekcií \ref{design:architecture} o~návrhu architektúry, redakčný systém Slackify disponuje dvomi GraphQL službami -- skrytou \texttt{service-private} a verejnou \texttt{service-public}. Obe GraphQL služby sú implementované pomocou balíčka Apollo Server.
+Ako bolo vysvetlené v~sekcii \ref{design:architecture} o~návrhu architektúry, redakčný systém Slackify disponuje dvomi GraphQL službami -- skrytou \texttt{service-private} a verejnou \texttt{service-public}. Obe GraphQL služby sú implementované pomocou balíčka Apollo Server.
 
 \subsection{Schéma}
-GraphQL schémy oboch služieb sú implementované pomocou balíčka \texttt{Nexus Schema}, ktorý umožňuje vytvoriť GraphQL schému v~jazyku JavaScript namiesto SDL\footnote{SDL -- Schema Definition Language} definovanom v~GraphQL špecifikácií. Vďaka tomu je možné budovať schému \uv{code-first} a silno typovanú. \\
+GraphQL schémy oboch služieb sú implementované pomocou balíčka \texttt{Nexus Schema}, ktorý umožňuje vytvoriť GraphQL schému v~jazyku JavaScript namiesto SDL\footnote{SDL -- Schema Definition Language} definovanom v~GraphQL špecifikácii. Vďaka tomu je možné budovať schému \uv{code-first} a silno typovanú. \\
 
 \begin{lstlisting}[caption=Časť GraphQL schémy služby \texttt{service-private}., label={impl:code:schema}]
 	export const Query = queryType({
@@ -862,10 +860,10 @@ GraphQL schémy oboch služieb sú implementované pomocou balíčka \texttt{Nex
 \noindent Plugin pre prepojenie schémy s~\texttt{prisma} klientom však nepodporuje kontrolu autorizácie užívateľa, tá je riešená použitím \uv{middleware} funkcií.
 
 \subsection{Autorizácia}
-Každá požiadavka a mutácia (s~výnimkou mutácie \texttt{signIn()} služby \texttt{service-private}) musí obsahovať HTTP hlavičku s~názvom \texttt{Authorization}. Obe GraphQL služby však vyžadujú rozdieľne hodnoty tejto hlavičky, bližšie popísané v~sekciách \ref{impl:service-private} a \ref{impl:service-public}.
+Každá požiadavka a mutácia (s~výnimkou mutácie \texttt{signIn()} služby \texttt{service-private}) musí obsahovať HTTP hlavičku s~názvom \texttt{Authorization}. Obe GraphQL služby však vyžadujú rozdielne hodnoty tejto hlavičky, bližšie popísané v~sekciách \ref{impl:service-private} a \ref{impl:service-public}.
 
 \subsubsection{GraphQL Shield}
-Skrytá aj verejná GraphQL služba pre kontrolu prístupu využíva aj middleware \texttt{GraphQL Shield}, ktorý umožňuje vytvoriť \uv{pravidlá} pre prístup ku konkrétnym požiadavkám alebo mutáciam. \\
+Skrytá aj verejná GraphQL služba pre kontrolu prístupu využíva aj middleware \texttt{GraphQL Shield}, ktorý umožňuje vytvoriť \uv{pravidlá} pre prístup ku konkrétnym požiadavkám alebo mutáciám. \\
 
 \begin{lstlisting}[caption={Pravidlo \texttt{GraphQL Shield} kontrolujúce či je užívateľ autentifikovaný.}, label={impl:code:rule}]
 	export const isAuthenticated = rule({ cache: 'contextual' })(
@@ -877,24 +875,24 @@ Skrytá aj verejná GraphQL služba pre kontrolu prístupu využíva aj middlewa
 
 \medskip
 
-\noindent Podobné pravidlá ako vo výpise \ref{impl:code:rule} sú využité pre kontrolu prístupu v~celej GraphQL schéme. Ak niektorá z~podmienok pravidla nie je splnená, dané pravidlo obvykle vráti instanciu typu \texttt{Error} so špecifickou správou, ktorá je zaslaná späť do webovej konzoly. Ak sú však splnené \emph{všetky podmienky}, pravidlo vracia boolean hodnotu \texttt{true} a riadenie je prenechané príslušnej GraphQL \texttt{resolver} funkcií.
+\noindent Podobné pravidlá ako vo výpise \ref{impl:code:rule} sú využité pre kontrolu prístupu v~celej GraphQL schéme. Ak niektorá z~podmienok pravidla nie je splnená, dané pravidlo obvykle vráti inštanciu typu \texttt{Error} so špecifickou správou, ktorá je zaslaná späť do webovej konzoly. Ak sú však splnené \emph{všetky podmienky}, pravidlo vracia boolean hodnotu \texttt{true} a riadenie je prenechané príslušnej GraphQL \texttt{resolver} funkcii.
 
 \subsection{Skrytá služba \texttt{service-private}}
 \label{impl:service-private}
-Skrytá GraphQL služba (\texttt{service-private}) poskytuje prístup k~dátam pre webové konzolu (službu \texttt{frontend}, ktorej implementácia je popísaná v~sekcií \ref{impl:frontend}). Schéma tejto služby je tvorená prevažne CRUD operáciami nad databázovými modelmi \texttt{Collection} a \texttt{Component}.
+Skrytá GraphQL služba (\texttt{service-private}) poskytuje prístup k~dátam pre webové konzolu (službu \texttt{frontend}, ktorej implementácia je popísaná v~sekcii \ref{impl:frontend}). Schéma tejto služby je tvorená prevažne CRUD operáciami nad databázovými modelmi \texttt{Collection} a \texttt{Component}.
 
 \subsubsection{Autorizácia}
-HTTP hlavička \texttt{Authorization} požiadavky alebo mutácie obsahuje JWT konkrétneho užívateľa. Tento token obsahuje okrem iných informácií o~užívateľovi aj jeho ID. Vďaka tomu je možné pred vykonaním každej operácie získať všetky dostupné informácie o~užívateľovi a jeho tíme, ktoré sú následne dostupné v~kontexte každej GraphQL \texttt{resolver} funkcií. Ak nebolo možné nájsť užívateľa s~daným ID, dáta o~ňom a jeho tíme majú v~GraphQL \texttt{resolver} funkcií hodnotu \texttt{undefined}.
+HTTP hlavička \texttt{Authorization} požiadavky alebo mutácie obsahuje JWT\footnote{JWT -- JSON Web Token} konkrétneho užívateľa. Tento token obsahuje okrem iných informácií o~užívateľovi aj jeho ID. Vďaka tomu je možné pred vykonaním každej operácie získať všetky dostupné informácie o~užívateľovi a jeho tíme, ktoré sú následne dostupné v~kontexte každej GraphQL \texttt{resolver} funkcie. Ak nebolo možné nájsť užívateľa s~daným ID, dáta o~ňom a jeho tíme majú v~GraphQL \texttt{resolver} funkcii hodnotu \texttt{undefined}.
 
 \subsection{Verejná služba \texttt{service-public}}
 \label{impl:service-public}
 Verejná GraphQL služba (\texttt{service-public}) slúži ako hlavné aplikačné rozhranie pre headless redakčný systém Slackify. Tento GraphQL server umožňuje vývojárom využívajúcim Slackify vo svojich implementáciach jednoducho získať obsah z~redakčného systému.
 
 \subsubsection{Autorizácia}
-Po prepojení tímu v~službe Slack s~redakčným systémom Slackify je tomuto tímu vygenerovaný \emph{unikátny autorizačný token}. Tento token je následne očakávaný v~HTTP hlavičke \texttt{Authorization} každej požiadavky smerujúcej na službu \texttt{service-public}. V~prípade, že autorizačný token chýba alebo je nesprávny, služba požiadavku zahodí a odpovie chybovou správou vysvetlujúcou zlyhanie. 
+Po prepojení tímu v~službe Slack s~redakčným systémom Slackify je tomuto tímu vygenerovaný \emph{unikátny autorizačný token}. Tento token je následne očakávaný v~HTTP hlavičke \texttt{Authorization} každej požiadavky smerujúcej na službu \texttt{service-public}. V~prípade, že autorizačný token chýba alebo je nesprávny, služba požiadavku zahodí a odpovie chybovou správou vysvetľujúcou zlyhanie. 
 
 \subsubsection{Zjednodušený typ \texttt{Component}}
-Databázový model \texttt{Component} slúži pre uchovávanie metadát o~komponente. Samotný obsah komponentu sa nachádza v~oddelených databázových modeloch s~ktorými je daný komponent v~relácií (viac viz \ref{impl:model:component}). Takýto princíp ukladania dát umožňuje jednoduchú modifikáciu typov komponentov a ich obsahu, no nie je optimálny pre vývojárov, ktorí implementujú Slackify do svojich projektov. \\
+Databázový model \texttt{Component} slúži pre uchovávanie metadát o~komponente. Samotný obsah komponentu sa nachádza v~oddelených databázových modeloch s~ktorými je komponent v~relácií (viac viz \ref{impl:model:component}). Takýto princíp ukladania dát umožňuje jednoduchú modifikáciu typov komponentov a ich obsahu, no nie je optimálny pre vývojárov, ktorí využívajú Slackify vo svojich projektoch. \\
 
 \begin{lstlisting}[language={GraphQL}, caption={Príklad získania obsahu komponentu pred optimalizáciou.}]
 	query {
@@ -930,7 +928,7 @@ Databázový model \texttt{Component} slúži pre uchovávanie metadát o~kompon
 \noindent Z~tohto dôvodu dôvodu služba \texttt{service-public} disponuje upraveným typom \texttt{Component}, ktorý má špeciálne pole \texttt{data} typu \texttt{union} (viz výpis \ref{impl:service-public:union}). Toto pole združuje relácie s~obsahom pre všetky typy komponentov. Ak si vývojár vyžiada toto pole, získa obsah komponentu bez ohľadu na to, akého je typu.
 
 \subsubsection{Zber štatistík}
-Verejná GraphQL služba zaznamenáva jednoduché štatistiky prístupu k~obsahu jednotlivých komponentov. Pokaždé, keď je nejaký komponent vyžiadaný z~tohto rozhrania služba vytvorí nový záznam v~databáze. Záznam sa skladá z~času a ID komponentu a je vytvorený aj keď je komponent obsiahnutý ako súčasť požiadavky na kolekciu.
+Verejná GraphQL služba zaznamenáva jednoduché štatistiky prístupu k~obsahu jednotlivých komponentov. Vždy, keď je nejaký komponent vyžiadaný z~tohto rozhrania služba vytvorí nový záznam v~databáze. Záznam sa skladá z~času a ID komponentu a je vytvorený aj keď je komponent obsiahnutý ako súčasť požiadavky na kolekciu.
 
 % Webová konzola
 \section{Webová konzola}
@@ -938,14 +936,14 @@ Verejná GraphQL služba zaznamenáva jednoduché štatistiky prístupu k~obsahu
 Webová konzola (služba \texttt{frontend}) slúži pre komplexnejšiu správu obsahu v~Slackify redakčnom systéme. Samotné uživateľské rozhranie je implementované pomocou JavaScriptovej knižnice React a frameworku Next.js, ktorý zabezpečuje vykresľovanie (render) na strane servera.
 
 \subsection{Pridanie Slackify do pracovného prostredia}
-Pred prvým použítím Slackify je nutné redakčný systém (konkrétne jeho Slack aplikáciu) pridať do pracovného prostredia pomocou OAuth 2.0 brány služby Slack.  \\
+Pred prvým použítím Slackify je nutné redakčný systém (konkrétne jeho Slack aplikáciu) pridať do pracovného prostredia pomocou OAuth 2.0\footnote{\href{https://oauth.net/2/}{https://oauth.net/2/}} brány služby Slack.  \\
 
-\noindent Proces pridania Slackify do pracovného prostredia je následovný:
+\noindent Proces pridania Slackify do pracovného prostredia je nasledovný:
 
 \begin{enumerate}
 	\item Užívateľ, ktorý chce pridať Slackify do svojho pracovného prostredia je po kliknutí na tlačidlo \uv{Add to Slack} presmerovaný na autorizačnú stránku Slacku.
 	\item Po úspešnej autorizácií aplikácie je užívateľ presmerovaný späť na stránku vo webovej konzole Slackify \texttt{/auth/add} s~URL parametrom \textit{code} (dočasný prístupový kód).
-	\item Slackify vymení obsah parametra \textit{code} za informácie o~danom pracovnom prostredí a užívateľovi, ktorí aplikáciu do pracovného prostredia pridal.
+	\item Slackify vymení obsah parametra \textit{code} za informácie o~danom pracovnom prostredí a užívateľovi, ktorý aplikáciu do pracovného prostredia pridal.
 	\item Informácie o~pracovnom prostredí sú pridané do databázy spolu s~užívateľom, ktorý má automaticky priradenú rolu \emph{Owner}.
 \end{enumerate}
 
@@ -954,7 +952,7 @@ Pred prvým použítím Slackify je nutné redakčný systém (konkrétne jeho S
 \subsection{Prihlásenie užívateľa}
 Slackify nemá vlastný proces vytvorenia užívateľského účtu, naopak všetky \emph{dáta o~užívateľoch preberá z~služby Slack} pomocou OAuth 2.0 brány služby Slack. \\
 
-\noindent Proces príhlásenia užívateľa do Slackify je následovný:
+\noindent Proces príhlásenia užívateľa do Slackify je nasledovný:
 
 \begin{enumerate}
 	\item Užívateľ, ktorý sa chce prihlásiť do Slackify je po kliknutí na tlačidlo \uv{Sign in with Slack} presmerovaný na autorizačnú stránku služby Slack.
@@ -966,7 +964,7 @@ Slackify nemá vlastný proces vytvorenia užívateľského účtu, naopak všet
 
 \noindent Po úspešnom obdržaní autorizačného tokena a užívateľských dát systém skontroluje, či už daný užívateľ v~databáze existuje. V~prípade, že užívateľ neexistuje, je záznam o~ňom pridaný do databázy. V~prípade, že už existuje, informácie o~ňom sú len aktualizované. \\
 
-\noindent Vygenerovaný JWT\footnote{JWT -- JSON Web Token} so základnými informáciami o~užívateľovi je uložený do cookies prehliadača. Pri návšteve každej stránky prebieha kontrola, či uložený JWT nie je expirovaný. Napríklad pravidlo 
+\noindent Vygenerovaný JWT so základnými informáciami o~užívateľovi je uložený do cookies prehliadača. Pri návšteve každej stránky prebieha kontrola, či uložený JWT nie je expirovaný.
 
 \subsection{Správa kolekcií}
 Hlavnou súčasťou správy kolekcií je zoznam všetkých kolekcií, ktoré boli vytvorené v~tíme aktuálne prihláseného užívateľa. Na tejto stránke je možné kolekcie vytvoriť, upraviť alebo zmazať, ak má užívateľ na tieto akcie dostatočné práva.
@@ -980,7 +978,7 @@ Hlavnou súčasťou správy kolekcií je zoznam všetkých kolekcií, ktoré bol
 \noindent Pri úvodnom načítaní stránky je odoslaná GraphQL požiadavka (query) \texttt{collections()}, ktorá získa prvých 40 kolekcií zo služby \texttt{service-private}. Ak chce užívateľ zobraziť viac kolekcií, musí zísť na koniec zoznamu. Na jeho konci sa nachádza element, ktorý ak je viditeľný v~okne prehliadača odošle znova požiadavku \texttt{collections()}, ale tentoraz s~priloženými parametrami \texttt{skip} a \texttt{first}. Získané položky sú pridané na koniec zoznamu a takto je vytvorený mechanizmus tzv. \uv{nekonečného scrollovania} (infinite scrolling).
 
 \subsubsection{Vytvorenie a úprava kolekcie}
-Vytvorenie novej kolekcie alebo úprava už existujúcej je možná pomocou dialógového okna, ktoré je dostupné na stránkach zoznamu a detailu kolekcií. Objekt uložený v~globálnom stave aplikácie pod názvom \texttt{createUpdateModal} uchováva kontext dialógového okna, ktorý sa obsahuje položky:
+Vytvorenie novej kolekcie alebo úprava už existujúcej je možná pomocou dialógového okna, ktoré je dostupné na stránkach zoznamu a detailu kolekcií. Objekt uložený v~globálnom stave aplikácie pod názvom \texttt{createUpdateModal} uchováva kontext dialógového okna, ktorý obsahuje položky:
 
 \begin{itemize}
 	\item \texttt{mode} -- Mód zobrazenia, môže nadobudnúť hodnoty \uv{create} alebo \uv{update}.
@@ -1004,15 +1002,15 @@ Podobne ako u~kolekcií je hlavnou súčasťou správy komponentov zoznam všetk
 	\caption{Stránka správy komponentov vo webovej konzole.}
 \end{figure}
 
-\noindent Rovnako ako pri zozname kolekcií je pri úvodnom načítaní odoslaná požiadavka pre získanie z~ktorých sa zoznam zostaví. Pre komponenty je táto požiadavka pomenovaná \texttt{components()}. Zoznam komponentov takisto podporuje aj infinite scrolling mechanizmus.
+\noindent Rovnako ako pri zozname kolekcií je pri úvodnom načítaní odoslaná požiadavka pre získanie komponentov, z~ktorých sa zoznam zostaví. Pre komponenty je táto požiadavka pomenovaná \texttt{components()}. Zoznam komponentov takisto podporuje aj infinite scrolling mechanizmus.
 
 \subsubsection{Vytvorenie a úprava komponentov}
 Rovnaký princíp ako pri tvorbe a úprave kolekcií. Jedná sa o~dialógové okno, ktoré svoj kontext uchováva v~globálnom stave aplikácie, avšak mierne pozmenený:
 
 \begin{itemize}
 	\item \texttt{mode} -- Mód zobrazenia, rovnako ako u~kolekcií môže nadobudnúť hodnoty \uv{create} alebo \uv{update}.
-	\item \texttt{collection} -- Obsahuje informácie o~aktuálne zvolenej kolekcií pri tvorbe nového komponentu. Typ kolekcie určuje typ k~\emph{nej priradených komponentov}, a preto je táto kolekcia využitá pre zobrazenie relevantného formulára pre konkrétny typ komponentov.
-	\item \texttt{component} -- V~prípade, že mód zobrazenia má hodnotu \uv{update}, očakáva sa, že hodnota tejto položky obsahuje objekt poposijúci upravovaný komponent.
+	\item \texttt{collection} -- Obsahuje informácie o~aktuálne zvolenej kolekcii pri tvorbe nového komponentu. Typ kolekcie určuje typ k~\emph{nej priradených komponentov}, a preto je táto kolekcia využitá pre zobrazenie relevantného formulára pre konkrétny typ komponentov.
+	\item \texttt{component} -- V~prípade, že mód zobrazenia má hodnotu \uv{update}, očakáva sa, že hodnota tejto položky obsahuje objekt popisujúci upravovaný komponent.
 \end{itemize}
 
 \begin{figure}[H]
@@ -1032,18 +1030,18 @@ Každý užívateľ môže navštíviť stránku so zoznamom všetkých užívat
 Služba \texttt{service-slack} je Slack aplikácia umožňujúca \emph{plnohodnotnú správu obsahu} v~redakčnom systéme Slackify. Jedná sa o~HTTP server implementovaný pomocu balíčka Bolt od spoločnosti Slack, ktorý reaguje na udalosti (events) a akcie (actions) prichádzajúce z verejnej API služby Slack.
 
 \subsection{Autorizácia tímov}
-Slack aplikácia sa musí pri každej akcií autorizovať špeciálnym tokenom \uv{bot token} unikátnym pre každý tím (pracovné prostredie) prepojený s aplikáciou. Na túto autorizáciu slúži metóda \texttt{authorize()}, ktorá vyhľadá \uv{bot token} konkrétneho tímu podľa jeho ID, ktoré je obsiahnuté v každej prichádzajúcej akcií alebo udalosti.
+Slack aplikácia sa musí pri každej akcii autorizovať špeciálnym tokenom \uv{bot token} unikátnym pre každý tím (pracovné prostredie) prepojený s aplikáciou. Na túto autorizáciu slúži metóda \texttt{authorize()}, ktorá vyhľadá \uv{bot token} konkrétneho tímu podľa jeho ID, ktoré je obsiahnuté v každej prichádzajúcej akcii alebo udalosti.
 
 \subsection{Domovská stránka}
-Každá Slack aplikácia má k~dispozícií jednu stránku, ktorej obsah môže prispôsobiť danému užívateľovi. Táto stránka má názov \uv{App Home} a v~Slackify slúži ako jediné miesto, kde môže užívateľ spravovať obsah redakčného systému. Pri každej návšteve tejto stránky užívateľom Slack API odošle udalosť \texttt{app\_home\_opened} na službu \texttt{slackify-slack}. Po obrdžaní udalosti služba vygeneruje rohranie pre daného užvateľa a odošle ho späť na Slack API, ktoré sa postará aby bolo správne zobrazené užívateľovi v~aplikácií. Rozhranie domovskej stránky je \emph{perzistentné}.
+Každá Slack aplikácia má k~dispozícií jednu stránku, ktorej obsah môže prispôsobiť danému užívateľovi. Táto stránka má názov \uv{App Home} a v~Slackify slúži ako jediné miesto, kde môže užívateľ spravovať obsah redakčného systému. Pri každej návšteve tejto stránky užívateľom Slack API odošle udalosť \texttt{app\_home\_opened} na službu \texttt{slackify-slack}. Po obrdžaní udalosti služba vygeneruje rohranie pre daného užvateľa a odošle ho späť na Slack API, ktoré sa postará aby bolo správne zobrazené užívateľovi v~aplikácii. Rozhranie domovskej stránky je \emph{perzistentné}.
 
 \begin{figure}[h]
 	\centering
 	\includegraphics[scale=0.085]{obrazky-figures/screenshot_slack-home}
-	\caption{Domovská stránka v~Slack aplikácií.}
+	\caption{Domovská stránka v~Slack aplikácii.}
 \end{figure}
 
-\noindent Na domovskej stránke sa nachádza hlavička so všetkými akciami, ktoré môže užívateľ v~redakčnom systéme vykonávať (ak užívateľ nemá dostatočné práva, akcie sú skryté). Pod touto hlavičkou sa nachádza zoznam komponentov. Zoznam zobrazuje komponenty priradené k~zvolenej kolekcií pomocou elementu \texttt{Select} v~záhlaví zoznamu. Ak nie je zvolená žiadna kolekcia, zobrazuje komponenty priradené k~prvej dostupnej kolekcií. \\
+\noindent Na domovskej stránke sa nachádza hlavička so všetkými akciami, ktoré môže užívateľ v~redakčnom systéme vykonávať (ak užívateľ nemá dostatočné práva, akcie sú skryté). Pod touto hlavičkou sa nachádza zoznam komponentov. Zoznam zobrazuje komponenty priradené k~zvolenej kolekcií pomocou elementu \texttt{Select} v~záhlaví zoznamu. Ak nie je zvolená žiadna kolekcia, zobrazuje komponenty priradené k~prvej dostupnej kolekcii. \\
 
 \begin{lstlisting}[caption={Funkcia zodpovedná za generovanie rozhrania domovskej stránky.}]
 	async function compose_app_home_view(
@@ -1055,7 +1053,7 @@ Každá Slack aplikácia má k~dispozícií jednu stránku, ktorej obsah môže 
 
 \medskip
 
-\noindent Domovská stránka je aktualizovaná po akciách užívateľa. Ak užívateľ vytvorí, odstráni alebo upraví kolekciu alebo komponent, rozhranie domovskej stránky musí byť aktualizované s~novými zmenami.
+\noindent Domovská stránka je aktualizovaná po rôznych akciách vykonaných užívateľom. Ak užívateľ vytvorí, odstráni alebo upraví kolekciu alebo komponent, rozhranie domovskej stránky musí byť aktualizované s~novými zmenami.
 
 \subsection{Správa kolekcií a komponentov}
 Užívateľské rozhranie správy kolekcií a komponentov kopíruje webovú konzolu. Užívateľ má možnosť zobraziť, publikovať, skryť, upraviť a zmazať kolekcie alebo komponenty.
@@ -1063,18 +1061,18 @@ Užívateľské rozhranie správy kolekcií a komponentov kopíruje webovú konz
 \begin{figure}[h]
 	\centering
 	\includegraphics[scale=0.085]{obrazky-figures/screenshot_slack_collections}
-	\caption{Dialógové okno so zoznamom kolekcií v~Slack aplikácií.}
+	\caption{Dialógové okno so zoznamom kolekcií v~Slack aplikácii.}
 \end{figure}
 
-\noindent Zoznam kolekcií sa nachádza v~dialógovom okne prístupnom z~domovskej stránky. Dialógové okná v~Slack aplikácií slúžia pre zobrazovanie informácií, ktoré sa nenachádzajú na domovskej stránke alebo pre získanie dát od užívateľa pomocou formulárov (napríklad vytvorenie novej kolekcie).
+\noindent Zoznam kolekcií sa nachádza v~dialógovom okne prístupnom z~domovskej stránky. Dialógové okná v~Slack aplikácii slúžia pre zobrazovanie informácií, ktoré sa nenachádzajú na domovskej stránke alebo pre získanie dát od užívateľa pomocou formulárov (napríklad vytvorenie novej kolekcie).
 
 % Testovanie
 %---------------------------------------------------------------------------
 \chapter{Testovanie}
 \label{test}
-Podstatnou časťou tejto práce bolo testovanie systému. Tak ako end to end a jednotkové testy zabezpečujú správnu funkcionalitu implementácie, tak užívateľské testy pomáhajú odhalovať nedostatky v~samotnom používaní systému.
+Podstatnou časťou tejto práce bolo testovanie systému. Tak ako end to end a jednotkové testy zabezpečujú správnu funkcionalitu implementácie, tak užívateľské testy pomáhajú odhaľovať nedostatky v~samotnom používaní systému.
 
-Táto kapitola je venovaná užívateľskému testovaniu headless redakčného systému Slackify. Prvá sekcia \ref{test:dev} popisuje princíp a závery z~testovania počas implementovania samotným vývojárom a druhá sekcia \ref{test:user} sa venuje užívateľskému testovaniu osobami, ktoré sa na vývoji nepodielali.
+Táto kapitola je venovaná užívateľskému testovaniu headless redakčného systému Slackify. Prvá sekcia \ref{test:dev} popisuje princíp a závery z~testovania počas implementovania samotným vývojárom a druhá sekcia \ref{test:user} sa venuje užívateľskému testovaniu osobami, ktoré sa na vývoji nepodieľali.
 
 \section{Testovanie počas vývoja}
 \label{test:dev}
@@ -1128,13 +1126,13 @@ Testovacie scenáre boli zostavené z~najbežnejších úkonov, ktoré by typick
 		& Názov & Úspech \\
 		\hline
 		\hline
-		1. & \textbf{Vytvorenie kolekcie} \newline Poznámka: Odhalená chyba v~zobrazení zoznamu komponentov typu \texttt{Article} s~nevyplneným polom \uv{lead}. Chýbajúce upozornenie pri duplicite názvov kolekcií. & ÁNO \\
+		1. & \textbf{Vytvorenie kolekcie} \newline Poznámka: Odhalená chyba v~zobrazení zoznamu komponentov typu \texttt{Article} s~nevyplneným poľom \uv{lead}. Chýbajúce upozornenie pri duplicite názvov kolekcií. & ÁNO \\
 		\hline
 		2. & \textbf{Vytvorenie komponentu} & ÁNO \\
 		\hline
 		3. & \textbf{Odstránenie komponentu} \newline Poznámka: Chýbajúce potvrdenie pri zmazaní komponentu. & ÁNO \\
 		\hline
-		4. & \textbf{Odstránenie kolekcie} \newline Poznámka: Chýbajúce potvrdenie pri zmazaní komponentu. & ÁNO \\
+		4. & \textbf{Odstránenie kolekcie} \newline Poznámka: Chýbajúce potvrdenie pri zmazaní kolekcie. & ÁNO \\
 		\hline
 	\end{tabularx}}
 \end{center}
@@ -1152,7 +1150,7 @@ Testovacie scenáre boli zostavené z~najbežnejších úkonov, ktoré by typick
 		\hline
 		2. & \textbf{Získanie jednej kolekcie} & ÁNO \\
 		\hline
-		3. & \textbf{Získanie všetkých komponentov v~kolekcií} & ÁNO \\
+		3. & \textbf{Získanie všetkých komponentov v~kolekcii} & ÁNO \\
 		\hline
 		4. & \textbf{Získanie jedného komponentu} & ÁNO \\
 		\hline
@@ -1168,8 +1166,8 @@ Všetky scenáre užívateľského testovania boli \emph{úspešné} aj vďaka s
 \label{conc}
 Cieľom práce bolo vytvoriť headless redakčný systém s~možnosťou správy obsahu v~službe Slack. Výsledné riešenie, redakčný systém Slackify, splňuje všetky body formálneho zadania s~výnimkou využitia aplikácie Slack pre ukladanie dát. Už pri návrhu riešenia som odhalil niekoľko prekážok, pre ktoré som sa rozhodol, že obsah redakčného systému bude ukladaný v~konvenčnej databáze.
 
-Na začiatku práce som analyzoval existujúce headless redakčné systémy a nedostatky v~ich nasadení, používaní alebo architektúre. Slackify adresuje a rieši tieto nedostatky. Umožňuje užívateľom spravovať a distribuovať obsah bez zbytočnej komplexity súčasných riešní, čo považujem za hlavný úspech tejto práce.
+Na začiatku práce som analyzoval existujúce headless redakčné systémy a nedostatky v~ich nasadení, používaní alebo architektúre. Slackify adresuje a rieši tieto nedostatky. Umožňuje užívateľom spravovať a distribuovať obsah bez zbytočnej komplexity súčasných riešení, čo považujem za hlavný úspech tejto práce.
 
-Vďaka tejto práci som sa naučil budovať robustné systémy a serverové aplikácie. Oblasť, v~ktorej som nemal pred touto prácou žiadne skúsenosti a minimálne znalosti. Toto rozhodnutie spravilo prácu náročnejšou, ale o~to viac odmeňujúcu.
+Vďaka tejto práci som sa naučil budovať robustné systémy a serverové aplikácie. Oblasť, v~ktorej som nemal pred touto prácou žiadne skúsenosti a minimálne znalosti. Toto rozhodnutie spravilo prácu náročnejšou, ale o~to viac odmeňujúcou.
 
-Jedným z~možných rozšírení, ktoré som sám niekoľkokrát zvažoval implementovať, je možnosť definovať vlastné typy komponentov. Toto rozšírenie by značne zvýšilo flexibilitu systému, no zároveň by si rozporovalo s~hlavným cieľom tejto práce -- jednoduchosťou použitia.
+Jedným z~možných rozšírení, ktorého implementáciu som sám zvažoval je možnosť definovať vlastné typy komponentov. Toto rozšírenie by značne zvýšilo flexibilitu systému, no zároveň by si rozporovalo s~hlavným cieľom tejto práce -- jednoduchosťou použitia.

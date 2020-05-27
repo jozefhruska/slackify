@@ -3,7 +3,7 @@ import { applyMiddleware } from 'graphql-middleware';
 import { PrismaClient, Team } from '@prisma/client';
 
 import { schema } from './schema';
-import { collectionsMiddleware, statsMiddleware } from './middleware';
+import { teamIdMiddleware, statsMiddleware } from './middleware';
 import { permissions } from './permissions';
 import { PORT } from './config';
 
@@ -20,7 +20,7 @@ export interface Context {
 const schemaWithMiddleware = applyMiddleware(
   schema,
   permissions,
-  collectionsMiddleware,
+  teamIdMiddleware,
   statsMiddleware
 );
 
