@@ -35,19 +35,19 @@
 \contentsline {section}{\numberline {5.1}Funk\IeC {\v c}n\IeC {\'e} po\IeC {\v z}iadavky}{18}{section.5.1}% 
 \contentsline {subsection}{\numberline {5.1.1}Odch\IeC {\'y}lky n\IeC {\'a}vrhu od p\IeC {\^o}vodn\IeC {\'e}ho zadania}{18}{subsection.5.1.1}% 
 \contentsline {subsection}{\numberline {5.1.2}Porovnanie s~existuj\IeC {\'u}cimi rie\IeC {\v s}eniami}{19}{subsection.5.1.2}% 
-\contentsline {section}{\numberline {5.2}Diagramy pr\IeC {\'\i }padov pou\IeC {\v z}itia}{19}{section.5.2}% 
-\contentsline {subsection}{\numberline {5.2.1}Viewer}{19}{subsection.5.2.1}% 
-\contentsline {subsection}{\numberline {5.2.2}Author}{19}{subsection.5.2.2}% 
-\contentsline {subsection}{\numberline {5.2.3}Editor}{20}{subsection.5.2.3}% 
-\contentsline {subsection}{\numberline {5.2.4}Owner}{20}{subsection.5.2.4}% 
-\contentsline {subsection}{\numberline {5.2.5}Zariadenie}{21}{subsection.5.2.5}% 
-\contentsline {section}{\numberline {5.3}N\IeC {\'a}vrh architekt\IeC {\'u}ry}{22}{section.5.3}% 
-\contentsline {section}{\numberline {5.4}D\IeC {\'a}tov\IeC {\'e} typy redak\IeC {\v c}n\IeC {\'e}ho syst\IeC {\'e}mu}{23}{section.5.4}% 
-\contentsline {subsection}{\numberline {5.4.1}Component}{23}{subsection.5.4.1}% 
-\contentsline {subsubsection}{Typ \quotedblbase \texttt {Plain Text}\textquotedblleft }{23}{section*.3}% 
-\contentsline {subsubsection}{Typ \quotedblbase \texttt {Article}\textquotedblleft }{23}{section*.4}% 
-\contentsline {subsubsection}{Typ \quotedblbase \texttt {Link}\textquotedblleft }{23}{section*.5}% 
-\contentsline {subsection}{\numberline {5.4.2}Collection}{23}{subsection.5.4.2}% 
+\contentsline {section}{\numberline {5.2}D\IeC {\'a}tov\IeC {\'e} typy redak\IeC {\v c}n\IeC {\'e}ho syst\IeC {\'e}mu}{19}{section.5.2}% 
+\contentsline {subsection}{\numberline {5.2.1}Component}{19}{subsection.5.2.1}% 
+\contentsline {subsubsection}{Typ \quotedblbase \texttt {Plain Text}\textquotedblleft }{19}{section*.3}% 
+\contentsline {subsubsection}{Typ \quotedblbase \texttt {Article}\textquotedblleft }{19}{section*.4}% 
+\contentsline {subsubsection}{Typ \quotedblbase \texttt {Link}\textquotedblleft }{19}{section*.5}% 
+\contentsline {subsection}{\numberline {5.2.2}Collection}{19}{subsection.5.2.2}% 
+\contentsline {section}{\numberline {5.3}Diagramy pr\IeC {\'\i }padov pou\IeC {\v z}itia}{19}{section.5.3}% 
+\contentsline {subsection}{\numberline {5.3.1}Viewer}{20}{subsection.5.3.1}% 
+\contentsline {subsection}{\numberline {5.3.2}Author}{20}{subsection.5.3.2}% 
+\contentsline {subsection}{\numberline {5.3.3}Editor}{21}{subsection.5.3.3}% 
+\contentsline {subsection}{\numberline {5.3.4}Owner}{21}{subsection.5.3.4}% 
+\contentsline {subsection}{\numberline {5.3.5}Zariadenie}{22}{subsection.5.3.5}% 
+\contentsline {section}{\numberline {5.4}N\IeC {\'a}vrh architekt\IeC {\'u}ry}{22}{section.5.4}% 
 \contentsline {chapter}{\numberline {6}Implement\IeC {\'a}cia}{24}{chapter.6}% 
 \contentsline {section}{\numberline {6.1}Datab\IeC {\'a}zov\IeC {\'a} vrstva}{24}{section.6.1}% 
 \contentsline {subsection}{\numberline {6.1.1}Sch\IeC {\'e}ma}{24}{subsection.6.1.1}% 
