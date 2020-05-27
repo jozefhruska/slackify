@@ -69,9 +69,7 @@ const RedirectPage: NextPage<Props> = ({ data, errorMessage }) => {
           justifyContent="center"
         >
           <Loader />
-          <Paragraph mb={0}>
-            {'Please wait while we are connecting your workspace with Slackify...'}
-          </Paragraph>
+          <Paragraph mb={0}>{'Please wait while we are signing you to Slackify...'}</Paragraph>
         </Flex>
       </Block>
     </Flex>
