@@ -13,7 +13,7 @@
     "generate:watch": "ts-node-dev --no-notify --transpileOnly --respawn src/schema"
   },
   "dependencies": {
-    "@prisma/client": "~2.0.0-beta.2",
+    "@prisma/client": "~2.1.0",
     "apollo-server": "~2.13.0",
     "axios": "~0.19.2",
     "dotenv": "~8.2.0",

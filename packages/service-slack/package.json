@@ -11,7 +11,7 @@
     "build": "npm -s run clean && tsc"
   },
   "dependencies": {
-    "@prisma/client": "~2.0.0-beta.2",
+    "@prisma/client": "~2.1.0",
     "@slack/bolt": "~2.0.1",
     "@slack/web-api": "~5.8.0",
     "dotenv": "~8.2.0"
